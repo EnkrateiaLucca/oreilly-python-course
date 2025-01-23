@@ -1,0 +1,36 @@
+https://arxiv.org/pdf/2412.14161
+
+The paper titled "TheAgent Company: Benchmarking LLM Agents on Consequential Real World Tasks" introduces a new benchmark, TheAgentCompany, aimed at evaluating the efficacy of large language model (LLM)-powered AI agents in completing real-world professional tasks in a simulated software company environment. The research is conducted by a collaborative team, mainly from Carnegie Mellon University and other institutions, and emphasizes the growing presence of AI in work settings.
+
+### Key Points from the Paper:
+
+1. **Motivation**:
+   - The rapid advancements in LLMs are prompting questions about AI's potential to automate or assist in various work-related tasks.
+   - Understanding AI agents’ capabilities is crucial for businesses considering AI integration and for policymakers assessing AI’s impact on employment.
+
+2. **Benchmark Overview**:
+   - TheAgentCompany simulates a software company environment with 175 diverse professional tasks spanning categories like software engineering, project management, and finance.
+   - The benchmark allows agents to interact through web browsing, coding, and colleague communication, providing a realistic testing framework.
+
+3. **Performance Findings**:
+   - Experiments conducted with several LLMs, including closed (like OpenAI's GPT-4o and Claude) and open-weight models (like Llama), reveal that the top-performing model, Claude-3.5-Sonnet, achieved 24% task completion autonomously, with a score of 34.4% when accounting for partial completions.
+   - Despite these advancements, LLM agents struggle significantly with longer, more complex tasks, especially those requiring social interaction and navigation of intricate user interfaces.
+
+4. **Framework and Design**:
+   - TheAgentCompany provides a self-hosted and reproducible environment utilizing open-source software.
+   - Tasks are structured into parts with defined checkpoints, allowing agents to receive partial credit for incomplete tasks.
+   - Evaluators for tasks are tailored to assess not just the success of task completion but also the quality of interactions with simulated colleagues.
+
+5. **Interaction and Collaboration**:
+   - A significant component of the benchmark involves the ability of agents to communicate effectively with simulated colleagues within the environment, enhancing the realism and complexity of tasks.
+
+6. **Future Directions**:
+   - The paper suggests that while TheAgentCompany provides a foundational step for understanding LLM capabilities in professional settings, there is a need to expand the tasks covered and include more creative or less straightforward tasks.
+   - Continuous improvements in LLMs are expected, highlighting their potential for increased efficiency and performance across various domains.
+
+7. **Conclusions**:
+   - The research underscores the current limitations of LLM agents in effectively automating diverse professional tasks.
+   - The results serve as a litmus test for future developments, pointing towards areas where LLM technology must improve, particularly in tasks involving human-like social interactions and complex decision-making.
+
+In summary, TheAgentCompany represents a significant effort to quantify AI agents' performance in real-world applications and to chart a course for further research in this rapidly evolving field.
+append thisnew data
