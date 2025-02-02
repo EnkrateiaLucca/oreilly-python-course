@@ -1,0 +1,84 @@
+EXEMPLO, UNIPESSOAL, LDA. AV. DA LIBERDADE, 120 - 2o ESQ 123456789 1250-140 LISBOA
+EXEMPLO, UNIPESSOAL, LDA.
+AV. DA LIBERDADE, 120 - 2o ESQ 1250-140 LISBOA
+LISBOA
+JOANA SILVA PEREIRA 0033
+DATA ANALYST 12345678901
+298765432
+AFIN 0010.20.987654
+123456789 Original
+LISBOA
+Recibo de Vencimentos
+Recibo de Vencimentos Período Janeiro
+Data Fecho 31/01/2024 Vencimento 3.900,00
+Período Data Fecho Vencimento Venc. / Hora N. Dias Mês:
+Faltas Alim.
+Cód.
+R01 R06 R13 D01 D02 D05
+Janeiro 31/01/2024
+3.900,00 20,00 20.00
+Nome
+N.o Mecan. Categoria
+N.o Benef.
+N.o Contrib. Departamento Seguro
+JOANA SILVA PEREIRA 0033
+DATA ANALYST 12345678901
+298765432
+AFIN 0010.20.987654
+Retenção IRS
+SDD IRS Retido Total Remun.
+Venc. / Hora N. Dias Mês:
+20,00 20.00
+Nome
+N.o Mecan. Categoria
+N.o Benef.
+N.o Contrib. Departamento Seguro
+Turno Data
+01-2024 01-2024 01-2024 01-2024 01-2024 01-2024
+CDD
+SDH
+Faltas
+Alim. Turno CDH
+Retenção IRS
+IRS Retido
+CDH
+Descrição Remunerações Descontos
+SDH
+SDD
+Total Remun.
+19.200,00
+Descontos
+500,00 1.200,00 150,00
+CDD
+Descrição Remunerações
+Vencimento 3.900,00 IHT 650,00
+5.400,00 19.200,00
+5.400,00
+Vencimento 3.900,00 IHT 650,00
+Cód. Data
+R01 01-2024 R06 01-2024 R13 01-2024 D01 01-2024 D02 01-2024 D05 01-2024
+Subsídio Alimentação Cartão Segurança Social
+IRS (Venc. 29,18%) (29,18%) Desconto Subsidio Alim. Cartão
+150,00
+Subsídio Alimentação Cartão Segurança Social
+IRS (Venc. 29,18%) (29,18%) Desconto Subsidio Alim. Cartão
+150,00
+500,00 1.200,00 150,00
+Formas de Pagamento: % Remuneração
+100,00
+Forma de Pagamento Moeda
+Formas de Pagamento: % Remuneração
+100,00
+Forma de Pagamento
+Transferência
+Moeda
+Total
+4.400,00 1.800,00 Total Pago ( EUR ) 2.950,00
+Total
+4.400,00 Total Pago ( EUR )
+1.800,00 2.950,00
+Declaro que recebi a quantia constante neste recibo,
+Obs.
+Declaro que recebi a quantia constante neste recibo,
+Transferência EUR
+EUR
