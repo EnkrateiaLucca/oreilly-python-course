@@ -61,70 +61,70 @@ ANTHROPIC_API_KEY=<your claude api key>
 Here are the notebooks available in the `notebooks/` folder:
 
 1. [Python Basics: Data Types, Strings, Operators (Updated)](notebooks/1.0-python-basics-data-types-strings-operators-updated.ipynb)  
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/EnkrateiaLucca/oreilly_live_training_agents/blob/main/notebooks/1.0-python-basics-data-types-strings-operators-updated.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/EnkrateiaLucca/oreilly-python-course/blob/main/notebooks/1.0-python-basics-data-types-strings-operators-updated.ipynb)
 
 2. [Python Basics: Variables (Updated)](notebooks/1.1-python-basics-variables-updated.ipynb)  
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/EnkrateiaLucca/oreilly_live_training_agents/blob/main/notebooks/1.1-python-basics-variables-updated.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/EnkrateiaLucca/oreilly-python-course/blob/main/notebooks/1.1-python-basics-variables-updated.ipynb)
 
 3. [Python Basics: Functions (Updated)](notebooks/1.2-python-basics-functions-updated.ipynb)  
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/EnkrateiaLucca/oreilly_live_training_agents/blob/main/notebooks/1.2-python-basics-functions-updated.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/EnkrateiaLucca/oreilly-python-course/blob/main/notebooks/1.2-python-basics-functions-updated.ipynb)
 
 4. [Python Basics: Lists, For Loops (Updated)](notebooks/1.3-python-basics-lists-for-loops-updated.ipynb)  
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/EnkrateiaLucca/oreilly_live_training_agents/blob/main/notebooks/1.3-python-basics-lists-for-loops-updated.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/EnkrateiaLucca/oreilly-python-course/blob/main/notebooks/1.3-python-basics-lists-for-loops-updated.ipynb)
 
 5. [Python Basics: Dictionaries](notebooks/1.4-python-basics-dictionaries.ipynb)  
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/EnkrateiaLucca/oreilly_live_training_agents/blob/main/notebooks/1.4-python-basics-dictionaries.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/EnkrateiaLucca/oreilly-python-course/blob/main/notebooks/1.4-python-basics-dictionaries.ipynb)
 
 6. [Python Basics: Comparators (Updated)](notebooks/1.5-python-basics-comparators-updated.ipynb)  
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/EnkrateiaLucca/oreilly_live_training_agents/blob/main/notebooks/1.5-python-basics-comparators-updated.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/EnkrateiaLucca/oreilly-python-course/blob/main/notebooks/1.5-python-basics-comparators-updated.ipynb)
 
 7. [Python Basics: Conditionals, Branching Decisions](notebooks/1.6-python-basics-conditionals-branching-decisions.ipynb)  
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/EnkrateiaLucca/oreilly_live_training_agents/blob/main/notebooks/1.6-python-basics-conditionals-branching-decisions.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/EnkrateiaLucca/oreilly-python-course/blob/main/notebooks/1.6-python-basics-conditionals-branching-decisions.ipynb)
 
 8. [Python Basics: Working with Files](notebooks/1.7-python-basics-working-with-files.ipynb)  
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/EnkrateiaLucca/oreilly_live_training_agents/blob/main/notebooks/1.7-python-basics-working-with-files.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/EnkrateiaLucca/oreilly-python-course/blob/main/notebooks/1.7-python-basics-working-with-files.ipynb)
 
 9.  [Python Basics: Working with Tabular Data (CSVs)](notebooks/1.8-python-basics-working-with-tabular-data-csvs.ipynb)  
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/EnkrateiaLucca/oreilly_live_training_agents/blob/main/notebooks/1.8-python-basics-working-with-tabular-data-csvs.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/EnkrateiaLucca/oreilly-python-course/blob/main/notebooks/1.8-python-basics-working-with-tabular-data-csvs.ipynb)
 
 10.  [Python Basics: Packages and APIs](notebooks/1.9-python-basics-packages-and-apis.ipynb)  
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/EnkrateiaLucca/oreilly_live_training_agents/blob/main/notebooks/1.9-python-basics-packages-and-apis.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/EnkrateiaLucca/oreilly-python-course/blob/main/notebooks/1.9-python-basics-packages-and-apis.ipynb)
 
 11.  [Building AI Scheduler Agent](notebooks/10.0-building-ai-scheduler-agent.ipynb)  
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/EnkrateiaLucca/oreilly_live_training_agents/blob/main/notebooks/10.0-building-ai-scheduler-agent.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/EnkrateiaLucca/oreilly-python-course/blob/main/notebooks/10.0-building-ai-scheduler-agent.ipynb)
 
 12.  [Extracting Data from Receipts, Storing CSV](notebooks/11.0-extracting-data-from-receipts-storing-csv.ipynb)  
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/EnkrateiaLucca/oreilly_live_training_agents/blob/main/notebooks/11.0-extracting-data-from-receipts-storing-csv.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/EnkrateiaLucca/oreilly-python-course/blob/main/notebooks/11.0-extracting-data-from-receipts-storing-csv.ipynb)
 
 13.  [Building Your Own Automation Scripts](notebooks/12.0-building-your-own-automation-scripts.ipynb)  
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/EnkrateiaLucca/oreilly_live_training_agents/blob/main/notebooks/12.0-building-your-own-automation-scripts.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/EnkrateiaLucca/oreilly-python-course/blob/main/notebooks/12.0-building-your-own-automation-scripts.ipynb)
 
 14.  [Automatic Downloads: Examples](notebooks/13.0-automatic-downloads-examples.ipynb)  
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/EnkrateiaLucca/oreilly_live_training_agents/blob/main/notebooks/13.0-automatic-downloads-examples.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/EnkrateiaLucca/oreilly-python-course/blob/main/notebooks/13.0-automatic-downloads-examples.ipynb)
 
 15.  [AI Tools: LLM APIs](notebooks/2.0-ai-tools-llm-apis.ipynb)  
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/EnkrateiaLucca/oreilly_live_training_agents/blob/main/notebooks/2.0-ai-tools-llm-apis.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/EnkrateiaLucca/oreilly-python-course/blob/main/notebooks/2.0-ai-tools-llm-apis.ipynb)
 
 16.  [File Management Automations](notebooks/3.0-file-management-automations.ipynb)  
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/EnkrateiaLucca/oreilly_live_training_agents/blob/main/notebooks/3.0-file-management-automations.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/EnkrateiaLucca/oreilly-python-course/blob/main/notebooks/3.0-file-management-automations.ipynb)
 
 17.  [Automation Frameworks and Recipes](notebooks/4.0-automation-frameworks-and-recipes.ipynb)  
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/EnkrateiaLucca/oreilly_live_training_agents/blob/main/notebooks/4.0-automation-frameworks-and-recipes.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/EnkrateiaLucca/oreilly-python-course/blob/main/notebooks/4.0-automation-frameworks-and-recipes.ipynb)
 
 1.   [Automating Data Extraction with LLMs](notebooks/6.0-automating-data-extraction-with-llms.ipynb)  
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/EnkrateiaLucca/oreilly_live_training_agents/blob/main/notebooks/6.0-automating-data-extraction-with-llms.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/EnkrateiaLucca/oreilly-python-course/blob/main/notebooks/6.0-automating-data-extraction-with-llms.ipynb)
 
 1.   [Automating Data Extraction from Websites](notebooks/6.1-automating-data-extraction-from-websites.ipynb)  
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/EnkrateiaLucca/oreilly_live_training_agents/blob/main/notebooks/6.1-automating-data-extraction-from-websites.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/EnkrateiaLucca/oreilly-python-course/blob/main/notebooks/6.1-automating-data-extraction-from-websites.ipynb)
 
 1.   [Automating Data Extraction for Product Information](notebooks/6.2-automating-data-extraction-for-product-information.ipynb)  
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/EnkrateiaLucca/oreilly_live_training_agents/blob/main/notebooks/6.2-automating-data-extraction-for-product-information.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/EnkrateiaLucca/oreilly-python-course/blob/main/notebooks/6.2-automating-data-extraction-for-product-information.ipynb)
 
 1.   [Introduction to APIs: Using AI APIs (OpenAI, Claude, Llama3)](notebooks/7.0-introduction-to-apis-using-AI-apis-openai-claude-llama3.ipynb)  
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/EnkrateiaLucca/oreilly_live_training_agents/blob/main/notebooks/7.0-introduction-to-apis-using-AI-apis-openai-claude-llama3.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/EnkrateiaLucca/oreilly-python-course/blob/main/notebooks/7.0-introduction-to-apis-using-AI-apis-openai-claude-llama3.ipynb)
 
 1.   [Building Automation Workflows with AI](notebooks/8.0-building-automation-workflows-with-ai.ipynb)  
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/EnkrateiaLucca/oreilly_live_training_agents/blob/main/notebooks/8.0-building-automation-workflows-with-ai.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/EnkrateiaLucca/oreilly-python-course/blob/main/notebooks/8.0-building-automation-workflows-with-ai.ipynb)
 
 1.   [Building Email Assistant](notebooks/9.0-building-email-assistant.ipynb)  
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/EnkrateiaLucca/oreilly_live_training_agents/blob/main/notebooks/9.0-building-email-assistant.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/EnkrateiaLucca/oreilly-python-course/blob/main/notebooks/9.0-building-email-assistant.ipynb)
