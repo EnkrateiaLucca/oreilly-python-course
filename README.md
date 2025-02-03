@@ -111,23 +111,20 @@ Here are the notebooks available in the `notebooks/` folder:
 17.  [Automation Frameworks and Recipes](notebooks/4.0-automation-frameworks-and-recipes.ipynb)  
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/EnkrateiaLucca/oreilly_live_training_agents/blob/main/notebooks/4.0-automation-frameworks-and-recipes.ipynb)
 
-18.  [Automating Your Browser](notebooks/5.0-automating-your-browser.ipynb)  
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/EnkrateiaLucca/oreilly_live_training_agents/blob/main/notebooks/5.0-automating-your-browser.ipynb)
-
-19.  [Automating Data Extraction with LLMs](notebooks/6.0-automating-data-extraction-with-llms.ipynb)  
+1.   [Automating Data Extraction with LLMs](notebooks/6.0-automating-data-extraction-with-llms.ipynb)  
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/EnkrateiaLucca/oreilly_live_training_agents/blob/main/notebooks/6.0-automating-data-extraction-with-llms.ipynb)
 
-20.  [Automating Data Extraction from Websites](notebooks/6.1-automating-data-extraction-from-websites.ipynb)  
+1.   [Automating Data Extraction from Websites](notebooks/6.1-automating-data-extraction-from-websites.ipynb)  
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/EnkrateiaLucca/oreilly_live_training_agents/blob/main/notebooks/6.1-automating-data-extraction-from-websites.ipynb)
 
-21.  [Automating Data Extraction for Product Information](notebooks/6.2-automating-data-extraction-for-product-information.ipynb)  
+1.   [Automating Data Extraction for Product Information](notebooks/6.2-automating-data-extraction-for-product-information.ipynb)  
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/EnkrateiaLucca/oreilly_live_training_agents/blob/main/notebooks/6.2-automating-data-extraction-for-product-information.ipynb)
 
-22.  [Introduction to APIs: Using AI APIs (OpenAI, Claude, Llama3)](notebooks/7.0-introduction-to-apis-using-AI-apis-openai-claude-llama3.ipynb)  
+1.   [Introduction to APIs: Using AI APIs (OpenAI, Claude, Llama3)](notebooks/7.0-introduction-to-apis-using-AI-apis-openai-claude-llama3.ipynb)  
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/EnkrateiaLucca/oreilly_live_training_agents/blob/main/notebooks/7.0-introduction-to-apis-using-AI-apis-openai-claude-llama3.ipynb)
 
-23.  [Building Automation Workflows with AI](notebooks/8.0-building-automation-workflows-with-ai.ipynb)  
+1.   [Building Automation Workflows with AI](notebooks/8.0-building-automation-workflows-with-ai.ipynb)  
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/EnkrateiaLucca/oreilly_live_training_agents/blob/main/notebooks/8.0-building-automation-workflows-with-ai.ipynb)
 
-24.  [Building Email Assistant](notebooks/9.0-building-email-assistant.ipynb)  
+1.   [Building Email Assistant](notebooks/9.0-building-email-assistant.ipynb)  
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/EnkrateiaLucca/oreilly_live_training_agents/blob/main/notebooks/9.0-building-email-assistant.ipynb)
