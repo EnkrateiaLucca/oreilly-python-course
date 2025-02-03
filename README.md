@@ -2,15 +2,16 @@
 
 ## Setup
 
-- [Download Python if you don't have it locally](https://www.python.org/downloads/)
-- For this course we will be using: `Python 3.11.11`:
+- This repo was tested on a Mac with python=3.11.
+- If you are a complete beginner check the installation guides for mac and windows to setup homebrew, git and download python:
+  - `./installation-guide-mac.md`
+  - `./installation-guide-windows.md`
 
-![](./notebooks/assets-resources/python-download.png)
+### Environment Setup
 
-**Conda**
+#### Conda
 
 - Install [anaconda](https://www.anaconda.com/download) or [miniconda](https://docs.anaconda.com/miniconda/)
-- This repo was tested on a Mac with python=3.11.
 - Create an environment: `conda create -n oreilly-automate-tasks python=3.11`
 - Activate your environment with: `conda activate oreilly-automate-tasks`
 - Install requirements with: `pip install -r requirements/requirements.txt`
@@ -18,7 +19,7 @@
 - Setup your [Anthropic API key](https://console.anthropic.com/login?returnTo=%2F%3F)
 - Download [Ollama](https://ollama.ai/)
 
-**Pip**
+#### Pip
 
 
 1. **Create a Virtual Environment:**
@@ -40,7 +41,7 @@
 
 Remember to deactivate the virtual environment afterwards: `deactivate`
 
-## Setup your .env file
+#### Setup your .env file
 
 - Change the `.env.example` file to `.env` and add your OpenAI API key.
 
