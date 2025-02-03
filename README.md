@@ -5,7 +5,7 @@
 - [Download Python if you don't have it locally](https://www.python.org/downloads/)
 - For this course we will be using: `Python 3.11.11`:
 
-![](2025-02-03-11-57-55.png)
+![](./notebooks/assets-resources/python-download.png)
 
 **Conda**
 
