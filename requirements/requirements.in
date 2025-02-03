@@ -3,3 +3,7 @@ openai
 pandas
 anthropic
 ollama
+requests
+beautifulsoup4
+matplotlib
+ipywidgets

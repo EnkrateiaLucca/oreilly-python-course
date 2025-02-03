@@ -1,6 +1,7 @@
 from openai import OpenAI
 import anthropic
 import ollama
+import json
 
 def ask_ai(prompt, model_name="gpt-4o-mini"):
     """
@@ -60,4 +61,36 @@ def ask_local_ai(prompt, model_name="llama3.2", structured=False):
                                    {"role": "user", "content": prompt}
                                 ])
         return response.message.content
+
+
+def parse_dates_list(output_str):
+    """
+    Parse the string output containing a Python list of dates into an actual Python list.
+    
+    Args:
+        output_str (str): String containing a Python list representation of dates
         
+    Returns:
+        list: List of date strings
+    """
+    # Remove markdown code block formatting if present
+    output_str = output_str.replace('```python', '').replace('```', '').strip()
+    
+    # Safely evaluate the string as a Python expression
+    dates_list = eval(output_str)
+    
+    return dates_list
+
+def parse_json_output(json_str):
+    """
+    This function parses the JSON output from the AI and removes the markdown code block markers if present.
+    """
+    # Remove markdown code block markers if present
+    json_str = json_str.replace('```json', '').replace('```', '').strip()
+    
+    # Parse the JSON string into a Python dictionary
+    try:
+        return json.loads(json_str)
+    except json.JSONDecodeError:
+        print("Error: Could not parse JSON string")
+        return None
