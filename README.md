@@ -1,4 +1,4 @@
-# O'Reilly Live Trainining - Getting Started with LLM Agents using LangChain
+# O'Reilly Live Trainining - Automate Tasks with Python + AI 
 
 ## Setup
 
