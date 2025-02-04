@@ -1,0 +1,9 @@
+item,priority,estimated_cost,packed
+Tent,Essential,299.99,False
+Sleeping Bag,Essential,149.99,False
+Backpack,Essential,199.99,False
+Hiking Boots,Essential,159.99,False
+Water Filter,High,89.99,False
+First Aid Kit,Essential,49.99,False
+Headlamp,High,39.99,False
+Camp Stove,Medium,79.99,False
