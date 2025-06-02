@@ -41,6 +41,15 @@
         --
 
         4. **Use Python scripts to integrate with external LLM APIs**  
+
+        ---
+        class: center, middle
+
+        <h1>
+        <span style="background-color: orange">
+          Survey Question: Do you have a subscription for ChatGPT/Claude/Gemini?
+        </span>
+        </h1>
         
         ---
         class: center, middle
@@ -368,26 +377,54 @@
         # Data Types, Operations, Variables 
 
         - **Core Data Types**: 
+
+        --
+          
             - **int**: whole nubmers like 1, 2, 3 ... 
+        
+        --
             - **float**: decimal numbers like 1.1, 1.0, etc... 
+
+        --
             - **string**: text like `'Hello'`
+
+        --
             - **bool**: logical booleans like True or False  
         
         --
         
         - **Operations**:
+
+        --
+            
             - **Arithmetic** `(`+`, `-`, `*`, `/`, `**`, `//`, `%`)`
+
+        --
             - **String concatenation** (`'Lucas' + ' is' + ' wonderful' = 'Lucas is wonderful'`)
+
+        --
             - **Logical operations** (`and`, `or`, `not`)
+
+        --
             - **Comparison operations** (`>`, `<`, `>=`, `<=`, `==`, `!=`)
         
-        --
+        ---
         
         - **Variables**: Storing data for reuse, assigning and reassigning values: 
             ```python
                 a = 10
                 b = 20
+                print(a + b)
+                # Output: 30
             ```
+        ---
+        class: center, middle
+
+        <h1>
+            <span style="background-color: lightgreen">
+              Demo: Functions, Lists & Loops
+            </span>
+        </h1>
         ---
 
         # Functions
@@ -467,15 +504,6 @@
         - **Best Practices**: Keep them short, descriptive, and single-purpose  
 
         ---
-        class: center, middle
-
-        <h1>
-            <span style="background-color: lightgreen">
-             Demo Functions
-            </span>
-        </h1>
-
-        ---
         # Lists & Loops
 
         - **Lists**: Python’s go-to data structure for ordered collections  
@@ -543,10 +571,11 @@
 
         ---
         class: center, middle
+
         <h1>
-          <span style="background-color: lightgreen">
-           Demo - Lists & Loops
-          </span>
+            <span style="background-color: lightgreen">
+             Demo - Dictionaries, Tabular Data, Conditionals
+            </span>
         </h1>
 
         ---
@@ -582,53 +611,6 @@
         --
 
         - **Common Uses**: Storing configurations, mapping relationships, caching data
-
-        ---
-
-        # Reading/Writing
-
-        - **Tabular Data**: Data that is organized in a table format
-
-        --
-
-        - **Common Formats**: `.csv`, `.json`, `.xlsx`, `.xls`  
-
-        --
-
-        - CSV Files store data in rows and columns via comma-separated values:
-
-              ```text
-              Name,Age,City
-              John Smith,32,New York
-              Jane Doe,28,San Francisco
-              ```
-
-        <table style="border-collapse: collapse; width: 80%; margin: 20px auto;">
-            <tr style="background-color: #f2f2f2;">
-                <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Name</th>
-                <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Age</th>
-                <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">City</th>
-            </tr>
-            <tr>
-                <td style="border: 1px solid #ddd; padding: 8px;">John Smith</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">32</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">New York</td>
-            </tr>
-            <tr style="background-color: #f2f2f2;">
-                <td style="border: 1px solid #ddd; padding: 8px;">Jane Doe</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">28</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">San Francisco</td>
-            </tr>
-        </table>
-
-        ---
-        class: center, middle
-
-        <h1>
-            <span style="background-color: lightgreen">
-             Demo - Dictionaries & Tabular Data
-            </span>
-        </h1>
 
         ---
         # Comparators & Conditionals
@@ -703,16 +685,60 @@
 
         <h1>
             <span style="background-color: lightgreen">
-             Demo - Working with Data
+             Demo - Working with Data, APIs & Packages
             </span>
         </h1>
+
+        ---
+        # Reading/Writing
+
+        - **Tabular Data**: Data that is organized in a table format
+
+        --
+
+        - **Common Formats**: `.csv`, `.json`, `.xlsx`, `.xls`  
+
+        --
+
+        - CSV Files store data in rows and columns via comma-separated values:
+
+              ```text
+              Name,Age,City
+              John Smith,32,New York
+              Jane Doe,28,San Francisco
+              ```
+
+        <table style="border-collapse: collapse; width: 80%; margin: 20px auto;">
+            <tr style="background-color: #f2f2f2;">
+                <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Name</th>
+                <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Age</th>
+                <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">City</th>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #ddd; padding: 8px;">John Smith</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">32</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">New York</td>
+            </tr>
+            <tr style="background-color: #f2f2f2;">
+                <td style="border: 1px solid #ddd; padding: 8px;">Jane Doe</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">28</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">San Francisco</td>
+            </tr>
+        </table>
+
 
         ---
 
         # APIs, Packages, and AI as an API
 
         - **APIs 101**: Application Programming Interface—send a request, get a response  
+
+        --
+        
         - **Python Packages**: Example: `requests` library to make HTTP calls  
+
+        --
+        
         - **AI as an API**: Connect to services like OpenAI or Claude for text generation, content analysis, and more  
 
         ---
@@ -726,7 +752,13 @@
         # Automating Data Extraction
 
         - **Target Websites or Documents**: Identify patterns or structures (tables, IDs, HTML tags)  
+
+        --
+        
         - **Techniques**: Using Beautiful Soup, Pandas, or request-response cycles  
+
+        --
+        
         - **Practical Examples**: Extracting data from a CSV, scraping a simple webpage for product listings  
 
         ---
@@ -734,7 +766,13 @@
         # Automating Basic Data Analysis
 
         - **Data Loading**: Reading CSV files, Excel sheets, or database tables with Pandas  
+
+        --
+        
         - **Basic Analysis**: Calculating averages, sums, or finding patterns in data  
+
+        --
+        
         - **Visualization**: Creating simple charts or graphs to represent findings  
 
         ---
@@ -742,7 +780,13 @@
         # Automating Slides
 
         - Effective data wrangling for high quality slides
+
+        --
+        
         - A Hybrid Approach: AI + Python Scripts
+
+        --
+        
         - Bulk Processing to save time
 
         ---
@@ -750,7 +794,13 @@
         # Automating the Browser
 
         - **Tools**: `selenium`, `playwright`  
+
+        --
+        
         - **Common Tasks**: Logging in to websites, navigating pages, clicking buttons, scraping dynamic elements  
+
+        --
+        
         - **Why Automate Browser Tasks?**: Speed up online research, data entry, or repetitive website interactions  
 
         ---
@@ -758,7 +808,13 @@
         # Automating Filling Out Forms
 
         - **Form Fields**: Identifying input boxes, radio buttons, checkboxes in HTML  
+
+        --
+        
         - **Scripts**: Using `selenium` to locate elements by ID/class/xpath and input data  
+
+        --
+        
         - **Real-World Use**: Automating repetitive website sign-up processes, survey completion, or internal data-entry forms  
 
         ---
@@ -779,8 +835,17 @@
         # A System for Writing Your Scripts
 
         - **Plan**: Define the scope and goal of your automation  
+
+        --
+        
         - **Prototype**: Write a small test script or snippet to handle one core task  
+
+        --
+        
         - **Expand**: Add new features or handle edge cases incrementally  
+
+        --
+        
         - **Refine**: Use AI assistance to improve structure, fix bugs, and add clarity  
 
 
@@ -795,13 +860,14 @@
 
         # Using AI != Slop
 
-        *Slop is using unreviewed code from AI models*
+        *Slop is using unreviewed output (like code) from AI models*
 
         <div style="text-align: center;">
-          <img src="./2025-02-02-11-50-55.png" width="100%">
+          <img src="./2025-02-02-11-50-55.png" width="80%">
         </div>
 
-        --
+        ---
+        # Using AI != Slop
 
         1. Working with AI involves having a system for effectively reviewing high quality outputs
         
