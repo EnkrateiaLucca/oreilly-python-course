@@ -19,33 +19,30 @@ powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | ie
 ```bash
 git clone https://github.com/EnkrateiaLucca/oreilly-python-course
 cd oreilly-python-course
-uv sync --dev && \
-uv run python -m ipykernel install --user --name=oreilly-python-ai --display-name "O'Reilly Python AI" && \
-uv run playwright install && \
-echo "✅ Setup complete! Run: uv run jupyter lab"
+uv venv
+source .venv/bin/activate
+uv pip install jupyterlab ipykernel openai pandas anthropic ollama requests beautifulsoup4 matplotlib ipywidgets playwright
+python -m ipykernel install --user --name=oreilly-python-ai --display-name "O'Reilly Python AI"
+playwright install
+echo "✅ Setup complete! Run: jupyter lab"
 ```
 
 **Windows (PowerShell):**
 ```powershell
 git clone https://github.com/EnkrateiaLucca/oreilly-python-course
 cd oreilly-python-course
-uv sync --dev; uv run python -m ipykernel install --user --name=oreilly-python-ai --display-name "O'Reilly Python AI"; uv run playwright install; Write-Output "✅ Setup complete! Run: uv run jupyter lab"
-```
-
-**Alternative (If above fails):**
-```bash
-git clone https://github.com/EnkrateiaLucca/oreilly-python-course
-cd oreilly-python-course
-uv venv && source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-uv pip install -e ".[dev]" && \
-python -m ipykernel install --user --name=oreilly-python-ai --display-name "O'Reilly Python AI" && \
-playwright install && \
-echo "✅ Setup complete! Run: jupyter lab"
+uv venv
+.venv\Scripts\activate
+uv pip install jupyterlab ipykernel openai pandas anthropic ollama requests beautifulsoup4 matplotlib ipywidgets playwright
+python -m ipykernel install --user --name=oreilly-python-ai --display-name "O'Reilly Python AI"
+playwright install
+Write-Output "✅ Setup complete! Run: jupyter lab"
 ```
 
 ### 3. Start Jupyter Lab
 ```bash
-uv run jupyter lab
+# Make sure you're in the project directory
+jupyter lab
 ```
 
 ## API Setup
@@ -63,11 +60,8 @@ ANTHROPIC_API_KEY=<your claude api key>
 ```
 
 ## What's Included
-All dependencies are managed in `pyproject.toml`:
+Dependencies installed:
 - **AI Libraries:** openai, anthropic, ollama
 - **Data Science:** pandas, matplotlib
 - **Web Scraping:** requests, beautifulsoup4, playwright
 - **Jupyter:** jupyterlab, ipykernel, ipywidgets
-
-<!-- 1. [](notebooks/9.0-building-email-assistant.ipynb)  
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/EnkrateiaLucca/oreilly-python-course/blob/main/notebooks/9.0-building-email-assistant.ipynb) -->
