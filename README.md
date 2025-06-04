@@ -14,6 +14,11 @@ powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | ie
 ```
 
 ### 2. One-Command Setup
+
+**Clone the Repo**
+
+- `git clone https://github.com/EnkrateiaLucca/oreilly-python-course`
+
 **Linux/macOS:**
 ```bash
 uv sync --dev && \
