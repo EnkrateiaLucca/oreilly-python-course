@@ -32,6 +32,17 @@ cd oreilly-python-course
 uv sync --dev; uv run python -m ipykernel install --user --name=oreilly-python-ai --display-name "O'Reilly Python AI"; uv run playwright install; Write-Output "✅ Setup complete! Run: uv run jupyter lab"
 ```
 
+**Alternative (If above fails):**
+```bash
+git clone https://github.com/EnkrateiaLucca/oreilly-python-course
+cd oreilly-python-course
+uv venv && source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+uv pip install -e ".[dev]" && \
+python -m ipykernel install --user --name=oreilly-python-ai --display-name "O'Reilly Python AI" && \
+playwright install && \
+echo "✅ Setup complete! Run: jupyter lab"
+```
+
 ### 3. Start Jupyter Lab
 ```bash
 uv run jupyter lab
