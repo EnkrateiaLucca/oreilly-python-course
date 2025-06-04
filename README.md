@@ -13,14 +13,12 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
 ```
 
-### 2. One-Command Setup
-
-**Clone the Repo**
-
-- `git clone https://github.com/EnkrateiaLucca/oreilly-python-course`
+### 2. Clone and Setup Project
 
 **Linux/macOS:**
 ```bash
+git clone https://github.com/EnkrateiaLucca/oreilly-python-course
+cd oreilly-python-course
 uv sync --dev && \
 uv run python -m ipykernel install --user --name=oreilly-python-ai --display-name "O'Reilly Python AI" && \
 uv run playwright install && \
@@ -29,6 +27,8 @@ echo "✅ Setup complete! Run: uv run jupyter lab"
 
 **Windows (PowerShell):**
 ```powershell
+git clone https://github.com/EnkrateiaLucca/oreilly-python-course
+cd oreilly-python-course
 uv sync --dev; uv run python -m ipykernel install --user --name=oreilly-python-ai --display-name "O'Reilly Python AI"; uv run playwright install; Write-Output "✅ Setup complete! Run: uv run jupyter lab"
 ```
 
