@@ -2,7 +2,7 @@
 
 ## Recommended Setup
 
-First, install UV:
+### 1. Install UV:
 
 **Linux/macOS:**
 ```bash
@@ -14,7 +14,7 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
 ```
 
-## Setup
+### 2. Setup Environment
 
 **Linux/macOS:**
 ```bash
@@ -57,7 +57,8 @@ Write-Output "✅ Setup complete. Run with:"
 Write-Output "uv run jupyter lab"
 ```
 
-### Setup your API keys:
+### 3. Setup your API keys:
+
 1. Openai [API key](https://platform.openai.com/)
 2. Anthropic [API key](https://docs.anthropic.com/en/docs/get-started)
 
