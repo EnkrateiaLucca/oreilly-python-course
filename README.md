@@ -51,6 +51,7 @@ Write-Output "🔧 Initializing project..."
 uv init --bare
 Write-Output "📦 Installing JupyterLab and ipykernel..."
 uv add --dev jupyterlab ipykernel
+uv add openai pandas anthropic ollama requests beautifulsoup4 matplotlib ipywidgets playwright
 Write-Output "🧠 Registering Jupyter kernel..."
 uv run python -m ipykernel install --user --name=$projectName --display-name "$kernelDisplayName"
 Write-Output "✅ Setup complete. Run with:"
