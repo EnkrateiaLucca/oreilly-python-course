@@ -202,6 +202,34 @@
         ---
         class: center, middle
 
+        # Learning Python with AI
+        *Your Personal Programming Tutor*
+
+        ---
+
+        # The Conversational Learning Approach
+
+        - **Start with "I don't know Python, but I want to..."** and describe your goal
+
+        --
+
+        - **Ask for explanations**: "What does this line do?" or "Why do we use a for loop here?"
+
+        --
+
+        - **Request variations**: "Show me 3 different ways to do this" or "Make this simpler"
+
+        --
+
+        - **Build incrementally**: Start with tiny scripts, then ask "How do I add X to this?"
+
+        --
+
+        - **Example conversation starter**:
+
+        ---
+        class: center, middle
+
         <div style="display: flex; align-items: center; justify-content: center;">
             <h1 style="margin-right: 20px;">Why Python?</h1>
             <img src="../notebooks/assets/python-logo.svg" width="100px">
@@ -775,33 +803,114 @@
         ---
         # Ask
 
-        - Be detailed
+        - Be **detailed**
 
-        - Use context (docs, articles, pdfs, ...)
+        --
 
-        - <span style="color: red">????</span> 
+        - Use **context** (docs, articles, pdfs, ...)
 
+        --
 
+        - **Tools** to help with feeding data/repo into LLMs
+          - https://github.com/yamadashy/repomix
+          - gitingest
+          - r.jina.ai
+          - arxiv-txt.org
+          - llms-txt
+          - files-to-prompt
+
+        - Use **meta-prompts**:
+          ```
+          I have this problem:
+          {describe the problem}
+          Help me write a good prompt that encapsulates this into a single Python script.
+          ```
+        
+        ---
+        # Ask
+
+        - For tough problems use **reasoning models**
+
+          - Claude + Extended Thinking
+          - O-series models from OpenAI
+          - Gemini 2.5 Pro
+          - DeepSeek R1
 
         ---
-        # Run
+        # Run/Understand/Fix
 
-        - Ask for terminal command that runs your script
+        - The pattern is:
 
-        ---
-        # Understand
+        --
+          
+          - LLM generates the script
+          - You run the script
+          - You inspect the output
+          - You ask the LLM to fix the script (if needed)
 
-        - Ask for comments on the code
+        --
+        
+        - Ask for **comments on the code**
 
-        ---
-        # Fix
+        --
 
-        - Feed the output of the terminal to the AI and ask to fix it
+        - **Feed the output of the terminal** to the AI and ask to fix it
 
         ---
         # Be Safe
 
-        - Explicit state to the LLM to avoid hard coding API keys, and consider pitfalls and security risks
+        - **Never hardcode credentials** - use environment variables or config files
+
+        --
+
+        - **Review AI-generated code** before running - understand what each line does
+
+        --
+
+        - **Test in isolated environments** first (separate folders, test data)
+
+        --
+
+        - **Don't share sensitive data** with AI models (personal info, API keys, proprietary data)
+
+        --
+
+        - **Backup important files** before running automation scripts
+
+        --
+
+        - **Check file paths** - ensure scripts won't delete important files
+
+        --
+
+        - **Add safeguards** for loops (break conditions, iteration limits)
+
+        --
+
+        - **Respect rate limits** and website terms of service when scraping
+
+        --
+
+        - **Quick Safety Checklist**: Read code → Test with dummy data → Have backups → Use version control
+
+        ---
+        class: center, middle
+
+        <h1>
+            <span style="background-color: lightgreen">
+             Demo - Implementing the A.R.U.F.S Framework
+            </span>
+        </h1>
+
+        ---
+        class: center, middle
+
+        <h1>
+            <span style="background-color: lightgreen">
+             Demo - Automating Data Extraction
+            </span>
+        </h1>
+
 
         ---
         
