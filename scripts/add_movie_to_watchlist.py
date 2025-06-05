@@ -1,10 +1,18 @@
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.11"
+# dependencies = [
+#   "playwright",
+# ]
+# ///
+
 import re
 from playwright.sync_api import Playwright, sync_playwright, expect
 import os
 import sys
 
 def run(playwright: Playwright) -> None:
-    movie_to_search = sys.argv[1] 
+    movie_to_search = sys.argv[1]
     browser = playwright.chromium.launch(headless=False)
     context = browser.new_context()
     page = context.new_page()
