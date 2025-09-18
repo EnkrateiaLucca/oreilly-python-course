@@ -75,7 +75,7 @@ Core Python concepts and syntax:
 - **01-python-basics.ipynb** – Python basics: numbers, strings, variables, operators
 - **02-working-with-data.ipynb** – Lists, dictionaries, file I/O, CSV handling
 - **03-packages-apis.ipynb** – Using libraries and working with APIs
-- **file_test.txt** – Sample text file for file operations
+- **file.txt** – Sample text file for file operations
 - **places_to_go.csv** – Example CSV data for exercises
 
 ### 🤖 02-ai-apis/
