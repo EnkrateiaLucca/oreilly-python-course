@@ -19,30 +19,28 @@ powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | ie
 ```bash
 git clone https://github.com/EnkrateiaLucca/oreilly-python-course
 cd oreilly-python-course
-uv venv
-source .venv/bin/activate
-uv pip install jupyterlab ipykernel openai pandas anthropic ollama requests beautifulsoup4 matplotlib ipywidgets playwright
-python -m ipykernel install --user --name=oreilly-python-ai --display-name "O'Reilly Python AI"
+uv sync
+uv run ipython kernel install --user --env VIRTUAL_ENV $(pwd)/.venv --name=oreilly-automate-py
 playwright install
-echo "✅ Setup complete! Run: jupyter lab"
+echo "✅ Setup complete! To execute the jupyter environment for the interactive notebooks run:"
+uv run --with jupyter jupyter lab
 ```
 
 **Windows (PowerShell):**
 ```powershell
 git clone https://github.com/EnkrateiaLucca/oreilly-python-course
 cd oreilly-python-course
-uv venv
-.venv\Scripts\activate
-uv pip install jupyterlab ipykernel openai pandas anthropic ollama requests beautifulsoup4 matplotlib ipywidgets playwright
-python -m ipykernel install --user --name=oreilly-python-ai --display-name "O'Reilly Python AI"
+uv sync
+uv run ipython kernel install --user --env VIRTUAL_ENV "$PWD\.venv" --name=oreilly-automate-py
 playwright install
-Write-Output "✅ Setup complete! Run: jupyter lab"
+Write-Output "✅ Setup complete! To execute the jupyter environment for the interactive notebooks run:"
+uv run --with jupyter jupyter lab
 ```
 
 ### 3. Start Jupyter Lab
 ```bash
 # Make sure you're in the project directory
-jupyter lab
+uv run --with jupyter jupyter lab
 ```
 
 ## API Setup
