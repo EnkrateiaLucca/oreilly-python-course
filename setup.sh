@@ -1,20 +1,9 @@
 #!/bin/bash
 
-# Set project name (adjust as needed)
-PROJECT_NAME="my-uv-project"
-KERNEL_NAME="My UV Project"
-
-# Exit if any command fails
-set -e
-
-echo "🔧 Initializing project..."
-uv init --bare
-
-echo "📦 Installing JupyterLab and ipykernel..."
-uv add --dev jupyterlab ipykernel pandas matplotlib numpy openai anthropic
-
-echo "🧠 Registering Jupyter kernel..."
-uv run python -m ipykernel install --user --name="$PROJECT_NAME" --display-name "$KERNEL_NAME"
-
-echo "✅ Setup complete. Run with:"
-echo "uv run jupyter lab"
+git clone https://github.com/EnkrateiaLucca/oreilly-python-course
+cd oreilly-python-course
+uv sync
+uv run ipython kernel install --user --env VIRTUAL_ENV $(pwd)/.venv --name=oreilly-automate-py
+playwright install
+echo "✅ Setup complete! To execute the jupyter environment for the interactive notebooks run:"
+uv run --with jupyter jupyter lab
