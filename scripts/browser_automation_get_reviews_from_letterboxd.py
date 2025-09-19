@@ -1,3 +1,12 @@
+# /// script
+# dependencies = [
+#   "playwright",
+#   "openai",
+#   "pyperclip",
+# ]
+# ///
+
+
 import openai
 import subprocess
 import re

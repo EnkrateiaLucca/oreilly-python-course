@@ -8,9 +8,9 @@ import os
 import shutil
 from datetime import datetime
 
-# Config
-SOURCE_FOLDER = "/Users/greatmaster/Desktop/projects/oreilly-live-trainings/oreilly-python-course"
-DEST_FOLDER = "/Users/greatmaster/Desktop/projects/tmp_files"
+# Config (change to your own!)
+SOURCE_FOLDER = "."
+DEST_FOLDER = "."
 TODAY = datetime.today().strftime('%Y-%m-%d')
 
 # Create destination if it doesn't exist
