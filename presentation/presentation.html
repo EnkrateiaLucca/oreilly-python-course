@@ -14,10 +14,12 @@
         font-weight: normal;
       }
       .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      #source { display: none; }
     </style>
   </head>
   <body>
     <textarea id="source">
+        
         class: center, middle
 
         # Using AI Tools and Python to Automate Tasks
@@ -50,40 +52,6 @@
           Survey Question: Do you have a subscription for ChatGPT/Claude/Gemini?
         </span>
         </h1>
-        
-        ---
-        class: center, middle
-
-        # Why Learn to Automate?
-
-        ---
-        # Automation as a General Skill
-
-        - Automate Repetitive Tasks
-        
-        --
-        
-        - Increase Productivity
-            
-        --
-        
-        - Replacing Subscriptions (saving $)
-        
-        --
-        
-        - Analyse Massive Amounts of Data 
-        
-        ---
-
-        class: center, middle
-
-        # The Real Reason....
-
-        ---
-        class: center, middle
-
-        # Writing code = the most general skill you can have!
-        *It is a superpower! :)*
 
         ---
         class: center, middle
@@ -91,10 +59,36 @@
 
         ---
         class: center, middle
-        
-        # Making Machines Do What You Want
 
-        <span style="color: red">Add visual</span> 
+        # Making Machines Do What You Want 🤖
+        ---
+
+        # Example: Instructing a Robot
+
+        --
+
+        - The Task: **"Move forward, pick up the box, turn right, place the box"**
+
+        --
+        
+        - The Code:
+          ```python
+          def deliver_package():
+              robot.move_forward(steps=10)
+              robot.pick_up("box")
+              robot.turn_right(90)
+              robot.place_item("box")
+              robot.say("Package delivered!")
+          ```
+
+        --
+        
+        <div style="display: flex; align-items: center; margin-top: 28px;">
+          <div style="flex: 1; text-align: center;">
+            <div style="font-size: 150px;">🤖</div>
+            <p style="font-size: 0.9em;">The robot follows your instructions exactly!</p>
+          </div>
+        </div>
 
         ---
 
@@ -133,6 +127,103 @@
               </code></pre>
           </div>
         </div>
+        
+        ---
+        class: center, middle
+
+        # Why Learn to Automate?
+
+        ---
+        class: center, middle
+
+        # Automate Repetitive Tasks
+
+        <img src="../notebooks/assets/2025-11-19-10-22-11.png" width="100%">
+        
+        ---
+        class: center, middle
+
+        # Increase Productivity
+
+        <img src="../notebooks/assets/2025-11-19-10-26-42.png" width="60%">
+            
+        ---
+        class: center, middle
+
+        # Replacing Subscriptions (saving $)
+
+        <img src="../notebooks/assets/2025-11-19-10-32-14.png" width="60%">
+            
+        ---
+        class: center, middle
+
+        # Analyse Massive Amounts of Data
+
+        <img src="../notebooks/assets/2025-11-19-10-32-52.png" width="80%">
+            
+        ---
+        class: center, middle
+
+        # The Real Reason....
+
+        ---
+        class: center, middle
+
+        # Writing code = the most general skill you can have!
+        *It is a superpower! :)*        
+
+        ---
+        class: center, middle
+
+        # Important Clarification
+
+        ## Learning to automate ≠ Everyone should be a developer
+
+        ---
+        # Automation is for Everyone
+
+        --
+        
+        - Automation skills are for **everyone**
+
+        --
+
+        - Professional software engineering is a **specialized career**
+
+        --
+
+        - You can be productive with code **without becoming a full-time developer**
+
+        --
+
+        - It's about writing **scripts** not fancy software
+
+        --
+
+        - Script = **simple program** that automates a task
+
+        --
+
+        - Professional software =  **complex program engineered** to be used by many people
+
+        ---
+        class: center, middle
+
+        # Scripting ≠ 'Software Engineering'
+
+        ---
+        class: center, middle
+
+        # Scripting
+
+        <img src="../notebooks/assets/2025-11-19-11-02-07.png" width="100%">
+
+        ---
+        class: center, middle
+
+        # Software Engineering
+
+        <img src="../notebooks/assets/2025-11-19-11-01-35.png" width="100%">
 
         ---
         # Scripting
@@ -142,77 +233,158 @@
 
         --
         
-        - Quick, targeted, and task-oriented  
+        - Quick, targeted, and task-oriented 
+
+        --
+
+        - You don't think that much about it
 
         --
         
         - Typically used for automations, data manipulation, or utility tasks  
 
+        ---
+        class: center, middle
+        # Real Automation Examples (that I use!)
+
+        ---
+        class: center, middle
+
+        # Bulk YouTube Upload Automation
+
+        <img src="../notebooks/assets/2025-11-19-11-26-31.png" width="60%">
+
+        ???
+        
+        - Problem: Upload 50 videos with custom metadata (titles, descriptions...)
+        
+        - Solution: Script that reads metadata from a spreadsheet and automates the upload process
+        
+        - Saved: 10+ hours of repetitive clicking
+
+        ---
+        class: center, middle
+
+        # Notes Processor
+
+        <img src="../notebooks/assets/2025-11-19-11-29-29.png" width="60%">
+
+        ???
+        
+        - Problem: Convert scattered meeting notes into organized summaries with action items
+        
+        - Solution: Script that parses notes, extracts key points, and generates formatted reports
+        
+        - Benefit: Consistent documentation without manual reformatting
+
+        ---
+        class: center, middle
+
+        # Your automation doesn't need to be perfect—it just needs to solve YOUR problem!
+
+        ---
+        class: center, middle
+        
+        <div style="display: flex; align-items: center; justify-content: center;">
+            <h1 style="margin-right: 20px;">Why Python?</h1>
+            <img src="../notebooks/assets/python-logo.svg" width="100px">
+        </div>
+
+        ---
+
+        <div style="display: flex; align-items: left; ">
+          <h1 style="margin-right: 20px;">What is Python?</h1>
+          <img src="../notebooks/assets/python-logo.svg" width="100px">
+        </div>
+
+        **Python** is a high-level, general-purpose programming language designed for readability and simplicity.
+
         --
 
-        - Toy example -> Renaming multiple files
+        Created by Guido van Rossum in 1991, Python emphasizes code that reads like English.
 
-        ```python
-          # Rename all .txt files in a directory to include today's date
-          import os
-          from datetime import date
+        --
 
-          today = date.today().strftime("%Y-%m-%d")
-
-          for filename in os.listdir("."):
-              if filename.endswith(".txt"):
-                  new_name = f"{today}_{filename}"
-                  os.rename(filename, new_name)
-
-        ```
-
-        ---
-        # Vibe Scripting?
-
-        <div style="display: flex; align-items: center;">
+        <div style="display: flex; align-items: center; margin-top: 20px;">
           <div style="flex: 1;">
-            <img src="../notebooks/assets/piramid-scripting.png" width="105%">
+            <h3>English:</h3>
+            <p style="font-size: 1.1em;">"For each item in my shopping list, print the item"</p>
           </div>
           <div style="flex: 1;">
-            <p style="margin-top: 20px; margin-left: 0;">
-              <img src="" width="105%">
-            </p>
+            <h3>Python:</h3>
+            <pre><code class="python" style="font-size: 1.0em;">for item in shopping_list:
+    print(item)</code></pre>
           </div>
         </div>
 
-        ---
-        # Vibe Scripting?
+        --
 
-        <div style="display: flex; align-items: center;">
-          <div style="flex: 1;">
-            <img src="../notebooks/assets/piramid-scripting.png" width="105%">
-          </div>
-          <div style="flex: 1;">
-            <p style="margin-top: 20px; margin-left: 0;">
-              <img src="../notebooks/assets/piramid-vibe-scripting.png" width="105%">  
-            </p>
-          </div>
-        </div>
-        
+        **See how similar they are? That's Python's superpower!**
+
         ---
-        # Why focus on scripting/vibe scripting?
-        
+        <div style="display: flex; align-items: left; ">
+          <h1 style="margin-right: 20px;">Python is Easy and Everywhere</h1>
+          <img src="../notebooks/assets/python-logo.svg" width="100px">
+        </div>
+
+        <div style="text-align: center;">
+          <img src="../notebooks/assets/2025-02-01-16-12-52.png" width="70%" style="border-radius: 30px;">
+        </div>
+
+        ---
+
+        <div style="display: flex; align-items: left; ">
+          <h1 style="margin-right: 20px;">Python is Easy and Everywhere</h1>
+          <img src="../notebooks/assets/python-logo.svg" width="100px">
+        </div>
+
+        - **General Purpose**: Can be used for web development, data science, automation, AI, and more
+
+        --
+
+        - **Most Popular**: #1 language among developers worldwide (TIOBE Index, Stack Overflow)
+
+        --
+
+        - **Powers Modern Technology**:
+          - 🤖 AI & Machine Learning (TensorFlow, PyTorch)
+          - 🚗 Self-driving cars (Tesla, Waymo)
+          - 👁️ Computer vision & image recognition
+          - 🌐 Web applications (Instagram, Spotify, Netflix)
+          - 🔬 Scientific computing & research
+
+        --
+
+        - **Beginner-Friendly**: Reads like English, minimal syntax complexity
+
+        ---
+        # Scripting with Python
+
         --
 
         - Much faster learning curve - *if it works don't change it*
-        
-        --
-        
-        - Immediate practical benefits - *makes your life better*  
-
-        --
-        
-        - Ideal for nondevelopers who just want to get things done  
 
         --
 
-        - I call it "The Ostrich Approach to Learning Python"
-        
+        - Immediate practical benefits - *makes your life better*
+
+        --
+
+        - Ideal for nondevelopers who just want to get things done
+
+        --
+
+        - **It's about learning to solve YOUR specific problems**
+
+        --
+
+        - Scripts should be **tailored to your unique needs**, not one-size-fits-all solutions
+
+        ---
+        class: center, middle
+
+        # _The Ostrich Approach to Learning Python_
+
         <div style="text-align: center;">
             <img src="../notebooks/assets/2025-01-31-16-24-34.png" width="30%">
         </div>
@@ -233,69 +405,6 @@
         
         *And purposefuly ignoring that which does not seem to have any effect on its
         success.*
-
-        ---
-        class: center, middle
-
-        # Learning Python with AI
-        *Your Personal Programming Tutor*
-
-        ---
-
-        # The Conversational Learning Approach
-
-        - **Start with "I don't know Python, but I want to..."** and describe your goal
-
-        --
-
-        - **Ask for explanations**: "What does this line do?" or "Why do we use a for loop here?"
-
-        --
-
-        - **Request variations**: "Show me 3 different ways to do this" or "Make this simpler"
-
-        --
-
-        - **Build incrementally**: Start with tiny scripts, then ask "How do I add X to this?"
-
-        --
-
-        - **Example conversation starter**:
-
-        ---
-        class: center, middle
-
-        <div style="display: flex; align-items: center; justify-content: center;">
-            <h1 style="margin-right: 20px;">Why Python?</h1>
-            <img src="../notebooks/assets/python-logo.svg" width="100px">
-        </div>
-
-        ---
-        <div style="display: flex; align-items: left; ">
-          <h1 style="margin-right: 20px;">Python is Easy and Everywhere</h1>
-          <img src="../notebooks/assets/python-logo.svg" width="100px">
-        </div>
-
-        <div style="text-align: center;">
-          <img src="../notebooks/assets/2025-02-01-16-12-52.png" width="70%">
-        </div>
-
-        ---
-
-        <div style="display: flex; align-items: left; ">
-          <h1 style="margin-right: 20px;">Python is Easy and Everywhere</h1>
-          <img src="../notebooks/assets/python-logo.svg" width="100px">
-        </div>
-
-        - Python is a general purpose language (can be used for everything)
-
-        --
-
-        - Python is used across the board in AI from developing AI models to powering self-driving cars
-
-        --
-
-        - Python is super easy to learn due to its proximity with natural language
 
         ---
         class: center, middle
@@ -733,6 +842,79 @@
         ---
         class: center, middle
 
+        # Quick Knowledge Check! 🧠
+
+        ---
+
+        # Quiz Question 1
+
+        **What will this code output?**
+
+        ```python
+        age = 25
+        if age >= 18:
+            print("Adult")
+        else:
+            print("Minor")
+        ```
+
+        --
+
+        **Answer:** `Adult`
+
+        --
+
+        **Explanation:** Since 25 is greater than or equal to 18, the condition is True, so "Adult" is printed.
+
+        ---
+
+        # Quiz Question 2
+
+        **What's wrong with this code?**
+
+        ```python
+        tasks = ["Email", "Meeting", "Code"]
+        print(tasks[3])
+        ```
+
+        --
+
+        **Answer:** Index out of range error!
+
+        --
+
+        **Explanation:** Lists are zero-indexed. This list has indices 0, 1, 2. There is no index 3!
+        - `tasks[0]` → "Email"
+        - `tasks[1]` → "Meeting"
+        - `tasks[2]` → "Code"
+
+        ---
+
+        # Quiz Question 3
+
+        **Fill in the blank to print each fruit:**
+
+        ```python
+        fruits = ["apple", "banana", "cherry"]
+        ___ fruit ___ fruits:
+            print(fruit)
+        ```
+
+        --
+
+        **Answer:**
+        ```python
+        for fruit in fruits:
+            print(fruit)
+        ```
+
+        --
+
+        **Explanation:** The `for` loop iterates through each item in the list, and `in` checks membership.
+
+        ---
+        class: center, middle
+
         <h1>
             <span style="background-color: lightgreen">
              Demo - Working with Data, APIs & Packages
@@ -778,18 +960,206 @@
 
 
         ---
+        class: center, middle
 
-        # APIs, Packages, and AI as an API
+        # Understanding APIs & Packages
 
-        - **APIs 101**: Application Programming Interface—send a request, get a response  
+        ---
+
+        # What is an API?
+
+        **API** = Application Programming Interface
 
         --
-        
-        - **Python Packages**: Example: `requests` library to make HTTP calls  
+
+        A way for different programs to communicate with each other.
 
         --
-        
-        - **AI as an API**: Connect to services like OpenAI or Claude for text generation, content analysis, and more  
+
+        **Think of it like a restaurant:**
+        - You (your code) look at the menu (API documentation)
+        - You tell the waiter (API) what you want
+        - The kitchen (external service) prepares it
+        - The waiter brings back your order (response)
+
+        --
+
+        **Real-World Example: Google Maps API**
+
+        <div style="text-align: center; margin-top: 20px;">
+          <div style="display: flex; justify-content: space-around; align-items: center;">
+            <div style="flex: 1; text-align: center;">
+              <p style="font-size: 1.2em;">🏨 <strong>Booking.com</strong></p>
+              <p style="font-size: 0.9em;">Shows hotel locations on map</p>
+            </div>
+            <div style="flex: 0.3; text-align: center;">
+              <p style="font-size: 2em;">→ 🗺️ ←</p>
+              <p style="font-size: 0.8em;">Google Maps API</p>
+            </div>
+            <div style="flex: 1; text-align: center;">
+              <p style="font-size: 1.2em;">🏠 <strong>Airbnb</strong></p>
+              <p style="font-size: 0.9em;">Shows property locations</p>
+            </div>
+          </div>
+        </div>
+
+        --
+
+        Neither Booking nor Airbnb built their own mapping system—they just use Google's API!
+
+        ---
+
+        # What are Packages and Imports?
+
+        **Package** = A collection of pre-written Python code (functions, classes) that you can reuse
+
+        --
+
+        **Import** = The command to bring a package into your script so you can use it
+
+        --
+
+        **Example:**
+
+        ```python
+        # Import the 'requests' package to make HTTP calls
+        import requests
+
+        # Now we can use functions from the requests package
+        response = requests.get("https://api.example.com/data")
+        print(response.json())
+        ```
+
+        --
+
+        **Think of it like:**
+        - Package = A toolbox full of tools
+        - Import = Taking the toolbox out so you can use the tools
+        - Using the package = Actually using the tools to build something
+
+        --
+
+        **Popular packages:** `requests` (HTTP calls), `pandas` (data analysis), `openai` (AI services)
+
+        ---
+
+        # The Package Management Problem 📦
+
+        When you write a Python automation script, it needs:
+
+        --
+
+        1. **A specific Python version** (e.g., Python 3.11)
+
+        --
+
+        2. **Specific package versions** (e.g., `requests==2.31.0`, `pandas==2.0.1`)
+
+        --
+
+        3. **Isolated environment** (so different projects don't conflict)
+
+        --
+
+        **Traditional Approach: Multiple Files + Virtual Environments**
+
+        <div style="display: flex; justify-content: space-around; margin-top: 20px;">
+          <div style="flex: 1; margin: 10px;">
+            <p><strong>📄 automation.py</strong></p>
+            <pre style="font-size: 0.7em;">import requests
+              import pandas
+
+          <pre style="font-size: 0.7em;"># Your code here...</pre>
+          </div>
+          <div style="flex: 1; margin: 10px;">
+            <p><strong>📄 requirements.txt</strong></p>
+            <pre style="font-size: 0.7em;">requests==2.31.0
+            pandas==2.0.1
+            numpy==1.24.0
+            </pre>
+          </div>
+          <div style="flex: 1; margin: 10px;">
+            <p><strong>📄 .python-version</strong></p>
+            <pre style="font-size: 0.7em;">3.11</pre>
+          </div>
+        </div>
+
+        --
+
+        **Tools:** pipenv, conda, venv, poetry... **Confusing for beginners!**
+
+        ---
+        class: center, middle
+
+        <h1>
+        <span style="background-color: lightgreen">
+         Demo - The Package Management Problem
+        </span>
+        </h1>
+
+        ---
+
+        # Enter UV: The Simple Solution ✨
+
+        <div style="text-align: center;">
+          <p style="font-size: 1.3em;"><strong>UV = Python script runner + package manager in one</strong></p>
+        </div>
+
+        --
+
+        **Everything in a single file!**
+
+        ```python
+        # /// script
+        # requires-python = ">=3.11"
+        # dependencies = [
+        #     "requests==2.31.0",
+        #     "pandas==2.0.1",
+        # ]
+        # ///
+
+        import requests
+        import pandas as pd
+
+        # Your automation code here...
+        response = requests.get("https://api.example.com/data")
+        df = pd.DataFrame(response.json())
+        print(df.head())
+        ```
+
+        ---
+
+        # UV: Single File vs Traditional Approach
+
+        <div style="display: flex; justify-content: space-around; align-items: center;">
+          <div style="flex: 1; text-align: center;">
+            <h3>Traditional 😓</h3>
+            <ul style="text-align: left; font-size: 0.9em;">
+              <li>Create virtual environment</li>
+              <li>Activate environment</li>
+              <li>Install packages</li>
+              <li>Manage requirements.txt</li>
+              <li>Remember which env to use</li>
+            </ul>
+            <p style="font-size: 0.8em; margin-top: 20px;">📁 Multiple files<br/>📚 Complex workflow</p>
+          </div>
+          <div style="flex: 0.2; text-align: center; font-size: 3em;">
+            VS
+          </div>
+          <div style="flex: 1; text-align: center;">
+            <h3>UV 🚀</h3>
+            <ul style="text-align: left; font-size: 0.9em;">
+              <li>Write your script</li>
+              <li>Add dependencies at the top</li>
+              <li>Run: <code>uv run script.py</code></li>
+            </ul>
+            <p style="font-size: 0.8em; margin-top: 20px;">📄 One file<br/>⚡ Simple workflow</p>
+          </div>
+        </div>
+
+        --
+
+        **Perfect for vibe scripting!** → Learn more: https://docs.astral.sh/uv/guides/scripts/
 
         ---
         class: center, middle
@@ -801,19 +1171,87 @@
         </h1>
 
         ---
+
+        # The Vibe Scripting Workflow 🔄
+
+        <div style="text-align: center; margin-top: 40px;">
+          <div style="display: flex; align-items: center; justify-content: center; font-size: 1.5em; margin-bottom: 30px;">
+            <div style="margin: 0 0px;">🤖 <strong>AI</strong></div>
+            <div style="margin: 0 0px;">→</div>
+            <div style="margin: 0 0px;">💻 <strong>CODE</strong></div>
+            <div style="margin: 0 0px;">→</div>
+            <div style="margin: 0 0px;">📄 <strong>file.py</strong></div>
+            <div style="margin: 0 0px;">→</div>
+            <div style="margin: 0 0px;">⚡ <code>uv run file.py</code></div>
+            <div style="margin: 0 0px;">→</div>
+            <div style="margin: 0 0px;">👁️ <strong>Review</strong></div>
+          </div>
+
+          <div style="margin-top: 50px; font-size: 1.2em;">
+            <div style="border: 3px solid #4CAF50; border-radius: 10px; padding: 20px; display: inline-block;">
+              <p style="margin: 10px 0;"><strong>Does it solve your problem?</strong></p>
+              <div style="display: flex; justify-content: space-around; margin-top: 20px;">
+                <div style="flex: 1; padding: 10px;">
+                  <p style="color: red; font-size: 1.3em;">❌ No</p>
+                  <p style="font-size: 0.9em;">→ Back to AI 🤖<br/>(refine & iterate)</p>
+                </div>
+                <div style="border-left: 2px solid #ccc;"></div>
+                <div style="flex: 1; padding: 10px;">
+                  <p style="color: green; font-size: 1.3em;">✅ Yes</p>
+                  <p style="font-size: 0.9em;">→ Done! 🎉<br/>(problem solved)</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        ---
         class: center, middle
 
         # How to Use AI to Learn/Use Python
-        
+
         *A quick detour to set up an AI toolkit to speed up our Automation skills *
-        
+
+        ---
+        class: center, middle
+
+        # Learning Python with AI
+        *Your Personal Programming Tutor*
+
         ---
 
-        # A.R.U.F.S Framework
+        # The Conversational Learning Approach
+
+        - **Start with "I don't know Python, but I want to..."** and describe your goal
+
+        --
+
+        - **Ask for explanations**: "What does this line do?" or "Why do we use a for loop here?"
+
+        --
+
+        - **Request variations**: "Show me 3 different ways to do this" or "Make this simpler"
+
+        --
+
+        - **Build incrementally**: Start with tiny scripts, then ask "How do I add X to this?"
+
+        <h1>
+        <span style="background-color: lightgreen">
+         Demo - Conversational Learning with AI for Python
+        </span>
+        </h1>
+
+        ---
+
+
+
+
+        # ARUFS Framework
 
         --
         
-        ## **A**sk,**R**un,**U**nderstand,**F**ix,Be **S**afe
+        ## **A**sk, **R**un, **U**nderstand, **F**ix, Be **S**afe
 
         --
 
@@ -1047,7 +1485,7 @@
         # Using AI != Slop
 
         1. Working with AI involves having a system for effectively reviewing high quality outputs
-        
+
         --
 
         2. Means having good systems for generating good outputs on the first place
@@ -1056,14 +1494,29 @@
 
         3. Then learning to put in place a procedure for effective review and feedback on top of the outputs you get
 
-        ---
-        
+        --
 
+        4. **If it fixes your problem, it's working!**
+           - The goal is to solve YOUR specific problem
+           - Perfection is the enemy of done
+           - A working automation that saves you time is better than a "perfect" solution that never ships
+
+        ---
+
+        # Connect With Me
+        
+        ## 📚 [Course materials](https://github.com/EnkrateiaLucca/oreilly-python-course)
+        ## 🔗 [LinkedIn](https://www.linkedin.com/in/lucas-soares-969044167/)
+        ## 🐦 [Twitter/X - @LucasEnkrateia](https://x.com/LucasEnkrateia)
+        ## 📺 [YouTube - @automatalearninglab](https://www.youtube.com/@automatalearninglab)
+        ## 📧 Email: lucasenkrateia@gmail.com
+        
         
     </textarea>
     <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
     <script>
-      var slideshow = remark.create();
+      var source = document.getElementById('source').value.replace(/^ {8}/gm, '');
+      var slideshow = remark.create({source: source});
     </script>
   </body>
 </html>
