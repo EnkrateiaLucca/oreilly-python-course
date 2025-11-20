@@ -26,7 +26,9 @@ def run(playwright: Playwright) -> None:
     page.locator(".navitem > .replace").click()
     page.get_by_label("Search:").fill(movie_to_search)
     page.get_by_role("button", name="Search").click()
-    page.get_by_role("link", name=movie_to_search, exact=True).first.click()
+    expect(page).to_have_url(re.compile(r"/search/"), timeout=10000)
+    page.wait_for_selector('a[href^="/film/"]', state="visible", timeout=10000)
+    page.locator('a[href^="/film/"]').first.click()
     page.get_by_role("link", name="Add this film to your").click()
 
     # ---------------------
