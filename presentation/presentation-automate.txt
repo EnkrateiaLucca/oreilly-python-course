@@ -1,0 +1,2033 @@
+Using AI Tools and Python to Automate
+Tasks
+A two-day, beginner-friendly journey to streamline workflows, boost
+productivity, and integrate AI into everyday tasks.
+
+1 / 218
+
+Goals
+1. Understand the basics of Python scripting without prior
+programming experience
+
+2 / 218
+
+Goals
+1. Understand the basics of Python scripting without prior
+programming experience
+2. Explore ways to leverage LLMs in combination with Python
+
+3 / 218
+
+Goals
+1. Understand the basics of Python scripting without prior
+programming experience
+2. Explore ways to leverage LLMs in combination with Python
+3. Learn how to automate tasks such as file organization and data entry
+
+4 / 218
+
+Goals
+1. Understand the basics of Python scripting without prior
+programming experience
+2. Explore ways to leverage LLMs in combination with Python
+3. Learn how to automate tasks such as file organization and data entry
+4. Use Python scripts to integrate with external LLM APIs
+
+5 / 218
+
+Survey Question: Do you have a subscription
+for ChatGPT/Claude/Gemini?
+
+6 / 218
+
+Programming?
+
+7 / 218
+
+Making Machines Do What You Want
+
+🤖
+8 / 218
+
+Example: Instructing a Robot
+
+9 / 218
+
+Example: Instructing a Robot
+The Task: "Move forward, pick up the box, turn right, place the box"
+
+10 / 218
+
+Example: Instructing a Robot
+The Task: "Move forward, pick up the box, turn right, place the box"
+The Code:
+def deliver_package():
+robot.move_forward(steps=10)
+robot.pick_up("box")
+robot.turn_right(90)
+robot.place_item("box")
+robot.say("Package delivered!")
+
+11 / 218
+
+Example: Instructing a Robot
+The Task: "Move forward, pick up the box, turn right, place the box"
+The Code:
+def deliver_package():
+robot.move_forward(steps=10)
+robot.pick_up("box")
+robot.turn_right(90)
+robot.place_item("box")
+robot.say("Package delivered!")
+
+🤖
+
+The robot follows your instructions exactly!
+
+12 / 218
+
+It's Like Writing Recipes
+# Pancake Making Algorithm
+def make_pancake():
+# Step 1: Prepare batter base
+batter = mix_flour_and_milk()
+# Step 2: Complete the batter
+batter = add_egg_and_stir(batter)
+# Step 3: Prepare cooking surface
+pan = heat_pan_on_stove()
+# Step 4: Start cooking
+pour_batter_in_pan(pan, batter)
+# Step 5: Wait for indicator
+wait_for_bubbles()
+# Step 6: Turn the pancake
+flip_pancake()
+# Step 7: Finish cooking
+cook_other_side()
+return pancake
+
+13 / 218
+
+Why Learn to Automate?
+
+14 / 218
+
+Automate Repetitive Tasks
+
+15 / 218
+
+Increase Productivity
+
+16 / 218
+
+Replacing Subscriptions (saving $)
+
+17 / 218
+
+Analyse Massive Amounts of Data
+
+18 / 218
+
+The Real Reason....
+
+19 / 218
+
+Writing code = the most general skill you
+can have!
+It is a superpower! :)
+
+20 / 218
+
+Important Clarification
+Learning to automate ≠ Everyone should be a
+developer
+
+21 / 218
+
+Automation is for Everyone
+
+22 / 218
+
+Automation is for Everyone
+Automation skills are for everyone
+
+23 / 218
+
+Automation is for Everyone
+Automation skills are for everyone
+Professional software engineering is a specialized career
+
+24 / 218
+
+Automation is for Everyone
+Automation skills are for everyone
+Professional software engineering is a specialized career
+You can be productive with code without becoming a full-time
+developer
+
+25 / 218
+
+Automation is for Everyone
+Automation skills are for everyone
+Professional software engineering is a specialized career
+You can be productive with code without becoming a full-time
+developer
+It's about writing scripts not fancy software
+
+26 / 218
+
+Automation is for Everyone
+Automation skills are for everyone
+Professional software engineering is a specialized career
+You can be productive with code without becoming a full-time
+developer
+It's about writing scripts not fancy software
+Script = simple program that automates a task
+
+27 / 218
+
+Automation is for Everyone
+Automation skills are for everyone
+Professional software engineering is a specialized career
+You can be productive with code without becoming a full-time
+developer
+It's about writing scripts not fancy software
+Script = simple program that automates a task
+Professional software = complex program engineered to be used by
+many people
+
+28 / 218
+
+Scripting ≠ 'Software Engineering'
+
+29 / 218
+
+Scripting
+
+30 / 218
+
+Software Engineering
+
+31 / 218
+
+Scripting
+Writing code to full fill a set of pre-defined steps that accomplish a task
+
+32 / 218
+
+Scripting
+Writing code to full fill a set of pre-defined steps that accomplish a task
+Quick, targeted, and task-oriented
+
+33 / 218
+
+Scripting
+Writing code to full fill a set of pre-defined steps that accomplish a task
+Quick, targeted, and task-oriented
+You don't think that much about it
+
+34 / 218
+
+Scripting
+Writing code to full fill a set of pre-defined steps that accomplish a task
+Quick, targeted, and task-oriented
+You don't think that much about it
+Typically used for automations, data manipulation, or utility tasks
+
+35 / 218
+
+Real Automation Examples (that I use!)
+
+36 / 218
+
+Bulk YouTube Upload Automation
+
+37 / 218
+
+Notes Processor
+
+38 / 218
+
+Your automation doesn't need to be perfect
+—it just needs to solve YOUR problem!
+
+39 / 218
+
+Why Python?
+
+40 / 218
+
+What is Python?
+Python is a high-level, general-purpose programming language designed for
+readability and simplicity.
+
+41 / 218
+
+What is Python?
+Python is a high-level, general-purpose programming language designed for
+readability and simplicity.
+Created by Guido van Rossum in 1991, Python emphasizes code that reads like
+English.
+
+42 / 218
+
+What is Python?
+Python is a high-level, general-purpose programming language designed for
+readability and simplicity.
+Created by Guido van Rossum in 1991, Python emphasizes code that reads like
+English.
+
+English:
+
+Python:
+
+"For each item in my shopping list, for item in shopping_list:
+print(item)
+print the item"
+
+43 / 218
+
+What is Python?
+Python is a high-level, general-purpose programming language designed for
+readability and simplicity.
+Created by Guido van Rossum in 1991, Python emphasizes code that reads like
+English.
+
+English:
+
+Python:
+
+"For each item in my shopping list, for item in shopping_list:
+print(item)
+print the item"
+See how similar they are? That's Python's superpower!
+
+44 / 218
+
+Python is Easy and Everywhere
+
+45 / 218
+
+Python is Easy and Everywhere
+General Purpose: Can be used for web development, data science,
+automation, AI, and more
+
+46 / 218
+
+Python is Easy and Everywhere
+General Purpose: Can be used for web development, data science,
+automation, AI, and more
+Most Popular: #1 language among developers worldwide (TIOBE Index,
+Stack Overflow)
+
+47 / 218
+
+Python is Easy and Everywhere
+General Purpose: Can be used for web development, data science,
+automation, AI, and more
+Most Popular: #1 language among developers worldwide (TIOBE Index,
+Stack Overflow)
+Powers Modern Technology:
+
+🤖 AI & Machine Learning (TensorFlow, PyTorch)
+🚗 Self-driving cars (Tesla, Waymo)
+👁️ Computer vision & image recognition
+🌐 Web applications (Instagram, Spotify, Netflix)
+🔬 Scientific computing & research
+
+48 / 218
+
+Python is Easy and Everywhere
+General Purpose: Can be used for web development, data science,
+automation, AI, and more
+Most Popular: #1 language among developers worldwide (TIOBE Index,
+Stack Overflow)
+Powers Modern Technology:
+
+🤖 AI & Machine Learning (TensorFlow, PyTorch)
+🚗 Self-driving cars (Tesla, Waymo)
+👁️ Computer vision & image recognition
+🌐 Web applications (Instagram, Spotify, Netflix)
+🔬 Scientific computing & research
+Beginner-Friendly: Reads like English, minimal syntax complexity
+
+49 / 218
+
+Scripting with Python
+
+50 / 218
+
+Scripting with Python
+Much faster learning curve - if it works don't change it
+
+51 / 218
+
+Scripting with Python
+Much faster learning curve - if it works don't change it
+Immediate practical benefits - makes your life better
+
+52 / 218
+
+Scripting with Python
+Much faster learning curve - if it works don't change it
+Immediate practical benefits - makes your life better
+Ideal for nondevelopers who just want to get things done
+
+53 / 218
+
+Scripting with Python
+Much faster learning curve - if it works don't change it
+Immediate practical benefits - makes your life better
+Ideal for nondevelopers who just want to get things done
+It's about learning to solve YOUR specific problems
+
+54 / 218
+
+Scripting with Python
+Much faster learning curve - if it works don't change it
+Immediate practical benefits - makes your life better
+Ideal for nondevelopers who just want to get things done
+It's about learning to solve YOUR specific problems
+Scripts should be tailored to your unique needs, not one-size-fits-all
+solutions
+
+55 / 218
+
+The Ostrich Approach to Learning Python
+
+56 / 218
+
+57 / 218
+
+It's about Learning What We Need for Our
+Tasks!
+
+58 / 218
+
+It's about Learning What We Need for Our
+Tasks!
+And purposefuly ignoring that which does not seem to have any effect on its
+success.
+
+59 / 218
+
+The Busy Person Guide to Python Basics
+
+60 / 218
+
+Python Things We Will Learn
+Basic Syntax: Indentation, variable assignments, printing
+
+61 / 218
+
+Python Things We Will Learn
+Basic Syntax: Indentation, variable assignments, printing
+Common Data Types: Strings, integers, floats, booleans
+
+62 / 218
+
+Python Things We Will Learn
+Basic Syntax: Indentation, variable assignments, printing
+Common Data Types: Strings, integers, floats, booleans
+Control Structures: if statements, loops (for, while)
+
+63 / 218
+
+Python Things We Will Learn
+Basic Syntax: Indentation, variable assignments, printing
+Common Data Types: Strings, integers, floats, booleans
+Control Structures: if statements, loops (for, while)
+Useful Libraries: os for file operations, csv for handling CSVs, requests
+for making web requests
+
+64 / 218
+
+Python Things We Will Learn
+Basic Syntax: Indentation, variable assignments, printing
+Common Data Types: Strings, integers, floats, booleans
+Control Structures: if statements, loops (for, while)
+Useful Libraries: os for file operations, csv for handling CSVs, requests
+for making web requests
+That is a lot! How can we manage?
+
+65 / 218
+
+Python Things We Will Learn
+Basic Syntax: Indentation, variable assignments, printing
+Common Data Types: Strings, integers, floats, booleans
+Control Structures: if statements, loops (for, while)
+Useful Libraries: os for file operations, csv for handling CSVs, requests
+for making web requests
+That is a lot! How can we manage?
+Use AI conversationally! Asking questions and clarifying what you don't
+know!
+
+66 / 218
+
+The "Just Ask AI" Naive Approach
+
+67 / 218
+
+The "Just Ask AI" Naive Approach
+
+68 / 218
+
+The "Just Ask AI" Naive Approach
+
+69 / 218
+
+Demo - Setting Up Your Environment
+(Installing Python, uv, Editor, Jupyter Notebook, AI chatbot)
+
+70 / 218
+
+Data Types, Operations, Variables
+Writing code is about writing text that changes or manipulates data in
+some way
+
+71 / 218
+
+Data Types, Operations, Variables
+Writing code is about writing text that changes or manipulates data in
+some way
+
+For that we need? ..... (drumbroll)
+
+Data! Specifically a way to describe it, reference it, talk about it etc...
+
+72 / 218
+
+Data Types, Operations, Variables
+Writing code is about writing text that changes or manipulates data in
+some way
+
+For that we need? ..... (drumbroll)
+
+Data! Specifically a way to describe it, reference it, talk about it etc...
+In Python data can be of different types (like numbers, text, image etc...)
+
+73 / 218
+
+Data Types, Operations, Variables
+Writing code is about writing text that changes or manipulates data in
+some way
+
+For that we need? ..... (drumbroll)
+
+Data! Specifically a way to describe it, reference it, talk about it etc...
+In Python data can be of different types (like numbers, text, image etc...)
+The things we can do to it are called operations (like 5+5)
+
+74 / 218
+
+Data Types, Operations, Variables
+Writing code is about writing text that changes or manipulates data in
+some way
+
+For that we need? ..... (drumbroll)
+
+Data! Specifically a way to describe it, reference it, talk about it etc...
+In Python data can be of different types (like numbers, text, image etc...)
+The things we can do to it are called operations (like 5+5)
+To organize things, we use variables to define what each thing is
+
+75 / 218
+
+Data Types, Operations, Variables - Example
+Here is a piece of code that defines a variable of some type and performs
+a simple operation on the data stored in the variable
+# This is data of type string!
+name = "Lucas"
+# This is data of type integer!
+actual_age = 33
+# This is data of type integer!
+mental_age = 12
+# our operation
+average_age_between_actual_and_mental = (actual_age + mental_age) / 2
+# special function that displays what goes inside of it
+print(average_age_between_actual_and_mental)
+# this would be a float!
+# Output: 22.5
+
+76 / 218
+
+Data Types; Operations; Variables - Demo
+
+77 / 218
+
+Data Types, Operations, Variables
+Core Data Types:
+
+78 / 218
+
+Data Types, Operations, Variables
+Core Data Types:
+int: whole nubmers like 1, 2, 3 ...
+
+79 / 218
+
+Data Types, Operations, Variables
+Core Data Types:
+int: whole nubmers like 1, 2, 3 ...
+float: decimal numbers like 1.1, 1.0, etc...
+
+80 / 218
+
+Data Types, Operations, Variables
+Core Data Types:
+int: whole nubmers like 1, 2, 3 ...
+float: decimal numbers like 1.1, 1.0, etc...
+string: text like 'Hello'
+
+81 / 218
+
+Data Types, Operations, Variables
+Core Data Types:
+int: whole nubmers like 1, 2, 3 ...
+float: decimal numbers like 1.1, 1.0, etc...
+string: text like 'Hello'
+bool: logical booleans like True or False
+
+82 / 218
+
+Data Types, Operations, Variables
+Core Data Types:
+int: whole nubmers like 1, 2, 3 ...
+float: decimal numbers like 1.1, 1.0, etc...
+string: text like 'Hello'
+bool: logical booleans like True or False
+Operations:
+
+83 / 218
+
+Data Types, Operations, Variables
+Core Data Types:
+int: whole nubmers like 1, 2, 3 ...
+float: decimal numbers like 1.1, 1.0, etc...
+string: text like 'Hello'
+bool: logical booleans like True or False
+Operations:
+Arithmetic (+,-,,/,*,//,%)
+
+84 / 218
+
+Data Types, Operations, Variables
+Core Data Types:
+int: whole nubmers like 1, 2, 3 ...
+float: decimal numbers like 1.1, 1.0, etc...
+string: text like 'Hello'
+bool: logical booleans like True or False
+Operations:
+Arithmetic (+,-,,/,*,//,%)
+String concatenation ('Lucas' + ' is' + ' wonderful' = 'Lucas is
+wonderful')
+
+85 / 218
+
+Data Types, Operations, Variables
+Core Data Types:
+int: whole nubmers like 1, 2, 3 ...
+float: decimal numbers like 1.1, 1.0, etc...
+string: text like 'Hello'
+bool: logical booleans like True or False
+Operations:
+Arithmetic (+,-,,/,*,//,%)
+String concatenation ('Lucas' + ' is' + ' wonderful' = 'Lucas is
+wonderful')
+Logical operations (and, or, not)
+
+86 / 218
+
+Data Types, Operations, Variables
+Core Data Types:
+int: whole nubmers like 1, 2, 3 ...
+float: decimal numbers like 1.1, 1.0, etc...
+string: text like 'Hello'
+bool: logical booleans like True or False
+Operations:
+Arithmetic (+,-,,/,*,//,%)
+String concatenation ('Lucas' + ' is' + ' wonderful' = 'Lucas is
+wonderful')
+Logical operations (and, or, not)
+Comparison operations (>, <, >=, <=, ==, !=)
+
+87 / 218
+
+Variables: Storing data for reuse, assigning and reassigning values:
+a = 10
+b = 20
+print(a + b)
+# Output: 30
+
+88 / 218
+
+Demo: Functions, Lists & Loops
+
+89 / 218
+
+Functions
+
+90 / 218
+
+Functions
+Functions are a way to group code that performs a specific task
+
+91 / 218
+
+Functions
+Functions are a way to group code that performs a specific task
+Functions can take parameters and return values
+
+92 / 218
+
+Functions
+Functions are a way to group code that performs a specific task
+Functions can take parameters and return values
+For example, a function that calculates the total cost of an item including
+tax
+
+93 / 218
+
+Functions
+Functions are a way to group code that performs a specific task
+Functions can take parameters and return values
+For example, a function that calculates the total cost of an item including
+tax
+We could do this by simply writing a script:
+
+94 / 218
+
+Functions
+Functions are a way to group code that performs a specific task
+Functions can take parameters and return values
+For example, a function that calculates the total cost of an item including
+tax
+We could do this by simply writing a script:
+# Arithmetic operation: multiplication of parameters
+tax = price * tax_rate
+# Arithmetic operation: addition of variables
+total = price + tax
+
+But what if I want to re-use this code for different prices and tax rates?
+
+95 / 218
+
+Functions
+Here is what it would look like if we define a function to do this:
+def calculate_total(price, tax_rate):
+tax = price * tax_rate
+total = price + tax
+return total
+
+96 / 218
+
+Functions
+Here is what it would look like if we define a function to do this:
+def calculate_total(price, tax_rate):
+tax = price * tax_rate
+total = price + tax
+return total
+
+Now we can re-use the function for different prices and tax rates:
+shirt_price = 10
+shirt_tax_rate = 0.05
+pants_price = 20
+pants_tax_rate = 0.1
+print(calculate_total(shirt_price, shirt_tax_rate))
+# Output: 10.5
+print(calculate_total(pants_price, pants_tax_rate))
+# Output: 22.0
+
+97 / 218
+
+Functions
+Why Functions?: Reuse code and break tasks into smaller chunks
+
+98 / 218
+
+Functions
+Why Functions?: Reuse code and break tasks into smaller chunks
+Defining a Function: def function_name(parameters):
+
+99 / 218
+
+Functions
+Why Functions?: Reuse code and break tasks into smaller chunks
+Defining a Function: def function_name(parameters):
+Return Values: Make your functions flexible and reusable
+
+100 / 218
+
+Functions
+Why Functions?: Reuse code and break tasks into smaller chunks
+Defining a Function: def function_name(parameters):
+Return Values: Make your functions flexible and reusable
+Best Practices: Keep them short, descriptive, and single-purpose
+
+101 / 218
+
+Lists & Loops
+Lists: Python’s go-to data structure for ordered collections
+
+102 / 218
+
+Lists & Loops
+Lists: Python’s go-to data structure for ordered collections
+# Define a list of tasks
+tasks = ["Buy groceries", "Finish project", "Call the bank"]
+
+Access Elements: Indexing and slicing
+
+103 / 218
+
+Lists & Loops
+Lists: Python’s go-to data structure for ordered collections
+# Define a list of tasks
+tasks = ["Buy groceries", "Finish project", "Call the bank"]
+
+Access Elements: Indexing and slicing
+print(tasks[0])
+# Output: Buy groceries
+print(tasks[1])
+# Output: Finish project
+
+104 / 218
+
+Lists & Loops
+Lists: Python’s go-to data structure for ordered collections
+# Define a list of tasks
+tasks = ["Buy groceries", "Finish project", "Call the bank"]
+
+Access Elements: Indexing and slicing
+print(tasks[0])
+# Output: Buy groceries
+print(tasks[1])
+# Output: Finish project
+
+Slice: Get a range of elements
+
+105 / 218
+
+Lists & Loops
+Lists: Python’s go-to data structure for ordered collections
+# Define a list of tasks
+tasks = ["Buy groceries", "Finish project", "Call the bank"]
+
+Access Elements: Indexing and slicing
+print(tasks[0])
+# Output: Buy groceries
+print(tasks[1])
+# Output: Finish project
+
+Slice: Get a range of elements
+print(tasks[0:2])
+# Output: ['Buy groceries', 'Finish project']
+
+106 / 218
+
+Lists & Loops
+Loops: for loops to iterate over items
+
+107 / 218
+
+Lists & Loops
+Loops: for loops to iterate over items
+tasks = ["Buy groceries", "Finish project", "Call the bank"]
+for task in tasks:
+print(task)
+
+108 / 218
+
+Lists & Loops
+Loops: for loops to iterate over items
+tasks = ["Buy groceries", "Finish project", "Call the bank"]
+for task in tasks:
+print(task)
+
+Processing List Elements: With for loops we can perform the same
+operation on each element of the list
+
+109 / 218
+
+Lists & Loops
+Loops: for loops to iterate over items
+tasks = ["Buy groceries", "Finish project", "Call the bank"]
+for task in tasks:
+print(task)
+
+Processing List Elements: With for loops we can perform the same
+operation on each element of the list
+# Below we use an imaginary function that asks a robot to do a task
+for task in tasks:
+ask_robot_to_do(task)
+
+110 / 218
+
+Lists & Loops
+Loops: for loops to iterate over items
+tasks = ["Buy groceries", "Finish project", "Call the bank"]
+for task in tasks:
+print(task)
+
+Processing List Elements: With for loops we can perform the same
+operation on each element of the list
+# Below we use an imaginary function that asks a robot to do a task
+for task in tasks:
+ask_robot_to_do(task)
+
+Common Uses: Batch renaming files in a directory, processing data from
+tables, etc...
+
+111 / 218
+
+Demo - Dictionaries, Tabular Data,
+Conditionals
+
+112 / 218
+
+Dictionaries & Tabular Data
+Dictionaries: Key-value pairs for storing related data
+
+113 / 218
+
+Dictionaries & Tabular Data
+Dictionaries: Key-value pairs for storing related data
+# Dictionary of product prices
+prices = {
+"apple": 0.50,
+"banana": 0.75,
+"orange": 0.60
+}
+
+114 / 218
+
+Dictionaries & Tabular Data
+Dictionaries: Key-value pairs for storing related data
+# Dictionary of product prices
+prices = {
+"apple": 0.50,
+"banana": 0.75,
+"orange": 0.60
+}
+
+Accessing Values: Use keys to lookup values quickly
+
+115 / 218
+
+Dictionaries & Tabular Data
+Dictionaries: Key-value pairs for storing related data
+# Dictionary of product prices
+prices = {
+"apple": 0.50,
+"banana": 0.75,
+"orange": 0.60
+}
+
+Accessing Values: Use keys to lookup values quickly
+print(prices["apple"])
+# Output: 0.50
+print(prices["banana"])
+# Output: 0.75
+
+116 / 218
+
+Dictionaries & Tabular Data
+Dictionaries: Key-value pairs for storing related data
+# Dictionary of product prices
+prices = {
+"apple": 0.50,
+"banana": 0.75,
+"orange": 0.60
+}
+
+Accessing Values: Use keys to lookup values quickly
+print(prices["apple"])
+# Output: 0.50
+print(prices["banana"])
+# Output: 0.75
+
+Common Uses: Storing configurations, mapping relationships, caching
+data
+
+117 / 218
+
+Comparators & Conditionals
+Boolean Comparisons: ==, !=, >, <, >=, <=
+
+118 / 218
+
+Comparators & Conditionals
+Boolean Comparisons: ==, !=, >, <, >=, <=
+# Example of a boolean comparison
+a = 10
+b = 20
+print(a == b) # Output: False
+print(a != b) # Output: True
+print(a > b)
+# Output: False
+print(a < b)
+# Output: True
+print(a >= b) # Output: False
+print(a <= b) # Output: True
+
+119 / 218
+
+Comparators & Conditionals
+Boolean Comparisons: ==, !=, >, <, >=, <=
+# Example of a boolean comparison
+a = 10
+b = 20
+print(a == b) # Output: False
+print(a != b) # Output: True
+print(a > b)
+# Output: False
+print(a < b)
+# Output: True
+print(a >= b) # Output: False
+print(a <= b) # Output: True
+
+Logical Operators: and, or, not
+
+120 / 218
+
+Comparators & Conditionals
+Boolean Comparisons: ==, !=, >, <, >=, <=
+# Example of a boolean comparison
+a = 10
+b = 20
+print(a == b) # Output: False
+print(a != b) # Output: True
+print(a > b)
+# Output: False
+print(a < b)
+# Output: True
+print(a >= b) # Output: False
+print(a <= b) # Output: True
+
+Logical Operators: and, or, not
+# Example of a logical operator
+print(True and False) # Output: False
+print(True or False) # Output: True
+print(not True)
+# Output: False
+
+121 / 218
+
+Comparators & Conditionals
+Conditionals: Using conditionals if/elif/else to perform different
+actions based on data
+
+122 / 218
+
+Comparators & Conditionals
+Conditionals: Using conditionals if/elif/else to perform different
+actions based on data
+# Example of an if statement
+if a > b:
+print("a is greater than b")
+
+123 / 218
+
+Comparators & Conditionals
+Conditionals: Using conditionals if/elif/else to perform different
+actions based on data
+# Example of an if statement
+if a > b:
+print("a is greater than b")
+# Example of an if/else statement
+if a > b:
+print("a is greater than b")
+else:
+print("a is less than or equal to b")
+
+124 / 218
+
+Comparators & Conditionals
+Conditionals: Using conditionals if/elif/else to perform different
+actions based on data
+# Example of an if statement
+if a > b:
+print("a is greater than b")
+# Example of an if/else statement
+if a > b:
+print("a is greater than b")
+else:
+print("a is less than or equal to b")
+# Example of an if/elif/else statement
+if a > b:
+print("a is greater than b")
+elif a == b:
+print("a is equal to b")
+else:
+print("a is less than b")
+
+125 / 218
+
+Quick Knowledge Check!
+
+🧠
+126 / 218
+
+Quiz Question 1
+What will this code output?
+age = 25
+if age >= 18:
+print("Adult")
+else:
+print("Minor")
+
+127 / 218
+
+Quiz Question 1
+What will this code output?
+age = 25
+if age >= 18:
+print("Adult")
+else:
+print("Minor")
+
+Answer: Adult
+
+128 / 218
+
+Quiz Question 1
+What will this code output?
+age = 25
+if age >= 18:
+print("Adult")
+else:
+print("Minor")
+
+Answer: Adult
+Explanation: Since 25 is greater than or equal to 18, the condition is True, so
+"Adult" is printed.
+
+129 / 218
+
+Quiz Question 2
+What's wrong with this code?
+tasks = ["Email", "Meeting", "Code"]
+print(tasks[3])
+
+130 / 218
+
+Quiz Question 2
+What's wrong with this code?
+tasks = ["Email", "Meeting", "Code"]
+print(tasks[3])
+
+Answer: Index out of range error!
+
+131 / 218
+
+Quiz Question 2
+What's wrong with this code?
+tasks = ["Email", "Meeting", "Code"]
+print(tasks[3])
+
+Answer: Index out of range error!
+Explanation: Lists are zero-indexed. This list has indices 0, 1, 2. There is no
+index 3!
+tasks[0] → "Email"
+tasks[1] → "Meeting"
+tasks[2] → "Code"
+
+132 / 218
+
+Quiz Question 3
+Fill in the blank to print each fruit:
+fruits = ["apple", "banana", "cherry"]
+___ fruit ___ fruits:
+print(fruit)
+
+133 / 218
+
+Quiz Question 3
+Fill in the blank to print each fruit:
+fruits = ["apple", "banana", "cherry"]
+___ fruit ___ fruits:
+print(fruit)
+
+Answer:
+for fruit in fruits:
+print(fruit)
+
+134 / 218
+
+Quiz Question 3
+Fill in the blank to print each fruit:
+fruits = ["apple", "banana", "cherry"]
+___ fruit ___ fruits:
+print(fruit)
+
+Answer:
+for fruit in fruits:
+print(fruit)
+
+Explanation: The for loop iterates through each item in the list, and in checks
+membership.
+
+135 / 218
+
+Demo - Working with Data, APIs & Packages
+
+136 / 218
+
+Reading/Writing
+Tabular Data: Data that is organized in a table format
+
+137 / 218
+
+Reading/Writing
+Tabular Data: Data that is organized in a table format
+Common Formats: .csv, .json, .xlsx, .xls
+
+138 / 218
+
+Reading/Writing
+Tabular Data: Data that is organized in a table format
+Common Formats: .csv, .json, .xlsx, .xls
+CSV Files store data in rows and columns via comma-separated values:
+Name,Age,City
+John Smith,32,New York
+Jane Doe,28,San Francisco
+
+Name
+
+Age
+
+City
+
+John Smith
+
+32
+
+New York
+
+Jane Doe
+
+28
+
+San Francisco
+
+139 / 218
+
+Understanding APIs & Packages
+
+140 / 218
+
+What is an API?
+API = Application Programming Interface
+
+141 / 218
+
+What is an API?
+API = Application Programming Interface
+A way for different programs to communicate with each other.
+
+142 / 218
+
+What is an API?
+API = Application Programming Interface
+A way for different programs to communicate with each other.
+Think of it like a restaurant:
+You (your code) look at the menu (API documentation)
+You tell the waiter (API) what you want
+The kitchen (external service) prepares it
+The waiter brings back your order (response)
+
+143 / 218
+
+What is an API?
+API = Application Programming Interface
+A way for different programs to communicate with each other.
+Think of it like a restaurant:
+You (your code) look at the menu (API documentation)
+You tell the waiter (API) what you want
+The kitchen (external service) prepares it
+The waiter brings back your order (response)
+Real-World Example: Google Maps API
+
+🏨 Booking.com
+Shows hotel locations on map
+
+🗺️
+
+→
+←
+
+Google Maps
+API
+
+🏠 Airbnb
+Shows property locations
+
+144 / 218
+
+What is an API?
+API = Application Programming Interface
+A way for different programs to communicate with each other.
+Think of it like a restaurant:
+You (your code) look at the menu (API documentation)
+You tell the waiter (API) what you want
+The kitchen (external service) prepares it
+The waiter brings back your order (response)
+Real-World Example: Google Maps API
+
+🏨 Booking.com
+Shows hotel locations on map
+
+🗺️
+
+→
+←
+
+Google Maps
+API
+
+🏠 Airbnb
+Shows property locations
+
+145 / 218
+
+What are Packages and Imports?
+Package = A collection of pre-written Python code (functions, classes) that you
+can reuse
+
+146 / 218
+
+What are Packages and Imports?
+Package = A collection of pre-written Python code (functions, classes) that you
+can reuse
+Import = The command to bring a package into your script so you can use it
+
+147 / 218
+
+What are Packages and Imports?
+Package = A collection of pre-written Python code (functions, classes) that you
+can reuse
+Import = The command to bring a package into your script so you can use it
+Example:
+# Import the 'requests' package to make HTTP calls
+import requests
+# Now we can use functions from the requests package
+response = requests.get("https://api.example.com/data")
+print(response.json())
+
+148 / 218
+
+What are Packages and Imports?
+Package = A collection of pre-written Python code (functions, classes) that you
+can reuse
+Import = The command to bring a package into your script so you can use it
+Example:
+# Import the 'requests' package to make HTTP calls
+import requests
+# Now we can use functions from the requests package
+response = requests.get("https://api.example.com/data")
+print(response.json())
+
+Think of it like:
+Package = A toolbox full of tools
+Import = Taking the toolbox out so you can use the tools
+Using the package = Actually using the tools to build something
+
+149 / 218
+
+What are Packages and Imports?
+Package = A collection of pre-written Python code (functions, classes) that you
+can reuse
+Import = The command to bring a package into your script so you can use it
+Example:
+# Import the 'requests' package to make HTTP calls
+import requests
+# Now we can use functions from the requests package
+response = requests.get("https://api.example.com/data")
+print(response.json())
+
+Think of it like:
+Package = A toolbox full of tools
+Import = Taking the toolbox out so you can use the tools
+Using the package = Actually using the tools to build something
+Popular packages: requests (HTTP calls), pandas (data analysis), openai (AI
+services)
+150 / 218
+
+The Package Management Problem
+
+📦
+
+When you write a Python automation script, it needs:
+
+151 / 218
+
+The Package Management Problem
+
+📦
+
+When you write a Python automation script, it needs:
+1. A specific Python version (e.g., Python 3.11)
+
+152 / 218
+
+The Package Management Problem
+
+📦
+
+When you write a Python automation script, it needs:
+1. A specific Python version (e.g., Python 3.11)
+2. Specific package versions (e.g., requests==2.31.0, pandas==2.0.1)
+
+153 / 218
+
+The Package Management Problem
+
+📦
+
+When you write a Python automation script, it needs:
+1. A specific Python version (e.g., Python 3.11)
+2. Specific package versions (e.g., requests==2.31.0, pandas==2.0.1)
+3. Isolated environment (so different projects don't conflict)
+
+154 / 218
+
+The Package Management Problem
+
+📦
+
+When you write a Python automation script, it needs:
+1. A specific Python version (e.g., Python 3.11)
+2. Specific package versions (e.g., requests==2.31.0, pandas==2.0.1)
+3. Isolated environment (so different projects don't conflict)
+Traditional Approach: Multiple Files + Virtual Environments
+
+📄 automation.py
+
+📄 requirements.txt
+
+📄 .python-version
+
+import requests
+import pandas
+
+requests==2.31.0
+pandas==2.0.1
+numpy==1.24.0
+
+3.11
+
+# Your code here...
+
+155 / 218
+
+The Package Management Problem
+
+📦
+
+When you write a Python automation script, it needs:
+1. A specific Python version (e.g., Python 3.11)
+2. Specific package versions (e.g., requests==2.31.0, pandas==2.0.1)
+3. Isolated environment (so different projects don't conflict)
+Traditional Approach: Multiple Files + Virtual Environments
+
+📄 automation.py
+
+📄 requirements.txt
+
+📄 .python-version
+
+import requests
+import pandas
+
+requests==2.31.0
+pandas==2.0.1
+numpy==1.24.0
+
+3.11
+
+# Your code here...
+
+Tools: pipenv, conda, venv, poetry... Confusing for beginners!
+
+156 / 218
+
+Demo - The Package Management Problem
+
+157 / 218
+
+Enter UV: The Simple Solution
+
+✨
+
+UV = Python script runner + package manager in one
+
+158 / 218
+
+Enter UV: The Simple Solution
+
+✨
+
+UV = Python script runner + package manager in one
+Everything in a single file!
+# /// script
+# requires-python = ">=3.11"
+# dependencies = [
+#
+"requests==2.31.0",
+#
+"pandas==2.0.1",
+# ]
+# ///
+import requests
+import pandas as pd
+# Your automation code here...
+response = requests.get("https://api.example.com/data")
+df = pd.DataFrame(response.json())
+print(df.head())
+
+159 / 218
+
+UV: Single File vs Traditional Approach
+Traditional
+
+😓
+
+Create virtual environment
+Activate environment
+Install packages
+Manage requirements.txt
+Remember which env to use
+
+📁 Multiple files
+
+📚 Complex workflow
+
+UV
+
+VS
+
+🚀
+
+Write your script
+Add dependencies at the top
+Run: uv run script.py
+
+📄 One file
+
+⚡ Simple workflow
+
+160 / 218
+
+UV: Single File vs Traditional Approach
+Traditional
+
+😓
+
+Create virtual environment
+Activate environment
+Install packages
+Manage requirements.txt
+Remember which env to use
+
+UV
+
+VS
+
+📁 Multiple files
+
+📚 Complex workflow
+
+🚀
+
+Write your script
+Add dependencies at the top
+Run: uv run script.py
+
+📄 One file
+
+⚡ Simple workflow
+
+Perfect for vibe scripting! → Learn more:
+https://docs.astral.sh/uv/guides/scripts/
+
+161 / 218
+
+Demo - Vibe Scripting with UV + AI
+
+162 / 218
+
+The Vibe Scripting Workflow
+
+🤖→ 💻 → 📄
+
+AI
+
+CODE
+
+file.py
+
+→
+
+🔄
+
+⚡ uv run
+file.py
+
+→
+
+👁️
+
+Review
+
+Does it solve your problem?
+
+❌ No
+
+✅ Yes
+🤖
+
+→ Back to AI
+(refine & iterate)
+
+🎉
+
+→ Done!
+(problem
+solved)
+
+163 / 218
+
+How to Use AI to Learn/Use Python
+A quick detour to set up an AI toolkit to speed up our Automation skills
+
+164 / 218
+
+Learning Python with AI
+Your Personal Programming Tutor
+
+165 / 218
+
+The Conversational Learning Approach
+Start with "I don't know Python, but I want to..." and describe your
+goal
+
+166 / 218
+
+The Conversational Learning Approach
+Start with "I don't know Python, but I want to..." and describe your
+goal
+Ask for explanations: "What does this line do?" or "Why do we use a for
+loop here?"
+
+167 / 218
+
+The Conversational Learning Approach
+Start with "I don't know Python, but I want to..." and describe your
+goal
+Ask for explanations: "What does this line do?" or "Why do we use a for
+loop here?"
+Request variations: "Show me 3 different ways to do this" or "Make this
+simpler"
+
+168 / 218
+
+The Conversational Learning Approach
+Start with "I don't know Python, but I want to..." and describe your
+goal
+Ask for explanations: "What does this line do?" or "Why do we use a for
+loop here?"
+Request variations: "Show me 3 different ways to do this" or "Make this
+simpler"
+Build incrementally: Start with tiny scripts, then ask "How do I add X to
+this?"
+
+Demo - Conversational Learning with AI for
+Python
+169 / 218
+
+ARUFS Framework
+
+170 / 218
+
+ARUFS Framework
+Ask, Run, Understand, Fix, Be Safe
+
+171 / 218
+
+ARUFS Framework
+Ask, Run, Understand, Fix, Be Safe
+Ask → how to ask effectively, give the right context
+
+172 / 218
+
+ARUFS Framework
+Ask, Run, Understand, Fix, Be Safe
+Ask → how to ask effectively, give the right context
+Run → how to run the code AI gives you
+
+173 / 218
+
+ARUFS Framework
+Ask, Run, Understand, Fix, Be Safe
+Ask → how to ask effectively, give the right context
+Run → how to run the code AI gives you
+Understand → how to understand it/learn from it
+
+174 / 218
+
+ARUFS Framework
+Ask, Run, Understand, Fix, Be Safe
+Ask → how to ask effectively, give the right context
+Run → how to run the code AI gives you
+Understand → how to understand it/learn from it
+Fix → how to fix it
+
+175 / 218
+
+ARUFS Framework
+Ask, Run, Understand, Fix, Be Safe
+Ask → how to ask effectively, give the right context
+Run → how to run the code AI gives you
+Understand → how to understand it/learn from it
+Fix → how to fix it
+Be Safe → pittfalls & security risks
+
+176 / 218
+
+Ask
+Be detailed
+
+177 / 218
+
+Ask
+Be detailed
+Use context (docs, articles, pdfs, ...)
+
+178 / 218
+
+Ask
+Be detailed
+Use context (docs, articles, pdfs, ...)
+Tools to help with feeding data/repo into LLMs
+https://github.com/yamadashy/repomix
+gitingest
+r.jina.ai
+arxiv-txt.org
+llms-txt
+files-to-prompt
+Use meta-prompts:
+I have this problem:
+{describe the problem}
+Help me write a good prompt that encapsulates this into a single Python script.
+
+179 / 218
+
+Ask
+For tough problems use reasoning models
+Claude + Extended Thinking
+O-series models from OpenAI
+Gemini 2.5 Pro
+DeepSeek R1
+
+180 / 218
+
+Run/Understand/Fix
+The pattern is:
+
+181 / 218
+
+Run/Understand/Fix
+The pattern is:
+LLM generates the script
+You run the script
+You inspect the output
+You ask the LLM to fix the script (if needed)
+
+182 / 218
+
+Run/Understand/Fix
+The pattern is:
+LLM generates the script
+You run the script
+You inspect the output
+You ask the LLM to fix the script (if needed)
+Ask for comments on the code
+
+183 / 218
+
+Run/Understand/Fix
+The pattern is:
+LLM generates the script
+You run the script
+You inspect the output
+You ask the LLM to fix the script (if needed)
+Ask for comments on the code
+Feed the output of the terminal to the AI and ask to fix it
+
+184 / 218
+
+Be Safe
+Never hardcode credentials - use environment variables or config files
+
+185 / 218
+
+Be Safe
+Never hardcode credentials - use environment variables or config files
+Review AI-generated code before running - understand what each line
+does
+
+186 / 218
+
+Be Safe
+Never hardcode credentials - use environment variables or config files
+Review AI-generated code before running - understand what each line
+does
+Test in isolated environments first (separate folders, test data)
+
+187 / 218
+
+Be Safe
+Never hardcode credentials - use environment variables or config files
+Review AI-generated code before running - understand what each line
+does
+Test in isolated environments first (separate folders, test data)
+Don't share sensitive data with AI models (personal info, API keys,
+proprietary data)
+
+188 / 218
+
+Be Safe
+Never hardcode credentials - use environment variables or config files
+Review AI-generated code before running - understand what each line
+does
+Test in isolated environments first (separate folders, test data)
+Don't share sensitive data with AI models (personal info, API keys,
+proprietary data)
+Backup important files before running automation scripts
+
+189 / 218
+
+Be Safe
+Never hardcode credentials - use environment variables or config files
+Review AI-generated code before running - understand what each line
+does
+Test in isolated environments first (separate folders, test data)
+Don't share sensitive data with AI models (personal info, API keys,
+proprietary data)
+Backup important files before running automation scripts
+Check file paths - ensure scripts won't delete important files
+
+190 / 218
+
+Be Safe
+Never hardcode credentials - use environment variables or config files
+Review AI-generated code before running - understand what each line
+does
+Test in isolated environments first (separate folders, test data)
+Don't share sensitive data with AI models (personal info, API keys,
+proprietary data)
+Backup important files before running automation scripts
+Check file paths - ensure scripts won't delete important files
+Add safeguards for loops (break conditions, iteration limits)
+
+191 / 218
+
+Be Safe
+Never hardcode credentials - use environment variables or config files
+Review AI-generated code before running - understand what each line
+does
+Test in isolated environments first (separate folders, test data)
+Don't share sensitive data with AI models (personal info, API keys,
+proprietary data)
+Backup important files before running automation scripts
+Check file paths - ensure scripts won't delete important files
+Add safeguards for loops (break conditions, iteration limits)
+Respect rate limits and website terms of service when scraping
+
+192 / 218
+
+Be Safe
+Never hardcode credentials - use environment variables or config files
+Review AI-generated code before running - understand what each line
+does
+Test in isolated environments first (separate folders, test data)
+Don't share sensitive data with AI models (personal info, API keys,
+proprietary data)
+Backup important files before running automation scripts
+Check file paths - ensure scripts won't delete important files
+Add safeguards for loops (break conditions, iteration limits)
+Respect rate limits and website terms of service when scraping
+Quick Safety Checklist: Read code → Test with dummy data → Have
+backups → Use version control
+193 / 218
+
+Demo - Implementing the A.R.U.F.S
+Framework
+
+194 / 218
+
+Demo - Automating Data Extraction
+
+195 / 218
+
+Automating Data Extraction
+Target Websites or Documents: Identify patterns or structures (tables,
+IDs, HTML tags)
+
+196 / 218
+
+Automating Data Extraction
+Target Websites or Documents: Identify patterns or structures (tables,
+IDs, HTML tags)
+Techniques: Using Beautiful Soup, Pandas, or request-response cycles
+
+197 / 218
+
+Automating Data Extraction
+Target Websites or Documents: Identify patterns or structures (tables,
+IDs, HTML tags)
+Techniques: Using Beautiful Soup, Pandas, or request-response cycles
+Practical Examples: Extracting data from a CSV, scraping a simple
+webpage for product listings
+
+198 / 218
+
+Automating Basic Data Analysis
+Data Loading: Reading CSV files, Excel sheets, or database tables with
+Pandas
+
+199 / 218
+
+Automating Basic Data Analysis
+Data Loading: Reading CSV files, Excel sheets, or database tables with
+Pandas
+Basic Analysis: Calculating averages, sums, or finding patterns in data
+
+200 / 218
+
+Automating Basic Data Analysis
+Data Loading: Reading CSV files, Excel sheets, or database tables with
+Pandas
+Basic Analysis: Calculating averages, sums, or finding patterns in data
+Visualization: Creating simple charts or graphs to represent findings
+
+201 / 218
+
+Automating Slides
+Effective data wrangling for high quality slides
+
+202 / 218
+
+Automating Slides
+Effective data wrangling for high quality slides
+A Hybrid Approach: AI + Python Scripts
+
+203 / 218
+
+Automating Slides
+Effective data wrangling for high quality slides
+A Hybrid Approach: AI + Python Scripts
+Bulk Processing to save time
+
+204 / 218
+
+Automating the Browser
+Tools: selenium, playwright
+
+205 / 218
+
+Automating the Browser
+Tools: selenium, playwright
+Common Tasks: Logging in to websites, navigating pages, clicking
+buttons, scraping dynamic elements
+
+206 / 218
+
+Automating the Browser
+Tools: selenium, playwright
+Common Tasks: Logging in to websites, navigating pages, clicking
+buttons, scraping dynamic elements
+Why Automate Browser Tasks?: Speed up online research, data entry, or
+repetitive website interactions
+
+207 / 218
+
+Automating Filling Out Forms
+Form Fields: Identifying input boxes, radio buttons, checkboxes in HTML
+
+208 / 218
+
+Automating Filling Out Forms
+Form Fields: Identifying input boxes, radio buttons, checkboxes in HTML
+Scripts: Using selenium to locate elements by ID/class/xpath and input
+data
+
+209 / 218
+
+Automating Filling Out Forms
+Form Fields: Identifying input boxes, radio buttons, checkboxes in HTML
+Scripts: Using selenium to locate elements by ID/class/xpath and input
+data
+Real-World Use: Automating repetitive website sign-up processes, survey
+completion, or internal data-entry forms
+
+210 / 218
+
+Demo - Prompts, Tips & Tricks
+
+211 / 218
+
+Using AI != Slop
+
+212 / 218
+
+Using AI != Slop
+Slop is using unreviewed output (like code) from AI models
+
+213 / 218
+
+Using AI != Slop
+1. Working with AI involves having a system for effectively reviewing high
+quality outputs
+
+214 / 218
+
+Using AI != Slop
+1. Working with AI involves having a system for effectively reviewing high
+quality outputs
+2. Means having good systems for generating good outputs on the first place
+
+215 / 218
+
+Using AI != Slop
+1. Working with AI involves having a system for effectively reviewing high
+quality outputs
+2. Means having good systems for generating good outputs on the first place
+3. Then learning to put in place a procedure for effective review and
+feedback on top of the outputs you get
+
+216 / 218
+
+Using AI != Slop
+1. Working with AI involves having a system for effectively reviewing high
+quality outputs
+2. Means having good systems for generating good outputs on the first place
+3. Then learning to put in place a procedure for effective review and
+feedback on top of the outputs you get
+4. If it fixes your problem, it's working!
+The goal is to solve YOUR specific problem
+Perfection is the enemy of done
+A working automation that saves you time is better than a "perfect"
+solution that never ships
+
+217 / 218
+
+Connect With Me
+
+📚 Course materials
+🔗 LinkedIn
+🐦 Twitter/X - @LucasEnkrateia
+📺 YouTube - @automatalearninglab
+📧 Email: lucasenkrateia@gmail.com
+218 / 218
+
+

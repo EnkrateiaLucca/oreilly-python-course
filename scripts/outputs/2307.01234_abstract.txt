@@ -1,0 +1,3 @@
+Title: arXiv Query: search_query=&amp;id_list=2307.01234&amp;start=0&amp;max_results=10
+
+This paper presents a comprehensive investigation into developing a fault detection and classification system for real-world IIoT applications. The study addresses challenges in data collection, annotation, algorithm development, and deployment. Using a real-world IIoT system, three phases of data collection simulate 11 predefined fault categories. We propose SMTCNN for fault detection and category classification in IIoT, evaluating its performance on real-world data. SMTCNN achieves superior specificity (3.5%) and shows significant improvements in precision, recall, and F1 measures compared to existing techniques.
