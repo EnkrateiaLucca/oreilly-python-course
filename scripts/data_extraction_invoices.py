@@ -30,7 +30,7 @@ def extract_from_file(file_path: Path):
     content = file_path.read_text(encoding="utf-8")
     try:
         response = client.beta.chat.completions.parse(
-            model="gpt-4o-2024-08-06",
+            model="gpt-5-mini",
             messages=[
                 {"role": "system", "content": "Extract the invoice name, date, and tax ID."},
                 {"role": "user", "content": content},

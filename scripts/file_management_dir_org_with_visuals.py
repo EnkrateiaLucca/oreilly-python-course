@@ -23,7 +23,7 @@ from pathlib import Path
 from rich.console import Console
 from rich.table import Table
 from rich.progress import Progress
-import math
+import sys
 import numpy as np
 
 def get_file_size_mb(size_bytes):
@@ -87,7 +87,7 @@ def create_summary_table(df):
     console = Console()
     
     # Overall summary
-    table = Table(title="📁 Downloads Folder Summary", style="cyan")
+    table = Table(title="📁 Folder Summary", style="cyan")
     table.add_column("Metric", style="bold blue")
     table.add_column("Value", style="green")
     
@@ -239,7 +239,7 @@ def create_visualizations(df):
     plt.xticks(color='white')
     
     plt.tight_layout()
-    plt.savefig('downloads_analysis.png', dpi=300, bbox_inches='tight', 
+    plt.savefig('dir_analysis.png', dpi=300, bbox_inches='tight', 
                 facecolor='#0a0a0a', edgecolor='none')
     plt.show()
 
@@ -255,25 +255,30 @@ def save_detailed_csv(df):
                      'modified_date', 'full_path']]
     
     timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-    filename = f'downloads_file_inventory_{timestamp}.csv'
+    filename = f'dir_file_inventory_{timestamp}.csv'
     csv_df.to_csv(filename, index=False)
     
     console = Console()
     console.print(f"\n💾 Detailed file inventory saved to: [bold green]{filename}[/bold green]")
 
 def main():
-    downloads_path = "/Users/greatmaster/Downloads"
+    dir_path = sys.argv[1]
+    
+    try:
+        save = sys.argv[2]
+    except IndexError:
+        save = False
     
     console = Console()
-    console.print("[bold cyan]🔍 Analyzing Downloads Folder...[/bold cyan]\n")
+    console.print(f"[bold cyan]🔍 Analyzing {dir_path} Folder...[/bold cyan]\n")
     
     # Check if path exists
-    if not os.path.exists(downloads_path):
-        console.print(f"[bold red]❌ Path not found: {downloads_path}[/bold red]")
+    if not os.path.exists(dir_path):
+        console.print(f"[bold red]❌ Path not found: {dir_path}[/bold red]")
         return
     
     # Scan files
-    df = get_file_info(downloads_path)
+    df = get_file_info(dir_path)
     
     if df.empty:
         console.print("[bold yellow]⚠️  No files found![/bold yellow]")
@@ -289,11 +294,14 @@ def main():
     create_visualizations(df)
     
     # Save detailed CSV
-    save_detailed_csv(df)
+    if save:
+        save_detailed_csv(df)
+    else:
+        console.print("[bold yellow]⚠️  Detailed CSV not saved![/bold yellow]")
     
     console.print("\n[bold green]✨ Analysis complete! Check the generated files:[/bold green]")
-    console.print("📊 downloads_analysis.png - Visual charts")
-    console.print("📋 downloads_file_inventory_*.csv - Detailed file list")
+    console.print("📊 dir_analysis.png - Visual charts")
+    console.print("📋 dir_file_inventory_*.csv - Detailed file list")
 
 if __name__ == "__main__":
     main()
