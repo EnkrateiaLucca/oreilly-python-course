@@ -1,0 +1,3 @@
+Title: arXiv Query: search_query=&amp;id_list=2102.05622&amp;start=0&amp;max_results=10
+
+We study the well-posedness and the spatial behavior at infinity of perfect fluid flows on $\R^d$ with initial data in a scale of weighted Sobolev spaces that allow spatial growth/decay at infinity as $|x|^β$ with $β&lt;1/2$. In particular, we show that the solution of the Euler equation generically develops an asymptotic expansion at infinity with non-vanishing asymptotic terms that depend analytically on time and the initial data. We identify the evolution space for initial data in the Schwartz class with a certain space of symbols.
