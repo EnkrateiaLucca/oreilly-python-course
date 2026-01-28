@@ -1,8 +1,11 @@
+# PACKAGES 
 from openai import OpenAI
 import anthropic
 import ollama
 import json
 
+
+# CODE (SCRIPT!)
 def ask_ai(prompt, model_name="gpt-4o-mini"):
     """
     Send prompt to an LLM and get output text back.    
