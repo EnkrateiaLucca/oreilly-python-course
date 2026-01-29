@@ -8,14 +8,40 @@
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-**Windows (PowerShell):**
+**Windows:**
+
+> **🪟 Windows Users:** For complete beginners or if you encounter any issues, see **[WINDOWS_SETUP.md](WINDOWS_SETUP.md)** for a comprehensive step-by-step guide with troubleshooting.
+
+**Automated Setup (Recommended):**
 ```powershell
-powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+# 1. Clone the repository
+git clone https://github.com/EnkrateiaLucca/oreilly-python-course
+cd oreilly-python-course
+
+# 2. Run the automated setup script
+.\setup-windows.ps1
 ```
 
-### 2. Clone and Setup Project
+**Manual Setup:**
+```powershell
+# Install UV first
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
 
-**Linux/macOS:**
+# Then run these commands
+git clone https://github.com/EnkrateiaLucca/oreilly-python-course
+cd oreilly-python-course
+uv sync
+uv run ipython kernel install --user --env VIRTUAL_ENV "$PWD\.venv" --name=oreilly-automate-py
+uv run playwright install
+```
+
+**Having Issues?** Run the diagnostic tool:
+```powershell
+.\diagnose-setup.ps1
+```
+
+### 2. Clone and Setup Project (Linux/macOS)
+
 ```bash
 git clone https://github.com/EnkrateiaLucca/oreilly-python-course
 cd oreilly-python-course
@@ -24,17 +50,6 @@ source .venv/bin/activate
 uv run ipython kernel install --user --env VIRTUAL_ENV $(pwd)/.venv --name=oreilly-automate-py
 playwright install
 echo "✅ Setup complete! To execute the jupyter environment for the interactive notebooks run:"
-uv run --with jupyter jupyter lab
-```
-
-**Windows (PowerShell):**
-```powershell
-git clone https://github.com/EnkrateiaLucca/oreilly-python-course
-cd oreilly-python-course
-uv sync
-uv run ipython kernel install --user --env VIRTUAL_ENV "$PWD\.venv" --name=oreilly-automate-py
-uv run playwright install
-Write-Output "✅ Setup complete! To execute the jupyter environment for the interactive notebooks run:"
 uv run --with jupyter jupyter lab
 ```
 
