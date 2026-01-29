@@ -6,7 +6,7 @@ import json
 
 
 # CODE (SCRIPT!)
-def ask_ai(prompt, model_name="gpt-4o-mini"):
+def ask_ai(prompt, model_name="gpt-5-mini"):
     """
     Send prompt to an LLM and get output text back.    
     """

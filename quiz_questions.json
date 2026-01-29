@@ -1,0 +1,114 @@
+[
+  {
+    "question": "What data type is returned by type(42) in Python?",
+    "type": "multiple-choice",
+    "options": ["float", "str", "int", "bool"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which built-in function returns the number of items in a list or characters in a string?",
+    "type": "open-ended",
+    "acceptedAnswers": ["len", "len()", "the len function", "len function"]
+  },
+  {
+    "question": "What is the result of 17 % 5 in Python?",
+    "type": "multiple-choice",
+    "options": ["3", "2", "3.4", "5"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Which operator is used for exponentiation (raising to a power) in Python?",
+    "type": "open-ended",
+    "acceptedAnswers": ["**", "double asterisk", "two asterisks"]
+  },
+  {
+    "question": "What does f\"Hello {name}\" represent in Python?",
+    "type": "multiple-choice",
+    "options": ["A function call", "A regular string", "An f-string (formatted string)", "A file path"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which keyword is used to define a function in Python?",
+    "type": "open-ended",
+    "acceptedAnswers": ["def", "def keyword", "the def keyword"]
+  },
+  {
+    "question": "What will shopping.append('cheese') do to a list called shopping?",
+    "type": "multiple-choice",
+    "options": ["Replace the first item with 'cheese'", "Add 'cheese' to the end of the list", "Remove 'cheese' from the list", "Create a new list with 'cheese'"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "How do you access the first element of a list called 'students'?",
+    "type": "open-ended",
+    "acceptedAnswers": ["students[0]", "students[ 0 ]", "students[0]"]
+  },
+  {
+    "question": "What is the correct way to iterate through each item in a list called 'tasks'?",
+    "type": "multiple-choice",
+    "options": ["for tasks in item:", "while tasks:", "for task in tasks:", "loop task from tasks:"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "In a dictionary contacts = {'Alice': '555-0101'}, how do you access Alice's phone number?",
+    "type": "multiple-choice",
+    "options": ["contacts.Alice", "contacts('Alice')", "contacts['Alice']", "contacts[0]"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which dictionary method returns all the keys?",
+    "type": "open-ended",
+    "acceptedAnswers": ["keys()", ".keys()", "keys", "the keys method"]
+  },
+  {
+    "question": "What does the 'and' operator return when both conditions are True?",
+    "type": "multiple-choice",
+    "options": ["False", "True", "None", "0"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "What is the output of: 10 == 10?",
+    "type": "open-ended",
+    "acceptedAnswers": ["True", "true", "TRUE"]
+  },
+  {
+    "question": "Which statement correctly checks if a variable 'age' is greater than or equal to 18?",
+    "type": "multiple-choice",
+    "options": ["if age > = 18:", "if age >= 18:", "if age => 18:", "if age greater 18:"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "What keyword is used for the 'otherwise' condition in an if-elif-else chain?",
+    "type": "open-ended",
+    "acceptedAnswers": ["else", "else:", "the else keyword"]
+  },
+  {
+    "question": "Which mode should you use with open() to write to a file?",
+    "type": "multiple-choice",
+    "options": ["'r'", "'w'", "'x'", "'a'"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "What does the following code do: shopping.remove('milk')?",
+    "type": "multiple-choice",
+    "options": ["Adds 'milk' to the list", "Returns the index of 'milk'", "Removes the first occurrence of 'milk' from the list", "Checks if 'milk' is in the list"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "What library is commonly used to work with tabular data (DataFrames) in Python?",
+    "type": "open-ended",
+    "acceptedAnswers": ["pandas", "pd", "Pandas", "the pandas library"]
+  },
+  {
+    "question": "What is the correct syntax to read a CSV file using pandas?",
+    "type": "multiple-choice",
+    "options": ["pd.open_csv('file.csv')", "pandas.load('file.csv')", "pd.read_csv('file.csv')", "csv.read('file.csv')"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "What will 'Hello ' * 3 output in Python?",
+    "type": "multiple-choice",
+    "options": ["'Hello Hello Hello '", "'Hello 3'", "'Hello  Hello  Hello '", "'Hello Hello Hello'"],
+    "correctAnswer": 0
+  }
+]
