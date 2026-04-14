@@ -68,7 +68,7 @@ def _classify_with_ollama(image_path: Path, categories: List[str]) -> str:
     )
     try:
         result = subprocess.run(
-            ["ollama", "run", "llama3.2:vision", prompt],
+            ["ollama", "run", "gemma4", prompt],
             capture_output=True,
             text=True,
             check=True,
