@@ -9,8 +9,8 @@
 """
 Standalone script to download abstracts or first pages of ArXiv papers.
 Usage:
-    uv run download_arxiv.py urls.txt --mode abstract
-    uv run download_arxiv.py urls.txt --mode firstpage
+    uv run 5_arxiv_downloader.py ../sample-data/urls.txt --mode abstract
+    uv run 5_arxiv_downloader.py ../sample-data/urls.txt --mode firstpage
 """
 
 import argparse
