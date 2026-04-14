@@ -44,7 +44,7 @@ def ask_ai(prompt, model_name="gpt-5-mini"):
         return output
 
 
-def ask_local_ai(prompt, model_name="llama3.2", structured=False):
+def ask_local_ai(prompt, model_name="gemma4", structured=False):
     """
     Send prompt to a local LLM and get output text back.
     """
