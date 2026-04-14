@@ -25,7 +25,8 @@ def read_file(file_path):
     
     return contents
 
-file_path = "/Users/greatmaster/Desktop/projects/oreilly-live-trainings/oreilly-python-course/scripts/ai_tools.py"
+import os
+file_path = os.path.join(os.path.dirname(__file__), "..", "..", "ai_tools.py")
 
 contents = read_file(file_path)
 
