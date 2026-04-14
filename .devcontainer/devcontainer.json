@@ -1,9 +1,6 @@
 {
   "name": "Automate Tasks with Python + AI",
   "image": "mcr.microsoft.com/devcontainers/python:3.13",
-  "features": {
-    "ghcr.io/astral-sh/uv:1": {}
-  },
   "customizations": {
     "vscode": {
       "extensions": [
