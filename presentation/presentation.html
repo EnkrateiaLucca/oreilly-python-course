@@ -223,7 +223,7 @@
 
         # Software Engineering
 
-        <img src="../notebooks/assets/media/2025-11-19-11-01-35.png" width="100%">
+        <img src="../notebooks/assets/media/2026-04-14-software-engineering-graph.png" width="100%">
 
         ---
         # Scripting
@@ -1045,6 +1045,36 @@
 
         ---
 
+        # Package Versions: What Does `x.x.x` Mean?
+
+        Every package has a version number with **3 parts** — e.g., `requests==2.31.0`
+
+        --
+
+        | Number | Name | Changes when... |
+        |--------|------|-----------------|
+        | **2**.31.0 | **Major** | Breaking changes — old code may stop working |
+        | 2.**31**.0 | **Minor** | New features added, backwards compatible |
+        | 2.31.**0** | **Patch** | Bug fixes only, safe to update |
+
+        --
+
+        **Rule of thumb:**
+        - Patch bumps → safe to update anytime
+        - Minor bumps → usually safe, check changelog
+        - Major bumps → read the migration guide ⚠️
+
+        --
+
+        ```python
+        # Pinning exact versions = reproducible, predictable code
+        requests==2.31.0   # this exact version
+        requests>=2.31.0   # this version or newer
+        requests~=2.31.0   # 2.31.x only (patch updates ok)
+        ```
+
+        ---
+
         # The Package Management Problem 📦
 
         When you write a Python automation script, it needs:
@@ -1243,149 +1273,6 @@
          Demo - Conversational Learning with AI for Python
         </span>
         </h1>
-
-        ---
-
-
-
-
-        # ARUFS Framework
-
-        --
-        
-        ## **A**sk, **R**un, **U**nderstand, **F**ix, Be **S**afe
-
-        --
-
-        - **A**sk → how to ask effectively, give the right context
-
-        --
-
-        - **R**un → how to run the code AI gives you
-
-        --
-        
-        - **U**nderstand → how to understand it/learn from it
-
-        --
-        
-        - **F**ix → how to fix it
-
-        --
-        
-        - Be **S**afe → pittfalls & security risks
-
-        ---
-        # Ask
-
-        - Be **detailed**
-
-        --
-
-        - Use **context** (docs, articles, pdfs, ...)
-
-        --
-
-        - **Tools** to help with feeding data/repo into LLMs
-          - https://github.com/yamadashy/repomix
-          - gitingest
-          - r.jina.ai
-          - arxiv-txt.org
-          - llms-txt
-          - files-to-prompt
-
-        - Use **meta-prompts**:
-          ```
-          I have this problem:
-          {describe the problem}
-          Help me write a good prompt that encapsulates this into a single Python script.
-          ```
-        
-        ---
-        # Ask
-
-        - For tough problems use **reasoning models**
-
-          - Claude + Extended Thinking
-          - O-series models from OpenAI
-          - Gemini 2.5 Pro
-          - DeepSeek R1
-
-        ---
-        # Run/Understand/Fix
-
-        - The pattern is:
-
-        --
-          
-          - LLM generates the script
-          - You run the script
-          - You inspect the output
-          - You ask the LLM to fix the script (if needed)
-
-        --
-        
-        - Ask for **comments on the code**
-
-        --
-
-        - **Feed the output of the terminal** to the AI and ask to fix it
-
-        ---
-        # Be Safe
-
-        - **Never hardcode credentials** - use environment variables or config files
-
-        --
-
-        - **Review AI-generated code** before running - understand what each line does
-
-        --
-
-        - **Test in isolated environments** first (separate folders, test data)
-
-        --
-
-        - **Don't share sensitive data** with AI models (personal info, API keys, proprietary data)
-
-        --
-
-        - **Backup important files** before running automation scripts
-
-        --
-
-        - **Check file paths** - ensure scripts won't delete important files
-
-        --
-
-        - **Add safeguards** for loops (break conditions, iteration limits)
-
-        --
-
-        - **Respect rate limits** and website terms of service when scraping
-
-        --
-
-        - **Quick Safety Checklist**: Read code → Test with dummy data → Have backups → Use version control
-
-        ---
-        class: center, middle
-
-        <h1>
-            <span style="background-color: lightgreen">
-             Demo - Implementing the A.R.U.F.S Framework
-            </span>
-        </h1>
-
-        ---
-        class: center, middle
-
-        <h1>
-            <span style="background-color: lightgreen">
-             Demo - Automating Data Extraction
-            </span>
-        </h1>
-
 
         ---
         
