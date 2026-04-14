@@ -1,6 +1,27 @@
 # O'Reilly Live Training - Automate Tasks with Python + AI 
 
-## Quick Setup
+## Quickest Setup: GitHub Codespaces (Recommended)
+
+No local installation needed! Click the button below to launch a fully configured environment in your browser:
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/EnkrateiaLucca/oreilly-python-course)
+
+> **Note:** Codespaces usage is billed to **your own** GitHub account. GitHub Free includes 120 core-hours/month — more than enough for this course.
+
+After the Codespace launches (takes ~2 minutes), just:
+1. Copy `.env.example` to `.env` and add your API keys:
+   ```bash
+   cp .env.example .env
+   ```
+2. Edit `.env` with your OpenAI and/or Anthropic API keys
+3. Start Jupyter Lab:
+   ```bash
+   uv run --with jupyter jupyter lab
+   ```
+
+---
+
+## Local Setup
 
 ### 1. Install UV
 **Linux/macOS:**
@@ -8,34 +29,48 @@
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-**Windows (PowerShell):**
+**Windows:**
+
+> **🪟 Windows Users:** For complete beginners or if you encounter any issues, see **[WINDOWS_SETUP.md](WINDOWS_SETUP.md)** for a comprehensive step-by-step guide with troubleshooting.
+
+**Automated Setup (Recommended):**
 ```powershell
-powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+# 1. Clone the repository
+git clone https://github.com/EnkrateiaLucca/oreilly-python-course
+cd oreilly-python-course
+
+# 2. Run the automated setup script
+.\setup-windows.ps1
 ```
 
-### 2. Clone and Setup Project
+**Manual Setup:**
+```powershell
+# Install UV first
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
 
-**Linux/macOS:**
-```bash
+# Then run these commands
 git clone https://github.com/EnkrateiaLucca/oreilly-python-course
 cd oreilly-python-course
 uv sync
-source .venv.bin/activate
-uv run ipython kernel install --user --env VIRTUAL_ENV $(pwd)/.venv --name=oreilly-automate-py
-playwright install
-echo "✅ Setup complete! To execute the jupyter environment for the interactive notebooks run:"
-uv run --with jupyter jupyter lab
+uv run ipython kernel install --user --env VIRTUAL_ENV "$PWD\.venv" --name=oreilly-automate-py
+uv run playwright install
 ```
 
-**Windows (PowerShell):**
+**Having Issues?** Run the diagnostic tool:
 ```powershell
+.\diagnose-setup.ps1
+```
+
+### 2. Clone and Setup Project (Linux/macOS)
+
+```bash
 git clone https://github.com/EnkrateiaLucca/oreilly-python-course
 cd oreilly-python-course
 uv sync
 source .venv/bin/activate
 uv run ipython kernel install --user --env VIRTUAL_ENV "$PWD\.venv" --name=oreilly-automate-py
 playwright install
-Write-Output "✅ Setup complete! To execute the jupyter environment for the interactive notebooks run:"
+echo "✅ Setup complete! To execute the jupyter environment for the interactive notebooks run:"
 uv run --with jupyter jupyter lab
 ```
 
