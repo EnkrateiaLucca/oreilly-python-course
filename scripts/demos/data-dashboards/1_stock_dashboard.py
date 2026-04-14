@@ -9,12 +9,12 @@
 Generate an interactive stock trading dashboard from a CSV file.
 
 Usage:
-    python stock_dashboard.py stock-trading-data.csv
+    python 1_stock_dashboard.py ../sample-data/data.csv
     # or, with uv:
-    uv run stock_dashboard.py stock-trading-data.csv
+    uv run 1_stock_dashboard.py ../sample-data/data.csv
 
 Optional:
-    python stock_dashboard.py stock-trading-data.csv -o my_dashboard.html
+    uv run 1_stock_dashboard.py ../sample-data/data.csv -o my_dashboard.html
 """
 
 import argparse
