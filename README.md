@@ -1,6 +1,27 @@
 # O'Reilly Live Training - Automate Tasks with Python + AI 
 
-## Quick Setup
+## Quickest Setup: GitHub Codespaces (Recommended)
+
+No local installation needed! Click the button below to launch a fully configured environment in your browser:
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/EnkrateiaLucca/oreilly-python-course)
+
+> **Note:** Codespaces usage is billed to **your own** GitHub account. GitHub Free includes 120 core-hours/month — more than enough for this course.
+
+After the Codespace launches (takes ~2 minutes), just:
+1. Copy `.env.example` to `.env` and add your API keys:
+   ```bash
+   cp .env.example .env
+   ```
+2. Edit `.env` with your OpenAI and/or Anthropic API keys
+3. Start Jupyter Lab:
+   ```bash
+   uv run --with jupyter jupyter lab
+   ```
+
+---
+
+## Local Setup
 
 ### 1. Install UV
 **Linux/macOS:**
