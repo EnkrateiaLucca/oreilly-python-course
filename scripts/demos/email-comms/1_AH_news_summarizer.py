@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # /// script
-# dependencies = ["requests", "beautifulsoup4", "anthropic", "python-dotenv", "feedparser", "newspaper3k"]
+# dependencies = ["requests", "lxml_html_clean", "beautifulsoup4", "anthropic", "python-dotenv", "feedparser", "newspaper3k"]
 # ///
 
 """
