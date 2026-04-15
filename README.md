@@ -33,17 +33,7 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 
 > **🪟 Windows Users:** For complete beginners or if you encounter any issues, see **[WINDOWS_SETUP.md](WINDOWS_SETUP.md)** for a comprehensive step-by-step guide with troubleshooting.
 
-**Automated Setup (Recommended):**
-```powershell
-# 1. Clone the repository
-git clone https://github.com/EnkrateiaLucca/oreilly-python-course
-cd oreilly-python-course
-
-# 2. Run the automated setup script
-.\setup-windows.ps1
-```
-
-**Manual Setup:**
+**Setup:**
 ```powershell
 # Install UV first
 powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
