@@ -31,8 +31,6 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 
 **Windows:**
 
-> **🪟 Windows Users:** For complete beginners or if you encounter any issues, see **[WINDOWS_SETUP.md](WINDOWS_SETUP.md)** for a comprehensive step-by-step guide with troubleshooting.
-
 **Setup:**
 ```powershell
 # Install UV first
@@ -46,10 +44,6 @@ uv run ipython kernel install --user --env VIRTUAL_ENV "$PWD\.venv" --name=oreil
 uv run playwright install
 ```
 
-**Having Issues?** Run the diagnostic tool:
-```powershell
-.\diagnose-setup.ps1
-```
 
 ### 2. Clone and Setup Project (Linux/macOS)
 
