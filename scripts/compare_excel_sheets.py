@@ -7,13 +7,6 @@
 # ]
 # ///
 
-"""
-This script does x.
-
-This is how you run it:
-uv run .....
-"""
-
 import argparse
 import sys
 
@@ -25,6 +18,8 @@ from rich.text import Text
 console = Console()
 
 
+# Load an Excel file and use its first column as the row key (index).
+# This lets us match rows between files by key rather than by position.
 def load_excel(path: str) -> pd.DataFrame:
     df = pd.read_excel(path, engine="openpyxl")
     df = df.set_index(df.columns[0])
@@ -32,6 +27,9 @@ def load_excel(path: str) -> pd.DataFrame:
 
 
 def compare(df_old: pd.DataFrame, df_new: pd.DataFrame) -> None:
+    # --- Detect added/removed rows ---
+    # Set difference on index keys tells us 
+    # which rows exist in one file but not the other.
     old_keys = set(df_old.index)
     new_keys = set(df_new.index)
 
@@ -43,6 +41,10 @@ def compare(df_old: pd.DataFrame, df_new: pd.DataFrame) -> None:
     if removed:
         console.print(f"\n[red bold]Rows removed ({len(removed)}):[/] {', '.join(str(k) for k in removed)}")
 
+    # --- Narrow both DataFrames to only the rows 
+    # they share ---
+    # We can only do cell-by-cell 
+    # comparison on rows present in both files.
     common = sorted(old_keys & new_keys, key=str)
     df_old_c = df_old.loc[common]
     df_new_c = df_new.loc[common]
@@ -51,14 +53,23 @@ def compare(df_old: pd.DataFrame, df_new: pd.DataFrame) -> None:
     cols_affected = 0
     rows_with_changes: set = set()
 
+    # --- Column-by-column comparison loop ---
     for col in df_old_c.columns:
         old_vals = df_old_c[col]
         new_vals = df_new_c[col]
 
+        # Two cells are "equal" if their values 
+        # match OR both are NaN.
+        # Without the both_nan check, 
+        # every pair of empty cells would be a 
+        # false positive.
         both_nan = old_vals.isna() & new_vals.isna()
         equal = (old_vals == new_vals) | both_nan
 
-        # Handle type mismatches: try string comparison as fallback
+        # Type-mismatch fallback: if a cell holds 
+        # 100 (int) and the other holds "100" (str),
+        # pandas says they differ. Casting both 
+        # to string catches these false positives.
         still_diff = ~equal
         for key in old_vals[still_diff].index:
             try:
@@ -67,10 +78,12 @@ def compare(df_old: pd.DataFrame, df_new: pd.DataFrame) -> None:
             except Exception:
                 pass
 
+        # Skip this column entirely if there are no real differences
         diff_keys = equal[~equal].index
         if len(diff_keys) == 0:
             continue
 
+        # --- Build a rich table showing old vs new for every changed cell in this column ---
         cols_affected += 1
         total_diffs += len(diff_keys)
         rows_with_changes.update(diff_keys)
@@ -88,6 +101,7 @@ def compare(df_old: pd.DataFrame, df_new: pd.DataFrame) -> None:
         console.print()
         console.print(table)
 
+    # --- Final stats summary ---
     console.print()
     summary = Table(title="Summary", show_lines=True)
     summary.add_column("Metric", style="bold")
@@ -101,14 +115,17 @@ def compare(df_old: pd.DataFrame, df_new: pd.DataFrame) -> None:
 
 
 def main() -> None:
+    # --- Parse CLI arguments: two Excel file paths ---
     parser = argparse.ArgumentParser(description="Compare two Excel files column by column.")
     parser.add_argument("file_old", help="Path to the original .xlsx file")
     parser.add_argument("file_new", help="Path to the updated .xlsx file")
     args = parser.parse_args()
 
+    # --- Load both files, using the first column as row key ---
     df_old = load_excel(args.file_old)
     df_new = load_excel(args.file_new)
 
+    # --- Guard: columns must match exactly or comparison is meaningless ---
     if list(df_old.columns) != list(df_new.columns):
         console.print("[red bold]Error:[/red bold] Column headers do not match between files.")
         console.print(f"  Old: {list(df_old.columns)}")
