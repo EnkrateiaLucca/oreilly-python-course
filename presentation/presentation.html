@@ -42,7 +42,284 @@
 
         --
 
-        4. **Use Python scripts to integrate with external LLM APIs**  
+        4. **Use Python scripts to integrate with external LLM APIs**
+
+        ---
+        class: center, middle
+
+        # What Can — and Can't — Be Automated with Python?
+
+        ### Building intuition before writing code
+
+        ---
+
+        # Where we're going
+
+        **Part 1 — What Python _can_ do for you**
+        A framework for spotting automations in your own work.
+
+        **Part 2 — What Python _can't_ do for you**
+        A framework for avoiding expensive dead ends.
+
+        > The hard part of automation isn't the code.
+        > AI can write the code.
+        > The hard part is **seeing the automation**.
+
+        ---
+        class: center, middle
+
+        # Part 1
+        ## What can you automate?
+
+        ---
+
+        # The core mental model
+
+        Every automation is three things:
+
+        # `INPUT → PROCESS → OUTPUT`
+
+        Before writing any code, fill in three blanks.
+
+        | Blank        | Example                                        |
+        | ------------ | ---------------------------------------------- |
+        | **Input?**   | A folder, CSV, URL, PDF, clipboard, API call   |
+        | **Process?** | Rename, filter, extract, summarize, convert    |
+        | **Output?**  | A new file, a report, an email, a sheet row    |
+
+        ---
+
+        # Example — filled in
+
+        **Task:** "Rename all photos in a folder by the date they were taken."
+
+        - **Input:** a folder of photos
+        - **Process:** read each photo's EXIF date
+        - **Output:** renamed files in the same folder
+
+        If you can say it in one sentence like this, **you have a script**.
+
+        ---
+
+        # The sniff test — is it worth automating?
+
+        Four yes/no questions:
+
+        1. Do I do this **more than once**?
+        2. Are the steps **predictable**?
+        3. Does the input live somewhere a computer can **reach**?
+        4. Is the output something a computer can **produce**?
+
+        **4 yeses** → strong candidate
+        **2 or fewer** → not worth automating yet
+
+        > Twice is a coincidence. Three times is a script.
+
+        ---
+
+        # The five categories
+
+        Most beginner-friendly automations fall into one of these buckets.
+
+        | # | Category             | What it touches              |
+        | - | -------------------- | ---------------------------- |
+        | 1 | Files & folders      | Your filesystem              |
+        | 2 | Text & data          | Documents, tables, PDFs      |
+        | 3 | The web              | URLs, pages, public data     |
+        | 4 | App integrations     | Gmail, Slack, Notion, etc.   |
+        | 5 | AI-powered           | Language & judgment tasks    |
+
+        _A teaching shortcut, not an official taxonomy._
+
+        ---
+
+        # Category examples (1–3)
+
+        **1. Files & folders**
+        Rename 300 photos by date • Sort Downloads by file type • Zip-backup a folder every Friday
+
+        **2. Text & data**
+        Clean a CSV • Extract emails from a folder of PDFs • Convert `.docx` → Markdown
+
+        **3. The web**
+        Track a stock price daily • Scrape public headlines • Call a public API, save as spreadsheet
+
+        ---
+
+        # Category examples (4–5)
+
+        **4. App integrations**
+        Read unread Gmail and log subjects • Post a daily Slack summary • Sync calendar events into Notion
+
+        **5. AI-powered**
+        Summarize a folder of meeting notes • Classify incoming support emails • Turn voice memo transcripts into clean drafts
+
+        > Common thread in green-zone work: data is **reachable**, rules are **describable**, errors are **cheap**.
+
+        ---
+
+        # From idea to runnable script — 4 steps
+
+        1. **Write the one-sentence spec**
+          _"Take `<input>`, do `<process>`, produce `<output>`."_
+
+        2. **Ask an AI to draft it** (template on next slide)
+
+        3. **Run it**
+          `uv run python scripts/my_tool.py --input ./folder`
+
+        4. **Turn it into a CLI tool**
+          `argparse` + save to `scripts/` + a `--help` description
+
+        ---
+
+        # Reusable AI prompt template
+
+        ```
+        Write a Python script that:
+        - Takes <input> as input
+        - Does <process>
+        - Produces <output>
+
+        Make it runnable from the command line with argparse.
+        Use only the standard library unless you need <library>.
+        ```
+
+        Paste your one-sentence spec into the blanks. That's it.
+
+        ---
+
+        # Script → CLI tool
+
+        The jump students underestimate is **not** writing the code.
+        It's turning a one-off script into a reusable tool.
+
+        Three moves:
+
+        1. Replace hardcoded paths with `argparse` arguments
+        2. Save it to `scripts/` with a clear name
+        3. Add a one-line `--help` description
+
+        **That's the whole difference** between a script and a tool.
+
+        ---
+        class: center, middle
+
+        # Part 2
+        ## What Python _can't_ do for you
+
+        ---
+
+        # The core frame: the four R's
+
+        Before committing to automate something, ask:
+
+        | Question          | What it's really asking                                     |
+        | ----------------- | ----------------------------------------------------------- |
+        | **Reach?**        | Can my code get to the data and act on the system?          |
+        | **Rules?**        | Can I describe the logic in plain steps?                    |
+        | **Reliability?**  | Am I OK with occasional mistakes?                           |
+        | **Risk?**         | If it misfires, is the worst case recoverable?              |
+
+        The four answers sort every task into a zone.
+
+        ---
+
+        # Three zones
+
+        **■ GREEN** — Build it. Python is great at this.
+
+        **■ YELLOW** — Possible, but fragile. Build it small. Babysit it.
+
+        **■ RED** — Don't aim Python here. Keep a human in the loop.
+
+        ---
+
+        # **Green zone** — Python shines
+
+        - Moving data between files and formats (CSV ↔ JSON ↔ Excel, PDFs, logs)
+        - Talking to documented APIs (OpenAI, Anthropic, GitHub, Notion, Gmail)
+        - Scraping **public, static** web pages
+        - Running things on a schedule (backups, daily reports)
+        - LLM language tasks: summarize, classify, extract, rewrite
+        - Gluing tools together — "when X happens in A, write to B"
+
+        Common thread: **reachable, describable, cheap to get wrong.**
+
+        ---
+
+        # **Yellow zone** — possible, but fragile
+
+        - Scraping sites with logins, captchas, or heavy JavaScript
+        - Automating desktop apps by clicking buttons (breaks on every update)
+        - Parsing messy/inconsistent documents (scanned PDFs, wild emails)
+        - Anything that "mostly works" 90% of the time — when the other 10% matters
+        - Long chains of AI calls without verification steps
+
+        > Rule of thumb: **build it small, watch it run, expect to babysit.**
+
+        ---
+
+        # **Red zone** — wrong shape of problem
+
+        **Reach:** closed systems, 2FA/SSO with no API, mobile-only apps, physical tasks
+        **Rules:** tasks that need genuine human judgment every time
+        **Reliability:** near-perfect is required (medical, legal, safety)
+        **Risk:** irreversible or expensive failure (moving money, mass email, bulk delete)
+
+        > If any of the four R's lands in red, **keep the human in the loop** — or pick a smaller version of the task.
+
+        ---
+
+        # The AI-specific trap
+
+        Because this course uses AI heavily, two failure modes matter:
+
+        **1. Silent wrongness**
+        LLMs produce confident, fluent output even when it's wrong.
+
+        **2. Drift**
+        The same prompt can give different outputs on different days or model versions.
+
+        **Habit:** print the AI's output before you act on it — for the first dozen runs at least.
+
+        ---
+
+        # 30-second "which zone?" checklist
+
+        Before you build:
+
+        - [ ] I can **reach** the input without manual steps
+        - [ ] I can **describe the rules** in a paragraph
+        - [ ] I'm OK with occasional errors, or I have a way to catch them
+        - [ ] If the script misfires, the worst case is **easy to undo**
+
+        **4 checks** → build it
+        **3 checks** → build small, watch it run
+        **2 or fewer** → don't automate yet. Do it by hand and learn the shape first.
+
+        ---
+
+        # 5-minute exercise
+
+        1. Write down **three repetitive tasks** from your week
+        2. For each: fill in **Input → Process → Output**
+        3. For each: answer the **four R's** (reach, rules, reliability, risk)
+        4. Sort them: **green** / **yellow** / **red**
+        5. Build only the **green** ones this week
+        6. Write one sentence for each **red** one explaining _why_ it's red
+
+        That last sentence is often the most valuable thing you'll learn.
+
+        ---
+        class: center, middle
+
+        ## The real skill isn't Python.
+
+        ### It's instantly recognizing
+        ### what's automatable and what isn't —
+        ### and not wasting a weekend on a task
+        ### that was always in the red zone.
 
         ---
         class: center, middle
@@ -95,9 +372,6 @@
         # It's Like Writing Recipes
 
         <div style="display: flex; align-items: center;">
-          <div style="flex: 1;">
-            <img src="../notebooks/assets/media/2025-02-01-17-23-04.png" width="45%">
-          </div>
           <div style="flex: 1;">
             <pre><code class="python" style="font-size: 0.8em;"># Pancake Making Algorithm
 
@@ -483,27 +757,11 @@
 
         --
 
-        - That is a lot! How can we manage?
+        - Learn a mental framework for when and how to automate
 
         --
 
-        - Use AI conversationally! Asking questions and clarifying what you don't know!
-
-        ---
-        # The "Just Ask AI" Naive Approach
-
-        --
-
-        <div style="display: flex; justify-content: center; align-items: center; margin-top: 150px;">
-          <img src="../notebooks/assets/media/2025-02-01-16-37-14.png" width="100%">
-        </div>
-
-        ---
-        # The "Just Ask AI" Naive Approach
-
-        <div style="display: flex; justify-content: center; align-items: center; margin-top: 120px;margin-left: 50px;">
-          <img src="../notebooks/assets/media/2025-02-01-16-47-17.png" width="125%">
-        </div>
+        - Develop an intuition for what is possible with automation
 
         ---
         class: center, middle
@@ -519,7 +777,35 @@
         </div>
 
         ---
-        
+
+        # Python Setup Summary
+
+        What you should have installed:
+
+        --
+
+        - **Python** (via `pyenv` or the official installer)
+
+        --
+
+        - **uv** — the fast Python package manager (`pip install uv` or `curl -LsSf https://astral.sh/uv/install.sh | sh`)
+
+        --
+
+        - **A code editor** (VS Code recommended)
+
+        --
+
+        - **Jupyter Notebook** — `uv run --with jupyter jupyter lab`
+
+        --
+
+        - **An AI chatbot** (ChatGPT, Claude, or Gemini)
+
+        > Everything we do in this course runs via `uv run` — no manual environment activation needed.
+
+        ---
+
 
         # Data Types, Operations, Variables
 
@@ -892,13 +1178,29 @@
         ```
 
         ---
+        # The "Just Ask AI" Naive Approach
+
+        --
+
+        <div style="display: flex; justify-content: center; align-items: center; margin-top: 150px;">
+          <img src="../notebooks/assets/media/2025-02-01-16-37-14.png" width="100%">
+        </div>
+
+        ---
+        # The "Just Ask AI" Naive Approach
+
+        <div style="display: flex; justify-content: center; align-items: center; margin-top: 120px;margin-left: 50px;">
+          <img src="../notebooks/assets/media/2025-02-01-16-47-17.png" width="125%">
+        </div>
+
+        ---
         class: center, middle
 
-        # Quick Knowledge Check! 🧠
+        # Poll Questions 🗳️
 
         ---
 
-        # Quiz Question 1
+        # Poll Question 1
 
         **What will this code output?**
 
@@ -920,7 +1222,7 @@
 
         ---
 
-        # Quiz Question 2
+        # Poll Question 2
 
         **What's wrong with this code?**
 
@@ -942,7 +1244,7 @@
 
         ---
 
-        # Quiz Question 3
+        # Poll Question 3
 
         **Fill in the blank to print each fruit:**
 
@@ -963,6 +1265,114 @@
         --
 
         **Explanation:** The `for` loop iterates through each item in the list, and `in` checks membership.
+
+        ---
+
+        # Poll Question 4
+
+        **What does this code print?**
+
+        ```python
+        def greet(name):
+            return "Hello, " + name + "!"
+
+        print(greet("Lucas"))
+        ```
+
+        --
+
+        **Answer:** `Hello, Lucas!`
+
+        --
+
+        **Explanation:** `greet` is *defined* with `def`, then *called* with `greet("Lucas")`. The argument `"Lucas"` fills the `name` parameter, and the function `return`s the assembled string, which `print` displays.
+
+        ---
+
+        # Poll Question 5
+
+        **What does this loop print?**
+
+        ```python
+        numbers = [2, 4, 6]
+        total = 0
+        for n in numbers:
+            total = total + n
+        print(total)
+        ```
+
+        --
+
+        **Answer:** `12`
+
+        --
+
+        **Explanation:** The `for` loop visits each item in the list once, adding it to `total` (2, then 6, then 12). After the loop finishes, `total` holds the sum of every element.
+
+        ---
+
+        # Poll Question 6
+
+        **What does this code print?**
+
+        ```python
+        name = "Lucas"
+        age = 33
+        print(f"{name} is {age} years old")
+        ```
+
+        --
+
+        **Answer:** `Lucas is 33 years old`
+
+        --
+
+        **Explanation:** An **f-string** (the `f` before the quotes) lets you drop variables directly inside `{ }`. Python replaces `{name}` and `{age}` with their values — no `+` or manual conversion needed.
+
+        ---
+
+        # Poll Question 7
+
+        **What is this code doing?**
+
+        ```python
+        from openai import OpenAI
+
+        client = OpenAI()
+        response = client.responses.create(
+            model="gpt-4o-mini",
+            input="Say hello in one word."
+        )
+        print(response.output_text)
+        ```
+
+        --
+
+        **Answer:** Sending a prompt to an AI model and printing its reply.
+
+        --
+
+        **Explanation:** We create a `client`, send our `input` (the prompt) to a `model`, and the AI sends back a `response`. This is the core input → process → output pattern for every AI API call.
+
+        ---
+
+        # Poll Question 8
+
+        **What's the safest way to read a file in Python?**
+
+        ```python
+        with open("notes.txt", "r") as f:
+            contents = f.read()
+        print(contents)
+        ```
+
+        --
+
+        **Answer:** Using `with open(...)` — it closes the file automatically.
+
+        --
+
+        **Explanation:** The `with` block opens the file, lets you `read()` it, then **closes it for you** even if something goes wrong. `"r"` means read mode; use `"w"` to write and `"a"` to append.
 
         ---
         class: center, middle
@@ -1244,6 +1654,65 @@
         **Perfect for vibe scripting!** → Learn more: https://docs.astral.sh/uv/guides/scripts/
 
         ---
+
+        # Run Your Scripts Like Commands (Mac/Linux)
+
+        Turn `uv run ~/scripts/my_script.py` into a short command you can type anywhere.
+
+        --
+
+        1. Your script lives at a path, e.g. `~/scripts/my_script.py`
+
+        2. Add an **alias** (or function for arguments) to `~/.aliases`:
+
+        ```bash
+        # Simple alias
+        alias myscript='uv run ~/scripts/my_script.py'
+
+        # Function — passes all arguments through with "$@"
+        myscript() { uv run ~/scripts/my_script.py "$@"; }
+        ```
+
+        --
+
+        3. **Source it** from your `~/.zshrc` or `~/.bashrc`:
+
+        ```bash
+        source ~/.aliases
+        ```
+
+        Now just type `myscript` from anywhere. 🎉
+
+        ---
+
+        # Run Your Scripts Like Commands (Windows)
+
+        Same idea using a **PowerShell function** in your profile.
+
+        --
+
+        1. Open your profile: `notepad $PROFILE`
+
+        2. Add a function (`@args` passes all arguments through):
+
+        ```powershell
+        function myscript { uv run C:\scripts\my_script.py @args }
+        ```
+
+        3. Reload it: `. $PROFILE` (or restart the terminal)
+
+        --
+
+        **Alternative — a batch file** named `myscript.cmd` in a folder on your PATH:
+
+        ```cmd
+        @echo off
+        uv run C:\scripts\my_script.py %*
+        ```
+
+        `%*` passes all arguments through.
+
+        ---
         class: center, middle
 
         <h1>
@@ -1251,6 +1720,15 @@
            Demo - Vibe Scripting with UV + AI
           </span>
         </h1>
+
+        ---
+        class: center, middle
+
+        # The Vibe Scripting Steps
+
+        <div style="display: flex; justify-content: center; align-items: center; margin-top: 30px;">
+          <img src="../notebooks/assets/media/vibe-scripting-workflow.png" width="90%">
+        </div>
 
         ---
 
@@ -1310,26 +1788,11 @@
         </div>
 
         ---
-
-        # The Conversational Learning Approach
-
-        - **Start with "I don't know Python, but I want to..."** and describe your goal
-
-        --
-
-        - **Ask for explanations**: "What does this line do?" or "Why do we use a for loop here?"
-
-        --
-
-        - **Request variations**: "Show me 3 different ways to do this" or "Make this simpler"
-
-        --
-
-        - **Build incrementally**: Start with tiny scripts, then ask "How do I add X to this?"
+        class: center, middle
 
         <h1>
-        <span style="background-color: lightgreen">
-         Demo - Conversational Learning with AI for Python
+        <span style="background-color: lightgreen;">
+          Demo - Conversational Learning with AI for Python
         </span>
         </h1>
 
@@ -1337,7 +1800,7 @@
 
         # File Management Automation
 
-        Most people's file systems are a graveyard of renamed screenshots, duplicates, and folders called "final_v2_ACTUAL". A few lines of Python can bring order to all of it.
+        Your Downloads folder has 2,000 files and you can't find anything. Python can sort, rename, and tidy all of it in seconds.
 
         --
 
@@ -1358,7 +1821,7 @@
 
         # PDF & Document Automation
 
-        PDFs are where structured data goes to die. Invoices, receipts, reports — the information is right there, just completely inaccessible. AI changes that.
+        You have 50 invoices to read and a spreadsheet to fill by hand. AI can pull every number out for you while you grab a coffee.
 
         --
 
@@ -1379,7 +1842,7 @@
 
         # Data & Dashboards
 
-        Data analysis doesn't have to mean opening Excel every time. Python can fetch, clean, and visualise data automatically — and even interpret it with AI.
+        You rebuild the same Excel chart every Monday morning. Python can fetch the data, refresh the charts, and even explain the trends for you.
 
         --
 
@@ -1400,7 +1863,7 @@
 
         # Browser Automation
 
-        Anything done manually in a browser can be scripted. Login flows, form submissions, scraping pages that block normal requests — Playwright handles all of it.
+        You fill in the same web form every single day. Python can open the site, type everything, and click submit while you do something useful.
 
         --
 
@@ -1421,7 +1884,7 @@
 
         # Email & Comms Automation
 
-        Inboxes and meeting notes are full of signal buried in noise. AI is surprisingly good at reading through all of it and surfacing what actually matters.
+        You open 80 unread emails every morning trying to spot the urgent ones. AI can read them all and hand you a two-line triage list.
 
         --
 
@@ -1458,31 +1921,76 @@
 
         # Using AI != Slop
 
-        *Slop is using unreviewed output (like code) from AI models*
-
         <div style="text-align: center;">
           <img src="../notebooks/assets/media/2025-02-02-11-50-55.png" width="80%">
         </div>
 
+        *Slop comes from vague prompts and zero review — not from using AI*
+
         ---
         # Using AI != Slop
 
-        1. Working with AI involves having a system for effectively reviewing high quality outputs
+        1. **Slop comes from vague prompts; craft comes from specific, capability-aware prompts.** Name the libraries, the input, and the exact behavior:
+
+           > *"Write me a Python CLI tool using Click and boto3 which takes a URL of that form and then uses EVERY single boto3 trick in the book to try and debug why the file is returning a 404."* — Simon Willison
 
         --
 
-        2. Means having good systems for generating good outputs on the first place
+        2. **Encode your conventions once** — reusable context beats one-off prompting. Save your standards in a Claude Project / system prompt so every output inherits them.
 
         --
 
-        3. Then learning to put in place a procedure for effective review and feedback on top of the outputs you get
+        3. **Ship self-contained, runnable artifacts** — the same `uv run` + inline-dependency pattern this course already teaches means anyone can run your script with zero setup.
 
         --
 
-        4. **If it fixes your problem, it's working!**
-           - The goal is to solve YOUR specific problem
-           - Perfection is the enemy of done
-           - A working automation that saves you time is better than a "perfect" solution that never ships
+        4. **You own what you run.** As Willison puts it, others can run your script *"provided you trust me not to have replaced the script with something malicious."* AI output is a draft **you** are accountable for.
+
+        ---
+
+        # Red → Green: Tell the AI Exactly What "Done" Means
+
+        Write the check **first**, then let AI fill in the code.
+
+        --
+
+        - **RED**: write a test that describes the result you want — run it, watch it fail.
+
+        --
+
+        - **GREEN**: ask the AI to write code until the test passes.
+
+        --
+
+        - **Why**: a failing test first is a clear instruction the AI can't fudge — it stops the AI from "writing code that doesn't work, or ... unnecessary ... or both."
+
+        > A "test" is just a tiny piece of code that says: *if my function works, this should be true.*
+
+        ---
+
+        # A 6-Line Example Beginners Can Read
+
+        No framework needed — just a plain `assert`:
+
+        ```python
+        # RED: describe what "done" looks like
+        # (this fails — get_headers doesn't exist yet)
+        def test_get_headers():
+            md = "# Title\n\nsome text\n## Section"
+            assert get_headers(md) == ["Title", "Section"]
+
+        test_get_headers()  # run it -> error = RED
+        ```
+
+        --
+
+        Then the prompt to the AI:
+
+        > *"Build a Python function `get_headers(markdown)` that returns the header text. Use red/green TDD."*
+
+        --
+
+        Once `test_get_headers()` runs with **no error**, you're **GREEN** — and you keep the test forever as a safety net. 🟢
 
         ---
 
