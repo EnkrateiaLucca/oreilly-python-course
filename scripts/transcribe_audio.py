@@ -1,3 +1,10 @@
+# /// script
+# requires-python = ">=3.10"
+# dependencies = [
+#     "faster-whisper",
+# ]
+# ///
+
 from pathlib import Path
 import argparse
 

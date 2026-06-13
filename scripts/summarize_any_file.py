@@ -1,10 +1,10 @@
 # /// script
 # requires-python = ">=3.12"
-# dependencies = ["openai", "pypdf2"]
+# dependencies = ["openai", "pypdf"]
 # ///
 
 from openai import OpenAI # for accessing the model to do summarization
-from PyPDF2 import PdfReader
+from pypdf import PdfReader
 import sys
 
 # Load the file we want to summarize
@@ -75,9 +75,10 @@ def llm_call(prompt: str) -> str:
     return text_output
 
     
-# file_path_pdf = "./paper.pdf"
-# file_path_txt = "./aie-schedule.txt"
-# file_path_md = "./aie-schedule.md"
+# Example inputs live in the assets/ folder:
+# file_path_pdf = "../assets/paper.pdf"
+# file_path_txt = "../assets/aie-schedule.txt"
+# file_path_md  = "../assets/aie-schedule.md"
 
 file_path = sys.argv[1]
 print(f"File path given as input: {file_path}")
