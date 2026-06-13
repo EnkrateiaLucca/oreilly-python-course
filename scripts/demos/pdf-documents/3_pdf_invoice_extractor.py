@@ -22,7 +22,7 @@ class InvoiceData(BaseModel):
     tax_id: str
 
 # --- Change this path or pass via command line
-FOLDER = Path("/Users/greatmaster/Desktop/projects/oreilly-live-trainings/oreilly-python-course/notebooks/assets/fake-invoices")
+FOLDER = Path("/Users/greatmaster/Desktop/projects/oreilly-live-trainings/oreilly-python-course/assets/fake-invoices")
 
 if len(sys.argv) > 1:
     FOLDER = Path(sys.argv[1])
