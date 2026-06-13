@@ -757,11 +757,11 @@
 
         --
 
-        - Learn a mental framework for when and how to automate
+        - **Mental Framework**: Learn when and how to automate
 
         --
 
-        - Develop an intuition for what is possible with automation
+        - **Automation Intuition**: Develop a sense for what is possible
 
         ---
         class: center, middle
@@ -1178,22 +1178,6 @@
         ```
 
         ---
-        # The "Just Ask AI" Naive Approach
-
-        --
-
-        <div style="display: flex; justify-content: center; align-items: center; margin-top: 150px;">
-          <img src="../assets/media/2025-02-01-16-37-14.png" width="100%">
-        </div>
-
-        ---
-        # The "Just Ask AI" Naive Approach
-
-        <div style="display: flex; justify-content: center; align-items: center; margin-top: 120px;margin-left: 50px;">
-          <img src="../assets/media/2025-02-01-16-47-17.png" width="125%">
-        </div>
-
-        ---
         class: center, middle
 
         # Poll Questions 🗳️
@@ -1375,6 +1359,22 @@
         **Explanation:** The `with` block opens the file, lets you `read()` it, then **closes it for you** even if something goes wrong. `"r"` means read mode; use `"w"` to write and `"a"` to append.
 
         ---
+        # The "Just Ask AI" Naive Approach
+
+        --
+
+        <div style="display: flex; justify-content: center; align-items: center; margin-top: 150px;">
+          <img src="../assets/media/2025-02-01-16-37-14.png" width="100%">
+        </div>
+
+        ---
+        # The "Just Ask AI" Naive Approach
+
+        <div style="display: flex; justify-content: center; align-items: center; margin-top: 120px;margin-left: 50px;">
+          <img src="../assets/media/2025-02-01-16-47-17.png" width="125%">
+        </div>
+
+        ---
         class: center, middle
 
         <h1>
@@ -1430,44 +1430,50 @@
 
         # What is an API?
 
-        **API** = Application Programming Interface
+        **API** = Application Programming Interface — a way for programs to talk to each other.
 
-        --
-
-        A way for different programs to communicate with each other.
-
-        --
-
-        **Think of it like a restaurant:**
-        - You (your code) look at the menu (API documentation)
-        - You tell the waiter (API) what you want
-        - The kitchen (external service) prepares it
-        - The waiter brings back your order (response)
-
-        --
-
-        **Real-World Example: Google Maps API**
-
-        <div style="text-align: center; margin-top: 20px;">
-          <div style="display: flex; justify-content: space-around; align-items: center;">
-            <div style="flex: 1; text-align: center;">
-              <p style="font-size: 1.2em;">🏨 <strong>Booking.com</strong></p>
-              <p style="font-size: 0.9em;">Shows hotel locations on map</p>
-            </div>
-            <div style="flex: 0.3; text-align: center;">
-              <p style="font-size: 2em;">→ 🗺️ ←</p>
-              <p style="font-size: 0.8em;">Google Maps API</p>
-            </div>
-            <div style="flex: 1; text-align: center;">
-              <p style="font-size: 1.2em;">🏠 <strong>Airbnb</strong></p>
-              <p style="font-size: 0.9em;">Shows property locations</p>
-            </div>
+        <div style="display: flex; justify-content: space-around; align-items: center; margin-top: 40px; text-align: center;">
+          <div style="flex: 1;">
+            <p style="font-size: 2em;">💻</p>
+            <p><strong>Your Code</strong></p>
+            <p style="font-size: 0.85em; color: #555;">sends a request</p>
+          </div>
+          <div style="flex: 0.5; font-size: 2em;">⇄</div>
+          <div style="flex: 1;">
+            <p style="font-size: 2em;">🔌</p>
+            <p><strong>API</strong></p>
+            <p style="font-size: 0.85em; color: #555;">the interface</p>
+          </div>
+          <div style="flex: 0.5; font-size: 2em;">⇄</div>
+          <div style="flex: 1;">
+            <p style="font-size: 2em;">☁️</p>
+            <p><strong>Service</strong></p>
+            <p style="font-size: 0.85em; color: #555;">does the work, sends back a response</p>
           </div>
         </div>
 
-        --
+        ---
 
-        Neither Booking nor Airbnb built their own mapping system—they just use Google's API!
+        # APIs in the Real World
+
+        Neither Booking.com nor Airbnb built their own maps — they just call Google's API.
+
+        <div style="display: flex; justify-content: space-around; align-items: center; margin-top: 40px; text-align: center;">
+          <div style="flex: 1;">
+            <p style="font-size: 2.5em;">🏨</p>
+            <p><strong>Booking.com</strong></p>
+            <p style="font-size: 0.85em; color: #555;">Shows hotel locations on map</p>
+          </div>
+          <div style="flex: 0.8; text-align: center;">
+            <p style="font-size: 1.5em; color: #888;">→ 🗺️ ←</p>
+            <p style="font-size: 0.8em; color: #888;">Google Maps API</p>
+          </div>
+          <div style="flex: 1;">
+            <p style="font-size: 2.5em;">🏠</p>
+            <p><strong>Airbnb</strong></p>
+            <p style="font-size: 0.85em; color: #555;">Shows property locations</p>
+          </div>
+        </div>
 
         ---
 
@@ -1655,62 +1661,37 @@
 
         ---
 
-        # Run Your Scripts Like Commands (Mac/Linux)
+        # What is an Alias?
 
-        Turn `uv run ~/scripts/my_script.py` into a short command you can type anywhere.
+        An **alias** is a shortcut name for a longer command.
 
-        --
-
-        1. Your script lives at a path, e.g. `~/scripts/my_script.py`
-
-        2. Add an **alias** (or function for arguments) to `~/.aliases`:
-
-        ```bash
-        # Simple alias
-        alias myscript='uv run ~/scripts/my_script.py'
-
-        # Function — passes all arguments through with "$@"
-        myscript() { uv run ~/scripts/my_script.py "$@"; }
+        Instead of typing:
+        ```
+        uv run ~/scripts/my_script.py
         ```
 
-        --
-
-        3. **Source it** from your `~/.zshrc` or `~/.bashrc`:
-
-        ```bash
-        source ~/.aliases
+        You type:
+        ```
+        myscript
         ```
 
-        Now just type `myscript` from anywhere. 🎉
+        You define it once — then it works every time you open a terminal.
 
         ---
 
-        # Run Your Scripts Like Commands (Windows)
+        # Add an Alias — One Command
 
-        Same idea using a **PowerShell function** in your profile.
+        **Mac / Linux** — paste in Terminal:
+        ```bash
+        echo "alias myscript='uv run ~/scripts/my_script.py'" >> ~/.zshrc && source ~/.zshrc
+        ```
 
-        --
-
-        1. Open your profile: `notepad $PROFILE`
-
-        2. Add a function (`@args` passes all arguments through):
-
+        **Windows** — paste in PowerShell:
         ```powershell
-        function myscript { uv run C:\scripts\my_script.py @args }
+        Add-Content $PROFILE "`nfunction myscript { uv run C:\scripts\my_script.py @args }" ; . $PROFILE
         ```
 
-        3. Reload it: `. $PROFILE` (or restart the terminal)
-
-        --
-
-        **Alternative — a batch file** named `myscript.cmd` in a folder on your PATH:
-
-        ```cmd
-        @echo off
-        uv run C:\scripts\my_script.py %*
-        ```
-
-        `%*` passes all arguments through.
+        > Replace `myscript` with the name you want, and the path with your script's path.
 
         ---
         class: center, middle
