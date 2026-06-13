@@ -153,3 +153,15 @@ Desktop.ini
 
 # uv
 uv.lock
+
+# Local-only remark/presentation proposals — never commit to GitHub
+proposal_remark_cli.py
+proposal_remark_walkthrough_lucas.md
+scripts/remark_cli.py
+scripts/remark_walkthrough_lucas.md
+
+# Excel temp lock files
+~$*.xlsx
+
+# Agent worktrees (local only)
+.claude/worktrees/
