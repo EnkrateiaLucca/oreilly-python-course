@@ -83,6 +83,6 @@ def organize_files_in_folder(folder_path):
     return (f"Files organized successfully. Moved {moved_counts['documents']} to 'documents', "
             f"{moved_counts['media']} to 'media', and {moved_counts['others']} to 'others'.")
 
-organized_files = organize_files_in_folder("/Users/greatmaster/Desktop/projects/oreilly-live-trainings/oreilly-python-course/notebooks/assets")
+organized_files = organize_files_in_folder("/Users/greatmaster/Desktop/projects/oreilly-live-trainings/oreilly-python-course/assets")
 
 print(organized_files)
