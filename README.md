@@ -31,6 +31,8 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 
 **Windows:**
 
+> **🪟 Windows Users:** For complete beginners or if you encounter any issues, see **[WINDOWS_SETUP.md](WINDOWS_SETUP.md)** for a comprehensive step-by-step guide with troubleshooting.
+
 **Setup:**
 ```powershell
 # Install UV first
@@ -85,59 +87,52 @@ Dependencies installed:
 - **Web Scraping:** requests, beautifulsoup4, playwright
 - **Jupyter:** jupyterlab, ipykernel, ipywidgets
 
-# Course Notebooks
+# Course Content
 
-This directory contains all the Jupyter notebooks for the O'Reilly Live Training course organized into logical sections.
+This is a **two-day live training**. The course material is organized by day under `notebooks/`, with supporting slides, scripts, and assets in their own top-level folders.
 
-## Structure
+## Notebook Structure
 
-### 📚 notebooks/01-python-fundamentals/
-Core Python concepts and syntax:
-- **01-python-basics.ipynb** – Python basics: numbers, strings, variables, operators
-- **02-working-with-data.ipynb** – Lists, dictionaries, file I/O, CSV handling
-- **03-packages-apis.ipynb** – Using libraries and working with APIs
-- **file.txt** – Sample text file for file operations
-- **places_to_go.csv** – Example CSV data for exercises
+### 📅 Day 1 — `notebooks/day-1/`
+Python fundamentals, then a first look at AI APIs:
+- **01-python-basics.ipynb** – Numbers, strings, variables, operators, input, conditionals
+- **02-working-with-data.ipynb** – Lists, dictionaries, file I/O, CSV, pandas, and using AI to summarize/categorize data
+- **03-packages-apis.ipynb** – Importing libraries, local vs. remote LLMs, and calling external APIs
+- **04-ai-apis-overview.ipynb** – OpenAI, Anthropic, and local Ollama models; image generation and audio transcription
 
-### 🤖 02-ai-apis/
-Working with AI services:
-- **01-ai-apis-overview.ipynb** - Introduction to AI APIs
-- **02-ai-tools-hands-on.ipynb** - Practical AI tool usage
+### 📅 Day 2 — `notebooks/day-2/`
 
-### ⚙️ 03-automation-projects/
-Real-world automation projects:
-- **01-file-management-automation.ipynb** - Organizing and managing files
-- **02-data-extraction-with-ai.ipynb** - Extracting data using LLMs
-- **03-web-data-extraction.ipynb** - Web scraping and data collection
-- **04-data-analysis-automation.ipynb** - Automated data analysis
-- **05-presentation-automation.ipynb** - Generating slides automatically
-- **06-browser-automation.ipynb** - Controlling web browsers
-- **07-workflow-automation.ipynb** - Building automation workflows
-- **08-email-assistant.ipynb** - Email automation and processing
-- **09-ai-scheduler-agent.ipynb** - Intelligent scheduling systems
-- **10-receipt-data-extraction.ipynb** - Processing receipts and invoices
-- **11-custom-automation-scripts.ipynb** - Building your own scripts
-- **12-practical-examples.ipynb** - Additional real-world examples
+**`03-automation-projects/`** — real-world automation:
+- **01-file-management-automation.ipynb** – Extract invoice data and organize files with AI
+- **02-data-extraction.ipynb** – Structured receipt/data extraction to JSON (OpenAI, Claude, and local models)
+- **03-data-analysis-and-automation.ipynb** – Download data, scrape the web, and analyze with pandas
 
-### 📝 04-exercises/
-Practice problems and solutions:
-- **01-data-types-and-variables.ipynb** - Basic Python practice
-- **02-functions.ipynb** - Function creation exercises
-- **03-conditionals-and-files.ipynb** - Logic and file handling
-- **04-day1-recap.ipynb** - Summary and review
+**`04-exercises/`** — practice problems:
+- **01-data-types-and-variables.ipynb** – Basic Python practice
+- **02-functions.ipynb** – Function creation exercises
+- **03-conditionals-and-files.ipynb** – Logic and file handling
+- **04-day1-recap.ipynb** – Day 1 summary and review
+- **05-tutorial_learning_python_with_pdfs.ipynb** – Learning Python by working with PDFs
 
-### 📁 assets/
-Supporting files, images, sample data, and resources used throughout the course.
+**`05-how-to-learn-python/`** — using AI to learn the language:
+- **how-to-learn-python.ipynb** – Strategies for learning Python with AI
+- **learn-python-talking-to-ai.ipynb** – Using an AI model as a personal Python tutor
+
+## Other Folders
+
+- **`presentation/`** – The course slide deck (`presentation.html`, a remark.js presentation)
+- **`scripts/`** – Standalone automation scripts and shared helpers (e.g. `ai_tools.py`); `scripts/archive/` holds older demos
+- **`assets/`** – Sample data, PDFs, spreadsheets, and other resources used by the notebooks
 
 ## Getting Started
 
-1. Navigate to `01-python-fundamentals/` if you're new to Python
-2. Work through notebooks in numerical order within each section
-3. Use `04-exercises/` to practice what you've learned
-4. Move to `02-ai-apis/` and `03-automation-projects/` for advanced topics
+1. Complete the setup above (Codespaces or local), add your API keys, and launch Jupyter Lab
+2. Start with **`notebooks/day-1/`** and work through the notebooks in order
+3. Move on to **`notebooks/day-2/`** for the automation projects and exercises
 
 ## Tips
 
-- Each notebook is self-contained but builds on previous concepts
-- Sample data and resources are in the `assets/` folder
-- Run notebooks in order for the best learning experience
+- Select the **`oreilly-automate-py`** kernel so every notebook uses the same environment
+- Notebooks build on each other — run them in order within each day
+- AI cells need valid API keys in `.env`; cells using local models need [Ollama](https://ollama.com/download) installed and running
+- Sample data lives in `assets/`, referenced from the notebooks via relative paths
