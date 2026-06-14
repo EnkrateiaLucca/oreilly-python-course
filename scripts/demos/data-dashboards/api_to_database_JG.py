@@ -9,27 +9,24 @@
 # ]
 # ///
 
-"""
-JG_api_data_storage.py - Access API for Website and Store Data in Database
+"""Fetch data from public APIs and store it in a local SQLite database.
 
-Student: JG (Initials)
-Request: "access API for website and store data in database"
+Student demo (JG): "access API for website and store data in database".
+Automation category: Data.
 
-This script demonstrates how to fetch data from public APIs and store it in a SQLite database.
-It includes comprehensive error handling, data validation, and database management.
+Input   -> several free public APIs (no keys, e.g. JSONPlaceholder, random-user)
+Process -> request the data, validate/clean it, design tables and insert rows
+Output  -> a SQLite database (jg_api_demo.db) plus a summary report in the console
 
-Educational Focus:
-- Making HTTP requests to APIs
-- JSON data processing
-- SQLite database operations
-- Data validation and cleaning
-- Error handling and retry logic
-- Database schema design
-- Working with different API types
+Run it like:
+    uv run scripts/demos/data-dashboards/api_to_database_JG.py
 
-Prerequisites:
-- No API keys required (uses public APIs)
-- SQLite is included with Python
+Needs: nothing - uses public APIs and Python's built-in sqlite3 (no API key).
+
+Key Learning Objectives:
+- Making HTTP requests to APIs and processing JSON
+- SQLite database design and operations
+- Data validation, cleaning and error handling
 """
 
 import requests

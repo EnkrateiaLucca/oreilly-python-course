@@ -4,6 +4,20 @@
 #     "faster-whisper",
 # ]
 # ///
+"""Transcribe an audio file to text locally with Whisper (no API key).
+
+Automation category: Media + AI (local).
+
+Input   -> an audio file (mp3, wav, m4a, ...)
+Process -> run faster-whisper on the CPU to transcribe speech to text
+Output  -> the transcript printed to the console and saved to a text file
+
+Run it like:
+    uv run scripts/demos/media/transcribe_audio.py audio.mp3
+    uv run scripts/demos/media/transcribe_audio.py audio.mp3 --model base --output out.txt
+
+Needs: nothing (runs locally; the first run downloads the chosen Whisper model).
+"""
 
 from pathlib import Path
 import argparse

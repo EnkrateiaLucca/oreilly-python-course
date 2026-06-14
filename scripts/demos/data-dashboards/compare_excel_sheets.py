@@ -6,6 +6,19 @@
 #     "rich",
 # ]
 # ///
+"""Compare two Excel sheets and highlight every changed cell.
+
+Automation category: Data.
+
+Input   -> two .xlsx files (an old version and a new version)
+Process -> match rows by the first column, then diff every cell
+Output  -> a console report of added/removed rows and changed cells
+
+Run it like:
+    uv run scripts/demos/data-dashboards/compare_excel_sheets.py old.xlsx new.xlsx
+
+Needs: nothing (no API key).
+"""
 
 import argparse
 import sys

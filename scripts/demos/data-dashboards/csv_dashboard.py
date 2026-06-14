@@ -7,8 +7,19 @@
 #   "dash",
 # ]
 # ///
-"""
-Automata Learning Lab - Minimal Dashboard (Final Fixed Version)
+"""Build an interactive web dashboard from any CSV file.
+
+Automation category: Data.
+
+Input   -> a path to a CSV file
+Process -> auto-pick a date/numeric/category column and build time-series,
+           distribution and category charts with plotly
+Output  -> a local Dash web app served at http://127.0.0.1:8050 (open it in a browser)
+
+Run it like:
+    uv run scripts/demos/data-dashboards/csv_dashboard.py scripts/demos/sample-data/data.csv
+
+Needs: nothing (no API key). Press Ctrl+C to stop the server.
 """
 
 import argparse

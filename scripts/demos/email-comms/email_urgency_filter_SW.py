@@ -3,17 +3,23 @@
 # dependencies = ["anthropic", "python-dotenv"]
 # ///
 
-"""
-SW_email_filter_urgency.py
-Student: SW - "Filtering emails for specific topics and levels of urgent replies req'd"
+"""Sort a batch of emails by urgency and topic using AI.
 
-This script demonstrates email filtering and urgency classification using AI.
-It simulates email data and uses AI to categorize emails by urgency level and topics.
+Student demo (SW): "Filtering emails for specific topics and levels of urgent replies req'd".
+Automation category: Web & comms + AI.
+
+Input   -> simulated emails (built into the script, no inbox connection needed)
+Process -> ask Claude to classify each email's urgency, topic and reasoning
+Output  -> a console triage report plus email_urgency_analysis.json
+
+Run it like:
+    uv run scripts/demos/email-comms/email_urgency_filter_SW.py
+
+Needs: ANTHROPIC_API_KEY in a .env file (without it, falls back to rule-based output).
 
 Key Learning Objectives:
-- Text analysis and classification
-- AI-powered content filtering
-- Data organization and reporting
+- AI-powered text classification and filtering
+- Organising results into a triage report
 - Email automation concepts
 """
 
@@ -154,7 +160,7 @@ class EmailUrgencyFilter:
             )
 
             # Parse the AI response
-            ai_analysis = json.loads(response.content[0].text)
+            _t = response.content[0].text; ai_analysis = json.loads(_t[_t.index("{") : _t.rindex("}") + 1])
             return ai_analysis
 
         except Exception as e:

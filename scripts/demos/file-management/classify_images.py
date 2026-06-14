@@ -1,33 +1,28 @@
 #!/usr/bin/env -S uv run -s
 # /// script
 # requires-python = ">=3.9"
+# dependencies = ["ollama"]
 # ///
 
-"""
-Simple image organizer that classifies images with Ollama and organizes them
-into category folders.
+"""Classify images into category folders using a local vision model (Ollama).
 
-Usage examples:
-  - Run and move files (default):
-      ./image_classification_usecases.py \
-        "/path/to/folder" \
+Automation category: File management + AI (local, no API key).
+
+Input   -> a folder of images and a list of categories
+Process -> show each image to the gemma4 vision model and ask which category it fits
+Output  -> images moved (or copied with --copy) into one subfolder per category
+
+Run it like:
+    # move files (default):
+    uv run scripts/demos/file-management/classify_images.py /path/to/images \
         --categories Screenshots Photos Documents Receipts Other
 
-  - Run and copy files instead of moving:
-      ./image_classification_usecases.py \
-        "/path/to/folder" \
-        --categories Screenshots Photos Documents Receipts Other \
-        --copy
+    # copy instead of move, into a custom output directory:
+    uv run scripts/demos/file-management/classify_images.py /path/to/images \
+        --categories Screenshots Photos --copy --output /path/to/organized-images
 
-  - Custom output directory:
-      ./image_classification_usecases.py \
-        "/path/to/folder" \
-        --categories Screenshots Photos \
-        --output "/path/to/organized-images"
-
-Note:
-  - Requires `ollama` and the `qwen2.5vl` model available locally.
-  - The model is prompted to output only the category name.
+Needs: `ollama` running locally with the `gemma4` model pulled (`ollama pull gemma4`).
+       No API key. Images it can't classify are placed in an "Uncategorized" folder.
 """
 
 from __future__ import annotations
@@ -36,9 +31,10 @@ import argparse
 import hashlib
 import os
 import shutil
-import subprocess
 from pathlib import Path
 from typing import Dict, Iterable, List, Tuple
+
+import ollama
 
 
 SUPPORTED_EXTENSIONS = {
@@ -63,18 +59,19 @@ def _short_file_hash(path: Path, length: int = 8) -> str:
 def _classify_with_ollama(image_path: Path, categories: List[str]) -> str:
     # Prompt asks the model to return ONLY the category name
     prompt = (
-        f"Classify this image in: '{image_path}' according to these categories: {categories}, "
-        "your output should ONLY be the category name and nothing else."
+        f"Classify this image according to these categories: {categories}. "
+        "Your output should ONLY be the category name and nothing else."
     )
     try:
-        result = subprocess.run(
-            ["ollama", "run", "gemma4", prompt],
-            capture_output=True,
-            text=True,
-            check=True,
+        # gemma4 is a multimodal model: the image is attached via `images=[...]`
+        # so the model actually sees the picture (not just its file path).
+        response = ollama.chat(
+            model="gemma4",
+            messages=[
+                {"role": "user", "content": prompt, "images": [str(image_path)]}
+            ],
         )
-        print(result)
-        raw = (result.stdout or "").strip()
+        raw = (response["message"]["content"] or "").strip()
         # Use the last non-empty line, stripped of extra punctuation/quotes
         candidate = "\n".join([line for line in raw.splitlines() if line.strip()]).splitlines()[-1].strip()
         candidate = candidate.strip("`\"' .:;!#[]{}()\t")

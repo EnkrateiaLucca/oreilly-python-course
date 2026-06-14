@@ -41,7 +41,11 @@ playwright install
   - `02-ai-apis/` - Working with AI services
   - `03-automation-projects/` - Real-world automation projects
   - `04-exercises/` - Practice problems and solutions
-- `scripts/` - Standalone Python automation scripts and utilities
+- `scripts/` - Automation examples and helpers:
+  - `demos/` - runnable example scripts grouped by category: `file-management/`, `pdf-documents/`, `data-dashboards/`, `email-comms/`, `media/` (plus `sample-data/` inputs)
+  - `lib/` - shared helpers the notebooks import (`ai_tools.py`, `demo_utils.py`)
+  - `archive/` - older / redundant student submissions kept for reference
+  - See `index-scripts.md` (repo root) for a one-line description of every script
 - `assets/` - Supporting files, sample data, and resources
 - `main.py` - Basic entry point (minimal functionality)
 
