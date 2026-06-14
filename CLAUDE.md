@@ -25,7 +25,6 @@ uv run --with jupyter jupyter lab
 
 ### Running Python scripts
 ```bash
-uv run python main.py
 uv run python scripts/<script_name>.py
 ```
 
@@ -36,14 +35,16 @@ playwright install
 
 ## Project Structure
 
-- `notebooks/` - Main course content organized in 4 sections:
-  - `01-python-fundamentals/` - Core Python concepts
-  - `02-ai-apis/` - Working with AI services
-  - `03-automation-projects/` - Real-world automation projects
-  - `04-exercises/` - Practice problems and solutions
-- `scripts/` - Standalone Python automation scripts and utilities
+- `notebooks/` - Main course content organized by training day:
+  - `day-1/` - Python fundamentals and a first look at AI APIs (`01-python-basics`, `02-working-with-data`, `03-packages-apis`, `04-ai-apis-overview`)
+  - `day-2/` - Automation projects (`03-automation-projects/`), practice problems (`04-exercises/`), and learning Python with AI (`05-how-to-learn-python/`)
+- `scripts/` - Automation examples and helpers:
+  - `demos/` - runnable example scripts grouped by category: `file-management/`, `pdf-documents/`, `data-dashboards/`, `email-comms/`, `media/` (plus `sample-data/` inputs)
+  - `lib/` - shared helpers the notebooks import (`ai_tools.py`, `demo_utils.py`)
+  - `archive/` - older / redundant student submissions kept for reference
+  - See `index-scripts.md` (repo root) for a one-line description of every script
+- `presentation/` - The course slide deck (`presentation.html`, a remark.js presentation)
 - `assets/` - Supporting files, sample data, and resources
-- `main.py` - Basic entry point (minimal functionality)
 
 ## Key Dependencies
 
@@ -55,13 +56,13 @@ playwright install
 ## Architecture Notes
 
 ### AI Tools Module
-The `scripts/ai_tools.py` module provides a unified interface for interacting with different AI providers:
+The `scripts/lib/ai_tools.py` module provides a unified interface for interacting with different AI providers:
 - `ask_ai()` - Works with OpenAI (default) and Anthropic models
 - `ask_local_ai()` - Works with local Ollama models
 - Automatically handles API client initialization
 
 ### Demo Utilities
-The `scripts/demo_utils.py` provides Jupyter notebook display utilities:
+The `scripts/lib/demo_utils.py` provides Jupyter notebook display utilities:
 - `display_chat_message()` - Formats chat messages for notebook display
 - `display_comparison()` - Shows side-by-side AI responses
 

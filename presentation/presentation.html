@@ -7,6 +7,7 @@
       @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
       @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
       @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap);
 
       body { font-family: 'Droid Serif'; }
       h1, h2, h3 {
@@ -14,6 +15,45 @@
         font-weight: normal;
       }
       .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .pull-left { float: left; width: 47%; }
+      .pull-right { float: right; width: 47%; }
+      .eyebrow { font-family: 'Ubuntu Mono'; text-transform: uppercase; letter-spacing: 0.18em; font-size: 0.5em; color: #9094a0; }
+      .callout { display: block; border-left: 3px solid #cfd3da; padding-left: 0.7em; color: #5f6368; font-style: italic; margin-top: 0.6em; }
+      table { border-collapse: collapse; margin: 0.5em 0; }
+      th { padding: 4px 22px 4px 0; text-align: left; border-bottom: 2px solid #d0d4da; }
+      td { padding: 4px 22px 4px 0; border-bottom: 1px solid #edeff2; }
+      .vibe { text-align: center; margin-top: 70px; }
+      .vibe code { font-family: 'Ubuntu Mono'; color: inherit; }
+      .flow { display: inline-flex; align-items: center; gap: 9px; margin-bottom: 2.4em; font-family: 'Yanone Kaffeesatz'; font-size: 0.82em; white-space: nowrap; }
+      .flow .chip { padding: 9px 17px; border-radius: 10px; color: #fff; background: #3d4a5c; box-shadow: 0 2px 5px rgba(0,0,0,0.14); }
+      .flow .chip.run { background: #27ae60; }
+      .flow .arrow { color: #c2c7cf; font-size: 0.95em; }
+      .decision { display: inline-block; border: 2px solid #27ae60; border-radius: 14px; padding: 16px 28px 20px; box-shadow: 0 5px 18px rgba(39,174,96,0.10); }
+      .decision-q { font-weight: bold; font-size: 1.05em; margin-bottom: 18px; }
+      .decision-cols { display: flex; gap: 16px; }
+      .decision .opt { flex: 1; min-width: 150px; padding: 12px 22px; border-radius: 10px; }
+      .decision .opt.no { background: #fdecec; }
+      .decision .opt.yes { background: #e9f7ef; }
+      .decision .opt-label { font-family: 'Yanone Kaffeesatz'; font-size: 1.35em; margin-bottom: 8px; }
+      .decision .opt.no .opt-label { color: #c0392b; }
+      .decision .opt.yes .opt-label { color: #1e8e4e; }
+      .decision .opt-body { color: #5f6368; font-size: 0.82em; line-height: 1.5; }
+      .diagram { font-family: 'JetBrains Mono', monospace; font-size: 0.5em; line-height: 1.3; display: inline-block; text-align: left; color: #2d3436; white-space: pre; margin: 0; }
+      .variant-tag { font-family: 'Ubuntu Mono'; color: #b0b4bb; font-size: 0.5em; margin-top: 1.4em; }
+      .vflow { display: flex; flex-direction: column; align-items: center; margin-top: 20px; font-family: 'Yanone Kaffeesatz'; }
+      .vflow .step { background: #3d4a5c; color: #fff; padding: 10px 38px; border-radius: 12px; font-size: 1.15em; box-shadow: 0 3px 9px rgba(0,0,0,0.15); }
+      .vflow .step.run { background: #27ae60; }
+      .vflow .step code, .vflow .card code { font-family: 'Ubuntu Mono'; color: inherit; }
+      .vflow .down { color: #5a6473; font-size: 0.95em; line-height: 1; margin: 4px 0; }
+      .vflow .solved { font-weight: bold; font-size: 1.22em; color: #b8860b; background: #fff7e6; border: 2px solid #f0a500; border-radius: 30px; padding: 7px 34px; box-shadow: 0 3px 11px rgba(240,165,0,0.16); }
+      .vflow .branch { display: flex; gap: 110px; }
+      .vflow .leg { display: flex; flex-direction: column; align-items: center; }
+      .vflow .leg-label { font-size: 1.3em; margin-top: 7px; }
+      .vflow .leg-label.no { color: #c0392b; }
+      .vflow .leg-label.yes { color: #1e8e4e; }
+      .vflow .card { padding: 10px 28px; border-radius: 11px; font-size: 1.02em; text-align: center; }
+      .vflow .card.no { background: #fdecec; color: #c0392b; }
+      .vflow .card.yes { background: #e9f7ef; color: #1e8e4e; }
       #source { display: none; }
     </style>
   </head>
@@ -42,7 +82,284 @@
 
         --
 
-        4. **Use Python scripts to integrate with external LLM APIs**  
+        4. **Use Python scripts to integrate with external LLM APIs**
+
+        ---
+        class: center, middle
+
+        # What Can — and Can't — Be Automated with Python?
+
+        ### Building intuition before writing code
+
+        ---
+
+        # Where we're going
+
+        **Part 1 — What Python _can_ do for you**
+        A framework for spotting automations in your own work.
+
+        **Part 2 — What Python _can't_ do for you**
+        A framework for avoiding expensive dead ends.
+
+        > The hard part of automation isn't the code.
+        > AI can write the code.
+        > The hard part is **seeing the automation**.
+
+        ---
+        class: center, middle
+
+        # Part 1
+        ## What can you automate?
+
+        ---
+
+        # The core mental model
+
+        Every automation is three things:
+
+        # `INPUT → PROCESS → OUTPUT`
+
+        Before writing any code, fill in three blanks.
+
+        | Blank        | Example                                        |
+        | ------------ | ---------------------------------------------- |
+        | **Input?**   | A folder, CSV, URL, PDF, clipboard, API call   |
+        | **Process?** | Rename, filter, extract, summarize, convert    |
+        | **Output?**  | A new file, a report, an email, a sheet row    |
+
+        ---
+
+        # Example — filled in
+
+        **Task:** "Rename all photos in a folder by the date they were taken."
+
+        - **Input:** a folder of photos
+        - **Process:** read each photo's EXIF date
+        - **Output:** renamed files in the same folder
+
+        If you can say it in one sentence like this, **you have a script**.
+
+        ---
+
+        # The sniff test — is it worth automating?
+
+        Four yes/no questions:
+
+        1. Do I do this **more than once**?
+        2. Are the steps **predictable**?
+        3. Does the input live somewhere a computer can **reach**?
+        4. Is the output something a computer can **produce**?
+
+        **4 yeses** → strong candidate
+        **2 or fewer** → not worth automating yet
+
+        > Twice is a coincidence. Three times is a script.
+
+        ---
+
+        # The five categories
+
+        Most beginner-friendly automations fall into one of these buckets.
+
+        | # | Category             | What it touches              |
+        | - | -------------------- | ---------------------------- |
+        | 1 | Files & folders      | Your filesystem              |
+        | 2 | Text & data          | Documents, tables, PDFs      |
+        | 3 | The web              | URLs, pages, public data     |
+        | 4 | App integrations     | Gmail, Slack, Notion, etc.   |
+        | 5 | AI-powered           | Language & judgment tasks    |
+
+        _A teaching shortcut, not an official taxonomy._
+
+        ---
+
+        # Category examples (1–3)
+
+        **1. Files & folders**
+        Rename 300 photos by date • Sort Downloads by file type • Zip-backup a folder every Friday
+
+        **2. Text & data**
+        Clean a CSV • Extract emails from a folder of PDFs • Convert `.docx` → Markdown
+
+        **3. The web**
+        Track a stock price daily • Scrape public headlines • Call a public API, save as spreadsheet
+
+        ---
+
+        # Category examples (4–5)
+
+        **4. App integrations**
+        Read unread Gmail and log subjects • Post a daily Slack summary • Sync calendar events into Notion
+
+        **5. AI-powered**
+        Summarize a folder of meeting notes • Classify incoming support emails • Turn voice memo transcripts into clean drafts
+
+        > Common thread in green-zone work: data is **reachable**, rules are **describable**, errors are **cheap**.
+
+        ---
+
+        # From idea to runnable script — 4 steps
+
+        1. **Write the one-sentence spec**
+          _"Take `<input>`, do `<process>`, produce `<output>`."_
+
+        2. **Ask an AI to draft it** (template on next slide)
+
+        3. **Run it**
+          `uv run python scripts/my_tool.py --input ./folder`
+
+        4. **Turn it into a CLI tool**
+          `argparse` + save to `scripts/` + a `--help` description
+
+        ---
+
+        # Reusable AI prompt template
+
+        ```
+        Write a Python script that:
+        - Takes <input> as input
+        - Does <process>
+        - Produces <output>
+
+        Make it runnable from the command line with argparse.
+        Use only the standard library unless you need <library>.
+        ```
+
+        Paste your one-sentence spec into the blanks. That's it.
+
+        ---
+
+        # Script → CLI tool
+
+        The jump students underestimate is **not** writing the code.
+        It's turning a one-off script into a reusable tool.
+
+        Three moves:
+
+        1. Replace hardcoded paths with `argparse` arguments
+        2. Save it to `scripts/` with a clear name
+        3. Add a one-line `--help` description
+
+        **That's the whole difference** between a script and a tool.
+
+        ---
+        class: center, middle
+
+        # Part 2
+        ## What Python _can't_ do for you
+
+        ---
+
+        # The core frame: the four R's
+
+        Before committing to automate something, ask:
+
+        | Question          | What it's really asking                                     |
+        | ----------------- | ----------------------------------------------------------- |
+        | **Reach?**        | Can my code get to the data and act on the system?          |
+        | **Rules?**        | Can I describe the logic in plain steps?                    |
+        | **Reliability?**  | Am I OK with occasional mistakes?                           |
+        | **Risk?**         | If it misfires, is the worst case recoverable?              |
+
+        The four answers sort every task into a zone.
+
+        ---
+
+        # Three zones
+
+        **■ GREEN** — Build it. Python is great at this.
+
+        **■ YELLOW** — Possible, but fragile. Build it small. Babysit it.
+
+        **■ RED** — Don't aim Python here. Keep a human in the loop.
+
+        ---
+
+        # **Green zone** — Python shines
+
+        - Moving data between files and formats (CSV ↔ JSON ↔ Excel, PDFs, logs)
+        - Talking to documented APIs (OpenAI, Anthropic, GitHub, Notion, Gmail)
+        - Scraping **public, static** web pages
+        - Running things on a schedule (backups, daily reports)
+        - LLM language tasks: summarize, classify, extract, rewrite
+        - Gluing tools together — "when X happens in A, write to B"
+
+        Common thread: **reachable, describable, cheap to get wrong.**
+
+        ---
+
+        # **Yellow zone** — possible, but fragile
+
+        - Scraping sites with logins, captchas, or heavy JavaScript
+        - Automating desktop apps by clicking buttons (breaks on every update)
+        - Parsing messy/inconsistent documents (scanned PDFs, wild emails)
+        - Anything that "mostly works" 90% of the time — when the other 10% matters
+        - Long chains of AI calls without verification steps
+
+        > Rule of thumb: **build it small, watch it run, expect to babysit.**
+
+        ---
+
+        # **Red zone** — wrong shape of problem
+
+        **Reach:** closed systems, 2FA/SSO with no API, mobile-only apps, physical tasks
+        **Rules:** tasks that need genuine human judgment every time
+        **Reliability:** near-perfect is required (medical, legal, safety)
+        **Risk:** irreversible or expensive failure (moving money, mass email, bulk delete)
+
+        > If any of the four R's lands in red, **keep the human in the loop** — or pick a smaller version of the task.
+
+        ---
+
+        # The AI-specific trap
+
+        Because this course uses AI heavily, two failure modes matter:
+
+        **1. Silent wrongness**
+        LLMs produce confident, fluent output even when it's wrong.
+
+        **2. Drift**
+        The same prompt can give different outputs on different days or model versions.
+
+        **Habit:** print the AI's output before you act on it — for the first dozen runs at least.
+
+        ---
+
+        # 30-second "which zone?" checklist
+
+        Before you build:
+
+        - [ ] I can **reach** the input without manual steps
+        - [ ] I can **describe the rules** in a paragraph
+        - [ ] I'm OK with occasional errors, or I have a way to catch them
+        - [ ] If the script misfires, the worst case is **easy to undo**
+
+        **4 checks** → build it
+        **3 checks** → build small, watch it run
+        **2 or fewer** → don't automate yet. Do it by hand and learn the shape first.
+
+        ---
+
+        # 5-minute exercise
+
+        1. Write down **three repetitive tasks** from your week
+        2. For each: fill in **Input → Process → Output**
+        3. For each: answer the **four R's** (reach, rules, reliability, risk)
+        4. Sort them: **green** / **yellow** / **red**
+        5. Build only the **green** ones this week
+        6. Write one sentence for each **red** one explaining _why_ it's red
+
+        That last sentence is often the most valuable thing you'll learn.
+
+        ---
+        class: center, middle
+
+        ## The real skill isn't Python.
+
+        ### It's instantly recognizing
+        ### what's automatable and what isn't —
+        ### and not wasting a weekend on a task
+        ### that was always in the red zone.
 
         ---
         class: center, middle
@@ -96,9 +413,6 @@
 
         <div style="display: flex; align-items: center;">
           <div style="flex: 1;">
-            <img src="../notebooks/assets/media/2025-02-01-17-23-04.png" width="45%">
-          </div>
-          <div style="flex: 1;">
             <pre><code class="python" style="font-size: 0.8em;"># Pancake Making Algorithm
 
             def make_pancake():
@@ -138,28 +452,28 @@
 
         # Automate Repetitive Tasks
 
-        <img src="../notebooks/assets/media/2025-11-19-10-22-11.png" width="100%">
+        <img src="../assets/media/2025-11-19-10-22-11.png" width="100%">
         
         ---
         class: center, middle
 
         # Increase Productivity
 
-        <img src="../notebooks/assets/media/2025-11-19-10-26-42.png" width="60%">
+        <img src="../assets/media/2025-11-19-10-26-42.png" width="60%">
             
         ---
         class: center, middle
 
         # Replacing Subscriptions (saving $)
 
-        <img src="../notebooks/assets/media/2025-11-19-10-32-14.png" width="60%">
+        <img src="../assets/media/2025-11-19-10-32-14.png" width="60%">
             
         ---
         class: center, middle
 
         # Analyse Massive Amounts of Data
 
-        <img src="../notebooks/assets/media/2025-11-19-10-32-52.png" width="80%">
+        <img src="../assets/media/2025-11-19-10-32-52.png" width="80%">
             
         ---
         class: center, middle
@@ -266,14 +580,14 @@
 
         # Scripting
 
-        <img src="../notebooks/assets/media/2025-11-19-11-02-07.png" width="100%">
+        <img src="../assets/media/2025-11-19-11-02-07.png" width="100%">
 
         ---
         class: center, middle
 
         # Software Engineering
 
-        <img src="../notebooks/assets/media/2026-04-14-software-engineering-graph.png" width="100%">
+        <img src="../assets/media/2026-04-14-software-engineering-graph.png" width="100%">
 
         ---
         # Scripting
@@ -302,7 +616,7 @@
 
         # Bulk YouTube Upload Automation
 
-        <img src="../notebooks/assets/media/2025-11-19-11-26-31.png" width="60%">
+        <img src="../assets/media/2025-11-19-11-26-31.png" width="60%">
 
         ???
         
@@ -317,7 +631,7 @@
 
         # Notes Processor
 
-        <img src="../notebooks/assets/media/2025-11-19-11-29-29.png" width="60%">
+        <img src="../assets/media/2025-11-19-11-29-29.png" width="60%">
 
         ???
         
@@ -337,14 +651,14 @@
         
         <div style="display: flex; align-items: center; justify-content: center;">
             <h1 style="margin-right: 20px;">Why Python?</h1>
-            <img src="../notebooks/assets/media/python-logo.svg" width="100px">
+            <img src="../assets/media/python-logo.svg" width="100px">
         </div>
 
         ---
 
         <div style="display: flex; align-items: left; ">
           <h1 style="margin-right: 20px;">What is Python?</h1>
-          <img src="../notebooks/assets/media/python-logo.svg" width="100px">
+          <img src="../assets/media/python-logo.svg" width="100px">
         </div>
 
         **Python** is a high-level, general-purpose programming language designed for readability and simplicity.
@@ -374,12 +688,12 @@
         ---
         <div style="display: flex; align-items: left; ">
           <h1 style="margin-right: 20px;">Python is Easy and Everywhere</h1>
-          <img src="../notebooks/assets/media/python-logo.svg" width="100px">
+          <img src="../assets/media/python-logo.svg" width="100px">
         </div>
 
         <div style="text-align: center;">
           <div style="display: inline-block; background: #f0f0f0; border-radius: 16px; padding: 16px;">
-            <img src="../notebooks/assets/media/2026-04-14-python-most-popular.png" width="100%" style="border-radius: 12px; display: block; max-width: 900px;">
+            <img src="../assets/media/2026-04-14-python-most-popular.png" width="100%" style="border-radius: 12px; display: block; max-width: 900px;">
           </div>
         </div>
 
@@ -387,7 +701,7 @@
 
         <div style="display: flex; align-items: left; ">
           <h1 style="margin-right: 20px;">Python is Easy and Everywhere</h1>
-          <img src="../notebooks/assets/media/python-logo.svg" width="100px">
+          <img src="../assets/media/python-logo.svg" width="100px">
         </div>
 
         - **General Purpose**: Can be used for web development, data science, automation, AI, and more
@@ -438,14 +752,14 @@
         # _The Ostrich Approach to Learning Python_
 
         <div style="text-align: center;">
-            <img src="../notebooks/assets/media/2025-01-31-16-24-34.png" width="30%">
+            <img src="../assets/media/2025-01-31-16-24-34.png" width="30%">
         </div>
 
         ---
         class: center, middle
 
         <div style="text-align: center;">
-          <img src="../notebooks/assets/media/2025-01-31-16-20-25.png" width="100%">
+          <img src="../assets/media/2025-01-31-16-20-25.png" width="100%">
         </div>
 
         ---
@@ -461,50 +775,30 @@
         ---
         class: center, middle
 
-        # The Busy Person Guide to Python Basics
+        # The Busy Person Guide to Python Basics 🐍
+
+        ### *Just enough Python to be dangerous.*
         
 
         ---
-        # Python Things We Will Learn
+        # What We'll Learn
 
-        - **Basic Syntax**: Indentation, variable assignments, printing  
+        We cover only what's needed to **automate**, and nothing more.
 
-        --
-        
-        - **Common Data Types**: Strings, integers, floats, booleans  
+        .pull-left[
+        **Syntax**: indentation, variables, printing
 
-        --
+        **Data types**: text, numbers, true / false
 
-        - **Control Structures**: `if` statements, loops (`for`, `while`)  
+        **Control flow**: `if`, `for`, `while`
+        ]
+        .pull-right[
+        **Libraries**: `os`, `csv`, `requests`
 
-        --
+        **A framework**: *when* and *how* to automate
 
-        - **Useful Libraries**: `os` for file operations, `csv` for handling CSVs, `requests` for making web requests  
-
-        --
-
-        - That is a lot! How can we manage?
-
-        --
-
-        - Use AI conversationally! Asking questions and clarifying what you don't know!
-
-        ---
-        # The "Just Ask AI" Naive Approach
-
-        --
-
-        <div style="display: flex; justify-content: center; align-items: center; margin-top: 150px;">
-          <img src="../notebooks/assets/media/2025-02-01-16-37-14.png" width="100%">
-        </div>
-
-        ---
-        # The "Just Ask AI" Naive Approach
-
-        <div style="display: flex; justify-content: center; align-items: center; margin-top: 120px;margin-left: 50px;">
-          <img src="../notebooks/assets/media/2025-02-01-16-47-17.png" width="125%">
-        </div>
-
+        **Intuition**: a feel for what's worth the effort
+        ]
         ---
         class: center, middle
 
@@ -515,65 +809,46 @@
         </h1>
         (Installing Python, uv, Editor, Jupyter Notebook, AI chatbot)
         <div style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
-          <img src="../notebooks/assets/media/qr-code-repo.png" width="200px">
+          <img src="../assets/media/qr-code-repo.png" width="200px">
         </div>
-
         ---
-        
+        # What You Need Installed
 
-        # Data Types, Operations, Variables
+        | Tool | Purpose |
+        | --- | --- |
+        | **Python** | the language itself |
+        | **uv** | fast package manager |
+        | **VS Code** | your editor |
+        | **Jupyter** | `uv run --with jupyter jupyter lab` |
+        | **An AI chatbot** | ChatGPT, Claude, or Gemini |
 
-        - Writing code is about writing text that changes or manipulates data in some way
-
-        --
-
-        -   <div style="display: flex; align-items: center;">
-                <div> For that we need? ..... (drumbroll)</div>
-                <div><img src="../notebooks/assets/media/2025-01-31-16-30-04.png" width="100px" style="margin-left: 10px;"></div>
-            </div>
-        
-        - **Data!** Specifically a way to describe it, reference it, talk about it etc...
-
-        --
-
-        - In Python data can be of different **types** (like numbers, text, image etc...)
-
-        --
-
-        - The things we can do to it are called **operations** (like 5+5)
-
-        --
-
-        - To organize things, we use **variables** to define what each thing is
-
+        .callout[Everything runs through `uv run`, so there's no manual environment activation.]
         ---
+        # Code Is Mostly Moving Data Around
 
-        # Data Types, Operations, Variables - Example
-        
-        - Here is a piece of code that defines a variable of some type
-        and performs a simple operation on the data stored in the variable
-        
-            ```python
-            # This is data of type string!
-            name = "Lucas"
-            
-            # This is data of type integer!
-            actual_age = 33
+        Nearly every program does one thing: **take data and change it.**
 
-            # This is data of type integer!
-            mental_age = 12
+        Three words carry the whole idea:
 
-            # our operation
-            average_age_between_actual_and_mental = (actual_age + mental_age) / 2
+        **Data**: the *stuff* itself (numbers, text, true / false)
 
-            # special function that displays what goes inside of it
-            print(average_age_between_actual_and_mental)
+        **Operations**: what you *do* to data, like `5 + 5`
 
-            # this would be a float!
-            # Output: 22.5
+        **Variables**: the *names* you give data, like `name = "Lucas"`, so you can reuse it later
+        ---
+        # Read Code Like a Sentence
 
-            ```
-        
+        ```python
+        name = "Lucas"        # a string  (text)
+        actual_age = 33       # an integer
+        mental_age = 12       # an integer
+
+        average = (actual_age + mental_age) / 2   # an operation
+
+        print(average)        # show the result  ->  22.5  (a float)
+        ```
+
+        Each line **names** a piece of data, then **does something** with it.
         ---
         class: center, middle
 
@@ -582,52 +857,40 @@
              Data Types; Operations; Variables - Demo
             </span>
         </h1>
-
         ---
-        
-        # Data Types, Operations, Variables 
+        # The Building Blocks
 
-        - **Core Data Types**: 
+        .pull-left[
+        **Data types**
 
-        --
-          
-            - **int**: whole nubmers like 1, 2, 3 ... 
-        
-        --
-            - **float**: decimal numbers like 1.1, 1.0, etc... 
+        | Type | Example |
+        | --- | --- |
+        | `int` | `1, 2, 3` |
+        | `float` | `1.5, 3.14` |
+        | `str` | `"Hello"` |
+        | `bool` | `True / False` |
+        ]
+        .pull-right[
+        **Operations**
 
-        --
-            - **string**: text like `'Hello'`
+        Arithmetic: `+  -  *  /  **  //  %`
 
-        --
-            - **bool**: logical booleans like True or False  
-        
-        --
-        
-        - **Operations**:
+        Concatenate: `"Lucas" + " rocks"`
 
-        --
-            
-            - **Arithmetic** `(`+`, `-`, `*`, `/`, `**`, `//`, `%`)`
+        Logical: `and   or   not`
 
-        --
-            - **String concatenation** (`'Lucas' + ' is' + ' wonderful' = 'Lucas is wonderful'`)
-
-        --
-            - **Logical operations** (`and`, `or`, `not`)
-
-        --
-            - **Comparison operations** (`>`, `<`, `>=`, `<=`, `==`, `!=`)
-        
+        Compare: `>   <   ==   !=`
+        ]
         ---
-        
-        - **Variables**: Storing data for reuse, assigning and reassigning values: 
-            ```python
-                a = 10
-                b = 20
-                print(a + b)
-                # Output: 30
-            ```
+        # Variables Are Named Values
+
+        Store a value once, then reach for it by name as often as you like.
+
+        ```python
+        a = 10
+        b = 20
+        print(a + b)   # 30
+        ```
         ---
         class: center, middle
 
@@ -637,149 +900,80 @@
             </span>
         </h1>
         ---
-
         # Functions
 
-        --
+        A function bundles steps that do **one job**, so you write them once.
 
-        - Functions are a way to group code that performs a specific task
-
-        --
-
-        - Functions can take parameters and return values
-
-        --
-
-        - For example, a function that calculates the total cost of an item including tax
-
-        --
-
-        - We could do this by simply writing a script:
-
-        --
+        Without one, you repeat yourself:
 
         ```python
-          # Arithmetic operation: multiplication of parameters
-          tax = price * tax_rate
-          # Arithmetic operation: addition of variables
-          total = price + tax
+        tax = price * tax_rate
+        total = price + tax
         ```
 
-        - But what if I want to re-use this code for different prices and tax rates?
-
+        .callout[...and you would write it again for every new price and tax rate.]
         ---
-
-        # Functions
-
-        - Here is what it would look like if we define a function to do this:
+        # Define Once, Reuse Anywhere
 
         ```python
-          def calculate_total(price, tax_rate):
-              tax = price * tax_rate
-              total = price + tax
-              return total
+        def calculate_total(price, tax_rate):
+            tax = price * tax_rate
+            return price + tax
         ```
 
-        --
-
-        - Now we can re-use the function for different prices and tax rates:
+        Same logic, different inputs:
 
         ```python
-          shirt_price = 10
-          shirt_tax_rate = 0.05
-          pants_price = 20
-          pants_tax_rate = 0.1
-          
-          print(calculate_total(shirt_price, shirt_tax_rate)) 
-          # Output: 10.5
-          print(calculate_total(pants_price, pants_tax_rate))
-          # Output: 22.0
+        calculate_total(10, 0.05)   # 10.5
+        calculate_total(20, 0.10)   # 22.0
         ```
-
         ---
+        # Anatomy of a Function
 
-        # Functions
+        ```python
+        def greet(name):            # a name and its parameters
+            return f"Hi, {name}!"    # hand a value back
+        ```
 
-        - **Why Functions?**: Reuse code and break tasks into smaller chunks  
-
-        --
-
-        - **Defining a Function**: `def function_name(parameters):`  
-
-        --
-
-        - **Return Values**: Make your functions flexible and reusable  
-
-        --
-
-        - **Best Practices**: Keep them short, descriptive, and single-purpose  
-
+        - **Why bother**: reuse logic, and split big tasks into small ones
+        - **Rule of thumb**: short, well-named, one job each
         ---
-        # Lists & Loops
+        # Lists
 
-        - **Lists**: Python’s go-to data structure for ordered collections  
-
-        --
-        
-        ```python
-          # Define a list of tasks
-          tasks = ["Buy groceries", "Finish project", "Call the bank"]
-        ```
-
-        - **Access Elements**: Indexing and slicing
-
-        --
-
-        ```python
-          print(tasks[0])
-          # Output: Buy groceries
-
-          print(tasks[1])
-          # Output: Finish project
-        ```
-
-        --
-
-        - **Slice**: Get a range of elements  
-
-        --
-
-        ```python
-          print(tasks[0:2])
-          # Output: ['Buy groceries', 'Finish project']
-        ```
-
-        ---
-
-        # Lists & Loops
-        
-        - **Loops**: `for` loops to iterate over items
-
-        --
+        An **ordered collection** of items.
 
         ```python
         tasks = ["Buy groceries", "Finish project", "Call the bank"]
+        ```
 
+        **Index**: reach one item (counting starts at `0`)
+
+        ```python
+        tasks[0]   # "Buy groceries"
+        tasks[1]   # "Finish project"
+        ```
+
+        **Slice**: reach a range
+
+        ```python
+        tasks[0:2]   # ['Buy groceries', 'Finish project']
+        ```
+        ---
+        # Loops
+
+        Run the **same step on every item**, instead of copy-pasting.
+
+        ```python
         for task in tasks:
             print(task)
         ```
-        
-        --
-
-        - **Processing List Elements**: With `for` loops we can perform the same operation on each element of the list
-
-        --
 
         ```python
-        # Below we use an imaginary function that asks a robot to do a task
         for task in tasks:
             ask_robot_to_do(task)
         ```
 
-        --
-
-        **Common Uses**: Batch renaming files in a directory, processing data from tables, etc...
-
+        .callout[Renaming files in a folder, or processing rows in a table: the same shape every time.]
         ---
         class: center, middle
 
@@ -788,117 +982,66 @@
              Demo - Dictionaries, Tabular Data, Conditionals
             </span>
         </h1>
-
         ---
-        # Dictionaries & Tabular Data
+        # Dictionaries
 
-        - **Dictionaries**: Key-value pairs for storing related data
-
-        --
+        Store data as **key / value** pairs, then look it up by name.
 
         ```python
-        # Dictionary of product prices
-        prices = {
-            "apple": 0.50,
-            "banana": 0.75,
-            "orange": 0.60
-        }
+        prices = {"apple": 0.50, "banana": 0.75, "orange": 0.60}
         ```
-
-        --
-
-        - **Accessing Values**: Use keys to lookup values quickly
-
-        --
 
         ```python
-        print(prices["apple"])
-        # Output: 0.50
-
-        print(prices["banana"]) 
-        # Output: 0.75
+        prices["apple"]    # 0.50
+        prices["banana"]   # 0.75
         ```
 
-        --
-
-        - **Common Uses**: Storing configurations, mapping relationships, caching data
-
+        .callout[Configs, lookups, caching: anywhere you want the value for a given key.]
         ---
-        # Comparators & Conditionals
+        # Comparisons Answer True or False
 
-        - **Boolean Comparisons**: `==`, `!=`, `>`, `<`, `>=`, `<=`  
+        .pull-left[
+        ```python
+        a, b = 10, 20
 
-        --
+        a == b   # False
+        a != b   # True
+        a < b    # True
+        a >= b   # False
+        ```
+        ]
+        .pull-right[
+        **Combine them with logic:**
 
         ```python
-        # Example of a boolean comparison
-        a = 10
-        b = 20
-        print(a == b)  # Output: False
-        print(a != b)  # Output: True
-        print(a > b)   # Output: False
-        print(a < b)   # Output: True
-        print(a >= b) # Output: False
-        print(a <= b) # Output: True
-
+        True and False   # False
+        True or False    # True
+        not True         # False
         ```
-
-        --
-        
-        - **Logical Operators**: `and`, `or`, `not`  
-
-        --
-
-        ```python
-        # Example of a logical operator
-        print(True and False)  # Output: False
-        print(True or False)   # Output: True
-        print(not True)         # Output: False
-        ```
-
+        ]
         ---
-        # Comparators & Conditionals
-        
-        - **Conditionals**: Using conditionals `if/elif/else` to perform different actions based on data  
+        # Conditionals Make Decisions
 
-        --
+        `if / elif / else` lets code choose a path based on the data.
 
         ```python
-        # Example of an if statement
         if a > b:
-            print("a is greater than b")
-        ```
-
-        --
-
-        ```python
-        # Example of an if/else statement
-        if a > b:
-            print("a is greater than b")
-        else:
-            print("a is less than or equal to b")
-        ```
-
-        --
-
-        ```python
-        # Example of an if/elif/else statement
-        if a > b:
-            print("a is greater than b")
+            print("a is bigger")
         elif a == b:
-            print("a is equal to b")
+            print("they're equal")
         else:
-            print("a is less than b")
+            print("b is bigger")
         ```
 
+        .callout[Reacting to data is the core of almost every automation.]
         ---
         class: center, middle
 
-        # Quick Knowledge Check! 🧠
+        # Poll Questions 🗳️
 
         ---
 
-        # Quiz Question 1
+        # Poll Question 1
 
         **What will this code output?**
 
@@ -920,7 +1063,7 @@
 
         ---
 
-        # Quiz Question 2
+        # Poll Question 2
 
         **What's wrong with this code?**
 
@@ -942,7 +1085,7 @@
 
         ---
 
-        # Quiz Question 3
+        # Poll Question 3
 
         **Fill in the blank to print each fruit:**
 
@@ -963,6 +1106,130 @@
         --
 
         **Explanation:** The `for` loop iterates through each item in the list, and `in` checks membership.
+
+        ---
+
+        # Poll Question 4
+
+        **What does this code print?**
+
+        ```python
+        def greet(name):
+            return "Hello, " + name + "!"
+
+        print(greet("Lucas"))
+        ```
+
+        --
+
+        **Answer:** `Hello, Lucas!`
+
+        --
+
+        **Explanation:** `greet` is *defined* with `def`, then *called* with `greet("Lucas")`. The argument `"Lucas"` fills the `name` parameter, and the function `return`s the assembled string, which `print` displays.
+
+        ---
+
+        # Poll Question 5
+
+        **What does this loop print?**
+
+        ```python
+        numbers = [2, 4, 6]
+        total = 0
+        for n in numbers:
+            total = total + n
+        print(total)
+        ```
+
+        --
+
+        **Answer:** `12`
+
+        --
+
+        **Explanation:** The `for` loop visits each item in the list once, adding it to `total` (2, then 6, then 12). After the loop finishes, `total` holds the sum of every element.
+
+        ---
+
+        # Poll Question 6
+
+        **What does this code print?**
+
+        ```python
+        name = "Lucas"
+        age = 33
+        print(f"{name} is {age} years old")
+        ```
+
+        --
+
+        **Answer:** `Lucas is 33 years old`
+
+        --
+
+        **Explanation:** An **f-string** (the `f` before the quotes) lets you drop variables directly inside `{ }`. Python replaces `{name}` and `{age}` with their values — no `+` or manual conversion needed.
+
+        ---
+
+        # Poll Question 7
+
+        **What is this code doing?**
+
+        ```python
+        from openai import OpenAI
+
+        client = OpenAI()
+        response = client.responses.create(
+            model="gpt-4o-mini",
+            input="Say hello in one word."
+        )
+        print(response.output_text)
+        ```
+
+        --
+
+        **Answer:** Sending a prompt to an AI model and printing its reply.
+
+        --
+
+        **Explanation:** We create a `client`, send our `input` (the prompt) to a `model`, and the AI sends back a `response`. This is the core input → process → output pattern for every AI API call.
+
+        ---
+
+        # Poll Question 8
+
+        **What's the safest way to read a file in Python?**
+
+        ```python
+        with open("notes.txt", "r") as f:
+            contents = f.read()
+        print(contents)
+        ```
+
+        --
+
+        **Answer:** Using `with open(...)` — it closes the file automatically.
+
+        --
+
+        **Explanation:** The `with` block opens the file, lets you `read()` it, then **closes it for you** even if something goes wrong. `"r"` means read mode; use `"w"` to write and `"a"` to append.
+
+        ---
+        # The "Just Ask AI" Naive Approach
+
+        --
+
+        <div style="display: flex; justify-content: center; align-items: center; margin-top: 150px;">
+          <img src="../assets/media/2025-02-01-16-37-14.png" width="100%">
+        </div>
+
+        ---
+        # The "Just Ask AI" Naive Approach
+
+        <div style="display: flex; justify-content: center; align-items: center; margin-top: 120px;margin-left: 50px;">
+          <img src="../assets/media/2025-02-01-16-47-17.png" width="125%">
+        </div>
 
         ---
         class: center, middle
@@ -1020,44 +1287,50 @@
 
         # What is an API?
 
-        **API** = Application Programming Interface
+        **API** = Application Programming Interface — a way for programs to talk to each other.
 
-        --
-
-        A way for different programs to communicate with each other.
-
-        --
-
-        **Think of it like a restaurant:**
-        - You (your code) look at the menu (API documentation)
-        - You tell the waiter (API) what you want
-        - The kitchen (external service) prepares it
-        - The waiter brings back your order (response)
-
-        --
-
-        **Real-World Example: Google Maps API**
-
-        <div style="text-align: center; margin-top: 20px;">
-          <div style="display: flex; justify-content: space-around; align-items: center;">
-            <div style="flex: 1; text-align: center;">
-              <p style="font-size: 1.2em;">🏨 <strong>Booking.com</strong></p>
-              <p style="font-size: 0.9em;">Shows hotel locations on map</p>
-            </div>
-            <div style="flex: 0.3; text-align: center;">
-              <p style="font-size: 2em;">→ 🗺️ ←</p>
-              <p style="font-size: 0.8em;">Google Maps API</p>
-            </div>
-            <div style="flex: 1; text-align: center;">
-              <p style="font-size: 1.2em;">🏠 <strong>Airbnb</strong></p>
-              <p style="font-size: 0.9em;">Shows property locations</p>
-            </div>
+        <div style="display: flex; justify-content: space-around; align-items: center; margin-top: 40px; text-align: center;">
+          <div style="flex: 1;">
+            <p style="font-size: 2em;">💻</p>
+            <p><strong>Your Code</strong></p>
+            <p style="font-size: 0.85em; color: #555;">sends a request</p>
+          </div>
+          <div style="flex: 0.5; font-size: 2em;">⇄</div>
+          <div style="flex: 1;">
+            <p style="font-size: 2em;">🔌</p>
+            <p><strong>API</strong></p>
+            <p style="font-size: 0.85em; color: #555;">the interface</p>
+          </div>
+          <div style="flex: 0.5; font-size: 2em;">⇄</div>
+          <div style="flex: 1;">
+            <p style="font-size: 2em;">☁️</p>
+            <p><strong>Service</strong></p>
+            <p style="font-size: 0.85em; color: #555;">does the work, sends back a response</p>
           </div>
         </div>
 
-        --
+        ---
 
-        Neither Booking nor Airbnb built their own mapping system—they just use Google's API!
+        # APIs in the Real World
+
+        Neither Booking.com nor Airbnb built their own maps — they just call Google's API.
+
+        <div style="display: flex; justify-content: space-around; align-items: center; margin-top: 40px; text-align: center;">
+          <div style="flex: 1;">
+            <p style="font-size: 2.5em;">🏨</p>
+            <p><strong>Booking.com</strong></p>
+            <p style="font-size: 0.85em; color: #555;">Shows hotel locations on map</p>
+          </div>
+          <div style="flex: 0.8; text-align: center;">
+            <p style="font-size: 1.5em; color: #888;">→ 🗺️ ←</p>
+            <p style="font-size: 0.8em; color: #888;">Google Maps API</p>
+          </div>
+          <div style="flex: 1;">
+            <p style="font-size: 2.5em;">🏠</p>
+            <p><strong>Airbnb</strong></p>
+            <p style="font-size: 0.85em; color: #555;">Shows property locations</p>
+          </div>
+        </div>
 
         ---
 
@@ -1244,6 +1517,40 @@
         **Perfect for vibe scripting!** → Learn more: https://docs.astral.sh/uv/guides/scripts/
 
         ---
+
+        # What is an Alias?
+
+        An **alias** is a shortcut name for a longer command.
+
+        Instead of typing:
+        ```
+        uv run ~/scripts/my_script.py
+        ```
+
+        You type:
+        ```
+        myscript
+        ```
+
+        You define it once — then it works every time you open a terminal.
+
+        ---
+
+        # Add an Alias — One Command
+
+        **Mac / Linux** — paste in Terminal:
+        ```bash
+        echo "alias myscript='uv run ~/scripts/my_script.py'" >> ~/.zshrc && source ~/.zshrc
+        ```
+
+        **Windows** — paste in PowerShell:
+        ```powershell
+        Add-Content $PROFILE "`nfunction myscript { uv run C:\scripts\my_script.py @args }" ; . $PROFILE
+        ```
+
+        > Replace `myscript` with the name you want, and the path with your script's path.
+
+        ---
         class: center, middle
 
         <h1>
@@ -1253,36 +1560,37 @@
         </h1>
 
         ---
+        class: center, middle
 
-        # The Vibe Scripting Workflow 🔄
+        # The Vibe Scripting Steps
 
-        <div style="text-align: center; margin-top: 40px;">
-          <div style="display: flex; align-items: center; justify-content: center; font-size: 1.5em; margin-bottom: 30px;">
-            <div style="margin: 0 0px;">🤖 <strong>AI</strong></div>
-            <div style="margin: 0 0px;">→</div>
-            <div style="margin: 0 0px;">💻 <strong>CODE</strong></div>
-            <div style="margin: 0 0px;">→</div>
-            <div style="margin: 0 0px;">📄 <strong>file.py</strong></div>
-            <div style="margin: 0 0px;">→</div>
-            <div style="margin: 0 0px;">⚡ <code>uv run file.py</code></div>
-            <div style="margin: 0 0px;">→</div>
-            <div style="margin: 0 0px;">👁️ <strong>Review</strong></div>
-          </div>
+        <div style="display: flex; justify-content: center; align-items: center; margin-top: 30px;">
+          <img src="../assets/media/vibe-scripting-workflow.png" width="90%">
+        </div>
 
-          <div style="margin-top: 50px; font-size: 1.2em;">
-            <div style="border: 3px solid #4CAF50; border-radius: 10px; padding: 20px; display: inline-block;">
-              <p style="margin: 10px 0;"><strong>Does it solve your problem?</strong></p>
-              <div style="display: flex; justify-content: space-around; margin-top: 20px;">
-                <div style="flex: 1; padding: 10px;">
-                  <p style="color: red; font-size: 1.3em;">❌ No</p>
-                  <p style="font-size: 0.9em;">→ Back to AI 🤖<br/>(refine & iterate)</p>
-                </div>
-                <div style="border-left: 2px solid #ccc;"></div>
-                <div style="flex: 1; padding: 10px;">
-                  <p style="color: green; font-size: 1.3em;">✅ Yes</p>
-                  <p style="font-size: 0.9em;">→ Done! 🎉<br/>(problem solved)</p>
-                </div>
-              </div>
+        ---
+        # The Vibe Scripting Workflow
+
+        <div class="vflow">
+          <div class="step">Describe the goal</div>
+          <div class="down">&#9660;</div>
+          <div class="step">AI generates code</div>
+          <div class="down">&#9660;</div>
+          <div class="step run"><code>uv run file.py</code></div>
+          <div class="down">&#9660;</div>
+          <div class="step">Review</div>
+          <div class="down">&#9660;</div>
+          <div class="solved">Solved?</div>
+          <div class="branch">
+            <div class="leg">
+              <div class="leg-label no">No</div>
+              <div class="down">&#9660;</div>
+              <div class="card no">refine &amp; loop to top &#8635;</div>
+            </div>
+            <div class="leg">
+              <div class="leg-label yes">Yes</div>
+              <div class="down">&#9660;</div>
+              <div class="card yes">ship it &#10003;</div>
             </div>
           </div>
         </div>
@@ -1306,30 +1614,15 @@
         # The AI Coding Upskilling Curve
 
         <div style="margin-top: 16px;">
-          <img src="../notebooks/assets/media/2026-04-14-ai-upskilling-curve.png" width="85%" style="border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+          <img src="../assets/media/2026-04-14-ai-upskilling-curve.png" width="85%" style="border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
         </div>
 
         ---
-
-        # The Conversational Learning Approach
-
-        - **Start with "I don't know Python, but I want to..."** and describe your goal
-
-        --
-
-        - **Ask for explanations**: "What does this line do?" or "Why do we use a for loop here?"
-
-        --
-
-        - **Request variations**: "Show me 3 different ways to do this" or "Make this simpler"
-
-        --
-
-        - **Build incrementally**: Start with tiny scripts, then ask "How do I add X to this?"
+        class: center, middle
 
         <h1>
-        <span style="background-color: lightgreen">
-         Demo - Conversational Learning with AI for Python
+        <span style="background-color: lightgreen;">
+          Demo - Conversational Learning with AI for Python
         </span>
         </h1>
 
@@ -1337,7 +1630,7 @@
 
         # File Management Automation
 
-        Most people's file systems are a graveyard of renamed screenshots, duplicates, and folders called "final_v2_ACTUAL". A few lines of Python can bring order to all of it.
+        Your Downloads folder has 2,000 files and you can't find anything. Python can sort, rename, and tidy all of it in seconds.
 
         --
 
@@ -1358,7 +1651,7 @@
 
         # PDF & Document Automation
 
-        PDFs are where structured data goes to die. Invoices, receipts, reports — the information is right there, just completely inaccessible. AI changes that.
+        You have 50 invoices to read and a spreadsheet to fill by hand. AI can pull every number out for you while you grab a coffee.
 
         --
 
@@ -1379,7 +1672,7 @@
 
         # Data & Dashboards
 
-        Data analysis doesn't have to mean opening Excel every time. Python can fetch, clean, and visualise data automatically — and even interpret it with AI.
+        You rebuild the same Excel chart every Monday morning. Python can fetch the data, refresh the charts, and even explain the trends for you.
 
         --
 
@@ -1398,30 +1691,9 @@
 
         ---
 
-        # Browser Automation
-
-        Anything done manually in a browser can be scripted. Login flows, form submissions, scraping pages that block normal requests — Playwright handles all of it.
-
-        --
-
-        - **Automate timesheets** — open the site, fill the form, submit, done
-
-        --
-
-        - **Scrape Letterboxd reviews** and summarise them with AI
-
-        --
-
-        - **Extract IMDB data** — search, navigate, and pull structured results
-
-        <br><br>
-        <h2 style="text-align: center"><span style="background-color: lightgreen">`scripts/demos/browser-automation`</span></h2>
-
-        ---
-
         # Email & Comms Automation
 
-        Inboxes and meeting notes are full of signal buried in noise. AI is surprisingly good at reading through all of it and surfacing what actually matters.
+        You open 80 unread emails every morning trying to spot the urgent ones. AI can read them all and hand you a two-line triage list.
 
         --
 
@@ -1458,31 +1730,76 @@
 
         # Using AI != Slop
 
-        *Slop is using unreviewed output (like code) from AI models*
-
         <div style="text-align: center;">
-          <img src="../notebooks/assets/media/2025-02-02-11-50-55.png" width="80%">
+          <img src="../assets/media/2025-02-02-11-50-55.png" width="80%">
         </div>
+
+        *Slop comes from vague prompts and zero review — not from using AI*
 
         ---
         # Using AI != Slop
 
-        1. Working with AI involves having a system for effectively reviewing high quality outputs
+        1. **Slop comes from vague prompts; craft comes from specific, capability-aware prompts.** Name the libraries, the input, and the exact behavior:
+
+           > *"Write me a Python CLI tool using Click and boto3 which takes a URL of that form and then uses EVERY single boto3 trick in the book to try and debug why the file is returning a 404."* — Simon Willison
 
         --
 
-        2. Means having good systems for generating good outputs on the first place
+        2. **Encode your conventions once** — reusable context beats one-off prompting. Save your standards in a Claude Project / system prompt so every output inherits them.
 
         --
 
-        3. Then learning to put in place a procedure for effective review and feedback on top of the outputs you get
+        3. **Ship self-contained, runnable artifacts** — the same `uv run` + inline-dependency pattern this course already teaches means anyone can run your script with zero setup.
 
         --
 
-        4. **If it fixes your problem, it's working!**
-           - The goal is to solve YOUR specific problem
-           - Perfection is the enemy of done
-           - A working automation that saves you time is better than a "perfect" solution that never ships
+        4. **You own what you run.** As Willison puts it, others can run your script *"provided you trust me not to have replaced the script with something malicious."* AI output is a draft **you** are accountable for.
+
+        ---
+
+        # Red → Green: Tell the AI Exactly What "Done" Means
+
+        Write the check **first**, then let AI fill in the code.
+
+        --
+
+        - **RED**: write a test that describes the result you want — run it, watch it fail.
+
+        --
+
+        - **GREEN**: ask the AI to write code until the test passes.
+
+        --
+
+        - **Why**: a failing test first is a clear instruction the AI can't fudge — it stops the AI from "writing code that doesn't work, or ... unnecessary ... or both."
+
+        > A "test" is just a tiny piece of code that says: *if my function works, this should be true.*
+
+        ---
+
+        # A 6-Line Example Beginners Can Read
+
+        No framework needed — just a plain `assert`:
+
+        ```python
+        # RED: describe what "done" looks like
+        # (this fails — get_headers doesn't exist yet)
+        def test_get_headers():
+            md = "# Title\n\nsome text\n## Section"
+            assert get_headers(md) == ["Title", "Section"]
+
+        test_get_headers()  # run it -> error = RED
+        ```
+
+        --
+
+        Then the prompt to the AI:
+
+        > *"Build a Python function `get_headers(markdown)` that returns the header text. Use red/green TDD."*
+
+        --
+
+        Once `test_get_headers()` runs with **no error**, you're **GREEN** — and you keep the test forever as a safety net. 🟢
 
         ---
 
