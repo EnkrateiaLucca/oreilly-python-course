@@ -3,7 +3,6 @@
 # requires-python = ">=3.11"
 # dependencies = [
 #     "requests",
-#     "sqlite3",
 #     "pandas",
 #     "python-dotenv",
 #     "beautifulsoup4",

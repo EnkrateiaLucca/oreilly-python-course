@@ -2,12 +2,11 @@
 # requires-python = ">=3.12"
 # ///
 
-import os
+import argparse
 import shutil
 from pathlib import Path
-import sys
 
-def organize_files_in_folder(folder_path):
+def organize_files_in_folder(folder_path, apply=False):
     """
     Organize files in the given folder into three subfolders:
     - documents: .md, .txt, .pdf
@@ -16,7 +15,8 @@ def organize_files_in_folder(folder_path):
 
     Only top-level files in folder_path are moved (subfolders are left intact).
     If a filename conflict occurs in the destination folder, a numeric suffix is added.
-    Returns a success message with counts of moved files.
+    By default this is a dry run that only reports what would move; pass apply=True
+    to actually move the files. Returns a summary message with counts.
     """
     folder = Path(folder_path)
 
@@ -32,8 +32,9 @@ def organize_files_in_folder(folder_path):
     media_dir = folder / "media"
     others_dir = folder / "others"
 
-    for d in (documents_dir, media_dir, others_dir):
-        d.mkdir(exist_ok=True)
+    if apply:
+        for d in (documents_dir, media_dir, others_dir):
+            d.mkdir(exist_ok=True)
 
     moved_counts = {"documents": 0, "media": 0, "others": 0}
 
@@ -72,17 +73,35 @@ def organize_files_in_folder(folder_path):
                     break
                 counter += 1
 
-        # Move the file
-        try:
-            shutil.move(str(entry), str(dest_path))
+        # Move the file (or just report it in dry-run mode)
+        if apply:
+            try:
+                shutil.move(str(entry), str(dest_path))
+                moved_counts[key] += 1
+            except Exception as e:
+                # If a file couldn't be moved, continue with others
+                print(f"Warning: could not move '{entry.name}': {e}")
+        else:
             moved_counts[key] += 1
-        except Exception as e:
-            # If a file couldn't be moved, continue with others
-            print(f"Warning: could not move '{entry.name}': {e}")
+            print(f"Would move '{entry.name}' -> {key}/")
 
-    return (f"Files organized successfully. Moved {moved_counts['documents']} to 'documents', "
+    verb = "Moved" if apply else "Would move"
+    return (f"{verb} {moved_counts['documents']} file(s) to 'documents', "
             f"{moved_counts['media']} to 'media', and {moved_counts['others']} to 'others'.")
 
-organized_files = organize_files_in_folder("/Users/greatmaster/Desktop/projects/oreilly-live-trainings/oreilly-python-course/assets")
 
-print(organized_files)
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(
+        description="Sort the top-level files of a folder into documents/ media/ others/."
+    )
+    parser.add_argument("folder", help="Folder to organize")
+    parser.add_argument(
+        "--apply",
+        action="store_true",
+        help="Actually move the files (default is a dry run that only reports)",
+    )
+    args = parser.parse_args()
+
+    print(organize_files_in_folder(args.folder, apply=args.apply))
+    if not args.apply:
+        print("\nDry run only - re-run with --apply to actually move the files.")
