@@ -8,13 +8,16 @@
 """Fetch today's top Hacker News stories and turn them into an AI briefing.
 
 Automation category: Web / API + AI.
+
 Input   -> the public Hacker News API (top story titles + links)
 Process -> ask an LLM to group the headlines and write a short briefing
 Output  -> a markdown briefing printed to the terminal
 
 Run it like:
-    uv run scripts/summarize_hacker_news.py
-    uv run scripts/summarize_hacker_news.py --limit 15
+    uv run scripts/demos/email-comms/news_briefing.py
+    uv run scripts/demos/email-comms/news_briefing.py --limit 15
+
+Needs: OPENAI_API_KEY (set in your environment) and an internet connection.
 """
 
 import argparse

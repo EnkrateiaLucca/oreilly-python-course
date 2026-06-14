@@ -3,19 +3,25 @@
 # dependencies = ["anthropic", "python-dotenv", "pandas", "matplotlib"]
 # ///
 
-"""
-VK_log_analyzer.py
-Student: VK - "Auto log analysis of ECU results"
+"""Analyse ECU (vehicle Electronic Control Unit) logs for anomalies with AI.
 
-This script demonstrates automated analysis of ECU (Electronic Control Unit) logs
-to identify patterns, anomalies, and potential issues using AI and statistical analysis.
+Student demo (VK): "Auto log analysis of ECU results".
+Automation category: Data + AI.
+
+Input   -> simulated ECU log data (generated inside the script, no file needed)
+Process -> find patterns/anomalies with pandas, then ask Claude to interpret them
+Output  -> a console report, a chart (ecu_analysis_dashboard.png) and ecu_analysis_results.json
+
+Run it like:
+    uv run scripts/demos/data-dashboards/analyze_logs_VK.py
+
+Needs: ANTHROPIC_API_KEY in a .env file (without it, falls back to rule-based output).
 
 Key Learning Objectives:
-- Log file parsing and processing
+- Log parsing and processing
 - Pattern recognition in time-series data
 - Anomaly detection techniques
-- Automated alerting and reporting
-- Statistical analysis of automotive data
+- AI-powered interpretation and reporting
 """
 
 import os
@@ -344,12 +350,12 @@ class ECULogAnalyzer:
             # Make API call to Anthropic
             response = self.ai_client.messages.create(
                 model="claude-sonnet-4-5",
-                max_tokens=2000,
+                max_tokens=8192,
                 messages=[{"role": "user", "content": prompt}]
             )
 
             # Parse the AI response
-            ai_analysis = json.loads(response.content[0].text)
+            _t = response.content[0].text; ai_analysis = json.loads(_t[_t.index("{") : _t.rindex("}") + 1])
             return ai_analysis
 
         except Exception as e:

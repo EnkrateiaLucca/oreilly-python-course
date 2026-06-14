@@ -9,22 +9,18 @@
 #   "tabulate>=0.9.0",
 # ]
 # ///
-"""
-chat_with_pdfs_extract.py
+"""Chat with a PDF in the terminal and extract a table from it as CSV.
 
-A standalone terminal chat app that:
+Automation category: Documents + AI.
 
-1) Loads a PDF into memory (raw text + detected tables).
-2) Asks the user what to extract.
-3) Confirms the extraction request.
-4) Uses GPT-5 via the OpenAI Responses API to produce a CSV.
-5) Previews the CSV and saves it locally on approval.
+Input   -> a PDF file (raw text + detected tables are loaded into memory)
+Process -> you describe what to extract; GPT-5 (OpenAI Responses API) builds a CSV
+Output  -> a CSV preview in the terminal, saved to a file when you approve it
 
-Run:
-  uv run chat_with_pdfs_extract.py /path/to/file.pdf
+Run it like:
+    uv run scripts/demos/pdf-documents/chat_with_pdf.py scripts/demos/sample-data/paper.pdf
 
-Requires:
-  export OPENAI_API_KEY="sk-..."
+Needs: OPENAI_API_KEY exported in your environment. Interactive: run it in a real terminal.
 """
 from __future__ import annotations
 

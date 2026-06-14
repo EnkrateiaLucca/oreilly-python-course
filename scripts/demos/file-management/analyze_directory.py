@@ -10,6 +10,21 @@
 #     "numpy>=1.24.0"
 # ]
 # ///
+"""Analyse a directory by file type and size, with tables and a chart.
+
+Automation category: File management.
+
+Input   -> a path to a folder (scanned recursively)
+Process -> collect each file's type/size/date into a table with pandas
+Output  -> summary tables in the console and a chart saved as dir_analysis.png
+           (pass a second argument to also save a CSV inventory)
+
+Run it like:
+    uv run scripts/demos/file-management/analyze_directory.py ~/Downloads
+    uv run scripts/demos/file-management/analyze_directory.py ~/Downloads save
+
+Needs: nothing (no API key).
+"""
 
 import os
 import pandas as pd

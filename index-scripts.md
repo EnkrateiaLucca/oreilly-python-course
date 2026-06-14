@@ -1,46 +1,42 @@
 # Index of Course Examples
 
-Numbers reflect relevancy within each category — lower = more essential.
+Each script is self-contained and runnable with `uv` (inline dependencies):
+
+```bash
+uv run scripts/demos/<category>/<script>.py [arguments]
+```
+
+Shared helpers the notebooks import live in `scripts/lib/`. Sample inputs live in
+`scripts/demos/sample-data/`. Older / redundant student submissions are kept in
+`scripts/archive/`.
 
 ---
 
 ## File Management (`scripts/demos/file-management`)
 
-- [`1_file_organizer.py`](scripts/demos/file-management/1_file_organizer.py) — Organise a messy folder automatically by file type
-- [`2_file_backup.py`](scripts/demos/file-management/2_file_backup.py) — Automated folder backup with timestamped archives
-- [`3_file_image_classifier.py`](scripts/demos/file-management/3_file_image_classifier.py) — Categorise images in a folder using AI vision
-- [`4_file_dir_analysis.py`](scripts/demos/file-management/4_file_dir_analysis.py) — Analyse a directory by file type and generate a summary visual
-- [`5_LA_file_organizer.py`](scripts/demos/file-management/5_LA_file_organizer.py) — Automatically sort files into subfolders by type and date
+- [`organize_folder.py`](scripts/demos/file-management/organize_folder.py) — Sort a messy folder into subfolders by file type (dry-run by default, `--apply` to move)
+- [`classify_images.py`](scripts/demos/file-management/classify_images.py) — Categorise images into folders using a local Ollama vision model (no API key)
+- [`analyze_directory.py`](scripts/demos/file-management/analyze_directory.py) — Analyse a directory by type/size and generate tables plus a summary chart
 
 ## PDF / Documents (`scripts/demos/pdf-documents`)
 
-- [`1_pdf_summarizer.py`](scripts/demos/pdf-documents/1_pdf_summarizer.py) — Summarise any PDF in one command
-- [`2_pdf_receipt_extractor.py`](scripts/demos/pdf-documents/2_pdf_receipt_extractor.py) — Parse receipt images/PDFs into structured data
-- [`3_pdf_invoice_extractor.py`](scripts/demos/pdf-documents/3_pdf_invoice_extractor.py) — Extract structured fields from invoice PDFs with AI
-- [`4_pdf_paper_summarizer.py`](scripts/demos/pdf-documents/4_pdf_paper_summarizer.py) — Download arXiv papers and produce AI summaries
-- [`5_pdf_chat.py`](scripts/demos/pdf-documents/5_pdf_chat.py) — Chat interactively with any PDF using AI
+- [`summarize_document.py`](scripts/demos/pdf-documents/summarize_document.py) — Summarise any PDF or text file in one command
+- [`extract_receipt_fields.py`](scripts/demos/pdf-documents/extract_receipt_fields.py) — Pull typed fields (company, date, amount) out of text with a Pydantic schema
+- [`chat_with_pdf.py`](scripts/demos/pdf-documents/chat_with_pdf.py) — Interactive terminal chat that extracts a CSV from a PDF on request
 
 ## Data / Dashboards (`scripts/demos/data-dashboards`)
 
-- [`1_stock_dashboard.py`](scripts/demos/data-dashboards/1_stock_dashboard.py) — Download and analyse stock price data with pandas/matplotlib
-- [`2_JG_api_data_storage.py`](scripts/demos/data-dashboards/2_JG_api_data_storage.py) — Fetch data from a public API and persist it in a SQLite database
-- [`3_csv_dashboard.py`](scripts/demos/data-dashboards/3_csv_dashboard.py) — Build an interactive data dashboard from any CSV
-- [`4_PL_etl_pipeline.py`](scripts/demos/data-dashboards/4_PL_etl_pipeline.py) — ETL pipeline: validate, transform, and load CSV data with pandas
-- [`5_VK_log_analyzer.py`](scripts/demos/data-dashboards/5_VK_log_analyzer.py) — Analyse log files with AI and produce matplotlib charts
-
-## Browser Automation (`scripts/demos/browser-automation`)
-
-- [`1_BD_timesheet_automation.py`](scripts/demos/browser-automation/1_BD_timesheet_automation.py) — Fill in and submit timesheets automatically via Playwright
-- [`2_browser_letterboxd_watchlist.py`](scripts/demos/browser-automation/2_browser_letterboxd_watchlist.py) — Add a movie to a Letterboxd watchlist via Playwright
-- [`3_browser_letterboxd_reviews.py`](scripts/demos/browser-automation/3_browser_letterboxd_reviews.py) — Scrape movie reviews from Letterboxd and summarise with AI
-- [`4_browser_imdb.py`](scripts/demos/browser-automation/4_browser_imdb.py) — Search and extract movie/show data from IMDB via browser automation
-- [`5_browser_secure_login.py`](scripts/demos/browser-automation/5_browser_secure_login.py) — Demonstrate safe browser login automation with spoofed user-agent
-
-
+- [`csv_dashboard.py`](scripts/demos/data-dashboards/csv_dashboard.py) — Build an interactive web dashboard from any CSV
+- [`api_to_database_JG.py`](scripts/demos/data-dashboards/api_to_database_JG.py) — Fetch data from public APIs and persist it in a local SQLite database
+- [`analyze_logs_VK.py`](scripts/demos/data-dashboards/analyze_logs_VK.py) — Analyse log files with AI and produce matplotlib charts
+- [`compare_excel_sheets.py`](scripts/demos/data-dashboards/compare_excel_sheets.py) — Compare two Excel sheets and highlight every changed cell
 
 ## Email / Comms (`scripts/demos/email-comms`)
 
-- [`1_AH_news_summarizer.py`](scripts/demos/email-comms/1_AH_news_summarizer.py) — Fetch RSS news feeds and summarise headlines with Anthropic AI
-- [`2_SW_email_urgency_filter.py`](scripts/demos/email-comms/2_SW_email_urgency_filter.py) — Classify incoming emails by urgency level using Anthropic AI
-- [`3_MM_email_subscriptions.py`](scripts/demos/email-comms/3_MM_email_subscriptions.py) — Manage and unsubscribe from email lists via IMAP
-- [`4_VN_user_test_summarizer.py`](scripts/demos/email-comms/4_VN_user_test_summarizer.py) — Summarise user testing session notes with Anthropic AI
+- [`news_briefing.py`](scripts/demos/email-comms/news_briefing.py) — Fetch top Hacker News stories and turn them into an AI briefing
+- [`email_urgency_filter_SW.py`](scripts/demos/email-comms/email_urgency_filter_SW.py) — Classify messages by urgency and topic with AI (runs on simulated data)
+- [`summarize_user_research_VN.py`](scripts/demos/email-comms/summarize_user_research_VN.py) — Summarise user-research / test notes into structured insights with AI
+
+## Media (`scripts/demos/media`)
+
+- [`transcribe_audio.py`](scripts/demos/media/transcribe_audio.py) — Transcribe an audio file to text locally with faster-whisper (no API key)

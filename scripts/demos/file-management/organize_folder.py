@@ -4,14 +4,18 @@
 """Organize a messy folder by sorting files into subfolders by type.
 
 Automation category: File management.
+
 Input   -> a folder full of mixed files
 Process -> decide a destination subfolder from each file's extension
 Output  -> files moved into documents/ PDFs/ images/ data/
 
 Safe by default: it only PREVIEWS the moves. Pass --apply to actually move files.
+
 Run it like:
-    uv run scripts/organize_downloads_folder.py ~/Downloads
-    uv run scripts/organize_downloads_folder.py ~/Downloads --apply
+    uv run scripts/demos/file-management/organize_folder.py ~/Downloads
+    uv run scripts/demos/file-management/organize_folder.py ~/Downloads --apply
+
+Needs: nothing (no API key).
 """
 
 import argparse

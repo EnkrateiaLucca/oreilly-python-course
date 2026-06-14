@@ -2,6 +2,19 @@
 # requires-python = ">=3.12"
 # dependencies = ["openai", "pypdf"]
 # ///
+"""Summarise a PDF, text or Markdown file into bullet points with AI.
+
+Automation category: Documents + AI.
+
+Input   -> a path to a .pdf, .txt or .md file
+Process -> read/extract the text, then ask GPT to compress it into bullet points
+Output  -> the summary printed to the console
+
+Run it like:
+    uv run scripts/demos/pdf-documents/summarize_document.py scripts/demos/sample-data/paper.pdf
+
+Needs: OPENAI_API_KEY exported in your environment.
+"""
 
 from openai import OpenAI # for accessing the model to do summarization
 from pypdf import PdfReader
@@ -75,10 +88,8 @@ def llm_call(prompt: str) -> str:
     return text_output
 
     
-# Example inputs live in the assets/ folder:
-# file_path_pdf = "../assets/paper.pdf"
-# file_path_txt = "../assets/aie-schedule.txt"
-# file_path_md  = "../assets/aie-schedule.md"
+# Example input lives in the sample-data/ folder:
+# file_path_pdf = "../sample-data/paper.pdf"
 
 file_path = sys.argv[1]
 print(f"File path given as input: {file_path}")

@@ -3,18 +3,24 @@
 # dependencies = ["anthropic", "python-dotenv", "pandas"]
 # ///
 
-"""
-VN_user_test_summarizer.py
-Student: VN - "summarizing common pain points in user tests"
+"""Summarise user-testing feedback into common pain points with AI.
 
-This script demonstrates automated analysis of user testing feedback to identify
-common pain points, themes, and actionable insights using AI.
+Student demo (VN): "summarizing common pain points in user tests".
+Automation category: Web & comms + AI.
+
+Input   -> simulated user-test feedback (built into the script, no file needed)
+Process -> ask Claude to cluster the feedback into themes and pain points
+Output  -> a console report, user_pain_points.csv and user_test_analysis.json
+
+Run it like:
+    uv run scripts/demos/email-comms/summarize_user_research_VN.py
+
+Needs: ANTHROPIC_API_KEY in a .env file (without it, falls back to rule-based output).
 
 Key Learning Objectives:
-- Text analysis and pattern recognition
-- User feedback processing
-- AI-powered insight extraction
-- Data aggregation and reporting
+- AI-powered insight extraction from free text
+- Clustering feedback into themes
+- Aggregating results into reports and a CSV
 """
 
 import os
@@ -263,12 +269,12 @@ class UserTestSummarizer:
             # Make API call to Anthropic
             response = self.ai_client.messages.create(
                 model="claude-sonnet-4-5",
-                max_tokens=2000,
+                max_tokens=8192,
                 messages=[{"role": "user", "content": prompt}]
             )
 
             # Parse the AI response
-            ai_analysis = json.loads(response.content[0].text)
+            _t = response.content[0].text; ai_analysis = json.loads(_t[_t.index("{") : _t.rindex("}") + 1])
             return ai_analysis
 
         except Exception as e:

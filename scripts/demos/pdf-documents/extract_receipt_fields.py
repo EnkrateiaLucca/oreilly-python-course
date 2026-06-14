@@ -2,6 +2,19 @@
 # requires-python=">=3.12"
 # dependencies=["openai","pydantic"]
 # ///
+"""Extract typed fields from a receipt's text using a Pydantic schema.
+
+Automation category: Documents + AI.
+
+Input   -> a text file containing the contents of a receipt
+Process -> ask GPT to fill a Pydantic schema (company, date, amount) from the text
+Output  -> the extracted, typed fields printed to the console
+
+Run it like:
+    uv run scripts/demos/pdf-documents/extract_receipt_fields.py receipt.txt
+
+Needs: OPENAI_API_KEY exported in your environment.
+"""
 
 from pydantic import BaseModel, Field
 from openai import OpenAI
