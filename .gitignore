@@ -159,6 +159,7 @@ proposal_remark_cli.py
 proposal_remark_walkthrough_lucas.md
 scripts/remark_cli.py
 scripts/remark_walkthrough_lucas.md
+remark-demo/
 
 # Excel temp lock files
 ~$*.xlsx

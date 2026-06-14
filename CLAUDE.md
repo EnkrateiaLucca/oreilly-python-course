@@ -55,13 +55,13 @@ playwright install
 ## Architecture Notes
 
 ### AI Tools Module
-The `scripts/ai_tools.py` module provides a unified interface for interacting with different AI providers:
+The `scripts/lib/ai_tools.py` module provides a unified interface for interacting with different AI providers:
 - `ask_ai()` - Works with OpenAI (default) and Anthropic models
 - `ask_local_ai()` - Works with local Ollama models
 - Automatically handles API client initialization
 
 ### Demo Utilities
-The `scripts/demo_utils.py` provides Jupyter notebook display utilities:
+The `scripts/lib/demo_utils.py` provides Jupyter notebook display utilities:
 - `display_chat_message()` - Formats chat messages for notebook display
 - `display_comparison()` - Shows side-by-side AI responses
 
