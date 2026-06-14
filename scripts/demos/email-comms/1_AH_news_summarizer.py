@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # /// script
-# dependencies = ["requests", "lxml_html_clean", "beautifulsoup4", "anthropic", "python-dotenv", "feedparser", "newspaper3k"]
+# dependencies = ["requests", "beautifulsoup4", "anthropic", "python-dotenv", "feedparser"]
 # ///
 
 """
@@ -31,7 +31,6 @@ import anthropic
 # News processing libraries
 import feedparser
 from bs4 import BeautifulSoup
-from newspaper import Article
 
 # Load environment variables
 load_dotenv()
@@ -152,31 +151,30 @@ class NewsCollector:
 
     def extract_article_content(self, article: Dict[str, Any]) -> Dict[str, Any]:
         """
-        Extract full content from a news article URL.
+        Fetch an article page and pull out its readable text.
+
+        We keep this deliberately simple: download the HTML with requests and let
+        BeautifulSoup give us the visible paragraph text. If anything goes wrong
+        (paywall, timeout, non-article page) we fall back to the RSS description,
+        which is always good enough to summarize.
 
         Args:
-            article: Article dictionary with URL
+            article: Article dictionary with a URL
 
         Returns:
-            Article dictionary with extracted content
+            Article dictionary with its "content" field filled in
         """
 
         try:
-            # Use newspaper3k for content extraction
-            news_article = Article(article["url"])
-            news_article.download()
-            news_article.parse()
+            response = self.session.get(article["url"], timeout=10)
+            response.raise_for_status()
 
-            # Update article with extracted content
-            article["content"] = news_article.text
-            article["authors"] = news_article.authors
-            article["publish_date"] = news_article.publish_date.isoformat() if news_article.publish_date else ""
-            article["top_image"] = news_article.top_image
-            article["keywords"] = news_article.keywords
+            soup = BeautifulSoup(response.content, "html.parser")
+            paragraphs = [p.get_text().strip() for p in soup.find_all("p")]
+            content = "\n".join(p for p in paragraphs if p)
 
-            # Fallback to description if content is too short
-            if len(article["content"]) < 100:
-                article["content"] = article["description"]
+            # Fall back to the feed description if we didn't get real article text
+            article["content"] = content if len(content) >= 100 else article["description"]
 
         except Exception as e:
             print(f"    ⚠️ Content extraction failed for {article['title'][:50]}...: {str(e)}")
@@ -377,7 +375,7 @@ class NewsCollector:
 
                 # Make API call to Anthropic
                 response = self.ai_client.messages.create(
-                    model="claude-3-sonnet-20240229",
+                    model="claude-sonnet-4-5",
                     max_tokens=500,
                     messages=[{"role": "user", "content": prompt}]
                 )
