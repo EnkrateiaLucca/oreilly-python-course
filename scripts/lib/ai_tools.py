@@ -4,9 +4,8 @@ import anthropic
 import ollama
 import json
 
-
 # CODE (SCRIPT!)
-def ask_ai(prompt, model_name="gpt-5-mini"):
+def ask_ai(prompt, model_name="gpt-5.4-mini"):
     """
     Send prompt to an LLM and get output text back.    
     """
