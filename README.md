@@ -95,10 +95,9 @@ This is a **two-day live training**. The course material is organized by day und
 
 ### 📅 Day 1 — `notebooks/day-1/`
 Python fundamentals, then a first look at AI APIs:
-- **01-python-basics.ipynb** – Numbers, strings, variables, operators, input, conditionals
+- **01-python-basics.ipynb** – Data types, variables, f-strings, functions, lists, loops, dictionaries, comparisons, and conditionals — taught with practical, real-world examples
 - **02-working-with-data.ipynb** – Lists, dictionaries, file I/O, CSV, pandas, and using AI to summarize/categorize data
-- **03-packages-apis.ipynb** – Importing libraries, local vs. remote LLMs, and calling external APIs
-- **04-ai-apis-overview.ipynb** – OpenAI, Anthropic, and local Ollama models; image generation and audio transcription
+- **03-packages-apis.ipynb** – Importing libraries, custom modules, calling external APIs, and **working with AI APIs** (OpenAI, Anthropic, and local Ollama models; plus image generation and audio transcription)
 
 ### 📅 Day 2 — `notebooks/day-2/`
 
@@ -117,11 +116,12 @@ Python fundamentals, then a first look at AI APIs:
 **`05-how-to-learn-python/`** — using AI to learn the language:
 - **how-to-learn-python.ipynb** – Strategies for learning Python with AI
 - **learn-python-talking-to-ai.ipynb** – Using an AI model as a personal Python tutor
+- **learn-python-with-solveit.ipynb** – A guided tour of the `solveit` toolkit: dialogue-based learning, Pólya's loop, interactive quizzes, and turning a notebook into an AI tutor
 
 ## Other Folders
 
 - **`presentation/`** – The course slide deck (`presentation.html`, a remark.js presentation)
-- **`scripts/`** – Standalone automation scripts and shared helpers (e.g. `ai_tools.py`); `scripts/archive/` holds older demos
+- **`scripts/`** – Standalone automation scripts and shared helpers. `scripts/lib/` holds modules the notebooks import (`ai_tools.py`, and `solveit.py` — a teachable AI-tutor toolkit). `scripts/ask.py` is a one-liner CLI tutor (`uv run scripts/ask.py "your question"`). `scripts/archive/` holds older demos
 - **`assets/`** – Sample data, PDFs, spreadsheets, and other resources used by the notebooks
 
 ## Getting Started

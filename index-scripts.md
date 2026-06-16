@@ -12,6 +12,12 @@ Shared helpers the notebooks import live in `scripts/lib/`. Sample inputs live i
 
 ---
 
+## Learning Helpers (`scripts/lib` & `scripts/`)
+
+- [`scripts/lib/solveit.py`](scripts/lib/solveit.py) — A teachable, SolveIt-style toolkit for learning Python *by talking to AI* inside a notebook: `ask`, a remembering `tutor` dialogue, Pólya's `solve` loop, `explain`/`hint`/`explain_error`, interactive `quiz`, `propose`/`edit`, `anki` export, `recap`, and PDF readers. `from solveit import *` (used by `notebooks/day-2/05-how-to-learn-python/learn-python-with-solveit.ipynb`)
+- [`scripts/ask.py`](scripts/ask.py) — One-liner AI tutor from the terminal: `uv run scripts/ask.py "What is a Python dictionary?"` (`--tutor` for beginner-tutor mode). Auto-detects `ANTHROPIC_API_KEY` / `OPENAI_API_KEY`
+- [`scripts/lib/ai_tools.py`](scripts/lib/ai_tools.py) — Minimal `ask_ai()` / `ask_local_ai()` wrappers used by the Day 1/Day 2 notebooks
+
 ## File Management (`scripts/demos/file-management`)
 
 - [`organize_folder.py`](scripts/demos/file-management/organize_folder.py) — Sort a messy folder into subfolders by file type (dry-run by default, `--apply` to move)

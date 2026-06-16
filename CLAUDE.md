@@ -36,7 +36,7 @@ playwright install
 ## Project Structure
 
 - `notebooks/` - Main course content organized by training day:
-  - `day-1/` - Python fundamentals and a first look at AI APIs (`01-python-basics`, `02-working-with-data`, `03-packages-apis`, `04-ai-apis-overview`)
+  - `day-1/` - Python fundamentals and a first look at AI APIs (`01-python-basics`, `02-working-with-data`, `03-packages-apis` — which also covers calling AI APIs)
   - `day-2/` - Automation projects (`03-automation-projects/`), practice problems (`04-exercises/`), and learning Python with AI (`05-how-to-learn-python/`)
 - `scripts/` - Automation examples and helpers:
   - `demos/` - runnable example scripts grouped by category: `file-management/`, `pdf-documents/`, `data-dashboards/`, `email-comms/`, `media/` (plus `sample-data/` inputs)
