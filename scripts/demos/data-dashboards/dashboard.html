@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sales Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  :root{
+    --bg:#0f1419; --panel:#1a212b; --panel-2:#222c38; --line:#2c3744;
+    --text:#e7edf3; --muted:#8a99a8; --accent:#4cc9f0; --accent-2:#f72585;
+    --good:#52c41a; --warn:#faad14;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);
+    font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+  header{padding:22px 28px;border-bottom:1px solid var(--line);
+    display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+  header h1{font-size:20px;margin:0;font-weight:650;letter-spacing:.2px}
+  header .src{color:var(--muted);font-size:13px}
+  .wrap{padding:22px 28px;max-width:1400px;margin:0 auto}
+  .filters{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+  .filters label{display:flex;flex-direction:column;font-size:11px;
+    color:var(--muted);gap:5px;text-transform:uppercase;letter-spacing:.6px}
+  select{background:var(--panel-2);color:var(--text);border:1px solid var(--line);
+    border-radius:8px;padding:8px 10px;font-size:13px;min-width:150px}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:14px;margin-bottom:22px}
+  .kpi{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px}
+  .kpi .v{font-size:24px;font-weight:700;margin-top:6px}
+  .kpi .l{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px}
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+  @media(max-width:900px){.grid{grid-template-columns:1fr}}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px}
+  .card.full{grid-column:1/-1}
+  .card .head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+  .card h3{margin:0;font-size:14px;font-weight:600}
+  .card .canvas-wrap{position:relative;height:300px}
+  button.exp{background:var(--accent);color:#06222d;border:none;border-radius:7px;
+    padding:6px 11px;font-size:12px;font-weight:600;cursor:pointer}
+  button.exp:hover{opacity:.9}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th,td{padding:7px 9px;text-align:left;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.5px;
+    cursor:pointer;user-select:none}
+  td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+  .tbl-wrap{max-height:340px;overflow:auto}
+</style>
+</head>
+<body>
+<header>
+  <h1>Sales Dashboard</h1>
+  <span class="src">Source: <span id="srcName"></span></span>
+</header>
+
+<div class="wrap">
+  <div class="filters" id="filters">
+    <label>Region<select id="fRegion"></select></label>
+    <label>Country<select id="fCountry"></select></label>
+    <label>Item Type<select id="fItem"></select></label>
+    <label>Channel<select id="fChannel"></select></label>
+    <label>Priority<select id="fPriority"></select></label>
+    <label>Year<select id="fYear"></select></label>
+  </div>
+
+  <div class="kpis" id="kpis"></div>
+
+  <div class="grid">
+    <div class="card">
+      <div class="head"><h3>Revenue over time</h3>
+        <button class="exp" data-chart="ts">Export PNG</button></div>
+      <div class="canvas-wrap"><canvas id="cTs"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="head"><h3>Profit by region</h3>
+        <button class="exp" data-chart="region">Export PNG</button></div>
+      <div class="canvas-wrap"><canvas id="cRegion"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="head"><h3>Revenue by item type</h3>
+        <button class="exp" data-chart="item">Export PNG</button></div>
+      <div class="canvas-wrap"><canvas id="cItem"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="head"><h3>Sales channel split</h3>
+        <button class="exp" data-chart="channel">Export PNG</button></div>
+      <div class="canvas-wrap"><canvas id="cChannel"></canvas></div>
+    </div>
+    <div class="card full">
+      <div class="head"><h3>Top countries by profit</h3>
+        <button class="exp" data-chart="country">Export PNG</button></div>
+      <div class="canvas-wrap" style="height:340px"><canvas id="cCountry"></canvas></div>
+    </div>
+    <div class="card full">
+      <div class="head"><h3>Detail (filtered, top 200 by revenue)</h3>
+        <button class="exp" data-csv="1">Export CSV</button></div>
+      <div class="tbl-wrap"><table id="tbl"><thead></thead><tbody></tbody></table></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const RAW = [{"Region": "Australia and Oceania", "Country": "Tuvalu", "Item Type": "Baby Food", "Sales Channel": "Offline", "Order Priority": "H", "Order Date": "2010-05-28", "Order ID": 669165933, "Ship Date": "2010-06-27", "Units Sold": 9925, "Unit Price": 255.28, "Unit Cost": 159.42, "Total Revenue": 2533654.0, "Total Cost": 1582243.5, "Total Profit": 951410.5, "Year": 2010, "YearMonth": "2010-05"}, {"Region": "Central America and the Caribbean", "Country": "Grenada", "Item Type": "Cereal", "Sales Channel": "Online", "Order Priority": "C", "Order Date": "2012-08-22", "Order ID": 963881480, "Ship Date": "2012-09-15", "Units Sold": 2804, "Unit Price": 205.7, "Unit Cost": 117.11, "Total Revenue": 576782.8, "Total Cost": 328376.44, "Total Profit": 248406.36, "Year": 2012, "YearMonth": "2012-08"}, {"Region": "Europe", "Country": "Russia", "Item Type": "Office Supplies", "Sales Channel": "Offline", "Order Priority": "L", "Order Date": "2014-05-02", "Order ID": 341417157, "Ship Date": "2014-05-08", "Units Sold": 1779, "Unit Price": 651.21, "Unit Cost": 524.96, "Total Revenue": 1158502.59, "Total Cost": 933903.84, "Total Profit": 224598.75, "Year": 2014, "YearMonth": "2014-05"}, {"Region": "Sub-Saharan Africa", "Country": "Sao Tome and Principe", "Item Type": "Fruits", "Sales Channel": "Online", "Order Priority": "C", "Order Date": "2014-06-20", "Order ID": 514321792, "Ship Date": "2014-07-05", "Units Sold": 8102, "Unit Price": 9.33, "Unit Cost": 6.92, "Total Revenue": 75591.66, "Total Cost": 56065.84, "Total Profit": 19525.82, "Year": 2014, "YearMonth": "2014-06"}, {"Region": "Sub-Saharan Africa", "Country": "Rwanda", "Item Type": "Office Supplies", "Sales Channel": "Offline", "Order Priority": "L", "Order Date": "2013-02-01", "Order ID": 115456712, "Ship Date": "2013-02-06", "Units Sold": 5062, "Unit Price": 651.21, "Unit Cost": 524.96, "Total Revenue": 3296425.02, "Total Cost": 2657347.52, "Total Profit": 639077.5, "Year": 2013, "YearMonth": "2013-02"}, {"Region": "Australia and Oceania", "Country": "Solomon Islands", "Item Type": "Baby Food", "Sales Channel": "Online", "Order Priority": "C", "Order Date": "2015-02-04", "Order ID": 547995746, "Ship Date": "2015-02-21", "Units Sold": 2974, "Unit Price": 255.28, "Unit Cost": 159.42, "Total Revenue": 759202.72, "Total Cost": 474115.08, "Total Profit": 285087.64, "Year": 2015, "YearMonth": "2015-02"}, {"Region": "Sub-Saharan Africa", "Country": "Angola", "Item Type": "Household", "Sales Channel": "Offline", "Order Priority": "M", "Order Date": "2011-04-23", "Order ID": 135425221, "Ship Date": "2011-04-27", "Units Sold": 4187, "Unit Price": 668.27, "Unit Cost": 502.54, "Total Revenue": 2798046.49, "Total Cost": 2104134.98, "Total Profit": 693911.51, "Year": 2011, "YearMonth": "2011-04"}, {"Region": "Sub-Saharan Africa", "Country": "Burkina Faso", "Item Type": "Vegetables", "Sales Channel": "Online", "Order Priority": "H", "Order Date": "2012-07-17", "Order ID": 871543967, "Ship Date": "2012-07-27", "Units Sold": 8082, "Unit Price": 154.06, "Unit Cost": 90.93, "Total Revenue": 1245112.92, "Total Cost": 734896.26, "Total Profit": 510216.66, "Year": 2012, "YearMonth": "2012-07"}, {"Region": "Sub-Saharan Africa", "Country": "Republic of the Congo", "Item Type": "Personal Care", "Sales Channel": "Offline", "Order Priority": "M", "Order Date": "2015-07-14", "Order ID": 770463311, "Ship Date": "2015-08-25", "Units Sold": 6070, "Unit Price": 81.73, "Unit Cost": 56.67, "Total Revenue": 496101.1, "Total Cost": 343986.9, "Total Profit": 152114.2, "Year": 2015, "YearMonth": "2015-07"}, {"Region": "Sub-Saharan Africa", "Country": "Senegal", "Item Type": "Cereal", "Sales Channel": "Online", "Order Priority": "H", "Order Date": "2014-04-18", "Order ID": 616607081, "Ship Date": "2014-05-30", "Units Sold": 6593, "Unit Price": 205.7, "Unit Cost": 117.11, "Total Revenue": 1356180.1, "Total Cost": 772106.23, "Total Profit": 584073.87, "Year": 2014, "YearMonth": "2014-04"}, {"Region": "Asia", "Country": "Kyrgyzstan", "Item Type": "Vegetables", "Sales Channel": "Online", "Order Priority": "H", "Order Date": "2011-06-24", "Order ID": 814711606, "Ship Date": "2011-07-12", "Units Sold": 124, "Unit Price": 154.06, "Unit Cost": 90.93, "Total Revenue": 19103.44, "Total Cost": 11275.32, "Total Profit": 7828.12, "Year": 2011, "YearMonth": "2011-06"}, {"Region": "Sub-Saharan Africa", "Country": "Cape Verde", "Item Type": "Clothes", "Sales Channel": "Offline", "Order Priority": "H", "Order Date": "2014-08-02", "Order ID": 939825713, "Ship Date": "2014-08-19", "Units Sold": 4168, "Unit Price": 109.28, "Unit Cost": 35.84, "Total Revenue": 455479.04, "Total Cost": 149381.12, "Total Profit": 306097.92, "Year": 2014, "YearMonth": "2014-08"}, {"Region": "Asia", "Country": "Bangladesh", "Item Type": "Clothes", "Sales Channel": "Online", "Order Priority": "L", "Order Date": "2017-01-13", "Order ID": 187310731, "Ship Date": "2017-03-01", "Units Sold": 8263, "Unit Price": 109.28, "Unit Cost": 35.84, "Total Revenue": 902980.64, "Total Cost": 296145.92, "Total Profit": 606834.72, "Year": 2017, "YearMonth": "2017-01"}, {"Region": "Central America and the Caribbean", "Country": "Honduras", "Item Type": "Household", "Sales Channel": "Offline", "Order Priority": "H", "Order Date": "2017-02-08", "Order ID": 522840487, "Ship Date": "2017-02-13", "Units Sold": 8974, "Unit Price": 668.27, "Unit Cost": 502.54, "Total Revenue": 5997054.98, "Total Cost": 4509793.96, "Total Profit": 1487261.02, "Year": 2017, "YearMonth": "2017-02"}, {"Region": "Asia", "Country": "Mongolia", "Item Type": "Personal Care", "Sales Channel": "Offline", "Order Priority": "C", "Order Date": "2014-02-19", "Order ID": 832401311, "Ship Date": "2014-02-23", "Units Sold": 4901, "Unit Price": 81.73, "Unit Cost": 56.67, "Total Revenue": 400558.73, "Total Cost": 277739.67, "Total Profit": 122819.06, "Year": 2014, "YearMonth": "2014-02"}, {"Region": "Europe", "Country": "Bulgaria", "Item Type": "Clothes", "Sales Channel": "Online", "Order Priority": "M", "Order Date": "2012-04-23", "Order ID": 972292029, "Ship Date": "2012-06-03", "Units Sold": 1673, "Unit Price": 109.28, "Unit Cost": 35.84, "Total Revenue": 182825.44, "Total Cost": 59960.32, "Total Profit": 122865.12, "Year": 2012, "YearMonth": "2012-04"}, {"Region": "Asia", "Country": "Sri Lanka", "Item Type": "Cosmetics", "Sales Channel": "Offline", "Order Priority": "M", "Order Date": "2016-11-19", "Order ID": 419123971, "Ship Date": "2016-12-18", "Units Sold": 6952, "Unit Price": 437.2, "Unit Cost": 263.33, "Total Revenue": 3039414.4, "Total Cost": 1830670.16, "Total Profit": 1208744.24, "Year": 2016, "YearMonth": "2016-11"}, {"Region": "Sub-Saharan Africa", "Country": "Cameroon", "Item Type": "Beverages", "Sales Channel": "Offline", "Order Priority": "C", "Order Date": "2015-04-01", "Order ID": 519820964, "Ship Date": "2015-04-18", "Units Sold": 5430, "Unit Price": 47.45, "Unit Cost": 31.79, "Total Revenue": 257653.5, "Total Cost": 172619.7, "Total Profit": 85033.8, "Year": 2015, "YearMonth": "2015-04"}, {"Region": "Asia", "Country": "Turkmenistan", "Item Type": "Household", "Sales Channel": "Offline", "Order Priority": "L", "Order Date": "2010-12-30", "Order ID": 441619336, "Ship Date": "2011-01-20", "Units Sold": 3830, "Unit Price": 668.27, "Unit Cost": 502.54, "Total Revenue": 2559474.1, "Total Cost": 1924728.2, "Total Profit": 634745.9, "Year": 2010, "YearMonth": "2010-12"}, {"Region": "Australia and Oceania", "Country": "East Timor", "Item Type": "Meat", "Sales Channel": "Online", "Order Priority": "L", "Order Date": "2012-07-31", "Order ID": 322067916, "Ship Date": "2012-09-11", "Units Sold": 5908, "Unit Price": 421.89, "Unit Cost": 364.69, "Total Revenue": 2492526.12, "Total Cost": 2154588.52, "Total Profit": 337937.6, "Year": 2012, "YearMonth": "2012-07"}, {"Region": "Europe", "Country": "Norway", "Item Type": "Baby Food", "Sales Channel": "Online", "Order Priority": "L", "Order Date": "2014-05-14", "Order ID": 819028031, "Ship Date": "2014-06-28", "Units Sold": 7450, "Unit Price": 255.28, "Unit Cost": 159.42, "Total Revenue": 1901836.0, "Total Cost": 1187679.0, "Total Profit": 714157.0, "Year": 2014, "YearMonth": "2014-05"}, {"Region": "Europe", "Country": "Portugal", "Item Type": "Baby Food", "Sales Channel": "Online", "Order Priority": "H", "Order Date": "2015-07-31", "Order ID": 860673511, "Ship Date": "2015-09-03", "Units Sold": 1273, "Unit Price": 255.28, "Unit Cost": 159.42, "Total Revenue": 324971.44, "Total Cost": 202941.66, "Total Profit": 122029.78, "Year": 2015, "YearMonth": "2015-07"}, {"Region": "Central America and the Caribbean", "Country": "Honduras", "Item Type": "Snacks", "Sales Channel": "Online", "Order Priority": "L", "Order Date": "2016-06-30", "Order ID": 795490682, "Ship Date": "2016-07-26", "Units Sold": 2225, "Unit Price": 152.58, "Unit Cost": 97.44, "Total Revenue": 339490.5, "Total Cost": 216804.0, "Total Profit": 122686.5, "Year": 2016, "YearMonth": "2016-06"}, {"Region": "Australia and Oceania", "Country": "New Zealand", "Item Type": "Fruits", "Sales Channel": "Online", "Order Priority": "H", "Order Date": "2014-09-08", "Order ID": 142278373, "Ship Date": "2014-10-04", "Units Sold": 2187, "Unit Price": 9.33, "Unit Cost": 6.92, "Total Revenue": 20404.71, "Total Cost": 15134.04, "Total Profit": 5270.67, "Year": 2014, "YearMonth": "2014-09"}, {"Region": "Europe", "Country": "Moldova ", "Item Type": "Personal Care", "Sales Channel": "Online", "Order Priority": "L", "Order Date": "2016-05-07", "Order ID": 740147912, "Ship Date": "2016-05-10", "Units Sold": 5070, "Unit Price": 81.73, "Unit Cost": 56.67, "Total Revenue": 414371.1, "Total Cost": 287316.9, "Total Profit": 127054.2, "Year": 2016, "YearMonth": "2016-05"}, {"Region": "Europe", "Country": "France", "Item Type": "Cosmetics", "Sales Channel": "Online", "Order Priority": "H", "Order Date": "2017-05-22", "Order ID": 898523128, "Ship Date": "2017-06-05", "Units Sold": 1815, "Unit Price": 437.2, "Unit Cost": 263.33, "Total Revenue": 793518.0, "Total Cost": 477943.95, "Total Profit": 315574.05, "Year": 2017, "YearMonth": "2017-05"}, {"Region": "Australia and Oceania", "Country": "Kiribati", "Item Type": "Fruits", "Sales Channel": "Online", "Order Priority": "M", "Order Date": "2014-10-13", "Order ID": 347140347, "Ship Date": "2014-11-10", "Units Sold": 5398, "Unit Price": 9.33, "Unit Cost": 6.92, "Total Revenue": 50363.34, "Total Cost": 37354.16, "Total Profit": 13009.18, "Year": 2014, "YearMonth": "2014-10"}, {"Region": "Sub-Saharan Africa", "Country": "Mali", "Item Type": "Fruits", "Sales Channel": "Online", "Order Priority": "L", "Order Date": "2010-05-07", "Order ID": 686048400, "Ship Date": "2010-05-10", "Units Sold": 5822, "Unit Price": 9.33, "Unit Cost": 6.92, "Total Revenue": 54319.26, "Total Cost": 40288.24, "Total Profit": 14031.02, "Year": 2010, "YearMonth": "2010-05"}, {"Region": "Europe", "Country": "Norway", "Item Type": "Beverages", "Sales Channel": "Offline", "Order Priority": "C", "Order Date": "2014-07-18", "Order ID": 435608613, "Ship Date": "2014-07-30", "Units Sold": 5124, "Unit Price": 47.45, "Unit Cost": 31.79, "Total Revenue": 243133.8, "Total Cost": 162891.96, "Total Profit": 80241.84, "Year": 2014, "YearMonth": "2014-07"}, {"Region": "Sub-Saharan Africa", "Country": "The Gambia", "Item Type": "Household", "Sales Channel": "Offline", "Order Priority": "L", "Order Date": "2012-05-26", "Order ID": 886494815, "Ship Date": "2012-06-09", "Units Sold": 2370, "Unit Price": 668.27, "Unit Cost": 502.54, "Total Revenue": 1583799.9, "Total Cost": 1191019.8, "Total Profit": 392780.1, "Year": 2012, "YearMonth": "2012-05"}, {"Region": "Europe", "Country": "Switzerland", "Item Type": "Cosmetics", "Sales Channel": "Offline", "Order Priority": "M", "Order Date": "2012-09-17", "Order ID": 249693334, "Ship Date": "2012-10-20", "Units Sold": 8661, "Unit Price": 437.2, "Unit Cost": 263.33, "Total Revenue": 3786589.2, "Total Cost": 2280701.13, "Total Profit": 1505888.07, "Year": 2012, "YearMonth": "2012-09"}, {"Region": "Sub-Saharan Africa", "Country": "South Sudan", "Item Type": "Personal Care", "Sales Channel": "Offline", "Order Priority": "C", "Order Date": "2013-12-29", "Order ID": 406502997, "Ship Date": "2014-01-28", "Units Sold": 2125, "Unit Price": 81.73, "Unit Cost": 56.67, "Total Revenue": 173676.25, "Total Cost": 120423.75, "Total Profit": 53252.5, "Year": 2013, "YearMonth": "2013-12"}, {"Region": "Australia and Oceania", "Country": "Australia", "Item Type": "Office Supplies", "Sales Channel": "Online", "Order Priority": "C", "Order Date": "2015-10-27", "Order ID": 158535134, "Ship Date": "2015-11-25", "Units Sold": 2924, "Unit Price": 651.21, "Unit Cost": 524.96, "Total Revenue": 1904138.04, "Total Cost": 1534983.04, "Total Profit": 369155.0, "Year": 2015, "YearMonth": "2015-10"}, {"Region": "Asia", "Country": "Myanmar", "Item Type": "Household", "Sales Channel": "Offline", "Order Priority": "H", "Order Date": "2015-01-16", "Order ID": 177713572, "Ship Date": "2015-03-01", "Units Sold": 8250, "Unit Price": 668.27, "Unit Cost": 502.54, "Total Revenue": 5513227.5, "Total Cost": 4145955.0, "Total Profit": 1367272.5, "Year": 2015, "YearMonth": "2015-01"}, {"Region": "Sub-Saharan Africa", "Country": "Djibouti", "Item Type": "Snacks", "Sales Channel": "Online", "Order Priority": "M", "Order Date": "2017-02-25", "Order ID": 756274640, "Ship Date": "2017-02-25", "Units Sold": 7327, "Unit Price": 152.58, "Unit Cost": 97.44, "Total Revenue": 1117953.66, "Total Cost": 713942.88, "Total Profit": 404010.78, "Year": 2017, "YearMonth": "2017-02"}, {"Region": "Central America and the Caribbean", "Country": "Costa Rica", "Item Type": "Personal Care", "Sales Channel": "Offline", "Order Priority": "L", "Order Date": "2017-05-08", "Order ID": 456767165, "Ship Date": "2017-05-21", "Units Sold": 6409, "Unit Price": 81.73, "Unit Cost": 56.67, "Total Revenue": 523807.57, "Total Cost": 363198.03, "Total Profit": 160609.54, "Year": 2017, "YearMonth": "2017-05"}, {"Region": "Middle East and North Africa", "Country": "Syria", "Item Type": "Fruits", "Sales Channel": "Online", "Order Priority": "L", "Order Date": "2011-11-22", "Order ID": 162052476, "Ship Date": "2011-12-03", "Units Sold": 3784, "Unit Price": 9.33, "Unit Cost": 6.92, "Total Revenue": 35304.72, "Total Cost": 26185.28, "Total Profit": 9119.44, "Year": 2011, "YearMonth": "2011-11"}, {"Region": "Sub-Saharan Africa", "Country": "The Gambia", "Item Type": "Meat", "Sales Channel": "Online", "Order Priority": "M", "Order Date": "2017-01-14", "Order ID": 825304400, "Ship Date": "2017-01-23", "Units Sold": 4767, "Unit Price": 421.89, "Unit Cost": 364.69, "Total Revenue": 2011149.63, "Total Cost": 1738477.23, "Total Profit": 272672.4, "Year": 2017, "YearMonth": "2017-01"}, {"Region": "Asia", "Country": "Brunei", "Item Type": "Office Supplies", "Sales Channel": "Online", "Order Priority": "L", "Order Date": "2012-04-01", "Order ID": 320009267, "Ship Date": "2012-05-08", "Units Sold": 6708, "Unit Price": 651.21, "Unit Cost": 524.96, "Total Revenue": 4368316.68, "Total Cost": 3521431.68, "Total Profit": 846885.0, "Year": 2012, "YearMonth": "2012-04"}, {"Region": "Europe", "Country": "Bulgaria", "Item Type": "Office Supplies", "Sales Channel": "Online", "Order Priority": "M", "Order Date": "2012-02-16", "Order ID": 189965903, "Ship Date": "2012-02-28", "Units Sold": 3987, "Unit Price": 651.21, "Unit Cost": 524.96, "Total Revenue": 2596374.27, "Total Cost": 2093015.52, "Total Profit": 503358.75, "Year": 2012, "YearMonth": "2012-02"}, {"Region": "Sub-Saharan Africa", "Country": "Niger", "Item Type": "Personal Care", "Sales Channel": "Online", "Order Priority": "H", "Order Date": "2017-03-11", "Order ID": 699285638, "Ship Date": "2017-03-28", "Units Sold": 3015, "Unit Price": 81.73, "Unit Cost": 56.67, "Total Revenue": 246415.95, "Total Cost": 170860.05, "Total Profit": 75555.9, "Year": 2017, "YearMonth": "2017-03"}, {"Region": "Middle East and North Africa", "Country": "Azerbaijan", "Item Type": "Cosmetics", "Sales Channel": "Online", "Order Priority": "M", "Order Date": "2010-02-06", "Order ID": 382392299, "Ship Date": "2010-02-25", "Units Sold": 7234, "Unit Price": 437.2, "Unit Cost": 263.33, "Total Revenue": 3162704.8, "Total Cost": 1904929.22, "Total Profit": 1257775.58, "Year": 2010, "YearMonth": "2010-02"}, {"Region": "Sub-Saharan Africa", "Country": "The Gambia", "Item Type": "Cereal", "Sales Channel": "Offline", "Order Priority": "H", "Order Date": "2012-06-07", "Order ID": 994022214, "Ship Date": "2012-06-08", "Units Sold": 2117, "Unit Price": 205.7, "Unit Cost": 117.11, "Total Revenue": 435466.9, "Total Cost": 247921.87, "Total Profit": 187545.03, "Year": 2012, "YearMonth": "2012-06"}, {"Region": "Europe", "Country": "Slovakia", "Item Type": "Vegetables", "Sales Channel": "Online", "Order Priority": "H", "Order Date": "2012-10-06", "Order ID": 759224212, "Ship Date": "2012-11-10", "Units Sold": 171, "Unit Price": 154.06, "Unit Cost": 90.93, "Total Revenue": 26344.26, "Total Cost": 15549.03, "Total Profit": 10795.23, "Year": 2012, "YearMonth": "2012-10"}, {"Region": "Asia", "Country": "Myanmar", "Item Type": "Clothes", "Sales Channel": "Online", "Order Priority": "H", "Order Date": "2015-11-14", "Order ID": 223359620, "Ship Date": "2015-11-18", "Units Sold": 5930, "Unit Price": 109.28, "Unit Cost": 35.84, "Total Revenue": 648030.4, "Total Cost": 212531.2, "Total Profit": 435499.2, "Year": 2015, "YearMonth": "2015-11"}, {"Region": "Sub-Saharan Africa", "Country": "Comoros", "Item Type": "Cereal", "Sales Channel": "Offline", "Order Priority": "H", "Order Date": "2016-03-29", "Order ID": 902102267, "Ship Date": "2016-04-29", "Units Sold": 962, "Unit Price": 205.7, "Unit Cost": 117.11, "Total Revenue": 197883.4, "Total Cost": 112659.82, "Total Profit": 85223.58, "Year": 2016, "YearMonth": "2016-03"}, {"Region": "Europe", "Country": "Iceland", "Item Type": "Cosmetics", "Sales Channel": "Online", "Order Priority": "C", "Order Date": "2016-12-31", "Order ID": 331438481, "Ship Date": "2016-12-31", "Units Sold": 8867, "Unit Price": 437.2, "Unit Cost": 263.33, "Total Revenue": 3876652.4, "Total Cost": 2334947.11, "Total Profit": 1541705.29, "Year": 2016, "YearMonth": "2016-12"}, {"Region": "Europe", "Country": "Switzerland", "Item Type": "Personal Care", "Sales Channel": "Online", "Order Priority": "M", "Order Date": "2010-12-23", "Order ID": 617667090, "Ship Date": "2011-01-31", "Units Sold": 273, "Unit Price": 81.73, "Unit Cost": 56.67, "Total Revenue": 22312.29, "Total Cost": 15470.91, "Total Profit": 6841.38, "Year": 2010, "YearMonth": "2010-12"}, {"Region": "Europe", "Country": "Macedonia", "Item Type": "Clothes", "Sales Channel": "Offline", "Order Priority": "C", "Order Date": "2014-10-14", "Order ID": 787399423, "Ship Date": "2014-11-14", "Units Sold": 7842, "Unit Price": 109.28, "Unit Cost": 35.84, "Total Revenue": 856973.76, "Total Cost": 281057.28, "Total Profit": 575916.48, "Year": 2014, "YearMonth": "2014-10"}, {"Region": "Sub-Saharan Africa", "Country": "Mauritania", "Item Type": "Office Supplies", "Sales Channel": "Offline", "Order Priority": "C", "Order Date": "2012-01-11", "Order ID": 837559306, "Ship Date": "2012-01-13", "Units Sold": 1266, "Unit Price": 651.21, "Unit Cost": 524.96, "Total Revenue": 824431.86, "Total Cost": 664599.36, "Total Profit": 159832.5, "Year": 2012, "YearMonth": "2012-01"}, {"Region": "Europe", "Country": "Albania", "Item Type": "Clothes", "Sales Channel": "Online", "Order Priority": "C", "Order Date": "2010-02-02", "Order ID": 385383069, "Ship Date": "2010-03-18", "Units Sold": 2269, "Unit Price": 109.28, "Unit Cost": 35.84, "Total Revenue": 247956.32, "Total Cost": 81320.96, "Total Profit": 166635.36, "Year": 2010, "YearMonth": "2010-02"}, {"Region": "Sub-Saharan Africa", "Country": "Lesotho", "Item Type": "Fruits", "Sales Channel": "Online", "Order Priority": "L", "Order Date": "2013-08-18", "Order ID": 918419539, "Ship Date": "2013-09-18", "Units Sold": 9606, "Unit Price": 9.33, "Unit Cost": 6.92, "Total Revenue": 89623.98, "Total Cost": 66473.52, "Total Profit": 23150.46, "Year": 2013, "YearMonth": "2013-08"}, {"Region": "Middle East and North Africa", "Country": "Saudi Arabia", "Item Type": "Cereal", "Sales Channel": "Online", "Order Priority": "M", "Order Date": "2013-03-25", "Order ID": 844530045, "Ship Date": "2013-03-28", "Units Sold": 4063, "Unit Price": 205.7, "Unit Cost": 117.11, "Total Revenue": 835759.1, "Total Cost": 475817.93, "Total Profit": 359941.17, "Year": 2013, "YearMonth": "2013-03"}, {"Region": "Sub-Saharan Africa", "Country": "Sierra Leone", "Item Type": "Office Supplies", "Sales Channel": "Offline", "Order Priority": "M", "Order Date": "2011-11-26", "Order ID": 441888415, "Ship Date": "2012-01-07", "Units Sold": 3457, "Unit Price": 651.21, "Unit Cost": 524.96, "Total Revenue": 2251232.97, "Total Cost": 1814786.72, "Total Profit": 436446.25, "Year": 2011, "YearMonth": "2011-11"}, {"Region": "Sub-Saharan Africa", "Country": "Sao Tome and Principe", "Item Type": "Fruits", "Sales Channel": "Offline", "Order Priority": "H", "Order Date": "2013-09-17", "Order ID": 508980977, "Ship Date": "2013-10-24", "Units Sold": 7637, "Unit Price": 9.33, "Unit Cost": 6.92, "Total Revenue": 71253.21, "Total Cost": 52848.04, "Total Profit": 18405.17, "Year": 2013, "YearMonth": "2013-09"}, {"Region": "Sub-Saharan Africa", "Country": "Cote d'Ivoire", "Item Type": "Clothes", "Sales Channel": "Online", "Order Priority": "C", "Order Date": "2012-06-08", "Order ID": 114606559, "Ship Date": "2012-06-27", "Units Sold": 3482, "Unit Price": 109.28, "Unit Cost": 35.84, "Total Revenue": 380512.96, "Total Cost": 124794.88, "Total Profit": 255718.08, "Year": 2012, "YearMonth": "2012-06"}, {"Region": "Australia and Oceania", "Country": "Fiji", "Item Type": "Clothes", "Sales Channel": "Offline", "Order Priority": "C", "Order Date": "2010-06-30", "Order ID": 647876489, "Ship Date": "2010-08-01", "Units Sold": 9905, "Unit Price": 109.28, "Unit Cost": 35.84, "Total Revenue": 1082418.4, "Total Cost": 354995.2, "Total Profit": 727423.2, "Year": 2010, "YearMonth": "2010-06"}, {"Region": "Europe", "Country": "Austria", "Item Type": "Cosmetics", "Sales Channel": "Offline", "Order Priority": "H", "Order Date": "2015-02-23", "Order ID": 868214595, "Ship Date": "2015-03-02", "Units Sold": 2847, "Unit Price": 437.2, "Unit Cost": 263.33, "Total Revenue": 1244708.4, "Total Cost": 749700.51, "Total Profit": 495007.89, "Year": 2015, "YearMonth": "2015-02"}, {"Region": "Europe", "Country": "United Kingdom", "Item Type": "Household", "Sales Channel": "Online", "Order Priority": "L", "Order Date": "2012-01-05", "Order ID": 955357205, "Ship Date": "2012-02-14", "Units Sold": 282, "Unit Price": 668.27, "Unit Cost": 502.54, "Total Revenue": 188452.14, "Total Cost": 141716.28, "Total Profit": 46735.86, "Year": 2012, "YearMonth": "2012-01"}, {"Region": "Sub-Saharan Africa", "Country": "Djibouti", "Item Type": "Cosmetics", "Sales Channel": "Offline", "Order Priority": "H", "Order Date": "2014-04-07", "Order ID": 259353148, "Ship Date": "2014-04-19", "Units Sold": 7215, "Unit Price": 437.2, "Unit Cost": 263.33, "Total Revenue": 3154398.0, "Total Cost": 1899925.95, "Total Profit": 1254472.05, "Year": 2014, "YearMonth": "2014-04"}, {"Region": "Australia and Oceania", "Country": "Australia", "Item Type": "Cereal", "Sales Channel": "Offline", "Order Priority": "H", "Order Date": "2013-06-09", "Order ID": 450563752, "Ship Date": "2013-07-02", "Units Sold": 682, "Unit Price": 205.7, "Unit Cost": 117.11, "Total Revenue": 140287.4, "Total Cost": 79869.02, "Total Profit": 60418.38, "Year": 2013, "YearMonth": "2013-06"}, {"Region": "Europe", "Country": "San Marino", "Item Type": "Baby Food", "Sales Channel": "Online", "Order Priority": "L", "Order Date": "2013-06-26", "Order ID": 569662845, "Ship Date": "2013-07-01", "Units Sold": 4750, "Unit Price": 255.28, "Unit Cost": 159.42, "Total Revenue": 1212580.0, "Total Cost": 757245.0, "Total Profit": 455335.0, "Year": 2013, "YearMonth": "2013-06"}, {"Region": "Sub-Saharan Africa", "Country": "Cameroon", "Item Type": "Office Supplies", "Sales Channel": "Online", "Order Priority": "M", "Order Date": "2011-11-07", "Order ID": 177636754, "Ship Date": "2011-11-15", "Units Sold": 5518, "Unit Price": 651.21, "Unit Cost": 524.96, "Total Revenue": 3593376.78, "Total Cost": 2896729.28, "Total Profit": 696647.5, "Year": 2011, "YearMonth": "2011-11"}, {"Region": "Middle East and North Africa", "Country": "Libya", "Item Type": "Clothes", "Sales Channel": "Offline", "Order Priority": "H", "Order Date": "2010-10-30", "Order ID": 705784308, "Ship Date": "2010-11-17", "Units Sold": 6116, "Unit Price": 109.28, "Unit Cost": 35.84, "Total Revenue": 668356.48, "Total Cost": 219197.44, "Total Profit": 449159.04, "Year": 2010, "YearMonth": "2010-10"}, {"Region": "Central America and the Caribbean", "Country": "Haiti", "Item Type": "Cosmetics", "Sales Channel": "Offline", "Order Priority": "H", "Order Date": "2013-10-13", "Order ID": 505716836, "Ship Date": "2013-11-16", "Units Sold": 1705, "Unit Price": 437.2, "Unit Cost": 263.33, "Total Revenue": 745426.0, "Total Cost": 448977.65, "Total Profit": 296448.35, "Year": 2013, "YearMonth": "2013-10"}, {"Region": "Sub-Saharan Africa", "Country": "Rwanda", "Item Type": "Cosmetics", "Sales Channel": "Offline", "Order Priority": "H", "Order Date": "2013-10-11", "Order ID": 699358165, "Ship Date": "2013-11-25", "Units Sold": 4477, "Unit Price": 437.2, "Unit Cost": 263.33, "Total Revenue": 1957344.4, "Total Cost": 1178928.41, "Total Profit": 778415.99, "Year": 2013, "YearMonth": "2013-10"}, {"Region": "Sub-Saharan Africa", "Country": "Gabon", "Item Type": "Personal Care", "Sales Channel": "Offline", "Order Priority": "L", "Order Date": "2012-07-08", "Order ID": 228944623, "Ship Date": "2012-07-09", "Units Sold": 8656, "Unit Price": 81.73, "Unit Cost": 56.67, "Total Revenue": 707454.88, "Total Cost": 490535.52, "Total Profit": 216919.36, "Year": 2012, "YearMonth": "2012-07"}, {"Region": "Central America and the Caribbean", "Country": "Belize", "Item Type": "Clothes", "Sales Channel": "Offline", "Order Priority": "M", "Order Date": "2016-07-25", "Order ID": 807025039, "Ship Date": "2016-09-07", "Units Sold": 5498, "Unit Price": 109.28, "Unit Cost": 35.84, "Total Revenue": 600821.44, "Total Cost": 197048.32, "Total Profit": 403773.12, "Year": 2016, "YearMonth": "2016-07"}, {"Region": "Europe", "Country": "Lithuania", "Item Type": "Office Supplies", "Sales Channel": "Offline", "Order Priority": "H", "Order Date": "2010-10-24", "Order ID": 166460740, "Ship Date": "2010-11-17", "Units Sold": 8287, "Unit Price": 651.21, "Unit Cost": 524.96, "Total Revenue": 5396577.27, "Total Cost": 4350343.52, "Total Profit": 1046233.75, "Year": 2010, "YearMonth": "2010-10"}, {"Region": "Sub-Saharan Africa", "Country": "Madagascar", "Item Type": "Clothes", "Sales Channel": "Offline", "Order Priority": "L", "Order Date": "2015-04-25", "Order ID": 610425555, "Ship Date": "2015-05-28", "Units Sold": 7342, "Unit Price": 109.28, "Unit Cost": 35.84, "Total Revenue": 802333.76, "Total Cost": 263137.28, "Total Profit": 539196.48, "Year": 2015, "YearMonth": "2015-04"}, {"Region": "Asia", "Country": "Turkmenistan", "Item Type": "Office Supplies", "Sales Channel": "Online", "Order Priority": "M", "Order Date": "2013-04-23", "Order ID": 462405812, "Ship Date": "2013-05-20", "Units Sold": 5010, "Unit Price": 651.21, "Unit Cost": 524.96, "Total Revenue": 3262562.1, "Total Cost": 2630049.6, "Total Profit": 632512.5, "Year": 2013, "YearMonth": "2013-04"}, {"Region": "Middle East and North Africa", "Country": "Libya", "Item Type": "Fruits", "Sales Channel": "Online", "Order Priority": "L", "Order Date": "2015-08-14", "Order ID": 816200339, "Ship Date": "2015-09-30", "Units Sold": 673, "Unit Price": 9.33, "Unit Cost": 6.92, "Total Revenue": 6279.09, "Total Cost": 4657.16, "Total Profit": 1621.93, "Year": 2015, "YearMonth": "2015-08"}, {"Region": "Sub-Saharan Africa", "Country": "Democratic Republic of the Congo", "Item Type": "Beverages", "Sales Channel": "Online", "Order Priority": "C", "Order Date": "2011-05-26", "Order ID": 585920464, "Ship Date": "2011-07-15", "Units Sold": 5741, "Unit Price": 47.45, "Unit Cost": 31.79, "Total Revenue": 272410.45, "Total Cost": 182506.39, "Total Profit": 89904.06, "Year": 2011, "YearMonth": "2011-05"}, {"Region": "Sub-Saharan Africa", "Country": "Djibouti", "Item Type": "Cereal", "Sales Channel": "Online", "Order Priority": "H", "Order Date": "2017-05-20", "Order ID": 555990016, "Ship Date": "2017-06-17", "Units Sold": 8656, "Unit Price": 205.7, "Unit Cost": 117.11, "Total Revenue": 1780539.2, "Total Cost": 1013704.16, "Total Profit": 766835.04, "Year": 2017, "YearMonth": "2017-05"}, {"Region": "Middle East and North Africa", "Country": "Pakistan", "Item Type": "Cosmetics", "Sales Channel": "Offline", "Order Priority": "L", "Order Date": "2013-07-05", "Order ID": 231145322, "Ship Date": "2013-08-16", "Units Sold": 9892, "Unit Price": 437.2, "Unit Cost": 263.33, "Total Revenue": 4324782.4, "Total Cost": 2604860.36, "Total Profit": 1719922.04, "Year": 2013, "YearMonth": "2013-07"}, {"Region": "North America", "Country": "Mexico", "Item Type": "Household", "Sales Channel": "Offline", "Order Priority": "C", "Order Date": "2014-11-06", "Order ID": 986435210, "Ship Date": "2014-12-12", "Units Sold": 6954, "Unit Price": 668.27, "Unit Cost": 502.54, "Total Revenue": 4647149.58, "Total Cost": 3494663.16, "Total Profit": 1152486.42, "Year": 2014, "YearMonth": "2014-11"}, {"Region": "Australia and Oceania", "Country": "Federated States of Micronesia", "Item Type": "Beverages", "Sales Channel": "Online", "Order Priority": "C", "Order Date": "2014-10-28", "Order ID": 217221009, "Ship Date": "2014-11-15", "Units Sold": 9379, "Unit Price": 47.45, "Unit Cost": 31.79, "Total Revenue": 445033.55, "Total Cost": 298158.41, "Total Profit": 146875.14, "Year": 2014, "YearMonth": "2014-10"}, {"Region": "Asia", "Country": "Laos", "Item Type": "Vegetables", "Sales Channel": "Offline", "Order Priority": "C", "Order Date": "2011-09-15", "Order ID": 789176547, "Ship Date": "2011-10-23", "Units Sold": 3732, "Unit Price": 154.06, "Unit Cost": 90.93, "Total Revenue": 574951.92, "Total Cost": 339350.76, "Total Profit": 235601.16, "Year": 2011, "YearMonth": "2011-09"}, {"Region": "Europe", "Country": "Monaco", "Item Type": "Baby Food", "Sales Channel": "Offline", "Order Priority": "H", "Order Date": "2012-05-29", "Order ID": 688288152, "Ship Date": "2012-06-02", "Units Sold": 8614, "Unit Price": 255.28, "Unit Cost": 159.42, "Total Revenue": 2198981.92, "Total Cost": 1373243.88, "Total Profit": 825738.04, "Year": 2012, "YearMonth": "2012-05"}, {"Region": "Australia and Oceania", "Country": "Samoa ", "Item Type": "Cosmetics", "Sales Channel": "Online", "Order Priority": "H", "Order Date": "2013-07-20", "Order ID": 670854651, "Ship Date": "2013-08-07", "Units Sold": 9654, "Unit Price": 437.2, "Unit Cost": 263.33, "Total Revenue": 4220728.8, "Total Cost": 2542187.82, "Total Profit": 1678540.98, "Year": 2013, "YearMonth": "2013-07"}, {"Region": "Europe", "Country": "Spain", "Item Type": "Household", "Sales Channel": "Offline", "Order Priority": "L", "Order Date": "2012-10-21", "Order ID": 213487374, "Ship Date": "2012-11-30", "Units Sold": 4513, "Unit Price": 668.27, "Unit Cost": 502.54, "Total Revenue": 3015902.51, "Total Cost": 2267963.02, "Total Profit": 747939.49, "Year": 2012, "YearMonth": "2012-10"}, {"Region": "Middle East and North Africa", "Country": "Lebanon", "Item Type": "Clothes", "Sales Channel": "Online", "Order Priority": "L", "Order Date": "2012-09-18", "Order ID": 663110148, "Ship Date": "2012-10-08", "Units Sold": 7884, "Unit Price": 109.28, "Unit Cost": 35.84, "Total Revenue": 861563.52, "Total Cost": 282562.56, "Total Profit": 579000.96, "Year": 2012, "YearMonth": "2012-09"}, {"Region": "Middle East and North Africa", "Country": "Iran", "Item Type": "Cosmetics", "Sales Channel": "Online", "Order Priority": "H", "Order Date": "2016-11-15", "Order ID": 286959302, "Ship Date": "2016-12-08", "Units Sold": 6489, "Unit Price": 437.2, "Unit Cost": 263.33, "Total Revenue": 2836990.8, "Total Cost": 1708748.37, "Total Profit": 1128242.43, "Year": 2016, "YearMonth": "2016-11"}, {"Region": "Sub-Saharan Africa", "Country": "Zambia", "Item Type": "Snacks", "Sales Channel": "Online", "Order Priority": "L", "Order Date": "2011-01-04", "Order ID": 122583663, "Ship Date": "2011-01-05", "Units Sold": 4085, "Unit Price": 152.58, "Unit Cost": 97.44, "Total Revenue": 623289.3, "Total Cost": 398042.4, "Total Profit": 225246.9, "Year": 2011, "YearMonth": "2011-01"}, {"Region": "Sub-Saharan Africa", "Country": "Kenya", "Item Type": "Vegetables", "Sales Channel": "Online", "Order Priority": "L", "Order Date": "2012-03-18", "Order ID": 827844560, "Ship Date": "2012-04-07", "Units Sold": 6457, "Unit Price": 154.06, "Unit Cost": 90.93, "Total Revenue": 994765.42, "Total Cost": 587135.01, "Total Profit": 407630.41, "Year": 2012, "YearMonth": "2012-03"}, {"Region": "North America", "Country": "Mexico", "Item Type": "Personal Care", "Sales Channel": "Offline", "Order Priority": "L", "Order Date": "2012-02-17", "Order ID": 430915820, "Ship Date": "2012-03-20", "Units Sold": 6422, "Unit Price": 81.73, "Unit Cost": 56.67, "Total Revenue": 524870.06, "Total Cost": 363934.74, "Total Profit": 160935.32, "Year": 2012, "YearMonth": "2012-02"}, {"Region": "Sub-Saharan Africa", "Country": "Sao Tome and Principe", "Item Type": "Beverages", "Sales Channel": "Offline", "Order Priority": "C", "Order Date": "2011-01-16", "Order ID": 180283772, "Ship Date": "2011-01-21", "Units Sold": 8829, "Unit Price": 47.45, "Unit Cost": 31.79, "Total Revenue": 418936.05, "Total Cost": 280673.91, "Total Profit": 138262.14, "Year": 2011, "YearMonth": "2011-01"}, {"Region": "Sub-Saharan Africa", "Country": "The Gambia", "Item Type": "Baby Food", "Sales Channel": "Offline", "Order Priority": "M", "Order Date": "2014-02-03", "Order ID": 494747245, "Ship Date": "2014-03-20", "Units Sold": 5559, "Unit Price": 255.28, "Unit Cost": 159.42, "Total Revenue": 1419101.52, "Total Cost": 886215.78, "Total Profit": 532885.74, "Year": 2014, "YearMonth": "2014-02"}, {"Region": "Middle East and North Africa", "Country": "Kuwait", "Item Type": "Fruits", "Sales Channel": "Online", "Order Priority": "M", "Order Date": "2012-04-30", "Order ID": 513417565, "Ship Date": "2012-05-18", "Units Sold": 522, "Unit Price": 9.33, "Unit Cost": 6.92, "Total Revenue": 4870.26, "Total Cost": 3612.24, "Total Profit": 1258.02, "Year": 2012, "YearMonth": "2012-04"}, {"Region": "Europe", "Country": "Slovenia", "Item Type": "Beverages", "Sales Channel": "Offline", "Order Priority": "C", "Order Date": "2016-10-23", "Order ID": 345718562, "Ship Date": "2016-11-25", "Units Sold": 4660, "Unit Price": 47.45, "Unit Cost": 31.79, "Total Revenue": 221117.0, "Total Cost": 148141.4, "Total Profit": 72975.6, "Year": 2016, "YearMonth": "2016-10"}, {"Region": "Sub-Saharan Africa", "Country": "Sierra Leone", "Item Type": "Office Supplies", "Sales Channel": "Offline", "Order Priority": "H", "Order Date": "2016-12-06", "Order ID": 621386563, "Ship Date": "2016-12-14", "Units Sold": 948, "Unit Price": 651.21, "Unit Cost": 524.96, "Total Revenue": 617347.08, "Total Cost": 497662.08, "Total Profit": 119685.0, "Year": 2016, "YearMonth": "2016-12"}, {"Region": "Australia and Oceania", "Country": "Australia", "Item Type": "Beverages", "Sales Channel": "Offline", "Order Priority": "H", "Order Date": "2014-07-07", "Order ID": 240470397, "Ship Date": "2014-07-11", "Units Sold": 9389, "Unit Price": 47.45, "Unit Cost": 31.79, "Total Revenue": 445508.05, "Total Cost": 298476.31, "Total Profit": 147031.74, "Year": 2014, "YearMonth": "2014-07"}, {"Region": "Middle East and North Africa", "Country": "Azerbaijan", "Item Type": "Office Supplies", "Sales Channel": "Online", "Order Priority": "M", "Order Date": "2012-06-13", "Order ID": 423331391, "Ship Date": "2012-07-24", "Units Sold": 2021, "Unit Price": 651.21, "Unit Cost": 524.96, "Total Revenue": 1316095.41, "Total Cost": 1060944.16, "Total Profit": 255151.25, "Year": 2012, "YearMonth": "2012-06"}, {"Region": "Europe", "Country": "Romania", "Item Type": "Cosmetics", "Sales Channel": "Online", "Order Priority": "H", "Order Date": "2010-11-26", "Order ID": 660643374, "Ship Date": "2010-12-25", "Units Sold": 7910, "Unit Price": 437.2, "Unit Cost": 263.33, "Total Revenue": 3458252.0, "Total Cost": 2082940.3, "Total Profit": 1375311.7, "Year": 2010, "YearMonth": "2010-11"}, {"Region": "Central America and the Caribbean", "Country": "Nicaragua", "Item Type": "Beverages", "Sales Channel": "Offline", "Order Priority": "C", "Order Date": "2011-02-08", "Order ID": 963392674, "Ship Date": "2011-03-21", "Units Sold": 8156, "Unit Price": 47.45, "Unit Cost": 31.79, "Total Revenue": 387002.2, "Total Cost": 259279.24, "Total Profit": 127722.96, "Year": 2011, "YearMonth": "2011-02"}, {"Region": "Sub-Saharan Africa", "Country": "Mali", "Item Type": "Clothes", "Sales Channel": "Online", "Order Priority": "M", "Order Date": "2011-07-26", "Order ID": 512878119, "Ship Date": "2011-09-03", "Units Sold": 888, "Unit Price": 109.28, "Unit Cost": 35.84, "Total Revenue": 97040.64, "Total Cost": 31825.92, "Total Profit": 65214.72, "Year": 2011, "YearMonth": "2011-07"}, {"Region": "Asia", "Country": "Malaysia", "Item Type": "Fruits", "Sales Channel": "Offline", "Order Priority": "L", "Order Date": "2011-11-11", "Order ID": 810711038, "Ship Date": "2011-12-28", "Units Sold": 6267, "Unit Price": 9.33, "Unit Cost": 6.92, "Total Revenue": 58471.11, "Total Cost": 43367.64, "Total Profit": 15103.47, "Year": 2011, "YearMonth": "2011-11"}, {"Region": "Sub-Saharan Africa", "Country": "Sierra Leone", "Item Type": "Vegetables", "Sales Channel": "Offline", "Order Priority": "C", "Order Date": "2016-06-01", "Order ID": 728815257, "Ship Date": "2016-06-29", "Units Sold": 1485, "Unit Price": 154.06, "Unit Cost": 90.93, "Total Revenue": 228779.1, "Total Cost": 135031.05, "Total Profit": 93748.05, "Year": 2016, "YearMonth": "2016-06"}, {"Region": "North America", "Country": "Mexico", "Item Type": "Personal Care", "Sales Channel": "Offline", "Order Priority": "M", "Order Date": "2015-07-30", "Order ID": 559427106, "Ship Date": "2015-08-08", "Units Sold": 5767, "Unit Price": 81.73, "Unit Cost": 56.67, "Total Revenue": 471336.91, "Total Cost": 326815.89, "Total Profit": 144521.02, "Year": 2015, "YearMonth": "2015-07"}, {"Region": "Sub-Saharan Africa", "Country": "Mozambique", "Item Type": "Household", "Sales Channel": "Offline", "Order Priority": "L", "Order Date": "2012-02-10", "Order ID": 665095412, "Ship Date": "2012-02-15", "Units Sold": 5367, "Unit Price": 668.27, "Unit Cost": 502.54, "Total Revenue": 3586605.09, "Total Cost": 2697132.18, "Total Profit": 889472.91, "Year": 2012, "YearMonth": "2012-02"}];
+const SRC = "SALES.csv";
+document.getElementById("srcName").textContent = SRC;
+
+const fmt = n => n>=1e9?(n/1e9).toFixed(2)+"B":n>=1e6?(n/1e6).toFixed(2)+"M":
+  n>=1e3?(n/1e3).toFixed(1)+"K":(Math.round(n*100)/100).toLocaleString();
+const money = n => "$"+fmt(n);
+
+const FILTERS = {
+  fRegion:"Region", fCountry:"Country", fItem:"Item Type",
+  fChannel:"Sales Channel", fPriority:"Order Priority", fYear:"Year"
+};
+function uniq(key){return [...new Set(RAW.map(r=>r[key]))].sort();}
+for(const [id,key] of Object.entries(FILTERS)){
+  const sel=document.getElementById(id);
+  sel.innerHTML='<option value="">All</option>'+
+    uniq(key).map(v=>`<option>${v}</option>`).join("");
+  sel.addEventListener("change",refresh);
+}
+
+function applyFilters(){
+  return RAW.filter(r=>{
+    for(const [id,key] of Object.entries(FILTERS)){
+      const v=document.getElementById(id).value;
+      if(v!=="" && String(r[key])!==v) return false;
+    }
+    return true;
+  });
+}
+
+function groupSum(rows,key,field){
+  const m=new Map();
+  for(const r of rows){m.set(r[key],(m.get(r[key])||0)+(+r[field]||0));}
+  return [...m.entries()].sort((a,b)=>b[1]-a[1]);
+}
+
+const PALETTE=["#4cc9f0","#f72585","#7209b7","#3a0ca3","#4361ee",
+  "#52c41a","#faad14","#fb8500","#06d6a0","#ef476f","#8338ec","#ffbe0b"];
+const GRID="#2c3744", TICK="#8a99a8";
+Chart.defaults.color=TICK; Chart.defaults.borderColor=GRID;
+const charts={};
+
+function mkChart(id,key,cfg){
+  if(charts[key]) charts[key].destroy();
+  charts[key]=new Chart(document.getElementById(id),cfg);
+}
+
+function refresh(){
+  const rows=applyFilters();
+
+  const rev=rows.reduce((s,r)=>s+(+r["Total Revenue"]||0),0);
+  const prof=rows.reduce((s,r)=>s+(+r["Total Profit"]||0),0);
+  const units=rows.reduce((s,r)=>s+(+r["Units Sold"]||0),0);
+  const margin=rev?(prof/rev*100):0;
+  document.getElementById("kpis").innerHTML=[
+    ["Orders",rows.length.toLocaleString()],
+    ["Total Revenue",money(rev)],
+    ["Total Profit",money(prof)],
+    ["Units Sold",fmt(units)],
+    ["Profit Margin",margin.toFixed(1)+"%"],
+  ].map(([l,v])=>`<div class="kpi"><div class="l">${l}</div><div class="v">${v}</div></div>`).join("");
+
+  const ts=groupSum(rows,"YearMonth","Total Revenue").sort((a,b)=>a[0]<b[0]?-1:1);
+  mkChart("cTs","ts",{type:"line",data:{labels:ts.map(d=>d[0]),
+    datasets:[{label:"Revenue",data:ts.map(d=>d[1]),borderColor:PALETTE[0],
+      backgroundColor:"rgba(76,201,240,.15)",fill:true,tension:.25,pointRadius:0}]},
+    options:baseOpts(true)});
+
+  const reg=groupSum(rows,"Region","Total Profit");
+  mkChart("cRegion","region",{type:"bar",data:{labels:reg.map(d=>d[0]),
+    datasets:[{label:"Profit",data:reg.map(d=>d[1]),backgroundColor:PALETTE[1]}]},
+    options:baseOpts(true)});
+
+  const item=groupSum(rows,"Item Type","Total Revenue");
+  mkChart("cItem","item",{type:"bar",data:{labels:item.map(d=>d[0]),
+    datasets:[{label:"Revenue",data:item.map(d=>d[1]),backgroundColor:PALETTE[3]}]},
+    options:{...baseOpts(true),indexAxis:"y"}});
+
+  const ch=groupSum(rows,"Sales Channel","Total Revenue");
+  mkChart("cChannel","channel",{type:"doughnut",data:{labels:ch.map(d=>d[0]),
+    datasets:[{data:ch.map(d=>d[1]),backgroundColor:PALETTE}]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{position:"bottom"}}}});
+
+  const ctry=groupSum(rows,"Country","Total Profit").slice(0,15);
+  mkChart("cCountry","country",{type:"bar",data:{labels:ctry.map(d=>d[0]),
+    datasets:[{label:"Profit",data:ctry.map(d=>d[1]),backgroundColor:PALETTE[5]}]},
+    options:baseOpts(true)});
+
+  renderTable(rows);
+}
+
+function baseOpts(hideLegend){
+  return {responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:!hideLegend}},
+    scales:{x:{grid:{color:GRID}},y:{grid:{color:GRID},
+      ticks:{callback:v=>fmt(v)}}}};
+}
+
+let sortKey="Total Revenue", sortDir=-1;
+const COLS=["Order Date","Region","Country","Item Type","Sales Channel",
+  "Order Priority","Units Sold","Total Revenue","Total Profit"];
+const NUMCOLS=new Set(["Units Sold","Total Revenue","Total Profit"]);
+let lastRows=[];
+
+function renderTable(rows){
+  lastRows=rows;
+  const sorted=[...rows].sort((a,b)=>{
+    let x=a[sortKey],y=b[sortKey];
+    if(NUMCOLS.has(sortKey)){x=+x;y=+y;}
+    return x<y?sortDir:x>y?-sortDir:0;
+  }).slice(0,200);
+  document.querySelector("#tbl thead").innerHTML="<tr>"+COLS.map(c=>
+    `<th class="${NUMCOLS.has(c)?'num':''}" data-c="${c}">${c}${sortKey===c?(sortDir<0?" ▼":" ▲"):""}</th>`).join("")+"</tr>";
+  document.querySelector("#tbl tbody").innerHTML=sorted.map(r=>"<tr>"+COLS.map(c=>{
+    let v=r[c]; if(NUMCOLS.has(c)) v=(c==="Units Sold")?(+v).toLocaleString():money(+v);
+    return `<td class="${NUMCOLS.has(c)?'num':''}">${v}</td>`;}).join("")+"</tr>").join("");
+  document.querySelectorAll("#tbl th").forEach(th=>th.onclick=()=>{
+    const c=th.dataset.c; if(sortKey===c) sortDir*=-1; else {sortKey=c;sortDir=-1;}
+    renderTable(lastRows);
+  });
+}
+
+document.querySelectorAll("button.exp").forEach(btn=>btn.onclick=()=>{
+  if(btn.dataset.csv){ exportCsv(); return; }
+  const c=charts[btn.dataset.chart]; if(!c) return;
+  const link=document.createElement("a");
+  // paint solid background so the PNG isn't transparent
+  const src=c.canvas, tmp=document.createElement("canvas");
+  tmp.width=src.width; tmp.height=src.height;
+  const ctx=tmp.getContext("2d");
+  ctx.fillStyle="#1a212b"; ctx.fillRect(0,0,tmp.width,tmp.height);
+  ctx.drawImage(src,0,0);
+  link.download=btn.dataset.chart+"_chart.png";
+  link.href=tmp.toDataURL("image/png"); link.click();
+});
+
+function exportCsv(){
+  const head=COLS.join(",");
+  const body=lastRows.map(r=>COLS.map(c=>{
+    const v=String(r[c]??""); return /[",\n]/.test(v)?`"${v.replace(/"/g,'""')}"`:v;
+  }).join(",")).join("\n");
+  const blob=new Blob([head+"\n"+body],{type:"text/csv"});
+  const link=document.createElement("a");
+  link.download="filtered_sales.csv"; link.href=URL.createObjectURL(blob); link.click();
+}
+
+refresh();
+</script>
+</body>
+</html>
