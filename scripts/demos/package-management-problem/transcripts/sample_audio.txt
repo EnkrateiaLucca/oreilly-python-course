@@ -1,0 +1,3 @@
+Hello, Lucas. This is a sample audio file for testing your free transcription script.
+The quick brown fox dumps over the lazy dog.
+Today we are testing local speech to text with Python and UV.
