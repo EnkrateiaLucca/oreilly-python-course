@@ -85,15 +85,364 @@
         4. **Use Python scripts to integrate with external LLM APIs**
 
         ---
+
         class: center, middle
-
-        # What Can — and Can't — Be Automated with Python?
-
-        ### Building intuition before writing code
+        # Programming?
 
         ---
 
+        class: center, middle
+
+        # Making Machines Do What You Want 🤖
+
+        ---
+
+        # Example: Instructing a Robot
+
+        --
+
+        - The Task: **"Move forward, pick up the box, turn right, place the box"**
+
+        --
+        
+        - The Code:
+          ```python
+          def deliver_package():
+              robot.move_forward(steps=10)
+              robot.pick_up("box")
+              robot.turn_right(90)
+              robot.place_item("box")
+              robot.say("Package delivered!")
+          ```
+
+        --
+        
+        <div style="display: flex; align-items: center; margin-top: 28px;">
+          <div style="flex: 1; text-align: center;">
+            <div style="font-size: 150px;">🤖</div>
+            <p style="font-size: 0.9em;">The robot follows your instructions exactly!</p>
+          </div>
+        </div>
+
+        ---
+
+        # It's Like Writing Recipes
+
+        <div style="display: flex; align-items: center;">
+          <div style="flex: 1;">
+            <pre><code class="python" style="font-size: 0.8em;"># Pancake Making Algorithm
+
+            def make_pancake():
+                # Step 1: Prepare batter base
+                batter = mix_flour_and_milk()
+
+                # Step 2: Complete the batter
+                batter = add_egg_and_stir(batter)
+
+                # Step 3: Prepare cooking surface
+                pan = heat_pan_on_stove()
+
+                # Step 4: Start cooking
+                pour_batter_in_pan(pan, batter)
+
+                # Step 5: Wait for indicator
+                wait_for_bubbles()
+
+                # Step 6: Turn the pancake
+                flip_pancake()
+
+                # Step 7: Finish cooking
+                cook_other_side()
+
+                return pancake
+              </code></pre>
+          </div>
+        </div>
+        
+
+        ---
+
+        class: center, middle
+
+        # Why Learn to Automate?
+
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin-top: 14px;">
+          <div style="flex: 0 0 42%; text-align: center;">
+            <img src="../assets/media/2025-11-19-10-22-11.png" width="100%">
+            <p style="font-size: 0.8em;">Automate repetitive tasks</p>
+          </div>
+          <div style="flex: 0 0 42%; text-align: center;">
+            <img src="../assets/media/2025-11-19-10-26-42.png" width="100%">
+            <p style="font-size: 0.8em;">Increase productivity</p>
+          </div>
+          <div style="flex: 0 0 42%; text-align: center;">
+            <img src="../assets/media/2025-11-19-10-32-14.png" width="100%">
+            <p style="font-size: 0.8em;">Replace subscriptions (save $)</p>
+          </div>
+          <div style="flex: 0 0 42%; text-align: center;">
+            <img src="../assets/media/2025-11-19-10-32-52.png" width="100%">
+            <p style="font-size: 0.8em;">Analyse massive amounts of data</p>
+          </div>
+        </div>
+
+        ---
+
+        class: center, middle
+
+        # The Real Reason…
+
+        ## Writing code = the most general skill you can have!
+
+        *It's a superpower :)*
+
+        ---
+
+        # Automation is for Everyone
+
+        ### Learning to automate ≠ everyone should be a developer
+
+        --
+
+        - Automation skills are for **everyone**
+
+        --
+
+        - Professional software engineering is a **specialized career**
+
+        --
+
+        - You can be productive with code **without becoming a full-time developer**
+
+        --
+
+        - **Script** = a simple program that automates a task
+
+        --
+
+        - **Professional software** = a complex program engineered for many people
+
+        ---
+
+        # Scripting ≠ 'Software Engineering'
+
+        **Scripting** is:
+
+        --
+
+        - Writing code to fulfil a set of pre-defined steps that accomplish a task
+
+        --
+
+        - Quick, targeted, and task-oriented
+
+        --
+
+        - Something you don't overthink
+
+        --
+
+        - Typically for automations, data manipulation, or utility tasks
+
+        ---
+
+        class: center, middle
+
+        # Who Are You Building For?
+
+        <div style="margin-top: 24px;">
+          <table style="margin: 0 auto; border-collapse: collapse; font-family: 'Droid Serif'; font-size: 1em; width: 85%;">
+            <thead>
+              <tr style="background: #1a1a2e; color: white;">
+                <th style="padding: 12px 20px; text-align: left; font-family: 'Yanone Kaffeesatz'; font-size: 1.2em; font-weight: normal;">Audience</th>
+                <th style="padding: 12px 20px; text-align: center; font-family: 'Yanone Kaffeesatz'; font-size: 1.2em; font-weight: normal;">Reliability</th>
+                <th style="padding: 12px 20px; text-align: center; font-family: 'Yanone Kaffeesatz'; font-size: 1.2em; font-weight: normal;">Security</th>
+                <th style="padding: 12px 20px; text-align: center; font-family: 'Yanone Kaffeesatz'; font-size: 1.2em; font-weight: normal;">Scalability</th>
+                <th style="padding: 12px 20px; text-align: center; font-family: 'Yanone Kaffeesatz'; font-size: 1.2em; font-weight: normal;">UX</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="background: #f8f8f8;">
+                <td style="padding: 10px 20px; font-weight: bold;">🌍 Public</td>
+                <td style="padding: 10px 20px; text-align: center;">⭐⭐⭐</td>
+                <td style="padding: 10px 20px; text-align: center;">⭐⭐⭐</td>
+                <td style="padding: 10px 20px; text-align: center;">⭐⭐⭐</td>
+                <td style="padding: 10px 20px; text-align: center;">⭐⭐⭐</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px 20px; font-weight: bold;">🤝 Partners</td>
+                <td style="padding: 10px 20px; text-align: center;">⭐⭐</td>
+                <td style="padding: 10px 20px; text-align: center;">⭐⭐</td>
+                <td style="padding: 10px 20px; text-align: center;">⭐⭐</td>
+                <td style="padding: 10px 20px; text-align: center;">⭐⭐</td>
+              </tr>
+              <tr style="background: #f8f8f8;">
+                <td style="padding: 10px 20px; font-weight: bold;">🏢 Internal</td>
+                <td style="padding: 10px 20px; text-align: center;">⭐⭐</td>
+                <td style="padding: 10px 20px; text-align: center;">⭐</td>
+                <td style="padding: 10px 20px; text-align: center;">⭐</td>
+                <td style="padding: 10px 20px; text-align: center;">⭐⭐</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px 20px; font-weight: bold;">🧑‍💻 Personal</td>
+                <td style="padding: 10px 20px; text-align: center;">⭐</td>
+                <td style="padding: 10px 20px; text-align: center;">⭐</td>
+                <td style="padding: 10px 20px; text-align: center;">⭐</td>
+                <td style="padding: 10px 20px; text-align: center;">⭐</td>
+              </tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.75em; color: #888; margin-top: 16px;">The audience shapes every technical decision you make</p>
+        </div>
+
+        ---
+
+        class: center, middle
+
+        # Real Automation Examples (that I use!)
+
+        <div style="display: flex; justify-content: center; gap: 30px; margin-top: 10px;">
+          <div style="flex: 1; text-align: center;">
+            <img src="../assets/media/2025-11-19-11-26-31.png" width="90%">
+            <p style="font-size: 0.8em;"><b>Bulk YouTube Upload</b><br>50 videos, metadata from a spreadsheet — saved 10+ hrs</p>
+          </div>
+          <div style="flex: 1; text-align: center;">
+            <img src="../assets/media/2025-11-19-11-29-29.png" width="90%">
+            <p style="font-size: 0.8em;"><b>Notes Processor</b><br>Scattered notes → organized summaries with action items</p>
+          </div>
+        </div>
+
+        ???
+
+        - YouTube: upload 50 videos with custom metadata; a script reads a spreadsheet and automates it (saved 10+ hours).
+        - Notes Processor: parse notes, extract key points, generate formatted reports.
+
+        ---
+
+        class: center, middle
+
+        # Your automation doesn't need to be perfect—it just needs to solve YOUR problem!
+
+        ---
+
+        class: center, middle
+        
+        <div style="display: flex; align-items: center; justify-content: center;">
+            <h1 style="margin-right: 20px;">Why Python?</h1>
+            <img src="../assets/media/python-logo.svg" width="100px">
+        </div>
+
+        ---
+
+        <div style="display: flex; align-items: left; ">
+          <h1 style="margin-right: 20px;">What is Python?</h1>
+          <img src="../assets/media/python-logo.svg" width="100px">
+        </div>
+
+        **Python** is a high-level, general-purpose programming language designed for readability and simplicity.
+
+        --
+
+        Created by Guido van Rossum in 1991, Python emphasizes code that reads like English.
+
+        --
+
+        <div style="display: flex; align-items: center; margin-top: 20px;">
+          <div style="flex: 1;">
+            <h3>English:</h3>
+            <p style="font-size: 1.1em;">"For each item in my shopping list, print the item"</p>
+          </div>
+          <div style="flex: 1;">
+            <h3>Python:</h3>
+            <pre><code class="python" style="font-size: 1.0em;">for item in shopping_list:
+    print(item)</code></pre>
+          </div>
+        </div>
+
+        --
+
+        **See how similar they are? That's Python's superpower!**
+
+        ---
+
+        <div style="display: flex; align-items: left; ">
+          <h1 style="margin-right: 20px;">Python is Easy and Everywhere</h1>
+          <img src="../assets/media/python-logo.svg" width="100px">
+        </div>
+
+        - **General Purpose**: web, data science, automation, AI, and more
+
+        --
+
+        - **#1 language** among developers worldwide (TIOBE, Stack Overflow)
+
+        --
+
+        - **Powers**: 🤖 AI/ML · 🚗 self-driving cars · 🌐 Instagram/Spotify/Netflix · 🔬 research
+
+        --
+
+        - **Beginner-friendly**: reads like English, minimal syntax
+
+        ---
+
+        # Scripting with Python
+
+        --
+
+        - Much faster learning curve - *if it works don't change it*
+
+        --
+
+        - Immediate practical benefits - *makes your life better*
+
+        --
+
+        - Ideal for nondevelopers who just want to get things done
+
+        --
+
+        - **It's about learning to solve YOUR specific problems**
+
+        --
+
+        - Scripts should be **tailored to your unique needs**, not one-size-fits-all solutions
+
+        ---
+
+        class: center, middle
+
+        # _The Ostrich Approach to Learning Python_
+
+        <div style="text-align: center;">
+            <img src="../assets/media/2025-01-31-16-24-34.png" width="30%">
+        </div>
+
+        ---
+
+        class: center, middle
+
+        <div style="text-align: center;">
+          <img src="../assets/media/2025-01-31-16-20-25.png" width="100%">
+        </div>
+
+        ---
+
+        class: center, middle
+
+        # It's about Learning What We Need for Our Tasks!
+
+        --
+        
+        *And purposefuly ignoring that which does not seem to have any effect on its
+        success.*
+
+        ---
+
+        class: center, middle
+
         # Where we're going
+
+        ### Building intuition before writing code
 
         **Part 1 — What Python _can_ do for you**
         A framework for spotting automations in your own work.
@@ -106,6 +455,7 @@
         > The hard part is **seeing the automation**.
 
         ---
+
         class: center, middle
 
         # Part 1
@@ -119,25 +469,16 @@
 
         # `INPUT → PROCESS → OUTPUT`
 
-        Before writing any code, fill in three blanks.
-
         | Blank        | Example                                        |
         | ------------ | ---------------------------------------------- |
         | **Input?**   | A folder, CSV, URL, PDF, clipboard, API call   |
         | **Process?** | Rename, filter, extract, summarize, convert    |
         | **Output?**  | A new file, a report, an email, a sheet row    |
 
-        ---
+        **Example:** "Rename all photos in a folder by the date they were taken."
+        → Input: a folder of photos · Process: read each EXIF date · Output: renamed files
 
-        # Example — filled in
-
-        **Task:** "Rename all photos in a folder by the date they were taken."
-
-        - **Input:** a folder of photos
-        - **Process:** read each photo's EXIF date
-        - **Output:** renamed files in the same folder
-
-        If you can say it in one sentence like this, **you have a script**.
+        If you can say it in one sentence, **you have a script**.
 
         ---
 
@@ -173,76 +514,39 @@
 
         ---
 
-        # Category examples (1–3)
+        # Category examples
 
-        **1. Files & folders**
-        Rename 300 photos by date • Sort Downloads by file type • Zip-backup a folder every Friday
+        **1. Files & folders** — rename 300 photos by date · sort Downloads by type · weekly zip-backup
 
-        **2. Text & data**
-        Clean a CSV • Extract emails from a folder of PDFs • Convert `.docx` → Markdown
+        **2. Text & data** — clean a CSV · extract emails from PDFs · `.docx` → Markdown
 
-        **3. The web**
-        Track a stock price daily • Scrape public headlines • Call a public API, save as spreadsheet
+        **3. The web** — track a stock price · scrape public headlines · call an API → spreadsheet
 
-        ---
+        **4. App integrations** — log unread Gmail · daily Slack summary · sync calendar → Notion
 
-        # Category examples (4–5)
+        **5. AI-powered** — summarize meeting notes · classify support emails · clean up transcripts
 
-        **4. App integrations**
-        Read unread Gmail and log subjects • Post a daily Slack summary • Sync calendar events into Notion
-
-        **5. AI-powered**
-        Summarize a folder of meeting notes • Classify incoming support emails • Turn voice memo transcripts into clean drafts
-
-        > Common thread in green-zone work: data is **reachable**, rules are **describable**, errors are **cheap**.
+        > Green-zone work: data is **reachable**, rules are **describable**, errors are **cheap**.
 
         ---
 
-        # From idea to runnable script — 4 steps
+        # From idea to runnable script
 
-        1. **Write the one-sentence spec**
-          _"Take `<input>`, do `<process>`, produce `<output>`."_
-
-        2. **Ask an AI to draft it** (template on next slide)
-
-        3. **Run it**
-          `uv run python scripts/my_tool.py --input ./folder`
-
-        4. **Turn it into a CLI tool**
-          `argparse` + save to `scripts/` + a `--help` description
-
-        ---
-
-        # Reusable AI prompt template
+        1. **Write the one-sentence spec** — _"Take `<input>`, do `<process>`, produce `<output>`."_
+        2. **Ask an AI to draft it** (template below)
+        3. **Run it** — `uv run python scripts/my_tool.py --input ./folder`
+        4. **Turn it into a CLI tool** — `argparse` + save to `scripts/` + a `--help` line
 
         ```
         Write a Python script that:
         - Takes <input> as input
         - Does <process>
         - Produces <output>
-
         Make it runnable from the command line with argparse.
-        Use only the standard library unless you need <library>.
         ```
 
-        Paste your one-sentence spec into the blanks. That's it.
-
         ---
 
-        # Script → CLI tool
-
-        The jump students underestimate is **not** writing the code.
-        It's turning a one-off script into a reusable tool.
-
-        Three moves:
-
-        1. Replace hardcoded paths with `argparse` arguments
-        2. Save it to `scripts/` with a clear name
-        3. Add a one-line `--help` description
-
-        **That's the whole difference** between a script and a tool.
-
-        ---
         class: center, middle
 
         # Part 2
@@ -352,6 +656,7 @@
         That last sentence is often the most valuable thing you'll learn.
 
         ---
+
         class: center, middle
 
         ## The real skill isn't Python.
@@ -362,6 +667,7 @@
         ### that was always in the red zone.
 
         ---
+
         class: center, middle
 
         <h1>
@@ -371,408 +677,7 @@
         </h1>
 
         ---
-        class: center, middle
-        # Programming?
 
-        ---
-        class: center, middle
-
-        # Making Machines Do What You Want 🤖
-        ---
-
-        # Example: Instructing a Robot
-
-        --
-
-        - The Task: **"Move forward, pick up the box, turn right, place the box"**
-
-        --
-        
-        - The Code:
-          ```python
-          def deliver_package():
-              robot.move_forward(steps=10)
-              robot.pick_up("box")
-              robot.turn_right(90)
-              robot.place_item("box")
-              robot.say("Package delivered!")
-          ```
-
-        --
-        
-        <div style="display: flex; align-items: center; margin-top: 28px;">
-          <div style="flex: 1; text-align: center;">
-            <div style="font-size: 150px;">🤖</div>
-            <p style="font-size: 0.9em;">The robot follows your instructions exactly!</p>
-          </div>
-        </div>
-
-        ---
-
-        # It's Like Writing Recipes
-
-        <div style="display: flex; align-items: center;">
-          <div style="flex: 1;">
-            <pre><code class="python" style="font-size: 0.8em;"># Pancake Making Algorithm
-
-            def make_pancake():
-                # Step 1: Prepare batter base
-                batter = mix_flour_and_milk()
-
-                # Step 2: Complete the batter
-                batter = add_egg_and_stir(batter)
-
-                # Step 3: Prepare cooking surface
-                pan = heat_pan_on_stove()
-
-                # Step 4: Start cooking
-                pour_batter_in_pan(pan, batter)
-
-                # Step 5: Wait for indicator
-                wait_for_bubbles()
-
-                # Step 6: Turn the pancake
-                flip_pancake()
-
-                # Step 7: Finish cooking
-                cook_other_side()
-
-                return pancake
-              </code></pre>
-          </div>
-        </div>
-        
-        ---
-        class: center, middle
-
-        # Why Learn to Automate?
-
-        ---
-        class: center, middle
-
-        # Automate Repetitive Tasks
-
-        <img src="../assets/media/2025-11-19-10-22-11.png" width="100%">
-        
-        ---
-        class: center, middle
-
-        # Increase Productivity
-
-        <img src="../assets/media/2025-11-19-10-26-42.png" width="60%">
-            
-        ---
-        class: center, middle
-
-        # Replacing Subscriptions (saving $)
-
-        <img src="../assets/media/2025-11-19-10-32-14.png" width="60%">
-            
-        ---
-        class: center, middle
-
-        # Analyse Massive Amounts of Data
-
-        <img src="../assets/media/2025-11-19-10-32-52.png" width="80%">
-            
-        ---
-        class: center, middle
-
-        # The Real Reason....
-
-        ---
-        class: center, middle
-
-        # Writing code = the most general skill you can have!
-        *It is a superpower! :)*        
-
-        ---
-        class: center, middle
-
-        # Important Clarification
-
-        ## Learning to automate ≠ Everyone should be a developer
-
-        ---
-        # Automation is for Everyone
-
-        --
-        
-        - Automation skills are for **everyone**
-
-        --
-
-        - Professional software engineering is a **specialized career**
-
-        --
-
-        - You can be productive with code **without becoming a full-time developer**
-
-        --
-
-        - It's about writing **scripts** not fancy software
-
-        --
-
-        - Script = **simple program** that automates a task
-
-        --
-
-        - Professional software =  **complex program engineered** to be used by many people
-
-        ---
-        class: center, middle
-
-        # Scripting ≠ 'Software Engineering'
-
-        ---
-        class: center, middle
-
-        # Who Are You Building For?
-
-        <div style="margin-top: 24px;">
-          <table style="margin: 0 auto; border-collapse: collapse; font-family: 'Droid Serif'; font-size: 1em; width: 85%;">
-            <thead>
-              <tr style="background: #1a1a2e; color: white;">
-                <th style="padding: 12px 20px; text-align: left; font-family: 'Yanone Kaffeesatz'; font-size: 1.2em; font-weight: normal;">Audience</th>
-                <th style="padding: 12px 20px; text-align: center; font-family: 'Yanone Kaffeesatz'; font-size: 1.2em; font-weight: normal;">Reliability</th>
-                <th style="padding: 12px 20px; text-align: center; font-family: 'Yanone Kaffeesatz'; font-size: 1.2em; font-weight: normal;">Security</th>
-                <th style="padding: 12px 20px; text-align: center; font-family: 'Yanone Kaffeesatz'; font-size: 1.2em; font-weight: normal;">Scalability</th>
-                <th style="padding: 12px 20px; text-align: center; font-family: 'Yanone Kaffeesatz'; font-size: 1.2em; font-weight: normal;">UX</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr style="background: #f8f8f8;">
-                <td style="padding: 10px 20px; font-weight: bold;">🌍 Public</td>
-                <td style="padding: 10px 20px; text-align: center;">⭐⭐⭐</td>
-                <td style="padding: 10px 20px; text-align: center;">⭐⭐⭐</td>
-                <td style="padding: 10px 20px; text-align: center;">⭐⭐⭐</td>
-                <td style="padding: 10px 20px; text-align: center;">⭐⭐⭐</td>
-              </tr>
-              <tr>
-                <td style="padding: 10px 20px; font-weight: bold;">🤝 Partners</td>
-                <td style="padding: 10px 20px; text-align: center;">⭐⭐</td>
-                <td style="padding: 10px 20px; text-align: center;">⭐⭐</td>
-                <td style="padding: 10px 20px; text-align: center;">⭐⭐</td>
-                <td style="padding: 10px 20px; text-align: center;">⭐⭐</td>
-              </tr>
-              <tr style="background: #f8f8f8;">
-                <td style="padding: 10px 20px; font-weight: bold;">🏢 Internal</td>
-                <td style="padding: 10px 20px; text-align: center;">⭐⭐</td>
-                <td style="padding: 10px 20px; text-align: center;">⭐</td>
-                <td style="padding: 10px 20px; text-align: center;">⭐</td>
-                <td style="padding: 10px 20px; text-align: center;">⭐⭐</td>
-              </tr>
-              <tr>
-                <td style="padding: 10px 20px; font-weight: bold;">🧑‍💻 Personal</td>
-                <td style="padding: 10px 20px; text-align: center;">⭐</td>
-                <td style="padding: 10px 20px; text-align: center;">⭐</td>
-                <td style="padding: 10px 20px; text-align: center;">⭐</td>
-                <td style="padding: 10px 20px; text-align: center;">⭐</td>
-              </tr>
-            </tbody>
-          </table>
-          <p style="font-size: 0.75em; color: #888; margin-top: 16px;">The audience shapes every technical decision you make</p>
-        </div>
-
-        ---
-        class: center, middle
-
-        # Scripting
-
-        <img src="../assets/media/2025-11-19-11-02-07.png" width="100%">
-
-        ---
-        class: center, middle
-
-        # Software Engineering
-
-        <img src="../assets/media/2026-04-14-software-engineering-graph.png" width="100%">
-
-        ---
-        # Scripting
-
-            
-        - Writing code to full fill a set of pre-defined steps that accomplish a task
-
-        --
-        
-        - Quick, targeted, and task-oriented 
-
-        --
-
-        - You don't think that much about it
-
-        --
-        
-        - Typically used for automations, data manipulation, or utility tasks  
-
-        ---
-        class: center, middle
-        # Real Automation Examples (that I use!)
-
-        ---
-        class: center, middle
-
-        # Bulk YouTube Upload Automation
-
-        <img src="../assets/media/2025-11-19-11-26-31.png" width="60%">
-
-        ???
-        
-        - Problem: Upload 50 videos with custom metadata (titles, descriptions...)
-        
-        - Solution: Script that reads metadata from a spreadsheet and automates the upload process
-        
-        - Saved: 10+ hours of repetitive clicking
-
-        ---
-        class: center, middle
-
-        # Notes Processor
-
-        <img src="../assets/media/2025-11-19-11-29-29.png" width="60%">
-
-        ???
-        
-        - Problem: Convert scattered meeting notes into organized summaries with action items
-        
-        - Solution: Script that parses notes, extracts key points, and generates formatted reports
-        
-        - Benefit: Consistent documentation without manual reformatting
-
-        ---
-        class: center, middle
-
-        # Your automation doesn't need to be perfect—it just needs to solve YOUR problem!
-
-        ---
-        class: center, middle
-        
-        <div style="display: flex; align-items: center; justify-content: center;">
-            <h1 style="margin-right: 20px;">Why Python?</h1>
-            <img src="../assets/media/python-logo.svg" width="100px">
-        </div>
-
-        ---
-
-        <div style="display: flex; align-items: left; ">
-          <h1 style="margin-right: 20px;">What is Python?</h1>
-          <img src="../assets/media/python-logo.svg" width="100px">
-        </div>
-
-        **Python** is a high-level, general-purpose programming language designed for readability and simplicity.
-
-        --
-
-        Created by Guido van Rossum in 1991, Python emphasizes code that reads like English.
-
-        --
-
-        <div style="display: flex; align-items: center; margin-top: 20px;">
-          <div style="flex: 1;">
-            <h3>English:</h3>
-            <p style="font-size: 1.1em;">"For each item in my shopping list, print the item"</p>
-          </div>
-          <div style="flex: 1;">
-            <h3>Python:</h3>
-            <pre><code class="python" style="font-size: 1.0em;">for item in shopping_list:
-    print(item)</code></pre>
-          </div>
-        </div>
-
-        --
-
-        **See how similar they are? That's Python's superpower!**
-
-        ---
-        <div style="display: flex; align-items: left; ">
-          <h1 style="margin-right: 20px;">Python is Easy and Everywhere</h1>
-          <img src="../assets/media/python-logo.svg" width="100px">
-        </div>
-
-        <div style="text-align: center;">
-          <div style="display: inline-block; background: #f0f0f0; border-radius: 16px; padding: 16px;">
-            <img src="../assets/media/2026-04-14-python-most-popular.png" width="100%" style="border-radius: 12px; display: block; max-width: 900px;">
-          </div>
-        </div>
-
-        ---
-
-        <div style="display: flex; align-items: left; ">
-          <h1 style="margin-right: 20px;">Python is Easy and Everywhere</h1>
-          <img src="../assets/media/python-logo.svg" width="100px">
-        </div>
-
-        - **General Purpose**: Can be used for web development, data science, automation, AI, and more
-
-        --
-
-        - **Most Popular**: #1 language among developers worldwide (TIOBE Index, Stack Overflow)
-
-        --
-
-        - **Powers Modern Technology**:
-          - 🤖 AI & Machine Learning (TensorFlow, PyTorch)
-          - 🚗 Self-driving cars (Tesla, Waymo)
-          - 👁️ Computer vision & image recognition
-          - 🌐 Web applications (Instagram, Spotify, Netflix)
-          - 🔬 Scientific computing & research
-
-        --
-
-        - **Beginner-Friendly**: Reads like English, minimal syntax complexity
-
-        ---
-        # Scripting with Python
-
-        --
-
-        - Much faster learning curve - *if it works don't change it*
-
-        --
-
-        - Immediate practical benefits - *makes your life better*
-
-        --
-
-        - Ideal for nondevelopers who just want to get things done
-
-        --
-
-        - **It's about learning to solve YOUR specific problems**
-
-        --
-
-        - Scripts should be **tailored to your unique needs**, not one-size-fits-all solutions
-
-        ---
-        class: center, middle
-
-        # _The Ostrich Approach to Learning Python_
-
-        <div style="text-align: center;">
-            <img src="../assets/media/2025-01-31-16-24-34.png" width="30%">
-        </div>
-
-        ---
-        class: center, middle
-
-        <div style="text-align: center;">
-          <img src="../assets/media/2025-01-31-16-20-25.png" width="100%">
-        </div>
-
-        ---
-        class: center, middle
-
-        # It's about Learning What We Need for Our Tasks!
-
-        --
-        
-        *And purposefuly ignoring that which does not seem to have any effect on its
-        success.*
-
-        ---
         class: center, middle
 
         # The Busy Person Guide to Python Basics 🐍
@@ -781,6 +686,7 @@
         
 
         ---
+
         # What We'll Learn
 
         We cover only what's needed to **automate**, and nothing more.
@@ -799,7 +705,9 @@
 
         **Intuition**: a feel for what's worth the effort
         ]
+
         ---
+
         class: center, middle
 
         <h1>
@@ -811,7 +719,9 @@
         <div style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
           <img src="../assets/media/qr-code-repo.png" width="200px">
         </div>
+
         ---
+
         # What You Need Installed
 
         | Tool | Purpose |
@@ -823,7 +733,9 @@
         | **An AI chatbot** | ChatGPT, Claude, or Gemini |
 
         .callout[Everything runs through `uv run`, so there's no manual environment activation.]
+
         ---
+
         # Code Is Mostly Moving Data Around
 
         Nearly every program does one thing: **take data and change it.**
@@ -835,7 +747,9 @@
         **Operations**: what you *do* to data, like `5 + 5`
 
         **Variables**: the *names* you give data, like `name = "Lucas"`, so you can reuse it later
+
         ---
+
         # Read Code Like a Sentence
 
         ```python
@@ -849,7 +763,9 @@
         ```
 
         Each line **names** a piece of data, then **does something** with it.
+
         ---
+
         class: center, middle
 
         <h1>
@@ -857,7 +773,9 @@
              Data Types; Operations; Variables - Demo
             </span>
         </h1>
+
         ---
+
         # The Building Blocks
 
         .pull-left[
@@ -881,7 +799,9 @@
 
         Compare: `>   <   ==   !=`
         ]
+
         ---
+
         # Variables Are Named Values
 
         Store a value once, then reach for it by name as often as you like.
@@ -891,7 +811,9 @@
         b = 20
         print(a + b)   # 30
         ```
+
         ---
+
         class: center, middle
 
         <h1>
@@ -899,7 +821,9 @@
               Demo: Functions, Lists & Loops
             </span>
         </h1>
+
         ---
+
         # Functions
 
         A function bundles steps that do **one job**, so you write them once.
@@ -912,7 +836,9 @@
         ```
 
         .callout[...and you would write it again for every new price and tax rate.]
+
         ---
+
         # Define Once, Reuse Anywhere
 
         ```python
@@ -927,7 +853,9 @@
         calculate_total(10, 0.05)   # 10.5
         calculate_total(20, 0.10)   # 22.0
         ```
+
         ---
+
         # Anatomy of a Function
 
         ```python
@@ -937,7 +865,9 @@
 
         - **Why bother**: reuse logic, and split big tasks into small ones
         - **Rule of thumb**: short, well-named, one job each
+
         ---
+
         # Lists
 
         An **ordered collection** of items.
@@ -958,7 +888,9 @@
         ```python
         tasks[0:2]   # ['Buy groceries', 'Finish project']
         ```
+
         ---
+
         # Loops
 
         Run the **same step on every item**, instead of copy-pasting.
@@ -974,7 +906,9 @@
         ```
 
         .callout[Renaming files in a folder, or processing rows in a table: the same shape every time.]
+
         ---
+
         class: center, middle
 
         <h1>
@@ -982,7 +916,9 @@
              Demo - Dictionaries, Tabular Data, Conditionals
             </span>
         </h1>
+
         ---
+
         # Dictionaries
 
         Store data as **key / value** pairs, then look it up by name.
@@ -997,7 +933,9 @@
         ```
 
         .callout[Configs, lookups, caching: anywhere you want the value for a given key.]
+
         ---
+
         # Comparisons Answer True or False
 
         .pull-left[
@@ -1019,7 +957,9 @@
         not True         # False
         ```
         ]
+
         ---
+
         # Conditionals Make Decisions
 
         `if / elif / else` lets code choose a path based on the data.
@@ -1034,7 +974,9 @@
         ```
 
         .callout[Reacting to data is the core of almost every automation.]
+
         ---
+
         class: center, middle
 
         # Poll Questions 🗳️
@@ -1216,6 +1158,147 @@
         **Explanation:** The `with` block opens the file, lets you `read()` it, then **closes it for you** even if something goes wrong. `"r"` means read mode; use `"w"` to write and `"a"` to append.
 
         ---
+
+        # Poll Question 9
+
+        🗳️ *Type your answer in the chat before the reveal.*
+
+        **What does this print?**
+
+        ```python
+        price = 19.5
+        print(f"Total: ${price:.2f}")
+        ```
+
+        --
+
+        **Answer:** `Total: $19.50`
+
+        --
+
+        **Explanation:** Inside an f-string, `:.2f` formats the number with exactly two decimal places — perfect for money.
+
+        ---
+
+        # Poll Question 10
+
+        🗳️ *Type your answer in the chat before the reveal.*
+
+        **What does this print?**
+
+        ```python
+        contacts = {"Alice": "555-0101"}
+        print(contacts.get("Bob", "Not found"))
+        ```
+
+        --
+
+        **Answer:** `Not found`
+
+        --
+
+        **Explanation:** `.get(key, default)` returns the default when the key is missing — so it won't crash like `contacts["Bob"]` would.
+
+        ---
+
+        # Poll Question 11
+
+        🗳️ *Type your answer in the chat before the reveal.*
+
+        **What does `tasks[1:3]` give you?**
+
+        ```python
+        tasks = ["email", "meeting", "code", "lunch"]
+        print(tasks[1:3])
+        ```
+
+        --
+
+        **Answer:** `['meeting', 'code']`
+
+        --
+
+        **Explanation:** Slicing `[1:3]` takes items at index 1 and 2 — the start is included, the end (3) is **not**.
+
+        ---
+
+        # Poll Question 12
+
+        🗳️ *Type your answer in the chat before the reveal.*
+
+        **What's wrong with this code?**
+
+        ```python
+        age = input("Your age: ")
+        print(age + 10)
+        ```
+
+        --
+
+        **Answer:** `input()` returns a **string**, so `"30" + 10` is a TypeError.
+
+        --
+
+        **Explanation:** Wrap it in `int(...)`: `age = int(input("Your age: "))`. Then the math works.
+
+        ---
+
+        # Poll Question 13
+
+        🗳️ *Type your answer in the chat before the reveal.*
+
+        **Fill in the blanks to print the grade:**
+
+        ```python
+        score = 75
+        ___ score >= 90:
+            print("A")
+        ___ score >= 70:
+            print("B")
+        ___:
+            print("C")
+        ```
+
+        --
+
+        **Answer:**
+        ```python
+        if score >= 90:
+            print("A")
+        elif score >= 70:
+            print("B")
+        else:
+            print("C")
+        ```
+
+        --
+
+        **Explanation:** Python checks `if` → `elif` → `else` top to bottom and runs the **first** branch that's true. Here `score = 75` prints `B`.
+
+        ---
+
+        # Poll Question 14
+
+        🗳️ *Type your answer in the chat before the reveal.*
+
+        **What is this code doing?**
+
+        ```python
+        for n in [10, 7, 4, 3]:
+            if n % 2 == 0:
+                print(n, "is even")
+        ```
+
+        --
+
+        **Answer:** Printing the even numbers: `10 is even`, then `4 is even`.
+
+        --
+
+        **Explanation:** `n % 2` is the remainder after dividing by 2. When it's `0`, the number is even — a super common automation check.
+
+        ---
+
         # The "Just Ask AI" Naive Approach
 
         --
@@ -1225,6 +1308,7 @@
         </div>
 
         ---
+
         # The "Just Ask AI" Naive Approach
 
         <div style="display: flex; justify-content: center; align-items: center; margin-top: 120px;margin-left: 50px;">
@@ -1232,6 +1316,7 @@
         </div>
 
         ---
+
         class: center, middle
 
         <h1>
@@ -1241,6 +1326,7 @@
         </h1>
 
         ---
+
         # Reading/Writing
 
         - **Tabular Data**: Data that is organized in a table format
@@ -1277,8 +1363,8 @@
             </tr>
         </table>
 
-
         ---
+
         class: center, middle
 
         # Understanding APIs & Packages
@@ -1444,6 +1530,7 @@
         **Tools:** pipenv, conda, venv, poetry... **Confusing for beginners!**
 
         ---
+
         class: center, middle
 
         <h1>
@@ -1551,6 +1638,7 @@
         > Replace `myscript` with the name you want, and the path with your script's path.
 
         ---
+
         class: center, middle
 
         <h1>
@@ -1560,6 +1648,7 @@
         </h1>
 
         ---
+
         class: center, middle
 
         # The Vibe Scripting Steps
@@ -1569,6 +1658,7 @@
         </div>
 
         ---
+
         # The Vibe Scripting Workflow
 
         <div class="vflow">
@@ -1596,6 +1686,7 @@
         </div>
 
         ---
+
         class: center, middle
 
         # How to Use AI to Learn/Use Python
@@ -1603,12 +1694,14 @@
         *A quick detour to set up an AI toolkit to speed up our Automation skills *
 
         ---
+
         class: center, middle
 
         # Learning Python with AI
         *Your Personal Programming Tutor*
 
         ---
+
         class: center, middle
 
         # The AI Coding Upskilling Curve
@@ -1618,6 +1711,7 @@
         </div>
 
         ---
+
         class: center, middle
 
         <h1>
@@ -1711,6 +1805,7 @@
         <h2 style="text-align: center"><span style="background-color: lightgreen">`scripts/demos/email-comms`</span></h2>
 
         ---
+
         class: center, middle
         
 
@@ -1720,6 +1815,7 @@
         </span>
         </h1>
         
+
         ---
 
         class: center, middle
@@ -1737,6 +1833,7 @@
         *Slop comes from vague prompts and zero review — not from using AI*
 
         ---
+
         # Using AI != Slop
 
         1. **Slop comes from vague prompts; craft comes from specific, capability-aware prompts.** Name the libraries, the input, and the exact behavior:
