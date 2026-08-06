@@ -5,7 +5,7 @@ import ollama
 import json
 
 # CODE (SCRIPT!)
-def ask_ai(prompt, model_name="gpt-5.4-mini"):
+def ask_ai(prompt, model_name="gpt-5.6-luna"):
     """
     Send prompt to an LLM and get output text back.    
     """

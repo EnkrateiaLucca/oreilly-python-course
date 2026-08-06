@@ -36,7 +36,7 @@ client = OpenAI()
 file_path = sys.argv[1]
 receipt_data = load_receipt_data(file_path)
 completion = client.beta.chat.completions.parse(
-    model="gpt-5-mini",
+    model="gpt-5.6-luna",
     messages=[
         {"role": "system", "content": """
          You are an extraction engine for receipt data.

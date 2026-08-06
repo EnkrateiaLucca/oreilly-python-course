@@ -47,7 +47,7 @@ def summarize(titles: list[str]) -> str:
     )
     client = OpenAI()
     response = client.chat.completions.create(
-        model="gpt-5-mini",
+        model="gpt-5.6-luna",
         messages=[{"role": "user", "content": prompt}],
     )
     return response.choices[0].message.content

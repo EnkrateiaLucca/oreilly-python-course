@@ -46,3 +46,21 @@ Shared helpers the notebooks import live in `scripts/lib/`. Sample inputs live i
 ## Media (`scripts/demos/media`)
 
 - [`transcribe_audio.py`](scripts/demos/media/transcribe_audio.py) — Transcribe an audio file to text locally with faster-whisper (no API key)
+
+## CLI Tools (`scripts/demos/cli-tools`)
+
+- [`llm.py`](scripts/demos/cli-tools/llm.py) — Send a prompt (typed and/or piped via stdin) to OpenAI or Anthropic from the terminal, Simon Willison `llm`-style
+- [`slides.py`](scripts/demos/cli-tools/slides.py) — Turn a plain Markdown file into a self-contained HTML slide deck by wrapping the Marp CLI
+- [`track.py`](scripts/demos/cli-tools/track.py) — A tiny terminal time-tracker (`start`/`stop`/`status`/`report`) backed by a JSON file
+- [`wikipedia_summary.py`](scripts/demos/cli-tools/wikipedia_summary.py) — Fetch Wikipedia article summaries from one shared core, exposed as both a CLI command and a FastAPI HTTP endpoint
+
+## Local AI (`scripts/demos/local_ai`)
+
+- [`local_llm.py`](scripts/demos/local_ai/local_llm.py) — Local document Q&A and schema-constrained JSON extraction (tasks/facts/custom schema) over Markdown/text/PDF files, powered entirely by Ollama (no API key)
+
+## Package Management Problem (`scripts/demos/package-management-problem`)
+
+A worked example of a real dependency-conflict scenario, with its own `README.md` and pinned `requirements.txt` alongside two runnable scripts:
+
+- [`article_scrapper.py`](scripts/demos/package-management-problem/article_scrapper.py) — Scrape AI/Programming headlines from O'Reilly Radar with `requests` + `BeautifulSoup`
+- [`transcribe.py`](scripts/demos/package-management-problem/transcribe.py) — Free local audio/video transcription with faster-whisper, printed to the console and saved as `.srt`/`.txt` (no API key)

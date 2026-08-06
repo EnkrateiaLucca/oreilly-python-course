@@ -18,7 +18,7 @@ def ask(prompt: str, system: str | None = None) -> str:
         import anthropic
         client = anthropic.Anthropic()
         r = client.messages.create(
-            model=model or "claude-sonnet-4-6",
+            model=model or "claude-sonnet-5",
             system=system or "You are a helpful assistant.",
             messages=[{"role": "user", "content": prompt}],
             max_tokens=2048,
@@ -29,7 +29,7 @@ def ask(prompt: str, system: str | None = None) -> str:
         client = OpenAI()
         msgs = ([{"role": "system", "content": system}] if system else []) + \
                [{"role": "user", "content": prompt}]
-        r = client.chat.completions.create(model=model or "gpt-5.4-mini", messages=msgs)
+        r = client.chat.completions.create(model=model or "gpt-5.6-luna", messages=msgs)
         return r.choices[0].message.content
     sys.exit("No API key found. Set ANTHROPIC_API_KEY or OPENAI_API_KEY.")
 
