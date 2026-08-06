@@ -27,7 +27,7 @@ Run it like:
 
     # give it a persona with --system, or switch models with -m
     uv run scripts/demos/cli-tools/llm.py "Rewrite politely" --system "You are a terse editor"
-    uv run scripts/demos/cli-tools/llm.py "Hello" -m claude-sonnet-4-6
+    uv run scripts/demos/cli-tools/llm.py "Hello" -m claude-sonnet-5
 
 Needs: OPENAI_API_KEY (default) or ANTHROPIC_API_KEY (for -m claude-*) in your environment.
 """
@@ -83,7 +83,7 @@ def read_stdin() -> str:
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Send a prompt (and/or piped text) to an AI model.")
     parser.add_argument("prompt", nargs="?", default="", help="Your question or instruction.")
-    parser.add_argument("-m", "--model", default="gpt-5-mini", help="Model name (default: gpt-5-mini; use claude-* for Anthropic).")
+    parser.add_argument("-m", "--model", default="gpt-5.6-luna", help="Model name (default: gpt-5.6-luna; use claude-* for Anthropic).")
     parser.add_argument("--system", default="You are a helpful assistant. Be concise.", help="System prompt / persona.")
     args = parser.parse_args()
 
