@@ -180,3 +180,8 @@ ecu_analysis_results.json
 email_urgency_analysis.json
 user_pain_points.csv
 user_test_analysis.json
+
+# Course process artifacts (not student-facing content)
+Plans/
+research/
+walkthrough.md
