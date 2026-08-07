@@ -10,18 +10,31 @@
       @import url(https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap);
 
       body { font-family: 'Droid Serif'; }
+      ol, ul { line-height: 1.65; }
+      ol li, ul li { margin-bottom: 0.55em; }
+      ol li:last-child, ul li:last-child { margin-bottom: 0; }
       h1, h2, h3 {
         font-family: 'Yanone Kaffeesatz';
         font-weight: normal;
       }
       .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .remark-inline-code { background: #f4f3ef; padding: 1px 6px; border-radius: 4px; }
+      pre { background: #f4f3ef; border: 1px solid #e0ded8; border-radius: 8px; padding: 14px 22px; }
       .pull-left { float: left; width: 47%; }
       .pull-right { float: right; width: 47%; }
       .eyebrow { font-family: 'Ubuntu Mono'; text-transform: uppercase; letter-spacing: 0.18em; font-size: 0.5em; color: #9094a0; }
       .callout { display: block; border-left: 3px solid #cfd3da; padding-left: 0.7em; color: #5f6368; font-style: italic; margin-top: 0.6em; }
-      table { border-collapse: collapse; margin: 0.5em 0; }
-      th { padding: 4px 22px 4px 0; text-align: left; border-bottom: 2px solid #d0d4da; }
-      td { padding: 4px 22px 4px 0; border-bottom: 1px solid #edeff2; }
+      blockquote { border-left: 3px solid #cfd3da; padding-left: 0.9em; margin: 0.5em 0 0; color: #5f6368; font-style: italic; }
+      li > blockquote { margin-top: 0.3em; }
+      blockquote p { margin: 0; }
+      table { border-collapse: collapse; margin: 1.2em 0; width: 100%; border-top: 3px solid #1a1a2e; }
+      thead th { font-family: 'Ubuntu Mono'; font-weight: bold; text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.8em; text-align: left; padding: 12px 30px 12px 4px; border-bottom: 2px solid #1a1a2e; color: #3d4a5c; }
+      tbody td { padding: 14px 30px 14px 4px; border-bottom: 1px solid #ecebe7; font-size: 1em; }
+      tbody tr:last-child td { border-bottom: none; }
+      tbody tr:nth-child(even) td { background: #faf9f6; }
+      .tbl-high { color: #1e8e4e; font-weight: bold; }
+      .tbl-med { color: #b8860b; font-weight: bold; }
+      .tbl-low { color: #c0392b; font-weight: bold; }
       .vibe { text-align: center; margin-top: 70px; }
       .vibe code { font-family: 'Ubuntu Mono'; color: inherit; }
       .flow { display: inline-flex; align-items: center; gap: 9px; margin-bottom: 2.4em; font-family: 'Yanone Kaffeesatz'; font-size: 0.82em; white-space: nowrap; }
@@ -43,7 +56,7 @@
       .vflow { display: flex; flex-direction: column; align-items: center; margin-top: 20px; font-family: 'Yanone Kaffeesatz'; }
       .vflow .step { background: #3d4a5c; color: #fff; padding: 10px 38px; border-radius: 12px; font-size: 1.15em; box-shadow: 0 3px 9px rgba(0,0,0,0.15); }
       .vflow .step.run { background: #27ae60; }
-      .vflow .step code, .vflow .card code { font-family: 'Ubuntu Mono'; color: inherit; }
+      .vflow .step code, .vflow .card code { font-family: 'Ubuntu Mono'; color: inherit; background: none; padding: 0; }
       .vflow .down { color: #5a6473; font-size: 0.95em; line-height: 1; margin: 4px 0; }
       .vflow .solved { font-weight: bold; font-size: 1.22em; color: #b8860b; background: #fff7e6; border: 2px solid #f0a500; border-radius: 30px; padding: 7px 34px; box-shadow: 0 3px 11px rgba(240,165,0,0.16); }
       .vflow .branch { display: flex; gap: 110px; }
@@ -117,10 +130,10 @@
 
         --
         
-        <div style="display: flex; align-items: center; margin-top: 28px;">
+        <div style="display: flex; align-items: center; margin-top: 10px;">
           <div style="flex: 1; text-align: center;">
-            <div style="font-size: 150px;">🤖</div>
-            <p style="font-size: 0.9em;">The robot follows your instructions exactly!</p>
+            <div style="font-size: 90px; line-height: 1;">🤖</div>
+            <p style="font-size: 0.85em; margin-top: 4px;">The robot follows your instructions exactly!</p>
           </div>
         </div>
 
@@ -130,30 +143,22 @@
 
         <div style="display: flex; align-items: center;">
           <div style="flex: 1;">
-            <pre><code class="python" style="font-size: 0.8em;"># Pancake Making Algorithm
-
+            <pre><code class="python" style="font-size: 0.75em;"># Pancake Making Algorithm
             def make_pancake():
                 # Step 1: Prepare batter base
                 batter = mix_flour_and_milk()
-
                 # Step 2: Complete the batter
                 batter = add_egg_and_stir(batter)
-
                 # Step 3: Prepare cooking surface
                 pan = heat_pan_on_stove()
-
                 # Step 4: Start cooking
                 pour_batter_in_pan(pan, batter)
-
                 # Step 5: Wait for indicator
                 wait_for_bubbles()
-
                 # Step 6: Turn the pancake
                 flip_pancake()
-
                 # Step 7: Finish cooking
                 cook_other_side()
-
                 return pancake
               </code></pre>
           </div>
@@ -166,22 +171,22 @@
 
         # Why Learn to Automate?
 
-        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin-top: 14px;">
-          <div style="flex: 0 0 42%; text-align: center;">
-            <img src="../assets/media/2025-11-19-10-22-11.png" width="100%">
-            <p style="font-size: 0.8em;">Automate repetitive tasks</p>
+        <div style="display: flex; flex-wrap: nowrap; justify-content: center; gap: 14px; margin-top: 10px;">
+          <div style="flex: 0 0 23%; text-align: center;">
+            <img src="../assets/media/2025-11-19-10-22-11.png" width="80%">
+            <p style="font-size: 0.65em;">Automate repetitive tasks</p>
           </div>
-          <div style="flex: 0 0 42%; text-align: center;">
-            <img src="../assets/media/2025-11-19-10-26-42.png" width="100%">
-            <p style="font-size: 0.8em;">Increase productivity</p>
+          <div style="flex: 0 0 23%; text-align: center;">
+            <img src="../assets/media/2025-11-19-10-26-42.png" width="80%">
+            <p style="font-size: 0.65em;">Increase productivity</p>
           </div>
-          <div style="flex: 0 0 42%; text-align: center;">
-            <img src="../assets/media/2025-11-19-10-32-14.png" width="100%">
-            <p style="font-size: 0.8em;">Replace subscriptions (save $)</p>
+          <div style="flex: 0 0 23%; text-align: center;">
+            <img src="../assets/media/2025-11-19-10-32-14.png" width="80%">
+            <p style="font-size: 0.65em;">Replace subscriptions (save $)</p>
           </div>
-          <div style="flex: 0 0 42%; text-align: center;">
-            <img src="../assets/media/2025-11-19-10-32-52.png" width="100%">
-            <p style="font-size: 0.8em;">Analyse massive amounts of data</p>
+          <div style="flex: 0 0 23%; text-align: center;">
+            <img src="../assets/media/2025-11-19-10-32-52.png" width="80%">
+            <p style="font-size: 0.65em;">Analyse massive amounts of data</p>
           </div>
         </div>
 
@@ -249,50 +254,50 @@
 
         # Who Are You Building For?
 
-        <div style="margin-top: 24px;">
-          <table style="margin: 0 auto; border-collapse: collapse; font-family: 'Droid Serif'; font-size: 1em; width: 85%;">
+        <div style="margin-top: 24px; display: flex; justify-content: center;">
+          <table>
             <thead>
-              <tr style="background: #1a1a2e; color: white;">
-                <th style="padding: 12px 20px; text-align: left; font-family: 'Yanone Kaffeesatz'; font-size: 1.2em; font-weight: normal;">Audience</th>
-                <th style="padding: 12px 20px; text-align: center; font-family: 'Yanone Kaffeesatz'; font-size: 1.2em; font-weight: normal;">Reliability</th>
-                <th style="padding: 12px 20px; text-align: center; font-family: 'Yanone Kaffeesatz'; font-size: 1.2em; font-weight: normal;">Security</th>
-                <th style="padding: 12px 20px; text-align: center; font-family: 'Yanone Kaffeesatz'; font-size: 1.2em; font-weight: normal;">Scalability</th>
-                <th style="padding: 12px 20px; text-align: center; font-family: 'Yanone Kaffeesatz'; font-size: 1.2em; font-weight: normal;">UX</th>
+              <tr>
+                <th>Audience</th>
+                <th style="text-align: center;">Reliability</th>
+                <th style="text-align: center;">Security</th>
+                <th style="text-align: center;">Scalability</th>
+                <th style="text-align: center;">UX</th>
               </tr>
             </thead>
             <tbody>
-              <tr style="background: #f8f8f8;">
-                <td style="padding: 10px 20px; font-weight: bold;">🌍 Public</td>
-                <td style="padding: 10px 20px; text-align: center;">⭐⭐⭐</td>
-                <td style="padding: 10px 20px; text-align: center;">⭐⭐⭐</td>
-                <td style="padding: 10px 20px; text-align: center;">⭐⭐⭐</td>
-                <td style="padding: 10px 20px; text-align: center;">⭐⭐⭐</td>
+              <tr>
+                <td><b>Public</b></td>
+                <td class="tbl-high" style="text-align: center;">High</td>
+                <td class="tbl-high" style="text-align: center;">High</td>
+                <td class="tbl-high" style="text-align: center;">High</td>
+                <td class="tbl-high" style="text-align: center;">High</td>
               </tr>
               <tr>
-                <td style="padding: 10px 20px; font-weight: bold;">🤝 Partners</td>
-                <td style="padding: 10px 20px; text-align: center;">⭐⭐</td>
-                <td style="padding: 10px 20px; text-align: center;">⭐⭐</td>
-                <td style="padding: 10px 20px; text-align: center;">⭐⭐</td>
-                <td style="padding: 10px 20px; text-align: center;">⭐⭐</td>
-              </tr>
-              <tr style="background: #f8f8f8;">
-                <td style="padding: 10px 20px; font-weight: bold;">🏢 Internal</td>
-                <td style="padding: 10px 20px; text-align: center;">⭐⭐</td>
-                <td style="padding: 10px 20px; text-align: center;">⭐</td>
-                <td style="padding: 10px 20px; text-align: center;">⭐</td>
-                <td style="padding: 10px 20px; text-align: center;">⭐⭐</td>
+                <td><b>Partners</b></td>
+                <td class="tbl-med" style="text-align: center;">Medium</td>
+                <td class="tbl-med" style="text-align: center;">Medium</td>
+                <td class="tbl-med" style="text-align: center;">Medium</td>
+                <td class="tbl-med" style="text-align: center;">Medium</td>
               </tr>
               <tr>
-                <td style="padding: 10px 20px; font-weight: bold;">🧑‍💻 Personal</td>
-                <td style="padding: 10px 20px; text-align: center;">⭐</td>
-                <td style="padding: 10px 20px; text-align: center;">⭐</td>
-                <td style="padding: 10px 20px; text-align: center;">⭐</td>
-                <td style="padding: 10px 20px; text-align: center;">⭐</td>
+                <td><b>Internal</b></td>
+                <td class="tbl-med" style="text-align: center;">Medium</td>
+                <td class="tbl-low" style="text-align: center;">Low</td>
+                <td class="tbl-low" style="text-align: center;">Low</td>
+                <td class="tbl-med" style="text-align: center;">Medium</td>
+              </tr>
+              <tr>
+                <td><b>Personal</b></td>
+                <td class="tbl-low" style="text-align: center;">Low</td>
+                <td class="tbl-low" style="text-align: center;">Low</td>
+                <td class="tbl-low" style="text-align: center;">Low</td>
+                <td class="tbl-low" style="text-align: center;">Low</td>
               </tr>
             </tbody>
           </table>
-          <p style="font-size: 0.75em; color: #888; margin-top: 16px;">The audience shapes every technical decision you make</p>
         </div>
+        <p style="font-size: 0.75em; color: #888; margin-top: 16px;">The audience shapes every technical decision you make</p>
 
         ---
 
@@ -606,10 +611,10 @@
 
         # **Red zone** — wrong shape of problem
 
-        **Reach:** closed systems, 2FA/SSO with no API, mobile-only apps, physical tasks
-        **Rules:** tasks that need genuine human judgment every time
-        **Reliability:** near-perfect is required (medical, legal, safety)
-        **Risk:** irreversible or expensive failure (moving money, mass email, bulk delete)
+- **Reach:** closed systems, 2FA/SSO with no API, mobile-only apps, physical tasks
+- **Rules:** tasks that need genuine human judgment every time
+- **Reliability:** near-perfect is required (medical, legal, safety)
+- **Risk:** irreversible or expensive failure (moving money, mass email, bulk delete)
 
         > If any of the four R's lands in red, **keep the human in the loop** — or pick a smaller version of the task.
 
@@ -661,10 +666,7 @@
 
         ## The real skill isn't Python.
 
-        ### It's instantly recognizing
-        ### what's automatable and what isn't —
-        ### and not wasting a weekend on a task
-        ### that was always in the red zone.
+        <p style="font-size: 1.35em; line-height: 1.7; color: #555; margin-top: 28px; max-width: 720px; margin-left: auto; margin-right: auto;">It's instantly recognizing what's automatable and what isn't — and not wasting a weekend on a task that was always in the red zone.</p>
 
         ---
 
@@ -1259,7 +1261,9 @@
             print("C")
         ```
 
-        --
+        ---
+
+        # Poll Question 13 — Answer
 
         **Answer:**
         ```python
@@ -1345,22 +1349,26 @@
               Jane Doe,28,San Francisco
               ```
 
-        <table style="border-collapse: collapse; width: 80%; margin: 20px auto;">
-            <tr style="background-color: #f2f2f2;">
-                <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Name</th>
-                <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Age</th>
-                <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">City</th>
-            </tr>
-            <tr>
-                <td style="border: 1px solid #ddd; padding: 8px;">John Smith</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">32</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">New York</td>
-            </tr>
-            <tr style="background-color: #f2f2f2;">
-                <td style="border: 1px solid #ddd; padding: 8px;">Jane Doe</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">28</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">San Francisco</td>
-            </tr>
+        <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>City</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>John Smith</td>
+                <td>32</td>
+                <td>New York</td>
+              </tr>
+              <tr>
+                <td>Jane Doe</td>
+                <td>28</td>
+                <td>San Francisco</td>
+              </tr>
+            </tbody>
         </table>
 
         ---
@@ -1441,7 +1449,9 @@
         print(response.json())
         ```
 
-        --
+        ---
+
+        # What are Packages and Imports? (cont.)
 
         **Think of it like:**
         - Package = A toolbox full of tools
@@ -1466,7 +1476,9 @@
         | 2.**31**.0 | **Minor** | New features added, backwards compatible |
         | 2.31.**0** | **Patch** | Bug fixes only, safe to update |
 
-        --
+        ---
+
+        # Package Versions: What Does `x.x.x` Mean? (cont.)
 
         **Rule of thumb:**
         - Patch bumps → safe to update anytime
@@ -1500,7 +1512,9 @@
 
         3. **Isolated environment** (so different projects don't conflict)
 
-        --
+        ---
+
+        # The Package Management Problem 📦 (cont.)
 
         **Traditional Approach: Multiple Files + Virtual Environments**
 
@@ -1508,16 +1522,15 @@
           <div style="flex: 1; margin: 10px;">
             <p><strong>📄 automation.py</strong></p>
             <pre style="font-size: 0.7em;">import requests
-              import pandas
+import pandas
 
-          <pre style="font-size: 0.7em;"># Your code here...</pre>
+# Your code here...</pre>
           </div>
           <div style="flex: 1; margin: 10px;">
             <p><strong>📄 requirements.txt</strong></p>
             <pre style="font-size: 0.7em;">requests==2.31.0
-            pandas==2.0.1
-            numpy==1.24.0
-            </pre>
+pandas==2.0.1
+numpy==1.24.0</pre>
           </div>
           <div style="flex: 1; margin: 10px;">
             <p><strong>📄 .python-version</strong></p>
@@ -1573,35 +1586,34 @@
 
         # UV: Single File vs Traditional Approach
 
-        <div style="display: flex; justify-content: space-around; align-items: center;">
-          <div style="flex: 1; text-align: center;">
-            <h3>Traditional 😓</h3>
-            <ul style="text-align: left; font-size: 0.9em;">
+        <div class="decision" style="display: block; width: 100%; border: none; box-shadow: none; padding: 0; margin-top: 12px;">
+        <div class="decision-cols">
+          <div class="opt no">
+            <div class="opt-label" style="text-align: center;">Traditional 😓</div>
+            <ul style="text-align: left; font-size: 0.85em; margin: 10px 0 0;">
               <li>Create virtual environment</li>
               <li>Activate environment</li>
               <li>Install packages</li>
               <li>Manage requirements.txt</li>
               <li>Remember which env to use</li>
             </ul>
-            <p style="font-size: 0.8em; margin-top: 20px;">📁 Multiple files<br/>📚 Complex workflow</p>
+            <p class="opt-body" style="text-align: center; margin-top: 14px;">📁 Multiple files · 📚 Complex workflow</p>
           </div>
-          <div style="flex: 0.2; text-align: center; font-size: 3em;">
-            VS
-          </div>
-          <div style="flex: 1; text-align: center;">
-            <h3>UV 🚀</h3>
-            <ul style="text-align: left; font-size: 0.9em;">
+          <div class="opt yes">
+            <div class="opt-label" style="text-align: center;">UV 🚀</div>
+            <ul style="text-align: left; font-size: 0.85em; margin: 10px 0 0;">
               <li>Write your script</li>
               <li>Add dependencies at the top</li>
               <li>Run: <code>uv run script.py</code></li>
             </ul>
-            <p style="font-size: 0.8em; margin-top: 20px;">📄 One file<br/>⚡ Simple workflow</p>
+            <p class="opt-body" style="text-align: center; margin-top: 14px;">📄 One file · ⚡ Simple workflow</p>
           </div>
+        </div>
         </div>
 
         --
 
-        **Perfect for vibe scripting!** → Learn more: https://docs.astral.sh/uv/guides/scripts/
+        <p class="callout" style="margin-top: 22px;">Perfect for vibe scripting! → Learn more: <a href="https://docs.astral.sh/uv/guides/scripts/">docs.astral.sh/uv/guides/scripts</a></p>
 
         ---
 
@@ -1827,7 +1839,7 @@
         # Using AI != Slop
 
         <div style="text-align: center;">
-          <img src="../assets/media/2025-02-02-11-50-55.png" width="80%">
+          <img src="../assets/media/2025-02-02-11-50-55.png" width="68%">
         </div>
 
         *Slop comes from vague prompts and zero review — not from using AI*
@@ -1840,7 +1852,9 @@
 
            > *"Write me a Python CLI tool using Click and boto3 which takes a URL of that form and then uses EVERY single boto3 trick in the book to try and debug why the file is returning a 404."* — Simon Willison
 
-        --
+        ---
+
+        # Using AI != Slop (cont.)
 
         2. **Encode your conventions once** — reusable context beats one-off prompting. Save your standards in a Claude Project / system prompt so every output inherits them.
 
