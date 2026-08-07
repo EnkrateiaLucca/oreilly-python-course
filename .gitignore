@@ -199,6 +199,9 @@ notebooks/day-1/requirements.txt
 # Runtime files written by notebooks/day-2/03-automation-projects/*.ipynb
 notebooks/day-2/03-automation-projects/sample_doc.txt
 notebooks/day-2/03-automation-projects/data.csv
+notebooks/day-2/03-automation-projects/file1.txt
+notebooks/day-2/03-automation-projects/file2.txt
+notebooks/day-2/03-automation-projects/file3.txt
 
 # Runtime file written by notebooks/day-2/04-exercises/05-tutorial_learning_python_with_pdfs.ipynb
 notebooks/day-2/04-exercises/sample_report.pdf

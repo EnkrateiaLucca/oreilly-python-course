@@ -71,6 +71,7 @@ uv run --with jupyter jupyter lab
 ### Get your API keys:
 1. OpenAI [API key](https://platform.openai.com/)
 2. Anthropic [API key](https://docs.anthropic.com/en/docs/get-started)
+3. (Optional) OpenWeatherMap [API key](https://home.openweathermap.org/users/sign_up) — only needed for the API example in `notebooks/day-1/03-packages-apis.ipynb`
 
 ### Setup your .env file
 Change the `.env.example` file to `.env` and add your API keys:
@@ -78,6 +79,7 @@ Change the `.env.example` file to `.env` and add your API keys:
 ```bash
 OPENAI_API_KEY=<your openai api key>
 ANTHROPIC_API_KEY=<your claude api key>
+OPEN_WEATHER_API_KEY=<your openweathermap api key>
 ```
 
 ## What's Included
