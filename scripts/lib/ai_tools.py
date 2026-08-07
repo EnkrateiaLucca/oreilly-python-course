@@ -22,8 +22,10 @@ def ask_ai(prompt, model_name="gpt-5.6-luna"):
                 ],
             max_tokens=4000,
         )
-        output = response.content[0].text
-        return output        
+        # Extended-thinking models can put a "thinking" block ahead of the
+        # text block, so content[0] isn't reliably the answer.
+        output = next(block.text for block in response.content if block.type == "text")
+        return output
     else:
         client = OpenAI()
         response = client.chat.completions.create(
