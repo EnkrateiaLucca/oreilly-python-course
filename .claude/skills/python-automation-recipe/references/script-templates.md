@@ -118,7 +118,7 @@ def load_pdf_text(path: Path) -> str:
     return "\n".join(p.extract_text() or "" for p in reader.pages)
 
 
-def ask_ai(prompt: str, model: str = "gpt-5-mini") -> str:
+def ask_ai(prompt: str, model: str = "gpt-5.6-luna") -> str:
     client = OpenAI()
     resp = client.chat.completions.create(
         model=model,
@@ -133,7 +133,7 @@ def main() -> None:
         description="Summarize a PDF into instructive bullet points.",
     )
     parser.add_argument("pdf", type=Path)
-    parser.add_argument("--model", default="gpt-5-mini")
+    parser.add_argument("--model", default="gpt-5.6-luna")
     args = parser.parse_args()
     if not args.pdf.exists():
         raise SystemExit(f"No such file: {args.pdf}")
@@ -332,7 +332,7 @@ def main() -> None:
                                      description="Fetch RSS headlines and summarize themes with Claude.")
     parser.add_argument("feed_url")
     parser.add_argument("--limit", type=int, default=20)
-    parser.add_argument("--model", default="claude-sonnet-4-6")
+    parser.add_argument("--model", default="claude-sonnet-5")
     args = parser.parse_args()
     if not os.getenv("ANTHROPIC_API_KEY"):
         raise SystemExit("Set ANTHROPIC_API_KEY first.")
@@ -368,7 +368,7 @@ from openai import OpenAI
 CATEGORIES = ["urgent", "normal", "promotional", "spam"]
 
 
-def ask_ai(prompt: str, model: str = "gpt-5-mini") -> str:
+def ask_ai(prompt: str, model: str = "gpt-5.6-luna") -> str:
     return OpenAI().chat.completions.create(
         model=model,
         messages=[{"role": "user", "content": prompt}],
@@ -392,7 +392,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(prog="classify_text",
                                      description="Classify text from stdin or a file into a fixed set of labels.")
     parser.add_argument("--file", help="Read text from this file instead of stdin.")
-    parser.add_argument("--model", default="gpt-5-mini")
+    parser.add_argument("--model", default="gpt-5.6-luna")
     args = parser.parse_args()
     if not os.getenv("OPENAI_API_KEY"):
         raise SystemExit("Set OPENAI_API_KEY first.")

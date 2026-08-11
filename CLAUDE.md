@@ -24,8 +24,11 @@ uv run --with jupyter jupyter lab
 ```
 
 ### Running Python scripts
+Most scripts under `scripts/demos/` declare their own dependencies via PEP 723 inline
+script metadata, so they must be run directly (not via `uv run python ...`, which skips
+that metadata and uses the project's synced env instead):
 ```bash
-uv run python scripts/<script_name>.py
+uv run scripts/<script_name>.py
 ```
 
 ### Installing Playwright (for web automation)
@@ -83,6 +86,6 @@ The `scripts/lib/demo_utils.py` provides Jupyter notebook display utilities:
 ## Testing and Quality
 
 This is an educational project without formal testing infrastructure. When making changes:
-- Test scripts individually using `uv run python scripts/<script_name>.py`
+- Test scripts individually using `uv run scripts/<script_name>.py`
 - Verify notebooks run end-to-end in Jupyter Lab
 - Ensure API keys are properly configured for AI-related functionality

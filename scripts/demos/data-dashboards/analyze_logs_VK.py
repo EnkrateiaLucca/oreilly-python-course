@@ -349,7 +349,7 @@ class ECULogAnalyzer:
         try:
             # Make API call to Anthropic
             response = self.ai_client.messages.create(
-                model="claude-sonnet-4-5",
+                model="claude-sonnet-5",
                 max_tokens=8192,
                 messages=[{"role": "user", "content": prompt}]
             )

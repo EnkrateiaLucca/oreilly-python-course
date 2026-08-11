@@ -87,7 +87,7 @@ def html(markup: str):
 # ----------------------------------------------------------------------------
 _CFG = {
     "backend": os.environ.get("SOLVEIT_BACKEND"),   # "ollama" | "anthropic" | "openai"
-    "model": os.environ.get("SOLVEIT_MODEL"),       # e.g. "gemma4", "claude-sonnet-4-6"
+    "model": os.environ.get("SOLVEIT_MODEL"),       # e.g. "gemma4", "claude-sonnet-5"
     "max_tokens": 4096,
     "stream": True,
 }
@@ -95,8 +95,8 @@ _CFG = {
 # Local-first: gemma4 over Ollama is the default — fast, free, no API key.
 _DEFAULTS = {
     "ollama": "gemma4",
-    "anthropic": "claude-sonnet-4-6",
-    "openai": "gpt-5.4-mini",
+    "anthropic": "claude-sonnet-5",
+    "openai": "gpt-5.6-luna",
 }
 
 # Speed/quality knobs for the local Ollama backend. `keep_alive` keeps the model

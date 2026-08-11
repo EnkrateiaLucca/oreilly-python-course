@@ -5,7 +5,7 @@ import ollama
 import json
 
 # CODE (SCRIPT!)
-def ask_ai(prompt, model_name="gpt-5.4-mini"):
+def ask_ai(prompt, model_name="gpt-5.6-luna"):
     """
     Send prompt to an LLM and get output text back.    
     """
@@ -22,8 +22,10 @@ def ask_ai(prompt, model_name="gpt-5.4-mini"):
                 ],
             max_tokens=4000,
         )
-        output = response.content[0].text
-        return output        
+        # Extended-thinking models can put a "thinking" block ahead of the
+        # text block, so content[0] isn't reliably the answer.
+        output = next(block.text for block in response.content if block.type == "text")
+        return output
     else:
         client = OpenAI()
         response = client.chat.completions.create(

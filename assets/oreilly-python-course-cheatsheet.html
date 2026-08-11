@@ -547,7 +547,7 @@ pip install requests pandas openai anthropic
 
 # With uv (this course)
 uv sync              # install from pyproject.toml
-uv run python main.py
+uv run scripts/demo_script.py   # inline PEP 723 deps auto-resolve
 
 # In notebook
 import subprocess
@@ -590,7 +590,7 @@ key = os.getenv("OPENAI_API_KEY")</code></pre>
 client = OpenAI()  # uses OPENAI_API_KEY env var
 
 response = client.chat.completions.create(
-    model="gpt-4o",           # or "gpt-4o-mini"
+    model="gpt-5.6-luna",     # or "gpt-5-mini" for cheap/fast
     messages=[
         {"role": "system",
          "content": "You are a helpful assistant."},
@@ -609,25 +609,25 @@ print(text)</code></pre>
 def chat(user_msg):
     messages.append({"role":"user","content":user_msg})
     resp = client.chat.completions.create(
-        model="gpt-4o-mini", messages=messages)
+        model="gpt-5-mini", messages=messages)
     reply = resp.choices[0].message.content
     messages.append({"role":"assistant","content":reply})
     return reply</code></pre>
 
-        <h3>Image Generation (DALL-E 3)</h3>
-<pre><code">response = client.images.generate(
-    model="dall-e-3",
+        <h3>Image Generation (GPT Image 2)</h3>
+<pre><code">img = client.images.generate(
+    model="gpt-image-2",
     prompt="A futuristic Python logo, digital art",
     size="1024x1024",
-    quality="standard",
     n=1
 )
-image_url = response.data[0].url</code></pre>
+# Returns base64-encoded image data
+image_b64 = img.data[0].b64_json</code></pre>
 
-        <h3>Audio Transcription (Whisper)</h3>
+        <h3>Audio Transcription (GPT Transcribe)</h3>
 <pre><code">with open("recording.mp3", "rb") as audio:
     transcript = client.audio.transcriptions.create(
-        model="whisper-1",
+        model="gpt-transcribe",
         file=audio
     )
 print(transcript.text)</code></pre>
@@ -636,10 +636,10 @@ print(transcript.text)</code></pre>
         <table>
             <thead><tr><th>Model</th><th>Best For</th></tr></thead>
             <tbody>
-                <tr><td><code>gpt-4o</code></td><td>Complex tasks, vision</td></tr>
-                <tr><td><code>gpt-4o-mini</code></td><td>Fast, cheap, everyday use</td></tr>
-                <tr><td><code>dall-e-3</code></td><td>Image generation</td></tr>
-                <tr><td><code>whisper-1</code></td><td>Audio transcription</td></tr>
+                <tr><td><code>gpt-5.6-luna</code></td><td>Complex tasks, this course's default</td></tr>
+                <tr><td><code>gpt-5-mini</code></td><td>Fast, cheap, everyday use</td></tr>
+                <tr><td><code>gpt-image-2</code></td><td>Image generation</td></tr>
+                <tr><td><code>gpt-transcribe</code></td><td>Audio transcription</td></tr>
             </tbody>
         </table>
 
@@ -652,19 +652,21 @@ print(transcript.text)</code></pre>
 client = anthropic.Anthropic()  # uses ANTHROPIC_API_KEY
 
 response = client.messages.create(
-    model="claude-sonnet-4-6",
+    model="claude-sonnet-5",
     max_tokens=1024,
     messages=[
         {"role": "user",
          "content": "Summarize this article: ..."}
     ]
 )
-text = response.content[0].text
+# content[0] isn't always the text block (extended-thinking
+# models can put a "thinking" block first) — filter by type
+text = next(b.text for b in response.content if b.type == "text")
 print(text)</code></pre>
 
         <h3>With System Prompt</h3>
 <pre><code">response = client.messages.create(
-    model="claude-sonnet-4-6",
+    model="claude-sonnet-5",
     max_tokens=2048,
     system="You are an expert Python tutor.",
     messages=[
@@ -677,8 +679,8 @@ print(text)</code></pre>
         <table>
             <thead><tr><th>Model</th><th>Use Case</th></tr></thead>
             <tbody>
-                <tr><td><code>claude-opus-4-7</code></td><td>Most capable, complex reasoning</td></tr>
-                <tr><td><code>claude-sonnet-4-6</code></td><td>Balanced speed &amp; quality</td></tr>
+                <tr><td><code>claude-opus-5</code></td><td>Most capable, complex reasoning</td></tr>
+                <tr><td><code>claude-sonnet-5</code></td><td>Balanced speed &amp; quality, this course's default</td></tr>
                 <tr><td><code>claude-haiku-4-5</code></td><td>Fastest, lightest tasks</td></tr>
             </tbody>
         </table>
@@ -691,7 +693,7 @@ print(text)</code></pre>
 
 # Simple text generation
 response = ollama.chat(
-    model="llama3.2",
+    model="gemma4",
     messages=[{"role":"user","content":"Hello!"}]
 )
 print(response.message.content)
@@ -699,14 +701,14 @@ print(response.message.content)
 # Using Client
 client = ollama.Client()
 resp = client.chat(
-    model="llama3.2",
+    model="gemma4",
     messages=[{"role":"user","content":"Explain AI"}]
 )
 print(resp.message.content)</code></pre>
 
         <h3>Structured JSON Output</h3>
 <pre><code">resp = ollama.chat(
-    model="llama3.2",
+    model="gemma4",
     messages=[{
         "role": "user",
         "content": "List 3 Python tips as JSON"
@@ -718,35 +720,33 @@ data = json.loads(resp.message.content)</code></pre>
 
         <div class="callout">
             <div class="callout-title">Setup Ollama</div>
-            Install from <strong>ollama.com</strong>, then: <code>ollama pull llama3.2</code> to download a model. Runs 100% locally — no API key needed.
+            Install from <strong>ollama.com</strong>, then: <code>ollama pull gemma4</code> to download a model. Runs 100% locally — no API key needed.
         </div>
 
         <!-- ==================== SECTION 12 ==================== -->
         <h2>12 · Unified AI Interface (ai_tools.py)</h2>
 
         <h3>The ask_ai() Function</h3>
-<pre><code">from scripts.ai_tools import ask_ai, ask_local_ai
+<pre><code"># scripts/lib on sys.path (see notebooks for the exact snippet)
+from ai_tools import ask_ai, ask_local_ai
 
-# Cloud AI (OpenAI or Anthropic)
-result = ask_ai("Summarize this text: ...",
-                model_name="gpt-4o-mini")
+# Cloud AI — defaults to OpenAI's gpt-5.6-luna
+result = ask_ai("Summarize this text: ...")
 
 result = ask_ai("Review this code: ...",
-                model_name="claude-sonnet-4-6")
+                model_name="claude-sonnet-5")
 
-# Local AI (Ollama)
-result = ask_local_ai("Explain decorators",
-                      model_name="llama3.2")
+# Local AI (Ollama) — defaults to gemma4
+result = ask_local_ai("Explain decorators")
 
 # Structured JSON from local AI
 data = ask_local_ai(
     "Return invoice data as JSON: ...",
-    model_name="llama3.2",
     structured=True
 )</code></pre>
 
         <h3>parse_json_output()</h3>
-<pre><code">from scripts.ai_tools import parse_json_output
+<pre><code">from ai_tools import parse_json_output
 
 raw = ask_ai(
     "Return as JSON: {name, price, qty} for 3 items"
@@ -795,7 +795,7 @@ refined = ask_ai(
 
 # Step 4: Generate image
 img = client.images.generate(
-    model="dall-e-3", prompt=refined)</code></pre>
+    model="gpt-image-2", prompt=refined)</code></pre>
 
         <h3>Structured Output Prompt</h3>
 <pre><code">prompt = """
@@ -976,7 +976,7 @@ df.to_csv("tickets_tagged.csv", index=False)</code></pre>
             <div class="ref-box-title">Running Commands (uv)</div>
             <dl>
                 <dt>uv sync</dt><dd>Install all project dependencies</dd>
-                <dt>uv run python script.py</dt><dd>Run a Python script</dd>
+                <dt>uv run scripts/script.py</dt><dd>Run a script (auto-resolves its inline deps)</dd>
                 <dt>uv run --with jupyter jupyter lab</dt><dd>Start Jupyter Lab</dd>
                 <dt>playwright install</dt><dd>Install browser binaries</dd>
             </dl>
@@ -987,7 +987,7 @@ df.to_csv("tickets_tagged.csv", index=False)</code></pre>
         </div>
 
         <footer>
-            <p>© 2025 Automata Learning Lab · O'Reilly Live Training: "Automate Tasks with Python + AI" · Quick Reference Cheatsheet</p>
+            <p>© 2026 Automata Learning Lab · O'Reilly Live Training: "Automate Tasks with Python + AI" · Quick Reference Cheatsheet</p>
         </footer>
 
     </div><!-- end two-column-container -->
