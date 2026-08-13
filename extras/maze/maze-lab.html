@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maze Lab — write Python, watch it run</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js"></script>
+<script src="https://cdn.jsdelivr.net/pyodide/v0.26.4/full/pyodide.js"></script>
+<style>
+  :root {
+    --cream: #F5EDE0; --cream-card: #FBF6EC; --ink: #1F1B16; --ink-soft: #5A524A;
+    --accent: #9B2C2C; --accent-soft: #C9605F; --dark: #221512; --border: #E4D8C4;
+    --green: #2E7D46;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--cream); color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, Roboto, sans-serif;
+    height: 100vh; display: flex; flex-direction: column; overflow: hidden;
+  }
+  header {
+    display: flex; align-items: center; gap: 14px; padding: 10px 18px;
+    border-bottom: 2px solid var(--border); background: var(--cream-card); flex-wrap: wrap;
+  }
+  header h1 { font-family: Georgia, 'Fraunces', serif; font-size: 20px; margin: 0; }
+  header h1 em { color: var(--accent); font-style: italic; }
+  .tabs { display: flex; gap: 4px; }
+  .tab {
+    border: 1px solid var(--border); background: transparent; color: var(--ink-soft);
+    padding: 6px 14px; border-radius: 999px; cursor: pointer; font-size: 13px; font-weight: 600;
+  }
+  .tab.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .spacer { flex: 1; }
+  button.action {
+    border: none; border-radius: 8px; padding: 8px 18px; cursor: pointer;
+    font-size: 14px; font-weight: 700; color: #fff; background: var(--green);
+  }
+  button.action:hover { filter: brightness(1.08); }
+  button.action:disabled { background: #9ca3af; cursor: not-allowed; }
+  button.ghost {
+    background: transparent; color: var(--ink-soft); border: 1px solid var(--border);
+    border-radius: 8px; padding: 7px 12px; cursor: pointer; font-size: 13px;
+  }
+  button.ghost:hover { border-color: var(--accent-soft); color: var(--accent); }
+  .speed { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--ink-soft); }
+  main { flex: 1; display: flex; min-height: 0; }
+  .pane-editor { width: 46%; min-width: 380px; display: flex; flex-direction: column; border-right: 2px solid var(--border); }
+  .pane-editor .bar {
+    display: flex; align-items: center; gap: 10px; padding: 6px 12px; font-size: 12px;
+    color: var(--ink-soft); background: var(--cream-card); border-bottom: 1px solid var(--border);
+  }
+  .CodeMirror { flex: 1; height: auto; font-size: 14px; line-height: 1.55;
+    font-family: 'SF Mono', Menlo, Consolas, monospace; background: var(--cream-card); color: var(--ink); }
+  .CodeMirror-gutters { background: var(--cream); border-right: 1px solid var(--border); }
+  .cm-s-default .cm-comment { color: #8a7a63; font-style: italic; }
+  .cm-s-default .cm-string { color: var(--accent); }
+  .cm-s-default .cm-keyword { color: #7c3aed; }
+  .cm-s-default .cm-def, .cm-s-default .cm-variable { color: var(--ink); }
+  .pane-maze { flex: 1; display: flex; flex-direction: column; background: var(--dark); min-width: 0; }
+  .hud {
+    display: flex; gap: 18px; padding: 8px 16px; color: #C9BDB2; font-size: 12.5px;
+    border-bottom: 1px solid #3a2a24; align-items: center; flex-wrap: wrap;
+  }
+  .hud b { color: #F5EDE0; font-weight: 700; }
+  .hud .badge { background: var(--green); color: #fff; border-radius: 999px; padding: 2px 12px;
+    font-weight: 700; letter-spacing: .06em; font-size: 11px; text-transform: uppercase; }
+  .canvas-wrap { flex: 1; display: flex; align-items: center; justify-content: center; position: relative; min-height: 0; }
+  canvas { max-width: 96%; max-height: 96%; }
+  .overlay {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    background: rgba(24, 12, 9, 0.82); opacity: 0; pointer-events: none; transition: opacity .25s;
+  }
+  .overlay.show { opacity: 1; pointer-events: auto; }
+  .overlay .card {
+    background: var(--cream-card); color: var(--ink); border-radius: 14px; padding: 26px 34px;
+    max-width: 520px; text-align: center; border-top: 6px solid var(--accent);
+    font-size: 15px; line-height: 1.55; box-shadow: 0 18px 60px rgba(0,0,0,.5);
+  }
+  .overlay .card.win { border-top-color: var(--green); }
+  .overlay .card h2 { font-family: Georgia, serif; margin: 0 0 10px; font-size: 24px; }
+  .overlay .card code { background: #efe5d2; padding: 1px 6px; border-radius: 4px; }
+  .overlay .card table { margin: 12px auto; border-collapse: collapse; font-size: 13.5px; }
+  .overlay .card td, .overlay .card th { padding: 4px 12px; border-bottom: 1px solid var(--border); }
+  .overlay .card .won { color: var(--green); font-weight: 700; }
+  .overlay .card .lost { color: var(--accent); font-weight: 700; }
+  .console {
+    height: 120px; overflow-y: auto; background: #1a0f0c; color: #d9c9ba; padding: 8px 14px;
+    font-family: 'SF Mono', Menlo, Consolas, monospace; font-size: 12.5px; line-height: 1.5;
+    border-top: 1px solid #3a2a24; white-space: pre-wrap;
+  }
+  .console .you { color: #7dd08d; }
+  .console .err { color: #ff9d8f; }
+  .console .sys { color: #8a766a; font-style: italic; }
+  .loading-overlay {
+    position: fixed; inset: 0; background: var(--cream); z-index: 50; display: flex;
+    flex-direction: column; align-items: center; justify-content: center; gap: 14px;
+  }
+  .loading-overlay .robot { font-size: 52px; animation: bob 1.2s ease-in-out infinite; }
+  @keyframes bob { 50% { transform: translateY(-10px); } }
+  .loading-overlay p { color: var(--ink-soft); font-size: 14px; margin: 0; }
+  details.hints { font-size: 12.5px; color: var(--ink-soft); padding: 6px 12px;
+    border-top: 1px solid var(--border); background: var(--cream-card); }
+  details.hints summary { cursor: pointer; font-weight: 600; }
+  details.hints .inner { padding: 8px 4px; line-height: 1.6; }
+  details.hints code { background: #efe5d2; padding: 1px 5px; border-radius: 4px; }
+  @media (max-width: 900px) {
+    main { flex-direction: column; }
+    .pane-editor { width: 100%; min-width: 0; height: 45%; border-right: none; border-bottom: 2px solid var(--border); }
+  }
+</style>
+</head>
+<body>
+
+<div class="loading-overlay" id="loading">
+  <div class="robot">🤖</div>
+  <p><b>Waking up Python in your browser…</b></p>
+  <p id="loadmsg">first visit takes ~10 seconds, instant after that</p>
+</div>
+
+<header>
+  <h1>Maze <em>Lab</em></h1>
+  <div class="tabs">
+    <button class="tab active" data-level="1">Level 1 · plan</button>
+    <button class="tab" data-level="2">Level 2 · logic</button>
+    <button class="tab" data-level="3">Level 3 · any maze</button>
+  </div>
+  <div class="spacer"></div>
+  <div class="speed">speed <input type="range" id="speed" min="1" max="10" value="4" style="width:90px"></div>
+  <button class="ghost" id="btn-newmaze" title="different layout">🎲 new maze</button>
+  <button class="ghost" id="btn-demo" title="the computer plays — your end goal">🤖 demo</button>
+  <button class="ghost" id="btn-reset" title="restore starter code">↺ reset code</button>
+  <button class="action" id="btn-run">▶ Run (⌘⏎)</button>
+</header>
+
+<main>
+  <div class="pane-editor">
+    <div class="bar">
+      <span id="editor-label">my_solver.py — level 1: write a plan</span>
+      <span style="flex:1"></span>
+      <span>the robot 🔴 starts top-left · flag ⚑ bottom-right · moves N S E W</span>
+    </div>
+    <textarea id="code"></textarea>
+    <details class="hints">
+      <summary>💡 Hints (staged — read one at a time)</summary>
+      <div class="inner" id="hints"></div>
+    </details>
+  </div>
+
+  <div class="pane-maze">
+    <div class="hud">
+      <span class="badge" id="mode-badge">ready</span>
+      <span>maze <b id="hud-seed">#7</b></span>
+      <span>steps <b id="hud-steps">0</b></span>
+      <span>bonks <b id="hud-bumps">0</b></span>
+      <span>shortest <b id="hud-opt">–</b></span>
+      <span style="flex:1"></span>
+      <span id="hud-msg"></span>
+    </div>
+    <div class="canvas-wrap">
+      <canvas id="maze"></canvas>
+      <div class="overlay" id="overlay"><div class="card" id="overlay-card"></div></div>
+    </div>
+    <div class="console" id="console"><span class="sys">Your print(...) lines show up here — print debugging is real debugging.</span></div>
+  </div>
+</main>
+
+<script>
+"use strict";
+/* ─────────────── constants & state ─────────────── */
+const CLASSROOM_SEED = 7;
+const STARTERS = {
+  plan: `# LEVEL 1 — beat THIS maze with a plan.
+# Your "code" is a string of moves: N = up, S = down, E = right, W = left.
+# Run it, watch the robot, fix the plan, run again.
+# (That edit -> run -> watch loop IS programming.) Spaces are fine: "SS EE"
+
+MOVES = "SSEE"   # <- start here. Run it. Watch. Extend.
+`,
+  logic: `# LEVEL 2 & 3 — beat the maze with LOGIC instead of a hand-made plan.
+#
+# The robot calls next_move(view) before EVERY step:
+#   view["walls"]     {"N": True, "S": False, ...}   True = wall (blocked)
+#   view["facing"]    direction of your last successful step, e.g. "E"
+#   view["position"]  (row, col) where you are
+#   view["exit"]      (row, col) of the flag
+#   view["memory"]    a dict that survives between steps - scribble in it
+# Return one letter: "N", "S", "E" or "W".  print(...) shows in the console.
+
+RIGHT_OF = {"N": "E", "E": "S", "S": "W", "W": "N"}
+LEFT_OF  = {"N": "W", "W": "S", "S": "E", "E": "N"}
+
+def next_move(view):
+    # This starter is deliberately terrible: it only ever goes east.
+    # Run it, enjoy the bonking, then make it smart. Hints below the editor.
+    return "E"
+`};
+let level = 1, pyodide = null, animToken = 0;
+let editor;
+
+/* ─────────────── editor ─────────────── */
+editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+  mode: "python", lineNumbers: true, indentUnit: 4, viewportMargin: Infinity,
+});
+function docKey() { return level === 1 ? "mazelab_plan" : "mazelab_logic"; }
+function starter() { return level === 1 ? STARTERS.plan : STARTERS.logic; }
+function loadDoc() { editor.setValue(localStorage.getItem(docKey()) ?? starter()); }
+editor.on("change", () => localStorage.setItem(docKey(), editor.getValue()));
+loadDoc();
+
+const HINTS = {
+  1: `1 · The robot obeys the string exactly, wall or no wall. A bonk just wastes a step.<br>
+      2 · Chunk the plan with spaces (<code>"SS EE S"</code>) so you can read it like the maze.<br>
+      3 · Stuck near the end? Count corridors on screen — the shortest plan here is under 20 moves.`,
+  2: `1 · First make <code>return "E"</code> smarter: only go east when <code>view["walls"]["E"]</code> is False, else go south. Better — but corners still trap you.<br>
+      2 · The classic trick: <b>keep your right hand on the wall</b>. Try directions in this order and take the first with no wall:
+      right of where you're facing → straight → left → behind you.<br>
+      3 · As code: a list of those 4 directions (use <code>RIGHT_OF</code>/<code>LEFT_OF</code>), a <code>for</code> loop, an <code>if not view["walls"][d]</code>. ~6 lines.<br>
+      ⚠️ Don't write <code>while True</code> inside next_move — the robot already loops for you.`,
+  3: `Level 3 runs the SAME code as level 2 — no edits needed if your rule is general.<br>
+      If some mazes fail: does your rule use only <code>view["walls"]</code> + <code>view["facing"]</code>? Anything hard-coded to one maze won't travel.`,
+};
+
+/* ─────────────── python engine (runs in pyodide) ─────────────── */
+const ENGINE_PY = `
+import io, json, random, traceback
+from collections import deque
+from contextlib import redirect_stdout
+
+STEP = {"N": (-1, 0), "S": (1, 0), "E": (0, 1), "W": (0, -1)}
+OPP = {"N": "S", "S": "N", "E": "W", "W": "E"}
+
+def generate_maze(rows, cols, rng):
+    passages = {(r, c): set() for r in range(rows) for c in range(cols)}
+    stack, visited = [(0, 0)], {(0, 0)}
+    while stack:
+        r, c = stack[-1]
+        nbrs = []
+        for d, (dr, dc) in STEP.items():
+            nr, nc = r + dr, c + dc
+            if 0 <= nr < rows and 0 <= nc < cols and (nr, nc) not in visited:
+                nbrs.append((d, (nr, nc)))
+        if nbrs:
+            d, nxt = rng.choice(nbrs)
+            passages[(r, c)].add(d); passages[nxt].add(OPP[d])
+            visited.add(nxt); stack.append(nxt)
+        else:
+            stack.pop()
+    return passages
+
+def shortest_plan(passages, start, goal):
+    q, came = deque([start]), {start: None}
+    while q:
+        cell = q.popleft()
+        if cell == goal: break
+        for d in passages[cell]:
+            dr, dc = STEP[d]
+            nxt = (cell[0] + dr, cell[1] + dc)
+            if nxt not in came:
+                came[nxt] = (cell, d); q.append(nxt)
+    moves, cell = [], goal
+    while came[cell] is not None:
+        cell, d = came[cell]; moves.append(d)
+    return "".join(reversed(moves))
+
+def _fail(kind, exc):
+    tb = traceback.format_exc().strip().splitlines()
+    return {"error": {"kind": kind, "type": type(exc).__name__,
+                      "msg": str(exc), "last": tb[-1] if tb else ""}}
+
+def simulate(code, mode, seed, rows, cols):
+    rng = random.Random(seed)
+    passages = generate_maze(rows, cols, rng)
+    start, goal = (0, 0), (rows - 1, cols - 1)
+    optimal = shortest_plan(passages, start, goal)
+    maze_out = [[r, c, "".join(sorted(passages[(r, c)]))] for r in range(rows) for c in range(cols)]
+    base = {"rows": rows, "cols": cols, "seed": seed, "maze": maze_out,
+            "optimal": len(optimal), "plan": optimal}
+    if mode == "demo":
+        moves_iter = iter(optimal); get = lambda v: next(moves_iter, None)
+    else:
+        ns = {}
+        try:
+            exec(code, ns)
+        except Exception as e:
+            return base | _fail("compile", e)
+        if mode == "plan":
+            plan = "".join(str(ns.get("MOVES", "")).split()).upper()
+            it = iter(plan); get = lambda v: next(it, None)
+        else:
+            fn = ns.get("next_move")
+            if not callable(fn):
+                return base | {"error": {"kind": "missing", "type": "MissingFunction",
+                    "msg": "I couldn't find a next_move(view) function in your code.", "last": ""}}
+            get = fn
+    player, facing, steps, bumps = start, "E", 0, 0
+    memory, trace, prints = {}, [], []
+    max_steps = rows * cols * 6
+    outcome = "lost"
+    while steps < max_steps:
+        if player == goal:
+            outcome = "won"; break
+        view = {"walls": {d: d not in passages[player] for d in "NSEW"},
+                "facing": facing, "position": player, "exit": goal,
+                "steps": steps, "memory": memory}
+        buf = io.StringIO()
+        try:
+            with redirect_stdout(buf):
+                move = get(view)
+        except Exception as e:
+            out = buf.getvalue()
+            if out and len(prints) < 400:
+                prints.append([steps, out[:400]])
+            return base | _fail("runtime", e) | {"trace": trace, "steps": steps, "prints": prints}
+        out = buf.getvalue()
+        if out and len(prints) < 400:
+            prints.append([steps, out[:400]])
+        if move is None:
+            outcome = "plan ran out"; break
+        move = str(move).strip().upper()[:1]
+        if move not in STEP:
+            return base | {"error": {"kind": "badmove", "type": "BadMove",
+                "msg": f"your code returned {move!r} — the robot only knows 'N','S','E','W'.",
+                "last": ""}, "trace": trace, "steps": steps}
+        steps += 1
+        if move in passages[player]:
+            dr, dc = STEP[move]
+            player = (player[0] + dr, player[1] + dc)
+            facing = move
+            trace.append([player[0], player[1], move, 0])
+        else:
+            bumps += 1
+            trace.append([player[0], player[1], move, 1])
+    if player == goal:
+        outcome = "won"
+    return base | {"trace": trace, "outcome": outcome, "steps": steps,
+                   "bumps": bumps, "prints": prints, "where": list(player)}
+
+def run_sim(code, mode, seed, rows, cols):
+    return json.dumps(simulate(code, mode, seed, rows, cols))
+`;
+
+/* ─────────────── canvas renderer ─────────────── */
+const canvas = document.getElementById("maze");
+const ctx = canvas.getContext("2d");
+let R = { maze: null, rows: 0, cols: 0, cell: 40, pad: 14 };
+
+function setupCanvas(sim) {
+  R.rows = sim.rows; R.cols = sim.cols;
+  R.maze = new Map(sim.maze.map(([r, c, dirs]) => [r + "," + c, dirs]));
+  const wrap = canvas.parentElement;
+  const availW = wrap.clientWidth * 0.94, availH = wrap.clientHeight * 0.92;
+  R.cell = Math.floor(Math.min(availW / sim.cols, availH / sim.rows, 56));
+  const w = sim.cols * R.cell + R.pad * 2, h = sim.rows * R.cell + R.pad * 2;
+  const dpr = window.devicePixelRatio || 1;
+  canvas.width = w * dpr; canvas.height = h * dpr;
+  canvas.style.width = w + "px"; canvas.style.height = h + "px";
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
+function cellXY(r, c) { return [R.pad + c * R.cell + R.cell / 2, R.pad + r * R.cell + R.cell / 2]; }
+
+function drawMaze(trail, player, bumpDir, particles) {
+  const w = R.cols * R.cell + R.pad * 2, h = R.rows * R.cell + R.pad * 2;
+  ctx.clearRect(0, 0, w, h);
+  ctx.fillStyle = "#1a0f0c"; ctx.beginPath(); ctx.roundRect(0, 0, w, h, 12); ctx.fill();
+  ctx.strokeStyle = "#E4D8C4"; ctx.lineWidth = Math.max(2, R.cell * 0.09); ctx.lineCap = "round";
+  ctx.beginPath();
+  for (let r = 0; r < R.rows; r++) for (let c = 0; c < R.cols; c++) {
+    const dirs = R.maze.get(r + "," + c);
+    const x = R.pad + c * R.cell, y = R.pad + r * R.cell;
+    if (!dirs.includes("N")) { ctx.moveTo(x, y); ctx.lineTo(x + R.cell, y); }
+    if (!dirs.includes("W")) { ctx.moveTo(x, y); ctx.lineTo(x, y + R.cell); }
+    if (r === R.rows - 1 && !dirs.includes("S")) { ctx.moveTo(x, y + R.cell); ctx.lineTo(x + R.cell, y + R.cell); }
+    if (c === R.cols - 1 && !dirs.includes("E")) { ctx.moveTo(x + R.cell, y); ctx.lineTo(x + R.cell, y + R.cell); }
+  }
+  ctx.stroke();
+  // trail
+  ctx.fillStyle = "rgba(201, 96, 95, 0.45)";
+  for (const [tr, tc] of trail) {
+    const [x, y] = cellXY(tr, tc);
+    ctx.beginPath(); ctx.arc(x, y, R.cell * 0.09, 0, 7); ctx.fill();
+  }
+  // exit flag
+  const [ex, ey] = cellXY(R.rows - 1, R.cols - 1);
+  ctx.font = Math.floor(R.cell * 0.55) + "px serif";
+  ctx.textAlign = "center"; ctx.textBaseline = "middle";
+  ctx.fillText("⚑", ex, ey + 1);
+  ctx.fillStyle = "#2E7D46"; // recolor flag by drawing over? emoji is fine as-is
+  // robot
+  const [px, py] = player;
+  ctx.save();
+  ctx.shadowColor = bumpDir ? "#f5c542" : "#ff6b5e"; ctx.shadowBlur = R.cell * 0.45;
+  ctx.fillStyle = bumpDir ? "#f5c542" : "#c62f2f";
+  ctx.beginPath(); ctx.arc(px, py, R.cell * 0.26, 0, 7); ctx.fill();
+  ctx.restore();
+  ctx.fillStyle = "#fff";
+  ctx.beginPath(); ctx.arc(px + R.cell * 0.07, py - R.cell * 0.06, R.cell * 0.05, 0, 7); ctx.fill();
+  // confetti particles
+  for (const p of particles) {
+    ctx.fillStyle = p.color; ctx.globalAlpha = Math.max(p.life, 0);
+    ctx.fillRect(p.x, p.y, p.s, p.s); ctx.globalAlpha = 1;
+  }
+}
+
+/* ─────────────── animation of a recorded run ─────────────── */
+const $ = id => document.getElementById(id);
+const consoleEl = $("console");
+function log(cls, text) {
+  const span = document.createElement("span");
+  span.className = cls; span.textContent = text + "\n";
+  consoleEl.appendChild(span); consoleEl.scrollTop = consoleEl.scrollHeight;
+}
+function clearConsole() { consoleEl.textContent = ""; }
+function setHud(seed, steps, bumps, opt, badge) {
+  $("hud-seed").textContent = "#" + seed; $("hud-steps").textContent = steps;
+  $("hud-bumps").textContent = bumps; $("hud-opt").textContent = opt;
+  if (badge) $("mode-badge").textContent = badge;
+}
+function overlay(html, win = false) {
+  const card = $("overlay-card");
+  card.className = "card" + (win ? " win" : "");
+  card.innerHTML = html + `<p style="margin-top:14px"><button class="action" onclick="document.getElementById('overlay').classList.remove('show')">Back to the code ✏️</button></p>`;
+  $("overlay").classList.add("show");
+}
+
+function animateRun(sim, label, doneCb) {
+  const token = ++animToken;
+  setupCanvas(sim);
+  setHud(sim.seed, 0, 0, sim.optimal, label);
+  const trail = [];
+  let pos = [0, 0], bumps = 0, i = 0, particles = [];
+  let printIdx = 0;
+  const startXY = cellXY(0, 0);
+  let px = startXY[0], py = startXY[1];
+
+  function stepDelay() { return 320 / Number($("speed").value); }
+
+  function emitPrints(uptoStep) {
+    while (printIdx < (sim.prints || []).length && sim.prints[printIdx][0] <= uptoStep) {
+      log("you", sim.prints[printIdx][1].replace(/\n$/, "")); printIdx++;
+    }
+  }
+
+  function finish() {
+    if (token !== animToken) return;
+    emitPrints(Infinity);
+    doneCb && doneCb();
+  }
+
+  function tick() {
+    if (token !== animToken) return;
+    if (i >= (sim.trace || []).length) { drawMaze(trail, [px, py], false, particles); return finish(); }
+    const [r, c, dir, bump] = sim.trace[i];
+    emitPrints(i);
+    const from = [px, py];
+    const to = bump ? [px, py] : cellXY(r, c);
+    const bumpVec = { N: [0, -1], S: [0, 1], E: [1, 0], W: [-1, 0] }[dir];
+    const t0 = performance.now(), dur = stepDelay();
+    if (!bump && (trail.length === 0 || trail[trail.length-1][0] !== pos[0] || trail[trail.length-1][1] !== pos[1]))
+      trail.push([...pos]);
+    function frame(now) {
+      if (token !== animToken) return;
+      let t = Math.min((now - t0) / dur, 1);
+      const ease = t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+      if (bump) {
+        const k = Math.sin(t * Math.PI) * R.cell * 0.22;
+        drawMaze(trail, [from[0] + bumpVec[0] * k, from[1] + bumpVec[1] * k], true, particles);
+      } else {
+        px = from[0] + (to[0] - from[0]) * ease; py = from[1] + (to[1] - from[1]) * ease;
+        drawMaze(trail, [px, py], false, particles);
+      }
+      if (t < 1) requestAnimationFrame(frame);
+      else {
+        if (bump) bumps++; else pos = [r, c];
+        setHud(sim.seed, i + 1, bumps, sim.optimal);
+        i++; tick();
+      }
+    }
+    requestAnimationFrame(frame);
+  }
+  drawMaze(trail, [px, py], false, particles);
+  setTimeout(tick, 120);
+
+  // confetti on win, fired by caller through this handle
+  return {
+    confetti() {
+      const w = R.cols * R.cell, h = R.rows * R.cell;
+      for (let k = 0; k < 90; k++) particles.push({
+        x: R.pad + Math.random() * w, y: R.pad + Math.random() * h * 0.4,
+        vx: (Math.random() - .5) * 2.4, vy: 1 + Math.random() * 2.2,
+        s: 3 + Math.random() * 4, life: 1,
+        color: ["#c62f2f", "#2E7D46", "#f5c542", "#F5EDE0"][k % 4],
+      });
+      const t2 = ++animToken;
+      (function rain(){
+        if (t2 !== animToken) return;
+        particles.forEach(p => { p.x += p.vx; p.y += p.vy; p.life -= 0.012; });
+        particles = particles.filter(p => p.life > 0);
+        drawMaze(trail, [px, py], false, particles);
+        if (particles.length) requestAnimationFrame(rain);
+      })();
+    }
+  };
+}
+
+/* ─────────────── outcomes ─────────────── */
+function reportOutcome(sim, handle, levelLabel) {
+  if (sim.outcome === "won") {
+    handle.confetti();
+    const bonky = sim.bumps ? ` — with ${sim.bumps} wall-bonks 😅` : "";
+    overlay(`<h2>🏆 Maze beaten!</h2><p>${sim.steps} steps (shortest possible: ${sim.optimal})${bonky}</p>` +
+      (level === 1 ? `<p>Now the interesting question: <b>could a rule replace your plan?</b> That's Level 2.</p>` :
+       level === 2 ? `<p>Your logic beat <i>this</i> maze. But would it beat one it has never seen? <b>That's Level 3.</b></p>` : ""), true);
+  } else if (sim.outcome === "plan ran out") {
+    overlay(`<h2>📜 Plan ran out</h2><p>The robot stopped at <code>(${sim.where[0]}, ${sim.where[1]})</code> — the flag is bottom-right.</p>
+      <p>Add more moves to <code>MOVES</code> and run again. That edit → run → watch loop <b>is programming</b>.</p>`);
+  } else {
+    overlay(`<h2>🌀 The robot is lost</h2><p>${sim.steps} steps, ${sim.bumps} bonks, no flag.</p>
+      <p>${levelLabel} hint: a maze whose walls are all connected can always be beaten by
+      <b>keeping one hand on the wall</b>. Open the hints under the editor.</p>`);
+  }
+}
+function reportError(sim) {
+  const e = sim.error;
+  const last = e.last ? `<pre style="text-align:left;background:#1a0f0c;color:#ffb4a8;padding:10px 14px;border-radius:8px;font-size:12.5px;overflow-x:auto">${e.last.replace(/&/g,"&amp;").replace(/</g,"&lt;")}</pre>` : "";
+  overlay(`<h2>🐍 Python has a complaint</h2>
+    <p><b>${e.type}</b>: ${String(e.msg).replace(/&/g,"&amp;").replace(/</g,"&lt;")}</p>${last}
+    <p style="font-size:13px;color:#5A524A">Lesson 06 rule: read the <b>last line first</b> — error type, then the message. Fix, rerun.</p>`);
+  log("err", `${e.type}: ${e.msg}`);
+}
+
+/* ─────────────── run orchestration ─────────────── */
+function pyRun(code, mode, seed, rows, cols) {
+  pyodide.globals.set("JS_CODE", code);
+  pyodide.globals.set("JS_MODE", mode);
+  const out = pyodide.runPython(`run_sim(JS_CODE, JS_MODE, ${seed}, ${rows}, ${cols})`);
+  return JSON.parse(out);
+}
+let currentSeed = CLASSROOM_SEED;
+
+function runLevel12(mode) {
+  clearConsole(); $("overlay").classList.remove("show");
+  const label = mode === "demo" ? "autopilot" : (level === 1 ? "level 1 · your plan" : "level 2 · your logic");
+  log("sys", mode === "demo" ? "The computer plays, using a path-finding recipe (BFS). By level 3 your code does this too."
+                             : "Running your code…");
+  const sim = pyRun(editor.getValue(), mode, currentSeed, 6, 9);
+  if (sim.error) {
+    setupCanvas(sim); drawMaze([], cellXY(0,0), false, []);
+    (sim.prints || []).forEach(([, txt]) => log("you", txt.replace(/\n$/, "")));
+    reportError(sim); return;
+  }
+  const handle = animateRun(sim, label, () => {
+    if (mode === "demo") {
+      handle.confetti();
+      overlay(`<h2>🤖 That was the computer</h2><p>It used a path-finding recipe (breadth-first search) to find the ${sim.optimal}-step shortest path.</p>
+        <p><b>By Level 3, your code beats any maze too.</b> Start with Level 1: write a plan.</p>`, true);
+    } else reportOutcome(sim, handle, "Level " + level);
+  });
+}
+
+function runLevel3() {
+  clearConsole(); $("overlay").classList.remove("show");
+  log("sys", "Five mazes your code has never seen. Same rules. Good luck. 🎲");
+  const trials = [[6, 9], [8, 12], [10, 14], [12, 16], [14, 20]]
+    .map(([r, c]) => [Math.floor(Math.random() * 1000000), r, c]);
+  const results = [];
+  let idx = 0;
+  function next() {
+    if (idx >= trials.length) {
+      const wins = results.filter(x => x.outcome === "won").length;
+      const rows = results.map((x, i) =>
+        `<tr><td>#${x.seed}</td><td>${trials[i][1]}×${trials[i][2]}</td>
+         <td class="${x.outcome === "won" ? "won" : "lost"}">${x.outcome === "won" ? "won" : "lost"}</td>
+         <td>${x.steps}</td><td>${x.optimal}</td></tr>`).join("");
+      const table = `<table><tr><th>maze</th><th>size</th><th>result</th><th>steps</th><th>shortest</th></tr>${rows}</table>`;
+      if (wins === 5)
+        overlay(`<h2>🏆 YOUR CODE BEATS ANY MAZE</h2>${table}
+          <p>You just wrote a <b>general solution</b> — that's the whole difference between a plan and a program.</p>`, true);
+      else
+        overlay(`<h2>${wins}/5 — close</h2>${table}
+          <p>A rule that uses only <code>view["walls"]</code> and <code>view["facing"]</code> can win them all. Hints under the editor.</p>`);
+      return;
+    }
+    const [seed, r, c] = trials[idx];
+    const sim = pyRun(editor.getValue(), "logic", seed, r, c);
+    if (sim.error) { reportError(sim); return; }
+    results.push(sim);
+    const handle = animateRun(sim, `level 3 · maze ${idx + 1}/5`, () => {
+      log("sys", `maze ${idx + 1}/5 (#${seed}): ${sim.outcome} in ${sim.steps} steps (shortest ${sim.optimal})`);
+      if (sim.outcome === "won") handle.confetti();
+      idx++; setTimeout(next, 500);
+    });
+  }
+  next();
+}
+
+/* ─────────────── wiring ─────────────── */
+function switchLevel(n) {
+  level = n;
+  document.querySelectorAll(".tab").forEach(t => t.classList.toggle("active", Number(t.dataset.level) === n));
+  $("editor-label").textContent = n === 1 ? "my_solver.py — level 1: write a plan"
+    : n === 2 ? "my_solver.py — level 2: write logic (next_move)"
+    : "my_solver.py — level 3: SAME code as level 2, five unseen mazes";
+  $("hints").innerHTML = HINTS[n];
+  loadDoc();
+  if (n === 3) log("sys", "Level 3 uses your level-2 code as-is. Press Run when ready.");
+}
+document.querySelectorAll(".tab").forEach(t => t.addEventListener("click", () => switchLevel(Number(t.dataset.level))));
+$("btn-run").addEventListener("click", () => level === 3 ? runLevel3() : runLevel12(level === 1 ? "plan" : "logic"));
+$("btn-demo").addEventListener("click", () => runLevel12("demo"));
+$("btn-reset").addEventListener("click", () => { localStorage.removeItem(docKey()); loadDoc(); });
+$("btn-newmaze").addEventListener("click", (e) => {
+  if (e.altKey) {  // instructor pocket-ace: Alt-click reveals a winning plan
+    const sim = pyRun("", "demo", currentSeed, 6, 9);
+    overlay(`<h2>🃏 Instructor card</h2><p>A winning plan for maze #${currentSeed}:</p>
+      <p><code>MOVES = "${sim.plan}"</code></p>`);
+    return;
+  }
+  currentSeed = currentSeed === CLASSROOM_SEED ? Math.floor(Math.random() * 1000000) : CLASSROOM_SEED;
+  $("hud-msg").textContent = currentSeed === CLASSROOM_SEED ? "back to the classroom maze" : "a maze nobody has seen before";
+  const sim = pyRun("", "demo", currentSeed, 6, 9);
+  setupCanvas(sim); drawMaze([], cellXY(0, 0), false, []);
+  setHud(sim.seed, 0, 0, sim.optimal, "ready");
+});
+document.addEventListener("keydown", (e) => {
+  if ((e.metaKey || e.ctrlKey) && e.key === "Enter") { e.preventDefault(); $("btn-run").click(); }
+});
+
+/* ─────────────── boot ─────────────── */
+(async function boot() {
+  try {
+    $("loadmsg").textContent = "downloading Python (WebAssembly)…";
+    pyodide = await loadPyodide();
+    $("loadmsg").textContent = "starting the maze engine…";
+    pyodide.runPython(ENGINE_PY);
+    const sim = pyRun("", "demo", CLASSROOM_SEED, 6, 9);
+    setupCanvas(sim); drawMaze([], cellXY(0, 0), false, []);
+    setHud(sim.seed, 0, 0, sim.optimal, "ready");
+    $("hints").innerHTML = HINTS[1];
+    $("loading").style.display = "none";
+    log("sys", "Python is live in your browser. Pick a level, write code on the left, press ▶ Run.");
+  } catch (err) {
+    $("loadmsg").innerHTML = "Couldn't load Python — check your internet connection and refresh.<br>" +
+      "(This tool downloads Python once from a CDN, then works offline.)";
+    console.error(err);
+  }
+})();
+window.addEventListener("resize", () => {
+  if (!pyodide) return;
+  const sim = pyRun("", "demo", currentSeed, 6, 9);
+  setupCanvas(sim); drawMaze([], cellXY(0, 0), false, []);
+});
+</script>
+</body>
+</html>

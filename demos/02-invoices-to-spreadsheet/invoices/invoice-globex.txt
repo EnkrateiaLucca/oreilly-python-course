@@ -1,0 +1,27 @@
+GLOBEX EUROPE GmbH
+Hauptstrasse 42
+10115 Berlin, Germany
+VAT ID: DE123456789
+
+INVOICE
+
+Bill To:                                    Invoice No: GX-2026-0217
+Maria Lopez                                 Date: February 17, 2026
+Automata Learning Lab                       Due Date: March 19, 2026
+Lisbon, Portugal
+
+Description                     Quantity    Rate        Amount
+-----------------------------------------------------------------
+Workshop Facilitation (days)        2       EUR 1,200.00   EUR 2,400.00
+Training Materials License          1       EUR 350.00     EUR 350.00
+Follow-up Consulting (hours)        5       EUR 180.00     EUR 900.00
+                                                        ------------
+                                            Subtotal:   EUR 3,650.00
+                                            VAT (19%):  EUR 693.50
+                                            Total:      EUR 4,343.50
+
+Payment Terms: Net 30
+Bank Transfer: IBAN DE00 0000 0000 0000 0000 00
+Please include the invoice number in the payment reference.
+
+Thank you for your business!

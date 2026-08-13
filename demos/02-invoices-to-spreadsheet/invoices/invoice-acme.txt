@@ -1,0 +1,31 @@
+
+ACME CORPORATION
+123 Business Street
+San Francisco, CA 94105
+Tax ID: 12-3456789
+
+INVOICE
+
+Bill To:                                    Invoice No: INV-2024-0042
+John Smith                                  Date: April 15, 2024
+456 Client Avenue                          Due Date: May 15, 2024
+New York, NY 10001
+
+Description                     Quantity    Rate        Amount
+-----------------------------------------------------------------
+Software Development Services      80       $150.00    $12,000.00
+Cloud Infrastructure Setup         1      $2,500.00    $2,500.00
+Technical Documentation           40        $75.00     $3,000.00
+                                                    ------------
+                                           Subtotal:  $17,500.00
+                                           Tax (8%):   $1,400.00
+                                           Total:     $18,900.00
+
+Payment Terms: Net 30
+Please make checks payable to: ACME Corporation
+Wire Transfer Details:
+Bank: First National Bank
+Account: 987654321
+Routing: 021000021
+
+Thank you for your business!
