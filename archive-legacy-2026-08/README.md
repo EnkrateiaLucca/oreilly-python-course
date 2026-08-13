@@ -22,12 +22,13 @@ images live in `slides/img/`.
 
 ## ⚠️ Before deleting — two things
 
-1. **Privacy (payslip):** the old `assets/fake-invoices/` folder held a **real
-   payslip** (`invoice1.txt`, full name + tax/ID numbers). It has been **deleted
-   from the working tree** (not archived). ‼️ It is **still in the repo's public
-   git history** — deleting the file does not remove past commits. To fully
-   remove it you'd need to scrub history (`git filter-repo` / BFG) + force-push,
-   and rotate any exposed identifiers. That step has **not** been done yet.
+1. **Privacy (payslip):** a **real payslip** (full name + tax/ID numbers) lived in
+   the old materials at several paths (`assets/fake-invoices/invoice1.txt`,
+   `assets/documents/receipt_data.txt`, and pasted inline in an old script/README).
+   All copies were **purged from git history** on 2026-08-13 via `git filter-repo`
+   (stripped by content/blob id) and force-pushed. History + tree verified clean.
+   ‼️ Remaining: GitHub still holds it in PR refs (`refs/pull/*`) and cached commit
+   views — a **GitHub Support request** is needed to purge those (see repo `CLEANUP.md`).
 2. **Possible keepers worth rescuing** before deletion: the ReportLab PDF tutorial
    (`notebooks/day-2/04-exercises/05-tutorial_learning_python_with_pdfs.ipynb`) and
    the `solveit` toolkit (`scripts/lib/solveit.py`, a ~1,600-line standalone AI

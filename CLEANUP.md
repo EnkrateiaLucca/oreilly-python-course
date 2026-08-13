@@ -13,14 +13,22 @@ deletion around **2026-09-13**.
       `WINDOWS_SETUP.md` → `archive-legacy-2026-08/`.
 - [x] Updated the README footnote to point at the archive.
 
-## ⚠️ Privacy — payslip deleted from tree; HISTORY still open
+## ⚠️ Privacy — payslip scrubbed from history (2026-08-13)
 
-- [x] Deleted the old `assets/fake-invoices/` folder (held a real payslip with
-      full name + tax/ID numbers) from the working tree — it was never archived.
-- [ ] **Still in public git history.** The delete only affects HEAD going forward;
-      the payslip remains in older commits already pushed. To fully remediate:
-      scrub history (`git filter-repo` / BFG) + force-push, and rotate any exposed
-      identifiers. Decide whether that's worth doing.
+- [x] Deleted the fake-invoices payslip and purged **all copies of the payslip
+      content** from git history via `git filter-repo` (stripped by blob id, so it
+      caught every filename): the file `assets/fake-invoices/invoice1.txt`, a
+      second copy at `assets/documents/receipt_data.txt`, and the same payslip
+      pasted inline into an old demo script and an old README. Force-pushed to
+      `main` + both side branches. History + working tree verified clean.
+- [ ] **GitHub still retains it in two places I can't reach by push:**
+      (1) pull-request refs `refs/pull/1..7/head` still point at pre-scrub commits;
+      (2) the old commit SHAs stay accessible by direct URL until GitHub garbage-
+      collects. **Action:** open a GitHub Support request to purge cached views /
+      stale refs for this repo (their documented step after a history rewrite).
+- [ ] The exposed identifiers (Portuguese NIF/NISS tax numbers, employer, salary)
+      were public for a while — worth noting for your own records; tax numbers
+      can't be rotated like a password.
 
 ## When the month is up
 
