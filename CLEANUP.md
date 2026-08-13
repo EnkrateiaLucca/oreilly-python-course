@@ -1,55 +1,46 @@
-# Post-approval cleanup checklist
+# Cleanup / follow-ups
 
-The 2026 redesign is **additive**: everything new lives in `lessons/`, `demos/`,
-`prompts/`, `slides/`, plus the rewritten `README.md` and new `SETUP.md`. Nothing
-old was moved or deleted. Once the redesign is approved, this is the deliberate
-archive/delete pass — **do not run it before approval** (and per house rules, ask
-before deleting multiple files).
+The 2026 redesign is live (`lessons/`, `demos/`, `prompts/`, `slides/`, `extras/`,
+rewritten `README.md`, new `SETUP.md`). The old materials were **archived on
+2026-08-13** into [`archive-legacy-2026-08/`](archive-legacy-2026-08/) via
+`git mv` (history preserved) — see that folder's README. It's scheduled for
+deletion around **2026-09-13**.
 
-## Move to `archive/` (keep for reference)
+## ✅ Done
 
-- [ ] `notebooks/` — all Jupyter content (day-1, day-2). Replaced by `lessons/` + `demos/`.
-      Contains some material worth mining later: the ReportLab PDF tutorial
-      (`day-2/04-exercises/05-tutorial_learning_python_with_pdfs.ipynb`) and the solveit
-      notebook (potential standalone product).
-- [ ] `presentation/` — remark.js deck + PDF. Replaced by `slides/`.
-- [ ] `scripts/` — old demos, lib, and archive tree. The keepers were ported into `demos/`
-      (with `scripts/lib/solveit.py` possibly worth extracting as its own project).
-- [ ] `assets/media/` — ~50 screenshots that fed the old deck. Keep only images the new
-      deck references.
-- [ ] Old setup docs superseded by `SETUP.md`: `QUICK_START_WINDOWS.md`,
-      `WINDOWS_SETUP.md`, `setup.sh`, `requirements/` (three dependency systems → PEP 723
-      per-script now), `index-scripts.md`.
+- [x] Archived `notebooks/`, `presentation/`, `scripts/`, `assets/`,
+      `requirements/`, `setup.sh`, `index-scripts.md`, `QUICK_START_WINDOWS.md`,
+      `WINDOWS_SETUP.md` → `archive-legacy-2026-08/`.
+- [x] Updated the README footnote to point at the archive.
 
-## ⚠️ Privacy — handle first
+## ⚠️ Privacy — payslip deleted from tree; HISTORY still open
 
-- [ ] `assets/fake-invoices/invoice1.txt` is a **real payslip** containing Lucas's full
-      name and tax/ID numbers — it's tracked in the public repo's history. Remove it
-      (and consider scrubbing git history / rotating any exposed identifiers). The new
-      `demos/02` uses clearly-fake invoices instead.
+- [x] Deleted the old `assets/fake-invoices/` folder (held a real payslip with
+      full name + tax/ID numbers) from the working tree — it was never archived.
+- [ ] **Still in public git history.** The delete only affects HEAD going forward;
+      the payslip remains in older commits already pushed. To fully remediate:
+      scrub history (`git filter-repo` / BFG) + force-push, and rotate any exposed
+      identifiers. Decide whether that's worth doing.
 
-## Delete outright
+## When the month is up
 
-- [ ] `notebooks/day-1/.ipynb_checkpoints/`, `notebooks/day-1/archive/live-*` duplicates
-- [ ] Stray artifacts: `notebooks/day-1/2026-06-16-*.png`, `notebooks/day-1/new_file.md`,
-      `__pycache__/`
-- [ ] `scripts/.env` — untracked and contains only a placeholder (verified), but shouldn't
-      exist in the tree at all; the root `.env` is the one true location.
-- [ ] `scripts/script_placeholder_template.py` (typos, superseded by `prompts/generate-a-tool.md`)
+- [ ] Delete `archive-legacy-2026-08/` entirely (rescue the ReportLab tutorial
+      and `scripts/lib/solveit.py` first if you want them — noted in its README).
 
-## Update after archiving
+## Update whenever convenient (stale but harmless)
 
-- [ ] `pyproject.toml` — the project env is only needed for Codespaces convenience now;
-      slim the 70 pinned deps to what `lessons/` + `demos/` actually use (or drop
-      `uv sync` from the flow entirely and lean fully on PEP 723).
-- [ ] `.devcontainer/post-create.sh` — remove kernel install + playwright steps; keep uv.
-- [ ] `CLAUDE.md` — rewrite for the new layout (script-first, no Jupyter/kernel/playwright).
-- [ ] README "legacy" footnote — remove once the dirs are archived.
-- [ ] Delete this file.
+- [ ] `pyproject.toml` — 70 pinned deps; only Codespaces/devcontainer needs the
+      synced env now (the course runs on per-script PEP 723). Slim it, or drop
+      `uv sync` from the flow entirely.
+- [ ] `.devcontainer/post-create.sh` — still does kernel install + `playwright
+      install` (unused now); keep only the uv step. README still shows a Codespaces
+      button, so this path should work.
+- [ ] `CLAUDE.md` — describes the old layout (notebooks/kernel/playwright);
+      rewrite for the script-first structure.
 
-## Pre-existing bugs that become moot (noted for the record)
+## Pre-existing bugs, now moot (for the record)
 
-- README (old) step 2 used a Windows-style path `"$PWD\.venv"` in the macOS kernel command.
+- Old README step 2 used a Windows path `"$PWD\.venv"` in the macOS kernel command.
 - `playwright install` was required by setup but no active notebook used Playwright.
-- Model IDs were inconsistent across notebooks/scripts (mix of 2024-2026 era IDs);
-  the new content standardizes on `gpt-5.6-luna` / `claude-opus-4-8` / `gemma4`.
+- Model IDs were inconsistent across the old notebooks/scripts; the new content
+  standardizes on `gpt-5.6-luna` / `claude-opus-4-8` / `gemma4`.

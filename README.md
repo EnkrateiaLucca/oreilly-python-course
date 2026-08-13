@@ -65,6 +65,6 @@ tool and to *know it's safe before you run it*.
 ---
 
 *Legacy course material (Jupyter notebooks, previous slide deck, older demo
-scripts) still lives in `notebooks/`, `scripts/`, `presentation/`, and `assets/`
-pending archive — see [CLEANUP.md](CLEANUP.md). New students: you only need the
-four folders in the table above.*
+scripts) has been moved to [`archive-legacy-2026-08/`](archive-legacy-2026-08/)
+and will be deleted around 2026-09-13. New students: ignore it — you only need
+the folders in the table above.*
