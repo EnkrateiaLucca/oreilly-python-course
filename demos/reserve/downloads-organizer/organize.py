@@ -10,8 +10,8 @@ Output  -> files moved into documents/ PDFs/ images/ data/ media/ archives/
 Safe by default: it only PREVIEWS the moves. Pass --apply to actually move files.
 
 Run it like:
-    uv run demos/01-tame-your-downloads/organize.py practice-mess
-    uv run demos/01-tame-your-downloads/organize.py practice-mess --apply
+    uv run demos/reserve/downloads-organizer/organize.py practice-mess
+    uv run demos/reserve/downloads-organizer/organize.py practice-mess --apply
 
 Needs: nothing (no API key).
 """
@@ -85,7 +85,7 @@ def main() -> None:
     if not folder.is_dir():
         print(f"That folder does not exist: {folder}")
         print("Tip: build a safe practice folder first with:")
-        print("     uv run demos/01-tame-your-downloads/make_mess.py --apply")
+        print("     uv run demos/reserve/downloads-organizer/make_mess.py --apply")
         sys.exit(1)
 
     organize_files(folder, apply=args.apply)

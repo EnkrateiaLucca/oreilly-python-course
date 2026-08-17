@@ -61,6 +61,11 @@ highest-leverage prompting habits there is.)*
 
 Do not run it. Go to the Run Gate: `run-gate.md`. That's the "I" step.
 
+Once it passes and proves out, finish it as a *reusable tool* — clear inputs,
+clear outputs, safe defaults, a written usage contract — and, if it's worth it,
+wrap it as an agent skill. See `tool-to-skill.md`. The script is cheap; the
+reusable capability is the asset.
+
 ## Iterating
 
 - Wrong result? Improve the **ticket**, not just the chat — then regenerate.

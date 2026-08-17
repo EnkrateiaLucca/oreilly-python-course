@@ -13,16 +13,18 @@ MUST NEVER: <hard limits: never delete, never send, never leave folder X, never 
 DONE MEANS: <the checkable result you will verify — be concrete>
 ```
 
-## Example 1 — invoices
+## Example 1 — document inbox
 
 ```
-TASK: Pull the company, date, and total out of each PDF invoice into one spreadsheet.
-TRIGGER: Manual — I run it after downloading the month's invoices.
-TOUCHES: Reads PDFs in ~/Documents/invoices-2026-08/ only. Writes one new CSV next to them.
-MUST NEVER: Modify or move the PDFs. Touch any other folder. Upload the PDFs anywhere
-            except the AI API I choose.
-DONE MEANS: invoices.csv exists with one row per PDF and columns company, date, total —
-            and the totals for 3 invoices I spot-check by hand are correct.
+TASK: Triage a folder of mixed documents (invoices, notes, receipts) into one table
+      with type, summary, priority, dates, people, and action items.
+TRIGGER: Manual — I run it against a folder I name.
+TOUCHES: Reads .pdf/.txt/.md/image files in ~/Documents/to-triage/ only. Writes one new
+         CSV next to them. Sends each document's text/image to the AI API I choose.
+MUST NEVER: Modify, move, or delete the source documents. Touch any other folder.
+            Write the CSV without --apply.
+DONE MEANS: inbox.csv exists with one row per document and a priority column, and the
+            3 rows I spot-check match what the documents actually say.
 ```
 
 ## Example 2 — morning briefing

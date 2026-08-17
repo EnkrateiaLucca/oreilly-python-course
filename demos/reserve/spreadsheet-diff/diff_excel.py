@@ -9,7 +9,7 @@ Process -> match rows by the first column, then diff every cell
 Output  -> a console report: rows added/removed, and old vs new for each change
 
 Run it like:
-    uv run demos/06-spreadsheet-diff/diff_excel.py employee_roster_january.xlsx employee_roster_february.xlsx
+    uv run demos/reserve/spreadsheet-diff/diff_excel.py employee_roster_january.xlsx employee_roster_february.xlsx
 
 Needs: nothing (no API key). Read-only: it never modifies either file.
 """

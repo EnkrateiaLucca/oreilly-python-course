@@ -2,18 +2,19 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <!-- Unique name for this job. Filename should match: com.user.morning-briefing.plist -->
+    <!-- Unique name for this job. Filename should match: com.user.briefing.plist -->
     <key>Label</key>
-    <string>com.user.morning-briefing</string>
+    <string>com.user.briefing</string>
 
     <!-- The command, one argument per <string>. Replace YOUR-USERNAME (twice)
          and adjust the repo path. Absolute paths only: launchd has no shell
-         aliases and a minimal PATH, which is why we call uv by full path. -->
+         aliases and a minimal PATH, which is why we call uv by full path.
+         Add your own feeds with extra <string>--rss</string> lines. -->
     <key>ProgramArguments</key>
     <array>
         <string>/Users/YOUR-USERNAME/.local/bin/uv</string>
         <string>run</string>
-        <string>/Users/YOUR-USERNAME/oreilly-python-course/demos/05-morning-briefing/briefing.py</string>
+        <string>/Users/YOUR-USERNAME/oreilly-python-course/demos/03-intelligence-briefing/briefing.py</string>
         <string>--apply</string>
     </array>
 
@@ -28,8 +29,8 @@
 
     <!-- Where print() output and errors go — your first stop when debugging. -->
     <key>StandardOutPath</key>
-    <string>/tmp/morning-briefing.log</string>
+    <string>/tmp/briefing.log</string>
     <key>StandardErrorPath</key>
-    <string>/tmp/morning-briefing.err</string>
+    <string>/tmp/briefing.err</string>
 </dict>
 </plist>

@@ -32,18 +32,18 @@ it up this weekend" has been true for a year.
 
 ```bash
 # 1. Build a SAFE sandbox first (never practice on your real Downloads):
-uv run demos/01-tame-your-downloads/make_mess.py
-uv run demos/01-tame-your-downloads/make_mess.py --apply
+uv run demos/reserve/downloads-organizer/make_mess.py
+uv run demos/reserve/downloads-organizer/make_mess.py --apply
 
 # 2. Dry run — read the plan before anything moves:
-uv run demos/01-tame-your-downloads/organize.py practice-mess
+uv run demos/reserve/downloads-organizer/organize.py practice-mess
 
 # 3. Happy with the plan? Execute it:
-uv run demos/01-tame-your-downloads/organize.py practice-mess --apply
+uv run demos/reserve/downloads-organizer/organize.py practice-mess --apply
 
 # Bonus — sort images by CONTENT with local AI (needs: ollama pull gemma4):
-uv run demos/01-tame-your-downloads/classify_images.py practice-mess
-uv run demos/01-tame-your-downloads/classify_images.py practice-mess --apply
+uv run demos/reserve/downloads-organizer/classify_images.py practice-mess
+uv run demos/reserve/downloads-organizer/classify_images.py practice-mess --apply
 ```
 
 ## Prove it
@@ -73,7 +73,7 @@ zero extra code, and find who actually creates the destination folder.
 
 ```bash
 # macOS/Linux (~/.zshrc):
-alias tidy='uv run ~/oreilly-python-course/demos/01-tame-your-downloads/organize.py'
+alias tidy='uv run ~/oreilly-python-course/demos/reserve/downloads-organizer/organize.py'
 # then:  tidy ~/Downloads          (dry run)
 #        tidy ~/Downloads --apply  (for real — after you read the plan!)
 ```

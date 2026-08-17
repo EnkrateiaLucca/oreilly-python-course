@@ -14,8 +14,8 @@ Output  -> images moved into one subfolder per category (Uncategorized if unsure
 Safe by default: it only PREVIEWS the moves. Pass --apply to actually move files.
 
 Run it like:
-    uv run demos/01-tame-your-downloads/classify_images.py practice-mess
-    uv run demos/01-tame-your-downloads/classify_images.py practice-mess --apply
+    uv run demos/reserve/downloads-organizer/classify_images.py practice-mess
+    uv run demos/reserve/downloads-organizer/classify_images.py practice-mess --apply
 
 Needs: Ollama running locally with the model pulled once:  ollama pull gemma4
 """

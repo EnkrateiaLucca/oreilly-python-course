@@ -8,8 +8,8 @@ piles up in a real Downloads folder: text notes, CSVs, "PDFs", and a few real PN
 images. Practice here first — never on your actual Downloads.
 
 Run it like:
-    uv run demos/01-tame-your-downloads/make_mess.py           # preview
-    uv run demos/01-tame-your-downloads/make_mess.py --apply   # actually create
+    uv run demos/reserve/downloads-organizer/make_mess.py           # preview
+    uv run demos/reserve/downloads-organizer/make_mess.py --apply   # actually create
 
 Needs: nothing (no API key, standard library only).
 """
@@ -79,7 +79,7 @@ def main() -> None:
     target.mkdir(parents=True, exist_ok=True)
     for name, content in MESS.items():
         (target / name).write_bytes(content)
-    print(f"\nDone. Now try:  uv run demos/01-tame-your-downloads/organize.py {target}")
+    print(f"\nDone. Now try:  uv run demos/reserve/downloads-organizer/organize.py {target}")
 
 
 if __name__ == "__main__":

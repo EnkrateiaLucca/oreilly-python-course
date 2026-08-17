@@ -37,8 +37,8 @@ covers them when you get there.
 | Folder | What it is |
 |---|---|
 | [`lessons/`](lessons/) | **Day 1** — 8 short scripts that build your Python *reading vocabulary*: just enough to inspect any script an AI hands you. Run them in order. |
-| [`demos/`](demos/) | **Day 2** — 6 real automations, each one a full rep of the SCRIPT loop: downloads organizer, invoices→spreadsheet, CSV→dashboard, voice notes→text, scheduled morning briefing, spreadsheet diff. |
-| [`prompts/`](prompts/) | The take-home artifacts: the SCRIPT loop card, the automation-ticket template, the generate-a-tool prompt, the Run Gate checklist, the "does this already exist?" prompt. |
+| [`demos/`](demos/) | **Day 2** — 3 real automations, each a full rep of the SCRIPT loop: document inbox → structured queue, messy data → interactive dashboard, personal intelligence briefing (scheduled) — then an endpoint that upgrades one tool into an agent-callable skill. |
+| [`prompts/`](prompts/) | The take-home artifacts: the SCRIPT loop card, the automation-ticket template, the generate-a-tool prompt, the Run Gate checklist, the "does this already exist?" prompt, the tool-to-skill wrapper. |
 | [`slides/`](slides/) | The course slide deck (Marp). |
 | [`extras/`](extras/) | Optional bonuses, outside the course flow. Currently: the **Maze Lab** — an animated maze game where your Python drives a robot (open `extras/maze/maze-lab.html`, zero setup). |
 
@@ -49,11 +49,15 @@ then the reading vocabulary (variables → loops → decisions → files → pac
 APIs → AI APIs), taught prediction-first: guess what the code prints, then run it.
 Capstone: a downloads organizer you can read every line of.
 
-**Day 2 — The loop at full power.** Six worked automations, each following the
-same Spot→Compose→Request→Inspect→Prove→Turn beats, ending where no beginner
-course goes: your briefing script running **unattended on a schedule**, with the
-safety habits (dry-runs, blast-radius checks, verify-what-done-means) that make
-that responsible.
+**Day 2 — The loop at full power.** Three worked automations, each following the
+same Spot→Compose→Request→Inspect→Prove→Turn beats, with real time to modify and
+inspect each one: a document inbox that turns a messy pile into a structured
+action queue, messy data into an interactive dashboard with an AI read of the
+patterns, and a personal intelligence briefing that runs **unattended on a
+schedule** — with the safety habits (dry-runs, blast-radius checks,
+verify-what-done-means) that make that responsible. The day ends by upgrading one
+tool you already understand into an **agent-callable skill**: the script is cheap,
+the reusable capability is the asset.
 
 ## Who this is for
 

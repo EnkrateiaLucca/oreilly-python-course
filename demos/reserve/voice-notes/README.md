@@ -35,7 +35,7 @@ to find one action item is worse than losing the idea.
 ## Run it
 
 ```bash
-cd demos/04-voice-notes-to-text
+cd demos/reserve/voice-notes
 
 # Dry run — transcribe + summarize, print everything, save nothing:
 uv run voice_notes.py audio-sample.mp3
@@ -74,6 +74,6 @@ the text, and pass it into `summarize()` so the prompt ends with something like
 
 ```bash
 # macOS/Linux (~/.zshrc):
-alias voicenote='uv run ~/oreilly-python-course/demos/04-voice-notes-to-text/voice_notes.py'
+alias voicenote='uv run ~/oreilly-python-course/demos/reserve/voice-notes/voice_notes.py'
 # then:  voicenote ~/Recordings/idea-2026-08-12.m4a --apply
 ```

@@ -1,0 +1,13 @@
+CloudHost Pro — Subscription Renewal Notice
+
+Account: automatalearninglab
+Plan: Team (5 seats)
+
+Your annual subscription renews automatically on 2026-09-01.
+The card on file will be charged EUR 588.00 unless you change your plan
+or cancel before that date.
+
+To avoid the charge, downgrade or cancel in Billing > Subscription before
+2026-08-31. After renewal, refunds are not available for the annual term.
+
+Questions? Reply to billing@cloudhost.example within 5 business days.

@@ -10,9 +10,9 @@ Process -> transcribe LOCALLY with faster-whisper (free, private, no key),
 Output  -> transcript + summary printed; with --apply, saved next to the audio
 
 Run it like:
-    uv run demos/04-voice-notes-to-text/voice_notes.py audio-sample.mp3
-    uv run demos/04-voice-notes-to-text/voice_notes.py audio-sample.mp3 --apply
-    uv run demos/04-voice-notes-to-text/voice_notes.py audio-sample.mp3 --no-summary
+    uv run demos/reserve/voice-notes/voice_notes.py audio-sample.mp3
+    uv run demos/reserve/voice-notes/voice_notes.py audio-sample.mp3 --apply
+    uv run demos/reserve/voice-notes/voice_notes.py audio-sample.mp3 --no-summary
 
 Needs: ANTHROPIC_API_KEY in the repo-root .env (skip it with --no-summary).
 The first run downloads the Whisper model (~250 MB), then it's cached.

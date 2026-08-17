@@ -45,8 +45,8 @@ You need to read the Python an AI writes <em>for</em> you.
 # Let's automate something. <em>Right now.</em>
 
 ```bash
-uv run demos/01-tame-your-downloads/organize.py ~/mess-demo
-uv run demos/01-tame-your-downloads/organize.py ~/mess-demo --apply
+uv run demos/reserve/downloads-organizer/organize.py ~/mess-demo
+uv run demos/reserve/downloads-organizer/organize.py ~/mess-demo --apply
 ```
 
 A folder with 40 messy files → sorted into tidy subfolders. Live.
@@ -165,7 +165,7 @@ Every automation in this course — every automation, period — is this shape.
 
 ## The third lane
 
-| | Coding bootcamp | Vibe-coding course | **This course** |
+| | Coding bootcamp | Vibe-coding course | This course |
 |---|---|---|---|
 | Goal | Become a developer | Ship a toy app | **Supervise AI that codes** |
 | Python | Years of syntax | "Forget the code exists" | **A reading vocabulary** |
@@ -193,7 +193,7 @@ Every automation in this course — every automation, period — is this shape.
 ## The two days
 
 1) **Day 1 — Read Python, run scripts.** The 5-minute setup, then the reading vocabulary: variables → loops → decisions → files → packages → APIs → AI. Capstone: an organizer you can read every line of.
-2) **Day 2 — The loop at full power.** Six real automations, one formula, ending with a script that runs **unattended, on a schedule**.
+2) **Day 2 — The loop at full power.** Three real automations, one formula, real time to modify each — ending with a script that runs **unattended, on a schedule**, then upgraded into an **agent-callable skill**.
 
 ---
 
@@ -321,12 +321,23 @@ DONE MEANS: the concrete result you will check by hand
 
 ---
 
-## T — Turn it into a tool
+## T — Turn it into a (reusable) tool
 
-* **Alias it** — give the command a one-word nickname (full how-to on Day 2):
-  `alias tidy='uv run ~/tools/organize.py ~/Downloads'`
-* **Schedule it** — your machine runs it on a timer: launchd (Mac) / Task Scheduler (Windows) — Day 2, demo 5
-* Keep script + ticket + prompt together: that's your **personal tool hoard**
+The script is cheap. The reusable **capability** is the asset. Finish it so a human *or* an agent could use it: **clear inputs · clear outputs · safe defaults · a usage contract.** Then ship it up the ladder:
+
+* **Alias it** — a one-word nickname: `alias tidy='uv run ~/tools/organize.py ~/Downloads'`
+* **Schedule it** — your machine runs it on a timer: launchd / Task Scheduler — Day 2, automation 3
+* **Skill it** (optional) — one markdown file so an agent can invoke it — Day 2 endpoint
+
+<div class="flow">
+<div class="step"><h3>one-off</h3><p>script</p></div>
+<div class="arrow">→</div>
+<div class="step"><h3>reusable</h3><p>tool</p></div>
+<div class="arrow">→</div>
+<div class="step"><h3>scheduled</h3><p>tool</p></div>
+<div class="arrow">→</div>
+<div class="step"><h3>agent</h3><p>skill</p></div>
+</div>
 
 <div class="footnote">"Hoard things you know how to do" — a pattern from <a href="https://simonwillison.net/">Simon Willison's</a> agentic-engineering notes.</div>
 
@@ -635,9 +646,9 @@ response = client.messages.create(
 
 <div class="kicker">Part 3 · Day 2</div>
 
-# Six automations, <em>one formula</em>
+# Three automations, <em>one formula</em>
 
-<!-- Day 2 opener: re-run the cold open in 60 seconds as a recap, then this. -->
+<!-- Day 2 opener: re-run the cold open in 60 seconds as a recap, then this. Fewer demos, more time on each — modify, inspect, code-walk. -->
 
 ---
 
@@ -651,7 +662,8 @@ response = client.messages.create(
 <div class="step"><h3>Prove + Turn</h3><p>dry-run → verify → ship</p></div>
 </div>
 
-The demos get more impressive. **The formula never changes.** That's the point.
+Three reps, not six — so we have time to **modify, inspect, and code-walk** each
+one. The automations get more impressive. **The formula never changes.**
 
 …and after every demo: **✏️ your turn** — one 5-minute modification.
 *The tool isn't yours until you've changed it.*
@@ -662,49 +674,23 @@ The demos get more impressive. **The formula never changes.** That's the point.
 
 <div class="demo-pill">🟢 Live demo</div>
 
-<div class="kicker">Demo 1 · Tame your downloads</div>
+<div class="kicker">Automation 1 · Document inbox → action queue</div>
 
 ## The ticket
 
 ```
-TASK:       Sort a messy folder into subfolders by type.
-TRIGGER:    Manual (weekly).
-TOUCHES:    One folder I name. Creates subfolders inside it. Moves files.
-MUST NEVER: Delete anything. Leave the folder. Touch hidden/system files.
-DONE MEANS: Folder has Images/ Documents/ etc. and every file is inside one.
+TASK:       Triage a folder of MIXED documents (invoices, notes, receipts,
+            screenshots) into one table: type · summary · priority · dates ·
+            people · action items.
+TRIGGER:    Manual — I run it against a folder I name.
+TOUCHES:    Reads .pdf/.txt/.md/image files in one folder. Sends text/images to
+            AI API. Writes one CSV (or Markdown) — only with --apply.
+MUST NEVER: Modify/move/delete the source documents. Touch other folders.
+DONE MEANS: One row per document, with a priority; 3 rows I spot-check match.
 ```
 
-* Warm-up rep — you *read* this yesterday. Today: full loop, with the Ollama vision variant
-
----
-
-<div class="demo-pill">🟢 Live demo</div>
-
-<div class="kicker">Demo 1b · local AI</div>
-
-## AI on <em>your</em> machine
-
-* `classify_images.py` — a **local vision model** (Ollama) reads each image and sorts screenshots / receipts / photos by *content*, not extension
-* No API key. No cloud. No file ever leaves your laptop
-* Run Gate answer that makes privacy people smile: **TOUCHES: nothing outside this folder — verifiably**
-
----
-
-<div class="demo-pill">🟢 Live demo</div>
-
-<div class="kicker">Demo 2 · Invoices → spreadsheet</div>
-
-## The ticket
-
-```
-TASK:       Extract company, date, total from each PDF invoice into one CSV.
-TRIGGER:    Manual, monthly.
-TOUCHES:    Reads PDFs in one folder. Writes one CSV. Sends text to AI API.
-MUST NEVER: Modify the PDFs. Touch other folders.
-DONE MEANS: One row per invoice; 3 hand-checked totals match.
-```
-
-<!-- The schema/Pydantic moment: the AI must fill YOUR form, not free-associate. -->
+* The chore knowledge workers actually have: a messy pile → a sortable queue
+* Same loop as yesterday's reading — now driving a real multimodal automation
 
 ---
 
@@ -725,16 +711,19 @@ DONE MEANS: One row per invoice; 3 hand-checked totals match.
 
 <div class="demo-pill">🟢 Live demo</div>
 
-<div class="kicker">Demo 3 · CSV → live dashboard</div>
+<div class="kicker">Automation 2 · Messy data → decision dashboard</div>
 
 ## The ticket
 
 ```
-TASK:       Turn any CSV into an interactive dashboard in my browser.
+TASK:       Turn any CSV into an interactive dashboard, plus an AI read of the
+            notable patterns.
 TRIGGER:    Manual — whenever someone emails me "the numbers".
 TOUCHES:    Reads one CSV. Serves a local page (my machine only). Writes nothing.
-MUST NEVER: Upload the data anywhere.
-DONE MEANS: Browser opens; charts match 3 numbers I check in the file.
+            With --explain, sends a PROFILE (stats, not raw rows) to the AI API.
+MUST NEVER: Modify the CSV. Upload the raw rows anywhere.
+DONE MEANS: Browser opens; charts match 3 numbers I check; the AI read is a
+            claim I can verify against those charts.
 ```
 
 * The showstopper: 90 seconds from spreadsheet to something your boss thinks took a week
@@ -743,38 +732,46 @@ DONE MEANS: Browser opens; charts match 3 numbers I check in the file.
 
 ---
 
-<div class="demo-pill">🟢 Live demo</div>
+## The line this demo teaches
 
-<div class="kicker">Demo 4 · Voice notes → text</div>
+<div class="two-col">
+<div>
 
-## The ticket
+### Deterministic Python
+* Cleans the data, draws the charts
+* Exact, repeatable, trustworthy to the cell
+* You *rely* on it
 
-```
-TASK:       Transcribe a voice memo locally, then summarize into action items.
-TRIGGER:    Manual, after walks.
-TOUCHES:    Reads one audio file. Local Whisper model. Summary → AI API. Writes one .md.
-MUST NEVER: Upload the audio itself anywhere.
-DONE MEANS: A markdown file: transcript + 3-5 action items that match what I said.
-```
+</div>
+<div>
 
-* Two-stage pipeline: **local** transcription → **cloud** summary — you choose what leaves the machine, stage by stage
+### AI judgement (`--explain`)
+* Reads the numbers, says what's interesting
+* Fuzzy, fast, occasionally wrong
+* You *verify* it — a lead, not gospel
+
+</div>
+</div>
+
+**Knowing which side of that line you're on is the whole skill.** The AI sees a *profile*, never your raw rows — a privacy boundary you drew on purpose.
 
 ---
 
 <div class="demo-pill">🟢 Live demo</div>
 
-<div class="kicker">Demo 5 · The morning briefing</div>
+<div class="kicker">Automation 3 · Personal intelligence briefing</div>
 
 ## The ticket
 
 ```
-TASK:       Top 10 Hacker News stories → 5-bullet AI briefing, saved as markdown.
-TRIGGER:    Every weekday, 7:30am — UNATTENDED.
-TOUCHES:    Public HN API, AI API, writes one file to ~/briefings/.
-MUST NEVER: Send/post anything. Touch any other folder.
+TASK:       Hacker News + my RSS feeds → 5-bullet AI briefing, saved as markdown.
+TRIGGER:    Every weekday, 8:00am — UNATTENDED.
+TOUCHES:    Public HN API, my RSS feeds, AI API, writes one file to ~/briefings/.
+MUST NEVER: Send/post anything. Touch any other folder. Fail silently when scheduled.
 DONE MEANS: A dated briefing file exists every weekday morning.
 ```
 
+* Pick **your** sources — this is a small personal agent, not a toy fetch
 * **UNATTENDED** changes everything — this ticket earns the strictest Run Gate of the course
 
 ---
@@ -846,48 +843,69 @@ Reopen PowerShell — done.
 
 ---
 
-<div class="demo-pill">🟢 Live demo</div>
-
-<div class="kicker">Demo 6 · Spreadsheet diff</div>
-
-## The ticket
-
-```
-TASK:       Compare two versions of an Excel file; show every changed cell.
-TRIGGER:    Manual — every time finance sends "final_v3_FINAL.xlsx".
-TOUCHES:    Reads two .xlsx files. Writes nothing. No network, no AI.
-MUST NEVER: Modify either file.
-DONE MEANS: A colored report of changed cells; a change I planted is caught.
-```
-
-* Note what's absent: **no AI at all**. Spot-step wisdom: plain Python was enough
-
----
-
 <div class="demo-pill">✏️ You build — 30 minutes</div>
 
-<div class="kicker">Capstone · Make one</div>
+<div class="kicker">Capstone · Build one reusable tool</div>
 
 ## Your first tool
 
-* Pick one: **combine** two of today's demos · automate **your Day-1 ticket** · push a demo past its your-turn
+* Pick one you can describe in a sentence: **point automation 1 at your own docs** · automate **your Day-1 ticket** · push a demo past its your-turn
 * The path is the loop: ticket → `prompts/build-automation-<your-os>.md` → Run Gate → dry-run → prove
-* It counts as **done** when you can: say what it's for in one sentence · point at every line that writes/moves/sends · show your done-means check passing
-* Ugly and disposable is fine. **Working and understood** is the bar
+* Finish it to the **reusable-tool bar**: clear inputs · clear outputs · safe defaults · a written usage contract
+* Done when you can: say what it's for in one sentence · point at every line that writes/moves/sends · show your done-means check passing
 
-<!-- Full brief in demos/07-your-first-tool/. Circulate; celebrate 2-3 out loud at the end. -->
+<!-- Full brief in demos/04-tool-to-skill/. Circulate; celebrate 2-3 out loud at the end, then the endpoint slide. -->
+
+---
+
+<div class="kicker">Endpoint · the last 10 minutes</div>
+
+## From script to a tool an <em>agent</em> can call
+
+Take one automation you already understand. **Nothing about the Python changes.** We just write its usage contract in a form an agent reads — a one-file **skill**:
+
+<div class="two-col">
+<div>
+
+### The six fields
+* **Name** — what the capability is
+* **When to use** — the trigger
+* **Inputs** — args, files, keys
+* **Command to run** — the exact `uv run …`
+* **Expected output** — what success looks like
+* **Safety constraints** — the MUST NEVER lines
+
+</div>
+<div>
+
+### Why it's basically free
+* A tool with clear inputs, clear outputs, safe defaults + a usage contract is **already agent-ready**
+* Same Run Gate — the agent just has a **bigger reach**, so safety matters *more*
+* Example: `demos/04-tool-to-skill/SKILL.md` wraps automation 1
+
+</div>
+</div>
+
+<div class="footnote">This is not a course on building agents — it's a course on building tools good enough that an agent could use them. The wrapper is one page of markdown, not a framework.</div>
+
+---
+
+<!-- _class: dark quote -->
+
+> <span class="mark">"</span>The script is cheap. The reusable capability is the asset.<span class="mark">"</span>
+
+<div class="by">one-off automation → reusable tool → scheduled tool → agent-callable skill</div>
 
 ---
 
 <div class="kicker">Poll 3</div>
 
-## Which demo maps onto *your* Monday?
+## Which automation maps onto *your* Monday?
 
-1) Organizer (files & folders)
-2) Invoices → spreadsheet (documents)
-3) CSV → dashboard (data)
-4) Morning briefing (scheduled fetch + summarize)
-5) Voice notes / spreadsheet diff
+1) Document inbox → structured action queue (piles of documents)
+2) Messy data → decision dashboard (spreadsheets & CSVs)
+3) Intelligence briefing → scheduled (fetch + summarize, unattended)
+4) A reusable tool you'd want an agent to call for you
 
 ---
 
@@ -943,7 +961,7 @@ DONE MEANS: A colored report of changed cells; a change I planted is caught.
 
 * Every automation = **ticket + prompt + script**, saved together in one folder
 * The hoard compounds: next tool starts from your best previous prompt
-* Six entries today. The habit is the take-home, not the files
+* Three solid entries today — and one you can hand to an agent. The habit is the take-home, not the files
 
 ---
 
@@ -967,7 +985,7 @@ DONE MEANS: A colored report of changed cells; a change I planted is caught.
 * **R**equest the code — one prompt, one file, dry-run by default
 * **I**nspect — Run Gate: blast radius + package check
 * **P**rove — dry-run → practice → verify done
-* **T**urn into a tool — alias it, schedule it, hoard it
+* **T**urn into a (reusable) tool — clear inputs/outputs, safe defaults, a usage contract; alias · schedule · skill
 
 `prompts/script-loop.md` — the whole course on one page.
 

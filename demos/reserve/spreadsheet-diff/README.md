@@ -32,7 +32,7 @@ miss one, and it will be the salary column.
 ## Run it
 
 ```bash
-cd demos/06-spreadsheet-diff
+cd demos/reserve/spreadsheet-diff
 
 # Read-only, so no dry run needed — just run it:
 uv run diff_excel.py employee_roster_january.xlsx employee_roster_february.xlsx
@@ -65,6 +65,6 @@ argparse flag plus BOTH `load_excel()` calls updated to pass it through.
 
 ```bash
 # macOS/Linux (~/.zshrc):
-alias xldiff='uv run ~/oreilly-python-course/demos/06-spreadsheet-diff/diff_excel.py'
+alias xldiff='uv run ~/oreilly-python-course/demos/reserve/spreadsheet-diff/diff_excel.py'
 # then:  xldiff budget_v1.xlsx budget_v2.xlsx
 ```

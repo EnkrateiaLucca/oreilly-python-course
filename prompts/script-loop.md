@@ -36,10 +36,22 @@ The **Run Gate** (`run-gate.md`). AI-generated code is untrusted input.
 - Check the ticket's "done means" — you told the AI what done means; now verify it.
   (Red → Green: it's only done when your own check passes.)
 
-## T — Turn it into a tool
+## T — Turn it into a (reusable) tool
+The script is cheap. The reusable **capability** is the asset. Finish every tool
+so a human *or* an AI agent could use it reliably — four things:
+- **Clear inputs** — arguments, files, environment variables.
+- **Clear outputs** — exactly what it returns or changes.
+- **Safe defaults** — dry-run by default, bounded scope, friendly failures.
+- **Usage contract** — when to use it, how to call it, what it must never do (that's your ticket).
+
+Then ship it up the ladder as far as the task needs:
 - **Alias it** ("ship it"): `alias briefing='uv run ~/tools/briefing.py'`
-- **Schedule it**: launchd (Mac) / Task Scheduler (Windows) — see `demos/05-morning-briefing/`.
+- **Schedule it**: launchd (Mac) / Task Scheduler (Windows) — see `demos/03-intelligence-briefing/`.
+- **Skill it** (optional): describe the tool in one markdown file so an agent can
+  invoke it — see `demos/04-tool-to-skill/` and `tool-to-skill.md`.
 - Save the script + ticket + prompt in your personal tools folder. That's your hoard.
+
+The continuum: **one-off automation → reusable tool → scheduled tool → agent-callable skill.**
 
 ---
 *Read it. Bound it. Run it. Prove it.* — the four-word version.
