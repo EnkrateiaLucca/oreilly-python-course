@@ -1,4 +1,4 @@
-# From Tool to Skill — the reusable-tool checklist + skill wrapper
+# Prompt
 
 The take-home for the **T** step, upgraded. A script you can run is not yet a tool
 someone else — a teammate, future-you, or an AI agent — can use reliably. Two
@@ -67,3 +67,8 @@ A worked example wrapping the document-inbox tool lives in
   state the tool's contract clearly, which makes it better for humans too.
 - Most tools stop at "reusable" or "scheduled" — and that's fine. The point is to
   *see the whole ladder* and know which rung a given chore needs.
+
+## How to read the verdict
+
+_(Placeholder — the verdict is Pass 1's four checkboxes. All four ticked → it's a
+reusable tool. Pass 2 is optional: only wrap it as a skill if an agent will call it.)_

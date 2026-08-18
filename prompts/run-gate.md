@@ -1,4 +1,4 @@
-# The Run Gate
+# Prompt
 
 The "I" in the SCRIPT loop. AI-generated code is **untrusted input** — treat it the
 way a bank treats a form someone mailed in. You can debug a wrong *output*; you can't
@@ -45,3 +45,9 @@ If the explanation and the code seem to disagree — stop. Regenerate.
 
 ---
 **Read it. Bound it. Run it. Prove it.**
+
+## How to read the verdict
+
+_(Placeholder — the four checks above ARE the verdict. Green only when the blast
+radius is bounded, every package is real, you can follow the story, and DONE MEANS
+passes by hand. Any red — stop and regenerate.)_

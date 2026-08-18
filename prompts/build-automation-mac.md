@@ -1,4 +1,4 @@
-# Build an automation for MY machine — macOS
+# Prompt
 
 Paste this whole prompt into a chatbot (Claude, ChatGPT) **or** hand it to a coding
 agent (Claude Code, run from the folder where you keep your tools). Fill in the
@@ -62,3 +62,9 @@ myself, after reading your walkthrough.
 
 **After you get the result:** don't skip the Run Gate (`run-gate.md`) — check the
 walkthrough against the code, check every package on pypi.org, dry-run first.
+
+## How to read the verdict
+
+_(Placeholder — this prompt produces a script, not a verdict. The deliverables A–E
+are what you read: the walkthrough is your Run Gate, and DONE MEANS is the check
+that says it worked.)_

@@ -1,4 +1,4 @@
-# The Automation Ticket
+# Prompt
 
 One paragraph. Four fields. Fill it in *before* you ask an AI for code —
 a vague ask produces a vague (and riskier) script. This is the "C" in the SCRIPT loop.
@@ -45,3 +45,9 @@ DONE MEANS: A dated file like ~/briefings/2026-08-12.md exists each weekday morn
 - **Must never** goes verbatim into your prompt; AIs follow explicit constraints well.
 - **Done means** is your Red→Green check — if you can't describe done, you can't verify it,
   and a script you can't verify is a script you shouldn't schedule.
+
+## How to read the verdict
+
+_(Placeholder — this prompt produces a ticket, not a verdict. Read it back against
+your task: every field filled, TOUCHES bounds the blast radius, and DONE MEANS is
+something you can actually check.)_

@@ -1,11 +1,4 @@
-# "Does this already exist?"
-
-The first question of the SCRIPT loop's **Spot** step. The best automation is one
-you don't have to build or maintain. Two minutes of asking beats two hours of building.
-
-## The prompt
-
-```
+# Prompt
 I'm about to build a small automation for this task:
 
 <one-sentence task description>
@@ -17,7 +10,6 @@ Before I build anything, act as a skeptical advisor:
    it cost?
 3. What does a custom Python script get me that those don't?
 4. Verdict: BUY / USE BUILT-IN / BUILD — one sentence why.
-```
 
 ## How to read the verdict
 

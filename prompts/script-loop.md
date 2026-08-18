@@ -1,4 +1,4 @@
-# The SCRIPT Loop — the course on one page
+# Prompt
 
 Every automation in this course is built the same way. Six steps, every time.
 You don't need to memorize Python. You need to memorize this.
@@ -55,3 +55,8 @@ The continuum: **one-off automation → reusable tool → scheduled tool → age
 
 ---
 *Read it. Bound it. Run it. Prove it.* — the four-word version.
+
+## How to read the verdict
+
+_(Placeholder — the SCRIPT loop has no single verdict; the P step is where you rule.
+It's only done when your ticket's DONE MEANS passes on the real thing — Red → Green.)_

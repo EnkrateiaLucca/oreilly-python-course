@@ -1,4 +1,4 @@
-# Generate-a-Tool Prompt
+# Prompt
 
 The "R" in the SCRIPT loop. Paste this — ticket included — into Claude, ChatGPT,
 or any capable AI. The constraints below are what make the result *safe to inspect
@@ -72,3 +72,9 @@ reusable capability is the asset.
 - Long chats make AIs dumber. When a fix drags past 2-3 turns, start a **fresh chat**
   with the improved ticket + the current script pasted in.
 - Sometimes the right move is to throw the script away and regenerate. They're cheap.
+
+## How to read the verdict
+
+_(Placeholder — this prompt produces a script, not a verdict. Don't run it: take
+the output straight to the Run Gate (`run-gate.md`), then prove it against DONE
+MEANS.)_
