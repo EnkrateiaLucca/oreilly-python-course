@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Python Deep Dive — Recall</title>
+<style>
+  :root{
+    --bg:#0f1117; --card:#1a1d27; --card2:#20242f; --ink:#e8eaf0; --dim:#9aa0b0;
+    --accent:#7c9cff; --accent2:#5ad1a8; --line:#2a2f3d; --code:#0b0d13;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.5;padding:28px 18px 80px}
+  header{max-width:1080px;margin:0 auto 18px}
+  h1{font-size:1.7rem;margin:0 0 4px}
+  .sub{color:var(--dim);font-size:.95rem}
+  .bar{max-width:1080px;margin:0 auto 20px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  button{font:inherit;cursor:pointer;border:1px solid var(--line);background:var(--card2);
+    color:var(--ink);padding:8px 14px;border-radius:9px;transition:.15s}
+  button:hover{border-color:var(--accent)}
+  .count{color:var(--dim);font-size:.9rem;margin-left:auto}
+  .grid{max-width:1080px;margin:0 auto;display:grid;gap:14px;
+    grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 18px 16px;
+    cursor:pointer;position:relative;min-height:150px;display:flex;flex-direction:column;
+    transition:.15s;user-select:none}
+  .card:hover{transform:translateY(-2px);border-color:var(--accent)}
+  .card.done{border-color:var(--accent2)}
+  .tag{font-size:.72rem;color:var(--accent);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px}
+  .term{font-size:1.15rem;font-weight:650;margin:0}
+  .prompt{color:var(--dim);font-size:.9rem;margin-top:10px}
+  .answer{display:none;margin-top:12px;border-top:1px solid var(--line);padding-top:12px}
+  .card.open .answer{display:block}
+  .card.open .prompt{display:none}
+  .answer p{margin:0 0 10px}
+  code,pre{font-family:"SF Mono",Menlo,Consolas,monospace}
+  pre{background:var(--code);border:1px solid var(--line);border-radius:8px;padding:10px 12px;
+    font-size:.82rem;overflow-x:auto;margin:0;color:#cdd3e0}
+  .kw{color:#c792ea}.str{color:#c3e88d}.fn{color:#82aaff}.cm{color:#5c6370}
+  .hint{max-width:1080px;margin:22px auto 0;color:var(--dim);font-size:.85rem;text-align:center}
+  .loop{max-width:1080px;margin:26px auto 0;background:var(--card);border:1px solid var(--line);
+    border-radius:14px;padding:20px}
+  .loop h2{margin:0 0 4px;font-size:1.15rem}
+  .steps{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+  .step{flex:1;min-width:150px;background:var(--card2);border:1px solid var(--line);border-radius:10px;
+    padding:12px 14px}
+  .step b{color:var(--accent2)}
+  .skel{margin-top:14px;color:var(--dim);font-size:.9rem}
+  .skel span{color:var(--accent);font-weight:600}
+</style>
+</head>
+<body>
+<header>
+  <h1>🐍 Python Deep Dive — Recall</h1>
+  <div class="sub">Read the term, say what it does out loud, <b>then</b> click to check yourself. Green = you nailed it.</div>
+</header>
+
+<div class="bar">
+  <button onclick="shuffle()">🔀 Shuffle</button>
+  <button onclick="reset()">↺ Reset all</button>
+  <button onclick="revealAll()">👁 Reveal all</button>
+  <span class="count" id="count">0 / 0 recalled</span>
+</div>
+
+<div class="grid" id="grid"></div>
+
+<div class="loop">
+  <h2>The SCRIPT loop</h2>
+  <div class="sub">AI writes the scripts. Your job is the loop:</div>
+  <div class="steps">
+    <div class="step"><b>1. Read</b><br>Look at each line — what's it doing?</div>
+    <div class="step"><b>2. Run</b><br><code>uv run script.py</code> — see what it prints.</div>
+    <div class="step"><b>3. Change</b><br>Tweak one value, run again, watch what moved.</div>
+  </div>
+  <div class="skel">Every script has the same skeleton:
+    <span>setup</span> → <span>loop</span> → <span>decision</span> → <span>output</span></div>
+</div>
+
+<p class="hint">Concepts pulled from today's live session (<code>lessons/intro_python_live.py</code>) + lessons 01–03.</p>
+
+<script>
+const cards = [
+  {tag:"store",term:"Variables",prompt:"How do you keep a value to use later?",
+   a:"A name that holds a value: <code>name = value</code>. Reassign it any time.",
+   code:`<span class="fn">this_is_a_variable</span> = <span class="str">"variable"</span>
+<span class="fn">variable</span> = <span class="str">10</span>   <span class="cm"># now it holds a number</span>`},
+  {tag:"kinds",term:"Data types",prompt:"What kinds of values can Python hold?",
+   a:"<b>int</b> (whole), <b>float</b> (decimal), <b>str</b> (text in quotes), <b>list</b> (many values), <b>bool</b> (True/False).",
+   code:`age = <span class="str">10</span>          <span class="cm"># int</span>
+pi = <span class="str">1.234</span>        <span class="cm"># float</span>
+name = <span class="str">"Lucas"</span>    <span class="cm"># str</span>
+nums = [<span class="str">1</span>,<span class="str">2</span>,<span class="str">3</span>]     <span class="cm"># list</span>`},
+  {tag:"inspect",term:"type()",prompt:"How do you check what kind of data something is?",
+   a:"<code>type(x)</code> tells you the data type of any value.",
+   code:`<span class="fn">type</span>(<span class="str">1.234</span>)   <span class="cm"># float</span>
+<span class="fn">type</span>([<span class="str">1</span>,<span class="str">2</span>])   <span class="cm"># list</span>`},
+  {tag:"collection",term:"Lists",prompt:"How do you store many values in one place?",
+   a:"Square brackets, comma-separated. Can mix types.",
+   code:`tasks = [<span class="str">"teach python"</span>, <span class="str">"go to the beach"</span>]`},
+  {tag:"access",term:"Indexing",prompt:"How do you grab ONE item out of a list?",
+   a:"Bracket + position. Counting starts at <b>0</b>.",
+   code:`tasks = [<span class="str">"a"</span>, <span class="str">"b"</span>, <span class="str">"c"</span>]
+tasks[<span class="str">0</span>]   <span class="cm"># "a"  (first!)</span>
+tasks[<span class="str">2</span>]   <span class="cm"># "c"</span>`},
+  {tag:"repeat",term:"for loops",prompt:"How do you do something to every item in a list?",
+   a:"<code>for item in collection:</code> — the indented block runs once per item.",
+   code:`<span class="kw">for</span> t <span class="kw">in</span> task_list:
+    <span class="fn">print</span>(t)`},
+  {tag:"import",term:"Packages / modules",prompt:"How do you get extra functionality into your script?",
+   a:"<code>import</code> a package to unlock more tools — like <code>os</code> for files/folders.",
+   code:`<span class="kw">import</span> os`},
+  {tag:"files",term:"os.listdir()",prompt:"How do you list what's inside a folder?",
+   a:"Returns a <b>list</b> of the file/folder names in a directory.",
+   code:`<span class="kw">import</span> os
+files = os.<span class="fn">listdir</span>(<span class="str">"./"</span>)   <span class="cm"># a list you can loop over</span>`},
+  {tag:"text",term:"String methods",prompt:"How do you change or check text?",
+   a:"Dot-methods on strings: <code>.upper()</code>, <code>.lower()</code>, <code>.capitalize()</code>, <code>.endswith()</code>.",
+   code:`name = <span class="str">"lucas"</span>
+name.<span class="fn">upper</span>()              <span class="cm"># "LUCAS"</span>
+<span class="str">"notes.md"</span>.<span class="fn">endswith</span>(<span class="str">".md"</span>)  <span class="cm"># True</span>`},
+  {tag:"logic",term:"Booleans",prompt:"What are True / False values for?",
+   a:"<b>True</b> / <b>False</b> — the answers to yes/no questions your code makes decisions with.",
+   code:`<span class="str">"notes.md"</span>.<span class="fn">endswith</span>(<span class="str">".md"</span>)   <span class="cm"># True</span>`},
+  {tag:"decide",term:"if statements",prompt:"How do you run code only sometimes?",
+   a:"<code>if condition:</code> — the block runs only when the condition is True.",
+   code:`<span class="kw">if</span> filename.<span class="fn">endswith</span>(<span class="str">".md"</span>):
+    <span class="fn">print</span>(<span class="str">"found a markdown file!"</span>)`},
+  {tag:"combine",term:"Putting it together",prompt:"Loop a folder and keep only the .md files — how?",
+   a:"Loop the folder's files, and use <code>if .endswith()</code> to filter. This is the whole organizer in miniature.",
+   code:`<span class="kw">import</span> os
+<span class="kw">for</span> f <span class="kw">in</span> os.<span class="fn">listdir</span>(<span class="str">"./"</span>):
+    <span class="kw">if</span> f.<span class="fn">endswith</span>(<span class="str">".md"</span>):
+        <span class="fn">print</span>(f)`},
+];
+
+const grid = document.getElementById('grid');
+const count = document.getElementById('count');
+
+function render(list){
+  grid.innerHTML = '';
+  list.forEach(c=>{
+    const el = document.createElement('div');
+    el.className = 'card';
+    el.innerHTML = `
+      <div class="tag">${c.tag}</div>
+      <div class="term">${c.term}</div>
+      <div class="prompt">${c.prompt} <br><small>(click to check)</small></div>
+      <div class="answer"><p>${c.a}</p><pre>${c.code}</pre></div>`;
+    el.onclick = ()=>{
+      if(!el.classList.contains('open')){ el.classList.add('open'); }
+      else { el.classList.toggle('done'); }
+      updateCount();
+    };
+    grid.appendChild(el);
+  });
+  updateCount();
+}
+function updateCount(){
+  const done = document.querySelectorAll('.card.done').length;
+  count.textContent = `${done} / ${cards.length} recalled`;
+}
+function shuffle(){
+  const a=[...cards];
+  for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
+  render(a);
+}
+function reset(){ render(cards); }
+function revealAll(){ document.querySelectorAll('.card').forEach(c=>c.classList.add('open')); }
+render(cards);
+</script>
+</body>
+</html>

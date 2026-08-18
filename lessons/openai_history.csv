@@ -1,0 +1,125 @@
+timestamp,model,question,answer
+2026-08-18T17:24:34,gpt-5.6,"Explain packages, APIs and using AI to write code in super simple bulletized format for a beginner","## 1. Packages
+
+- A **package** is reusable code made by someone else.
+- It saves you from building everything yourself.
+- Think of it like a **toolbox** you can add to your project.
+
+### Example
+
+In Python, the `requests` package helps websites communicate:
+
+```bash
+pip install requests
+```
+
+Then use it:
+
+```python
+import requests
+
+response = requests.get(""https://example.com"")
+print(response.status_code)
+```
+
+- `pip install` downloads the package.
+- `import` makes it available in your code.
+- Always choose well-known, trusted packages.
+
+---
+
+## 2. APIs
+
+- **API** means **Application Programming Interface**.
+- An API lets one program ask another program for information or actions.
+- Think of it like ordering at a restaurant:
+  - You send an order.
+  - The kitchen processes it.
+  - You receive the food.
+
+### Example
+
+A weather API might work like this:
+
+- Your program asks: “What is the weather in London?”
+- The API checks its data.
+- The API returns:
+
+```json
+{
+  ""city"": ""London"",
+  ""temperature"": 18
+}
+```
+
+APIs often require:
+
+- A website address called an **endpoint**
+- An **API key**, which acts like a password
+- A request containing your question or data
+
+> Never put private API keys in public code.
+
+---
+
+## 3. Using AI to Write Code
+
+- AI can help you:
+  - Explain code
+  - Write small functions
+  - Find bugs
+  - Suggest improvements
+  - Create tests
+  - Learn programming concepts
+
+### Good prompt example
+
+- “Write a beginner-friendly Python function that adds two numbers.”
+- “Explain each line with comments.”
+- “Do not use advanced features.”
+
+AI might produce:
+
+```python
+def add_numbers(first_number, second_number):
+    return first_number + second_number
+
+result = add_numbers(3, 5)
+print(result)
+```
+
+---
+
+## Important AI Tips
+
+- Be specific about:
+  - The programming language
+  - What the code should do
+  - What input it receives
+  - What output you expect
+- Ask AI to explain unfamiliar code.
+- Test the code yourself.
+- Do not assume AI is always correct.
+- Never share:
+  - Passwords
+  - API keys
+  - Personal information
+  - Private company code
+
+---
+
+## How They Work Together
+
+- **Packages** provide ready-made tools.
+- **APIs** connect your program to other services.
+- **AI** helps you understand and write the code.
+
+Example project:
+
+- Ask AI to help write a weather app.
+- Install a package for making web requests.
+- Use a weather API to get current weather.
+- Test and review the code before using it."
+2026-08-18T17:25:16,gpt-5.6,tell me a joke,"Why don’t skeletons fight each other?
+
+They don’t have the guts. 💀"

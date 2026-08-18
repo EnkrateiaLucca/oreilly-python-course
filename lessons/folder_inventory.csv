@@ -1,0 +1,16 @@
+name,category,extension,size_bytes,path
+01_first_run.py,Python file,.py,3370,./01_first_run.py
+02_lists_and_loops.py,Python file,.py,5573,./02_lists_and_loops.py
+03_decisions.py,Python file,.py,3884,./03_decisions.py
+04_files_and_folders.py,Python file,.py,5210,./04_files_and_folders.py
+05_packages.py,Python file,.py,4812,./05_packages.py
+06_when_it_breaks.py,Python file,.py,5960,./06_when_it_breaks.py
+07_talking_to_apis.py,Python file,.py,4210,./07_talking_to_apis.py
+08_talking_to_ai.py,Python file,.py,5610,./08_talking_to_ai.py
+09_capstone_organizer.py,Python file,.py,6954,./09_capstone_organizer.py
+intro_python_live.py,Python file,.py,3053,./intro_python_live.py
+live_intro_script_folder_inventory.py,Python file,.py,1013,./live_intro_script_folder_inventory.py
+live_script_inventory_to_table.py,Python file,.py,3006,./live_script_inventory_to_table.py
+puzzles.py,Python file,.py,5187,./puzzles.py
+README.md,Markdown file,.md,2168,./README.md
+recall.html,Other file,.html,9785,./recall.html
