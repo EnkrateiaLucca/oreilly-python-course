@@ -40,6 +40,7 @@ covers them when you get there.
 | [`demos/`](demos/) | **Day 2** — 3 real automations, each a full rep of the SCRIPT loop: document inbox → structured queue, messy data → interactive dashboard, personal intelligence briefing (scheduled) — then an endpoint that upgrades one tool into an agent-callable skill. |
 | [`prompts/`](prompts/) | The take-home artifacts: the SCRIPT loop card, the automation-ticket template, the generate-a-tool prompt, the Run Gate checklist, the "does this already exist?" prompt, the tool-to-skill wrapper. |
 | [`slides/`](slides/) | The course slide deck (Marp). |
+| [`skills/`](skills/) | The SCRIPT loop packaged as a **Claude skill** — copy it into your own project and Claude walks you through the six steps, gates included. See [`skills/script-loop/README.md`](skills/script-loop/README.md). |
 | [`extras/`](extras/) | Optional bonuses, outside the course flow. Currently: the **Maze Lab** — an animated maze game where your Python drives a robot (open `extras/maze/maze-lab.html`, zero setup). |
 
 ## The two days
